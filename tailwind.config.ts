@@ -10,7 +10,8 @@ const config: Config = {
     colors: {
       'red-mafer': "#f11009",
       'blue-mafer': "#0c1e5e",
-      'white-mafer': "#fff"
+      'white-mafer': "#ffffff",
+      "black-mafer": "#000000"
     },
   },
   plugins: [],

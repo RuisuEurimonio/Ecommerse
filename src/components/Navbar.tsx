@@ -27,20 +27,20 @@ const NavBar : React.FC<navProps> = () => {
                         </button>
                     </form>
                 </div>
-                <ul className="flex text-white-mafer/80 gap-5 ">
-                    <li><Link href="" className="hover:text-white-mafer hover:underline hover:underline-offset-8"> Inicio </Link></li>
-                    <li><Link href="" className="hover:text-white-mafer hover:underline hover:underline-offset-8"> Productos </Link></li>
-                    <li><Link href="" className="hover:text-white-mafer hover:underline hover:underline-offset-8"> Descuentos </Link></li>
-                    <li><Link href="" className="hover:text-white-mafer hover:underline hover:underline-offset-8"> JOSC </Link></li>
-                    <li><Link href="" className="hover:text-white-mafer hover:underline hover:underline-offset-8"> Eventos </Link></li>
-                    <li><Link href="" className="hover:text-white-mafer hover:underline hover:underline-offset-8"> Sobre Nosotros </Link></li>
+                <ul className="flex text-black-mafer gap-5 font-bold">
+                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Inicio </Link></li>
+                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Productos </Link></li>
+                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Descuentos </Link></li>
+                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> JOSC </Link></li>
+                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Eventos </Link></li>
+                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Sobre Nosotros </Link></li>
                 </ul>
                 <div className="text-xl">
                     <button className="h-10 border-r-[0.5px]">
-                        <span className=" h-full px-3 icon icon-cart before:content-['\e906'] before:text-white-mafer"></span>
+                        <span className=" h-full px-3 icon icon-cart before:content-['\e906'] before:text-black-mafer"></span>
                     </button>
                     <button className="h-10 border-l-[0.5px]">
-                        <span className="h-full px-3 icon icon-user before:content-['\e907'] before:text-white-mafer"></span>
+                        <span className="h-full px-3 icon icon-user before:content-['\e907'] before:text-black-mafer"></span>
                     </button>
                 </div>
             </div>
