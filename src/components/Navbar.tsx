@@ -2,13 +2,14 @@ import Image from "next/image";
 import React from "react"
 import logoGif from "@/assets/img/LogoCompletoRojo.gif";
 import Link from "next/link";
+import NavLinks from "./NavLinks";
 
 type navProps = {};
 
 const NavBar : React.FC<navProps> = () => {
     return (
-        <nav className="bg-red-mafer w-[100%] p-2">
-            <div className="flex justify-between items-center w-full m-auto
+        <nav className="bg-red-mafer w-[100%] ">
+            <div className="flex justify-between items-center w-full m-auto relative
                 xl:w-[80%]">
                 <div className="m-2 w-1/3
                                 lg:w-[288px]
@@ -18,7 +19,7 @@ const NavBar : React.FC<navProps> = () => {
                         alt="Logo en movimiento de Centro Ferretero Mafer"
                         width={720/2.5}
                         height={140/2.5}
-                        unoptimized={false}
+                        unoptimized={true}
                     />            
                 </div>
                 <div className="
@@ -39,24 +40,7 @@ const NavBar : React.FC<navProps> = () => {
                         </button>
                     </form>
                 </div>
-                <button className="
-                    mr-3 text-xl
-                    md:hidden
-                ">
-                        <span className="icon icon-bars" />
-                </button>
-                <ul className="
-                  text-black-mafer text-center m-5 font-bold items-center gap-1 text-xs hidden
-                    lg:gap-3 lg:m-2 lg:text-sm 
-                    md:flex
-                ">
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Inicio </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Productos </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Descuentos </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> JOSC </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Eventos </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Sobre Nosotros </Link></li>
-                </ul>
+                <NavLinks/>
                 <div className="text-base text-nowrap h-7 hidden
                     xl:text-xl xl:h-full
                     md:block
