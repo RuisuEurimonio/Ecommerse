@@ -39,7 +39,7 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                     lg:gap-3 lg:m-2 
                     2xl:text-base
                 ">
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Inicio </Link></li>
+                    <li><Link href="/" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Inicio </Link></li>
                     <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Productos </Link></li>
                     <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Descuentos </Link></li>
                     <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> JOSC </Link></li>
