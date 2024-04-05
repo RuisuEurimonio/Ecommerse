@@ -1,40 +1,69 @@
-import React from "react";
+"use client"
+
+import React, { useState } from "react";
 import mainImage from "@/assets/img/2024.jpg"
+import navidad from "@/assets/img/navidad.jpg"
 import Image from "next/image";
 
 type MainCarouselProps = {
 
 }
 
+let images = [
+    {src:mainImage, altText: "Imagen principal agradeciendo el 2024 en Mafer"},
+    {src:navidad, altText: "Imagen principal agradeciendo el 2024 en Mafer 2"}
+];
+
 const MainCarousel : React.FC<MainCarouselProps> = () => {
+
+    const [position, setPosition] = useState(0);
+
+    function before(){
+        if(position !== 0){
+            setPosition(position+100);
+        }
+    }
+
+    function next(){
+        if(position >= (((images.length*100)-200)*-1)){
+            setPosition(position-100);
+        } else {
+            setPosition(0);
+        }
+    }
+
     return (
         
         <div className="2xl:w-4/5 m-auto overflow-hidden">
             <div className="w-full relative flex items-center" >
                 <ul className="flex w-full">
-                    <li className="min-w-full"> 
+                    {images.map((img, index)=>(
+                        <li className={`min-w-full transition`} key={index} style={{transform: `translateX(${position}%)`}}> 
                         <Image 
-                            src={mainImage}
-                            alt={"Imagen principal agradeciendo el 2024 en Mafer"}
+                            src={img.src}
+                            alt={img.altText}
                             width={1920}
+                            priority={true}
                         />
-                    </li>
-                    <li className="min-w-full">
-                        <Image 
-                            src={mainImage}
-                            alt={"Imagen principal agradeciendo el 2024 en Mafer"}
-                            width={1920}
-                        />
-                    </li>
+                    </li>    
+                    ))}
                 </ul>
-                <div className="absolute left-5">
-                    <button>
-                        <span className="icon icon-arrowl text-4xl"/>
+                <div className="absolute left-2
+                    md:left-5
+                ">
+                    <button onClick={before}>
+                        <span className="icon icon-arrowl text-xl 
+                            md:text-4xl"
+                        />
                     </button>
                 </div>
-                <div className="absolute right-5">
-                    <button>
-                        <span className="icon icon-arrowr text-4xl"/>
+                <div className="absolute right-2
+                    md:right-5
+                ">
+                    <button onClick={next}>
+                        <span className="icon icon-arrowr text-xl
+                            md:text-4xl
+                        "/>
                     </button>
                 </div>
             </div>
