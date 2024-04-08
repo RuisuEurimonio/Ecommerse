@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import mainImage from "@/assets/img/2024.jpg"
 import navidad from "@/assets/img/navidad.jpg"
 import Image from "next/image";
@@ -11,26 +11,30 @@ type MainCarouselProps = {
 
 let images = [
     {src:mainImage, altText: "Imagen principal agradeciendo el 2024 en Mafer"},
-    {src:navidad, altText: "Imagen principal agradeciendo el 2024 en Mafer 2"}
+    {src:navidad, altText: "Imagen principal agradeciendo el 2024 en Mafer 2"},
+    
 ];
 
 const MainCarousel : React.FC<MainCarouselProps> = () => {
 
     const [position, setPosition] = useState(0);
+    const intervalImages = 7500;
 
     function before(){
-        if(position !== 0){
-            setPosition(position+100);
-        }
+        (position !== 0) ? setPosition(position+100) : setPosition(position-100);
     }
 
     function next(){
-        if(position >= (((images.length*100)-200)*-1)){
-            setPosition(position-100);
-        } else {
-            setPosition(0);
-        }
+        (position >= (((images.length*100)-200)*-1)) ? setPosition(position-100) : setPosition(0);
     }
+
+    useEffect(()=>{
+        const interval = setInterval(()=>{
+            next();
+        }, intervalImages)
+        return ()=> clearInterval(interval);
+    }
+    , [position])
 
     return (
         
