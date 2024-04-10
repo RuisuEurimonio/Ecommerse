@@ -1,5 +1,6 @@
 import AboutJosc from "@/components/AboutJOSC";
 import Clasificaciones from "@/components/Clasficaciones";
+import LatestDiscounts from "@/components/LatestDiscounts";
 import MainCarousel from "@/components/MainCarousel";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <MainCarousel/>
       <Clasificaciones/>
       <AboutJosc/>
+      <LatestDiscounts/>
     </>
   );
 }

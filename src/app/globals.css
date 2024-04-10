@@ -19,6 +19,33 @@ body {
   max-width: 100%;
 }
 
+.custom_content{
+  margin: 0.75rem auto;
+  width: 91.666667%;
+}
+
+h2.custom_title{
+  font-size: 1.125rem/* 18px */;
+  line-height: 1.75rem/* 28px */;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgb(12 30 94 / var(--tw-text-opacity));
+  font-weight: 700;
+}
+
+@media (min-width: 1280px) {
+  h2.custom_title {
+      font-size: 1.5rem/* 24px */;
+      line-height: 2rem/* 32px */;
+  }
+}
+
+@media (min-width: 1536px) {
+  .custom_content{
+    width: 66.666667%;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

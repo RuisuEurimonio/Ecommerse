@@ -11,7 +11,7 @@ import Link from "next/link";
 
  const Clasificaciones : React.FC<ClasificacionesProps> = () => {
     return(
-        <div className="2xl:w-4/5 m-auto">
+        <div>
             <ul className="flex flex-wrap justify-center text-xs text-center
                  md:h-48
                  lg:h-72 lg:text-base 2xl:text-lg

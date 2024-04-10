@@ -38,7 +38,9 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
 
     return (
         
-        <div className="2xl:w-4/5 m-auto overflow-hidden">
+        <div className="m-auto overflow-hidden
+            
+        ">
             <div className="w-full relative flex items-center" >
                 <ul className="flex w-full">
                     {images.map((img, index)=>(

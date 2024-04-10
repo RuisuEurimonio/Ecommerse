@@ -1,4 +1,4 @@
-export type CardItemProps = {
+export type CardProductProps = {
     id: number;
     image: string;
     nombre: string;
