@@ -41,7 +41,7 @@ const LatestDiscounts : React.FC<LatestDiscountsProps> = () => {
                         md:left-5
                     ">
                     <button onClick={before}>
-                        <span className="icon icon-arrowl text-xl 
+                        <span className="icon icon-arrowl text-xl
                             md:text-4xl"
                         />
                     </button>

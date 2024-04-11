@@ -8,17 +8,21 @@ const CardSimple : React.FC<{product:CardProductProps}> = (
     {product}
 ) => {
     return(
-        <li className="flex-1 bg-black-mafer/5 min-w-[10rem]">
-            <Image src={imageNotFound} alt="Image not found"/>
-            <div className="px-2">
-                <h3 className="font-bold"> {product.nombre} </h3>
-                <div className="flex items-center w-11/12 justify-between gap-1 m-auto">
-                    <p className="text-sm flex-grow"> {product.id} {product.descripcion.slice(0,50)+". . ."} </p>
-                    <button className="bg-blue-mafer flex-grow-0 p-2 rounded-full min-w-8 min-h-8">
-                        <Link href=""> <span className="icon icon-arrowr before:text-white-mafer before:content-['\e90a'] "/> </Link>
-                    </button>
+        <li className="flex-1 bg-black-mafer/5 min-w-[10rem] flex flex-col justify-between">
+            <Link href="">
+                <div className="relative">
+                    <div className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-red-mafer border-l-transparent border-b-transparent"> </div>
+                    <span className="absolute top-0.8 right-1 font-bold text-lg"> % </span>
+                    <Image src={imageNotFound} alt="Image not found"/>
                 </div>
-            </div>
+                <div className="px-2">
+                    <h3 className="font-bold"> {product.nombre} </h3>
+                    <p className="text-sm flex-grow"> {product.id} {product.descripcion.slice(0,50)+". . ."} </p>
+                </div>
+            </Link>
+        <button className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs
+            lg:text-sm
+        "> Agregar al carrito </button>
         </li>
     )
 }
