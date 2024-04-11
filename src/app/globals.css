@@ -51,13 +51,14 @@ h2.custom_title{
     text-wrap: balance;
   }
 }
+
 @font-face {
   font-family: 'icomoon';
-  src:  url('../assets/fonts/icomoon.eot?4wjq3o');
-  src:  url('../assets/fonts/icomoon.eot?4wjq3o#iefix') format('embedded-opentype'),
-    url('../assets/fonts/icomoon.ttf?4wjq3o') format('truetype'),
-    url('../assets/fonts/icomoon.woff?4wjq3o') format('woff'),
-    url('../assets/fonts/icomoon.svg?4wjq3o#icomoon') format('svg');
+  src:  url('../assets/fonts/icomoon.eot?bp8xv8');
+  src:  url('../assets/fonts/icomoon.eot?bp8xv8#iefix') format('embedded-opentype'),
+    url('../assets/fonts/icomoon.ttf?bp8xv8') format('truetype'),
+    url('../assets/fonts/icomoon.woff?bp8xv8') format('woff'),
+    url('../assets/fonts/icomoon.svg?bp8xv8#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -77,6 +78,18 @@ h2.custom_title{
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-arrow-rotate:before {
+  content: "\e90b";
+}
+.icon-global:before {
+  content: "\e90c";
+}
+.icon-ranking:before {
+  content: "\e90d";
+}
+.icon-truck:before {
+  content: "\e90e";
+}
 .icon-arrowl:before {
   content: "\e909";
 }
@@ -113,4 +126,3 @@ h2.custom_title{
 .icon-bin2:before {
   content: "\e9ad";
 }
-
