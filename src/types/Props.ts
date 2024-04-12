@@ -9,3 +9,11 @@ export type CardProductProps = {
     clasificacion: string;
     descuento: boolean;
 }
+
+export type ObjBranchProps = {
+    id: number,
+    nombre: string,
+    descripcion: string,
+    fechaCreacion: String,
+    fechaModificacion: String
+}
