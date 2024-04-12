@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <MainCarousel/>
-      <Clasificaciones/>
+      <Clasificaciones main/>
       <AboutJosc/>
       <LatestDiscounts/>
       <OurService/>

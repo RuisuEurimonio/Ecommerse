@@ -2,14 +2,30 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 
 type NavLinksProps = {
 
 }
 
+type LinkProps ={
+    href: string,
+    nameLink: string
+}
+
+const links=[
+    {href:"/",nameLink:"Inicio"},
+    {href:"/productos",nameLink:"Productos"},
+    {href:"/descuentos",nameLink:"Descuentos"},
+    {href:"/josc",nameLink:"JOSC"},
+    {href:"/eventos",nameLink:"Eventos"},
+    {href:"/sobre-nosotros",nameLink:"Sobre nosotros"}
+]
+
 const NavLinks:React.FC<NavLinksProps> = () => {
 
     const [active, setActive] = useState(false);
+    const pathName = usePathname();
 
     return(
         <>
@@ -39,12 +55,12 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                     lg:gap-3 lg:m-2 
                     2xl:text-base
                 ">
-                    <li><Link href="/" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Inicio </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Productos </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Descuentos </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> JOSC </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Eventos </Link></li>
-                    <li><Link href="" className="hover:text-black-mafer hover:underline hover:underline-offset-8"> Sobre Nosotros </Link></li>
+                    {links.map((link:LinkProps)=>{
+                        const style = (pathName==link.href) ? "font-extrabold underline underline-offset-8" : "font-bold";
+                    return(
+                        <li key={link.nameLink}><Link href={link.href} className={`hover:text-black-mafer font- hover:underline hover:underline-offset-8 ${style}`}> {link.nameLink} </Link></li>
+                    )}
+                    )}
                 </ul>
                 <hr className="md:hidden"/>
                 <ul className="md:hidden text-lg my-4 font-semibold">
