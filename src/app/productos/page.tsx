@@ -1,4 +1,5 @@
 import Clasificaciones from "@/components/Clasficaciones";
+import Filters from "@/components/Filters";
 import React from "react";
 
 type ProductsProps = {}
@@ -10,6 +11,12 @@ const Products : React.FC<ProductsProps> = () =>{
         ">
             <div className="my-2"> <span className="text-black-mafer/50"> Inicio &gt; </span>  <span className="font-bold"> Productos </span> </div>
             <Clasificaciones/>
+
+            <div className="flex my-4 flex-col w-screen overflow-x-hidden">
+                <Filters/>
+                <div className="bg-red-mafer"> uola</div>
+            </div>
+
         </div>
     )
 }

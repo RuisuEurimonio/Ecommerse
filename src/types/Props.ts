@@ -17,3 +17,19 @@ export type ObjBranchProps = {
     fechaCreacion: String,
     fechaModificacion: String
 }
+
+export type ClassificationProps = {
+    id: number,
+    nombre: string,
+    descripcion: string,
+    fechaCreacion: String,
+    fechaModificacion: String
+}
+
+export type CategoryProps = {
+    id: number,
+    nombre: string,
+    descripcion: string,
+    fechaCreacion: String,
+    fechaModificacion: String
+}

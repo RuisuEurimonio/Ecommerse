@@ -9,7 +9,7 @@
 }
 
 html{
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 body {
@@ -17,6 +17,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
   max-width: 100%;
+  position: relative;
 }
 
 .custom_content{
