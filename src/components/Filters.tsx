@@ -1,57 +1,50 @@
-import React from "react";
-import branchFake from "@/utils/json/branchFake.json";
-import { CategoryProps, ClassificationProps } from "@/types/Props";
-import Link from "next/link";
+"use client"
 
-type FiltersProps = {}
+import React, { useState } from "react";
+import FilterCategory from "./FilterCategory";
+import FilterClassification from "./FilterClassification";
+import FilterBranch from "./FilterBranch";
 
-const data = branchFake;
+type FiltersProps = {
+
+}
 
 const Filters : React.FC<FiltersProps> = () => {
+
+    const [active, setActive] = useState(false);
+
+    function openFilters(){
+        setActive(!active);
+    }
+
     return (
-        <div className="absolute bg-red-mafer top-0 right-0 h-full w-[320px] z-20 transition translate-x- px-6 duration-300">
-            <div>
-                <div className="flex w-full flex-row-reverse">
-                    <button className="relative right-0 p-2 text-2xl
-                    md:hidden"
-                      
-                    >
-                        <span className="icon icon-xmark"/>
-                    </button>
+        <>
+            <div className="w-full">
+                <button onClick={openFilters} className="w-full bg-blue-mafer/60 rounded-sm my-2"> Filtros: </button>
+            </div>
+            <div className={`fixed bg-light-white-mafer top-0 right-0 h-screen w-[320px] z-20 transition duration-500 border-2
+                ${(active ?  "translate-x-0" : "translate-x-full")}
+            `}>
+                <div className="bg-red-mafer w-full">
+                    <div className="flex flex-row-reverse w-11/12">
+                        <button className="relative right-0 py-1.5 px-2 text-2xl
+                            md:hidden"
+                                onClick={openFilters}
+                            >
+                                <span className="icon icon-xmark"/>
+                        </button>
+                    </div>
                 </div>
-                <h2 className="text-xl font-bold text-center"> Buscar por filtros. </h2>
-                <div className="group">
-                    <h3 className="font-bold text-lg my-2"> Categoria. </h3>
-                    <ul className="flex-col overflow-hidden hidden group-active:flex">
-                        {data.slice(0,6).map((item : CategoryProps)=>(
-                            <li key={item.id} className="pl-2">
-                                <Link href=""> <p> {item.nombre} </p> </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div>
-                    <h3 className="font-bold text-lg my-2"> Clasificación. </h3>
-                    <ul className="flex flex-col">
-                        {data.slice(0,3).map((item : ClassificationProps)=>(
-                            <li key={item.id} className="pl-2">
-                                <Link href=""> <p> {item.nombre} </p> </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div>
-                    <h3 className="font-bold text-lg my-2"> Marca. </h3>
-                    <ul className="flex flex-col">
-                        {data.slice(0,11).map((item : ClassificationProps)=>(
-                            <li key={item.id} className="pl-2">
-                                <Link href=""> <p> {item.nombre} </p> </Link>
-                            </li>
-                        ))}
-                    </ul>
+                <div className="px-6 py-3">
+                    <h2 className="text-xl font-bold text-center"> Buscar por filtros. </h2>
+                    <div className="">
+                        <FilterCategory/>
+                        <FilterClassification/>
+                        <FilterBranch/>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -12,7 +12,8 @@ const config: Config = {
       'blue-mafer': "#0c1e5e",
       'white-mafer': "#ffffff",
       "black-mafer": "#000000",
-      "transparent": "transparent"
+      "transparent": "transparent",
+      "light-white-mafer": "#FFFFF7"
     },
   },
   plugins: [],

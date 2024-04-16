@@ -10,9 +10,10 @@ const Products : React.FC<ProductsProps> = () =>{
             md:w-4/5
         ">
             <div className="my-2"> <span className="text-black-mafer/50"> Inicio &gt; </span>  <span className="font-bold"> Productos </span> </div>
+            
             <Clasificaciones/>
 
-            <div className="flex my-4 flex-col w-screen overflow-x-hidden">
+            <div className="flex my-4 flex-col">
                 <Filters/>
                 <div className="bg-red-mafer"> uola</div>
             </div>

@@ -36,7 +36,7 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                 onClick={()=>{setActive(!active)}}>
                     <span className="icon icon-bars" />
             </button>
-            <div className={`fixed right-0 top-0 w-[320px] px-6 h-screen bg-red-mafer border-2 transition duration-300 z-40
+            <div className={`fixed right-0 top-0 w-[320px] px-6 h-screen bg-red-mafer border-2 transition duration-500 z-40
                 md:static md:translate-x-0 md:px-0 md:py-0 md:h-auto md:border-0 md:w-auto
                 ${active ? "translate-x-0" : "translate-x-full"}
             `}
