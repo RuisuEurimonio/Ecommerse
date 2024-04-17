@@ -1,10 +1,20 @@
 import Clasificaciones from "@/components/Clasficaciones";
 import Filters from "@/components/Filters";
 import React from "react";
+import productsFake from "@/utils/json/productsFake.json"
+import Numeration from "@/components/Numeration";
 
 type ProductsProps = {}
 
+const data = productsFake;
+
+const options = [
+    {id: 1 , tipo: "alfabeticamente a > z"},
+    {id: 2 , tipo: "alfabeticamente z > a"}
+]
+
 const Products : React.FC<ProductsProps> = () =>{
+
     return(
         <div className="w-11/12 m-auto
             md:w-4/5
@@ -17,7 +27,21 @@ const Products : React.FC<ProductsProps> = () =>{
                 md:flex-row
             ">
                 <Filters/>
-                <div className="bg-red-mafer md:basis-4/6"> uola</div>
+                <div className="md:basis-4/6">
+                    <div className="bg-blue-mafer p-1"> 
+                        <div>
+                            <label className="text-white-mafer"> Ordenar por: </label>
+                            <select name="order" className="outline-none">
+                                {options.map((option)=>(
+                                    <option key={option.id} > {option.tipo} </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <Numeration data={data} itemsByPage={1}/>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
