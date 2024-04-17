@@ -22,7 +22,9 @@ const FilterClassification : React.FC<FilterClassificationProps> = () => {
 
     return (
         <div className="transition px-2 border-2 rounded-sm my-0.5">
-            <h3 className="font-bold text-lg my-1 relative flex items-center border-b-2" onClick={openFilters}>
+            <h3 className="font-bold text-lg my-1 relative flex items-center border-b-2
+                md:text-base
+            " onClick={openFilters}>
                 Clasificación. 
                 <span className={`icon icon-arrowl absolute right-0 transition
                     ${active ? "-rotate-90" : ""}

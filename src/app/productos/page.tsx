@@ -13,9 +13,11 @@ const Products : React.FC<ProductsProps> = () =>{
             
             <Clasificaciones/>
 
-            <div className="flex my-4 flex-col">
+            <div className="flex my-4 flex-col
+                md:flex-row
+            ">
                 <Filters/>
-                <div className="bg-red-mafer"> uola</div>
+                <div className="bg-red-mafer md:basis-4/6"> uola</div>
             </div>
 
         </div>
