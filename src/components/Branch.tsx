@@ -41,7 +41,7 @@ const Branch : React.FC<BranchProps> = () => {
                     {data.map((data:ObjBranchProps)=>(
                         <li key={data.id} className="min-w-24">
                             <Image src={imageNotFound} alt={`Imagen de representativo de ${data.nombre}`} />
-                            <p className="text-center text-xs mt-2"> {data.nombre.slice(0,20)}{(data.nombre.length < 20) ? "" :"..."} </p>
+                            <p className="text-center text-xs mt-2 line-clamp-2"> {data.nombre} </p>
                         </li>
                     ))}
                 </ul>

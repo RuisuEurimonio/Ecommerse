@@ -63,7 +63,7 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                         {links.map((link:LinkProps)=>{
                             const style = (pathName==link.href) ? "font-extrabold underline underline-offset-8" : "font-bold";
                         return(
-                            <li key={link.nameLink}><Link href={link.href} className={`hover:text-black-mafer font- hover:underline hover:underline-offset-8 ${style}`}> {link.nameLink} </Link></li>
+                            <li key={link.nameLink}><Link onClick={()=>{setActive(!active)}} href={link.href} className={`hover:text-black-mafer font- hover:underline hover:underline-offset-8 ${style}`}> {link.nameLink} </Link></li>
                         )}
                         )}
                     </ul>

@@ -17,7 +17,7 @@ const CardSimple : React.FC<{product:CardProductProps}> = (
                 </div>
                 <div className="px-2">
                     <h3 className="font-bold"> {product.nombre} </h3>
-                    <p className="text-sm flex-grow"> {product.id} {product.descripcion.slice(0,50)+". . ."} </p>
+                    <p className="text-sm flex-grow line-clamp-3"> {product.descripcion} </p>
                 </div>
             </Link>
         <button className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs

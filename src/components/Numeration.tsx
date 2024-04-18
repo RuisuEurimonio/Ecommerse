@@ -19,7 +19,7 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
             numeration.push(i+1);
         }
         setPages(numeration);
-    },[])
+    },[itemsByPage, data])
 
     return(
     <ul className="text-white-mafer flex flex-wrap justify-center my-2 text-lg items-center">
