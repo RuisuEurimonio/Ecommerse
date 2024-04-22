@@ -6,6 +6,7 @@ import productsFake from "@/utils/json/productsFake.json"
 import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 
 
@@ -19,21 +20,21 @@ const options = [
 ]
 
 const perPageOptions = [
-    {id: 1, cantidad: 2},
-    {id: 2, cantidad: 3},
-    {id: 3, cantidad: 4},
+    {id: 1, cantidad: 10},
+    {id: 2, cantidad: 25},
+    {id: 3, cantidad: 50},
 ]
 
 const Products : React.FC<ProductsProps> = () =>{
 
     const searchParams = useSearchParams();
     const router = useRouter();
-    const pageNum = (searchParams.get("page") || 1) as string;
+    const pageNum = (searchParams.get("page") || 1) as number;
     const perPage = (searchParams.get("perPage") || perPageOptions[1].cantidad) as number;
 
     function handleChange(event:any){
-        router.push(`?page=${pageNum}&perPage=${event.target.value}`,
-            {scroll:false}
+        router.push(`?page=1&perPage=${event.target.value}`,
+            {scroll:true}
         )
     }
 
@@ -51,8 +52,8 @@ const Products : React.FC<ProductsProps> = () =>{
                 <Filters/>
                 <div className="md:basis-3/4">
                     <div className=""> 
-                        <div className="bg-blue-mafer p-1 rounded-sm">
-                            <div>
+                        <div className="bg-blue-mafer p-1 rounded-sm flex flex-col items-center">
+                            <div className="mt-2">
                                 <label className="text-white-mafer"> Ordenar por: </label>
                                 <select name="order" className="outline-none">
                                     {options.map((option)=>(
@@ -65,8 +66,12 @@ const Products : React.FC<ProductsProps> = () =>{
                             </div>
                         </div>
                         <div className="m-2">
-                            <ul className="flex flew-wrap gap-4">
-                                {data.slice(0,2).map((item)=>(
+                            <ul className="grid grid-cols-2 gap-2
+                                md:grid-cols-3
+                                lg:grid-cols-4
+                                xl:grid-cols-5
+                            ">
+                                {data.slice(((perPage*pageNum)-perPage),perPage*pageNum).map((item)=>(
                                     <CardItem key={item.id} item={item}/>
                                     
                                 ))}

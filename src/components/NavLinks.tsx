@@ -56,7 +56,7 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                 ">
                     <h3 className="md:hidden font-bold text-lg"> Menu: </h3>
                     <ul className="text-black-mafer text-center m-5 font-bold items-center gap-3 text-lg flex-col flex
-                        md:flex md:flex-row md:text-sm
+                        md:flex md:flex-row md:text-sm md:m-0
                         lg:gap-3 lg:m-2 
                         2xl:text-base
                     ">

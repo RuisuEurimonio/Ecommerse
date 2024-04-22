@@ -22,7 +22,7 @@ const Filters : React.FC<FiltersProps> = () => {
             <div className="w-full md:hidden">
                 <button onClick={openFilters} className="w-full bg-blue-mafer/60 rounded-sm my-2"> Filtros: </button>
             </div>
-            <div className={`fixed bg-light-white-mafer top-0 right-0 h-screen w-[320px] z-20 transition duration-500 border-2
+            <div className={`fixed top-0 right-0 h-screen w-[320px] z-20 transition duration-500 border-2
                 ${(active ?  "translate-x-0" : "translate-x-full")}
                 md:static md:border-0 md:h-auto md:w-auto md:translate-x-0 md:basis-3/12 md:max-w-80
             `}>
@@ -36,8 +36,8 @@ const Filters : React.FC<FiltersProps> = () => {
                         </button>
                     </div>
                 </div>
-                <div className="px-6 py-3
-                    md:py-0 md:px-2
+                <div className="px-6 py-3 bg-light-white-mafer h-full
+                    md:py-0 md:px-2 md:pb-2 md:h-auto
                 ">
                     <h2 className="text-xl font-bold text-center"> Buscar por filtros. </h2>
                     <div className="text-sm">

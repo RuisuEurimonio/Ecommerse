@@ -13,13 +13,13 @@ const CardItem : React.FC<{item : CardProductProps}> = ({item}) => {
                 </div>
                 <p className="text-sm mt-2
                     xl:text-base
-                "> {item.clasificacion} </p>
+                "> {item.id} {item.clasificacion} </p>
                 <p className="text-base font-semibold
                     xl:text-lg
                 "> {item.nombre} </p>
                 <p className="text-ellipsis overflow-hidden text-xs line-clamp-3
                     xl:text-sm
-                "> {item.descripcion.slice(0, 80)} </p>
+                "> {item.descripcion} </p>
             </div>
             <div className="flex text-sm flex-col-reverse items-center m-1
                 lg:flex-row lg:gap-2 lg:text-center
