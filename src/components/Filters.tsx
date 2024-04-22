@@ -24,7 +24,7 @@ const Filters : React.FC<FiltersProps> = () => {
             </div>
             <div className={`fixed bg-light-white-mafer top-0 right-0 h-screen w-[320px] z-20 transition duration-500 border-2
                 ${(active ?  "translate-x-0" : "translate-x-full")}
-                md:static md:border-0 md:h-auto md:w-auto md:translate-x-0 md:basis-2/6 md:max-w-80
+                md:static md:border-0 md:h-auto md:w-auto md:translate-x-0 md:basis-3/12 md:max-w-80
             `}>
                 <div className="bg-red-mafer w-full">
                     <div className="flex flex-row-reverse w-11/12">

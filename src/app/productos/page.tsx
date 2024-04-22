@@ -2,7 +2,6 @@
 
 import Clasificaciones from "@/components/Clasficaciones";
 import Filters from "@/components/Filters";
-import React, { useEffect, useState } from "react";
 import productsFake from "@/utils/json/productsFake.json"
 import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
@@ -20,9 +19,9 @@ const options = [
 ]
 
 const perPageOptions = [
-    {id: 1, cantidad: "2"},
-    {id: 2, cantidad: "3"},
-    {id: 3, cantidad: "4"},
+    {id: 1, cantidad: 2},
+    {id: 2, cantidad: 3},
+    {id: 3, cantidad: 4},
 ]
 
 const Products : React.FC<ProductsProps> = () =>{
@@ -30,18 +29,13 @@ const Products : React.FC<ProductsProps> = () =>{
     const searchParams = useSearchParams();
     const router = useRouter();
     const pageNum = (searchParams.get("page") || 1) as string;
-    const perPageStr = (searchParams.get("perPage") || 2) as string;
-    const perPageNum = parseInt(perPageStr);
+    const perPage = (searchParams.get("perPage") || perPageOptions[1].cantidad) as number;
 
     function handleChange(event:any){
         router.push(`?page=${pageNum}&perPage=${event.target.value}`,
             {scroll:false}
         )
     }
-
-    useEffect(()=>{
-        console.log(pageNum)
-    },[])
 
     return(
         <div className="w-11/12 m-auto
@@ -55,9 +49,9 @@ const Products : React.FC<ProductsProps> = () =>{
                 md:flex-row
             ">
                 <Filters/>
-                <div className="md:basis-4/6">
+                <div className="md:basis-3/4">
                     <div className=""> 
-                        <div className="bg-blue-mafer p-1">
+                        <div className="bg-blue-mafer p-1 rounded-sm">
                             <div>
                                 <label className="text-white-mafer"> Ordenar por: </label>
                                 <select name="order" className="outline-none">
@@ -67,7 +61,7 @@ const Products : React.FC<ProductsProps> = () =>{
                                 </select>
                             </div>
                             <div>
-                                <Numeration data={data} itemsByPage={perPageNum}/>
+                                <Numeration data={data} itemsByPage={perPage}/>
                             </div>
                         </div>
                         <div className="m-2">
@@ -78,17 +72,17 @@ const Products : React.FC<ProductsProps> = () =>{
                                 ))}
                             </ul>
                         </div>
-                        <div className="bg-blue-mafer p-1">
-                            <div>
+                        <div className="bg-blue-mafer p-1 flex flex-col-reverse items-center rounded-sm">
+                            <div className="mb-3">
                                 <label className="text-white-mafer"> Cantidad por pagina: </label>
-                                <select name="order" className="outline-none" value={perPageNum} onChange={handleChange}>
+                                <select name="order" className="outline-none" value={perPage} onChange={handleChange}>
                                     {perPageOptions.map((option)=>(
-                                        <option key={option.id} > {option.cantidad} </option>
+                                        <option key={option.id} value={option.cantidad}> {option.cantidad} </option>
                                     ))}
                                 </select>
                             </div>
                             <div>
-                                <Numeration data={data} itemsByPage={perPageNum}/>
+                                <Numeration data={data} itemsByPage={perPage}/>
                             </div>
                         </div>
                     </div>
