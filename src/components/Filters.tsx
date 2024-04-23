@@ -1,13 +1,14 @@
 "use client"
 
 import React, { useState } from "react";
-import FilterCategory from "./FilterCategory";
-import FilterClassification from "./FilterClassification";
-import FilterBranch from "./FilterBranch";
+import branchFake from "@/utils/json/branchFake.json";
+import FilterComponent from "./FilterComponent";
 
 type FiltersProps = {
 
 }
+
+const data = branchFake;
 
 const Filters : React.FC<FiltersProps> = () => {
 
@@ -41,9 +42,24 @@ const Filters : React.FC<FiltersProps> = () => {
                 ">
                     <h2 className="text-xl font-bold text-center"> Buscar por filtros. </h2>
                     <div className="text-sm">
-                        <FilterCategory/>
-                        <FilterClassification/>
-                        <FilterBranch/>
+                        <FilterComponent
+                            title="Categoria."
+                            data={data}
+                            sliceFrom={0}
+                            sliceTo={6}
+                        />
+                        <FilterComponent
+                            title="Clasficicación."
+                            data={data}
+                            sliceFrom={0}
+                            sliceTo={2}
+                        />
+                        <FilterComponent
+                            title="Marca."
+                            data={data}
+                            sliceFrom={0}
+                            sliceTo={12}
+                        />
                     </div>
                 </div>
             </div>

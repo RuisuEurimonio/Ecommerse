@@ -2,9 +2,12 @@
 
 import Clasificaciones from "@/components/Clasficaciones";
 import Filters from "@/components/Filters";
-import productsFake from "@/utils/json/productsFake.json"
 import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
+
+import productsFake from "@/utils/json/productsFake.json"
+import {verifyPerPage} from "@/utils/ts/validations"
+
 import { useRouter, useSearchParams } from "next/navigation";
 
 type ProductsProps = {}
@@ -28,21 +31,13 @@ const Products : React.FC<ProductsProps> = () =>{
     const router = useRouter();
     const pageNum = (searchParams.get("page") || 1) as number;
     const perPageParam = (searchParams.get("perPage") || perPageOptions[1].cantidad) as number;
-    const perPage = verifyPerPage();
+    const perPage = verifyPerPage(perPageOptions, perPageParam);
 
 
     function handleChange(event:any){
         router.push(`?page=1&perPage=${event.target.value}`,
             {scroll:true}
         )
-    }
-
-    function verifyPerPage():number{
-        if(perPageOptions.find( option => option.cantidad == perPageParam)){
-            return perPageParam;
-        }
-        return perPageOptions[1].cantidad;
-        
     }
 
     return(
