@@ -6,7 +6,7 @@ import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
 
 import productsFake from "@/utils/json/productsFake.json"
-import {verifyPerPage} from "@/utils/ts/validations"
+import {verifyPerPageExist} from "@/utils/ts/validations"
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -29,9 +29,10 @@ const Products : React.FC<ProductsProps> = () =>{
 
     const searchParams = useSearchParams();
     const router = useRouter();
+
     const pageNum = (searchParams.get("page") || 1) as number;
-    const perPageParam = (searchParams.get("perPage") || perPageOptions[1].cantidad) as number;
-    const perPage = verifyPerPage(perPageOptions, perPageParam);
+    const perPageParam = Number(searchParams.get("perPage") || perPageOptions[1].cantidad) as number;
+    const perPage = verifyPerPageExist(perPageOptions, perPageParam);
 
 
     function handleChange(event:any){
