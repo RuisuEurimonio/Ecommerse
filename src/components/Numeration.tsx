@@ -16,7 +16,9 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
     const searchParam = useSearchParams();
     const router = useRouter();
     const pageNum = (searchParam.get("page") || 1) as string;
+    const pageNumInt:number = parseInt(pageNum);
     const [pages, setPages] = useState<number[]>([]);
+    const paginationCant:number = 4;
 
     useEffect(()=>{
         let numeration:number[] = [];
@@ -27,16 +29,16 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
     },[itemsByPage, data])
 
     function next(){
-        if(parseInt(pageNum)<=pages.length-1){
-            let sum : number= parseInt(pageNum)+1;
+        if(pageNumInt<=pages.length-1){
+            let sum : number= pageNumInt+1;
             router.push(`?page=${sum}&perPage=${itemsByPage}`,
             {scroll:false})
         }
     }
 
     function before(){
-        if(parseInt(pageNum)>1){
-            let sum : number= parseInt(pageNum)-1;
+        if(pageNumInt>1){
+            let sum : number= pageNumInt-1;
             router.push(`?page=${sum}&perPage=${itemsByPage}`,
             {scroll:false})
         } else {
@@ -53,8 +55,11 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
     return(
     <ul className="text-white-mafer flex flex-wrap justify-center my-2 text-lg items-center">
         <li className="mr-2 py-2" onClick={before}> <span className="icon icon-arrowl" ></span></li>
-        {pages.map((page:number)=>{
-            const style = (parseInt(pageNum)===page) ? "font-bold underline underline-offset-8" : "";
+        {pages.slice(
+            (pageNumInt<=paginationCant)?0:pageNumInt-paginationCant-1,
+            (pageNumInt>(pages.length-paginationCant))?pages.length:pageNumInt+paginationCant
+        ).map((page:number)=>{
+            const style = (pageNumInt===page) ? "font-bold underline underline-offset-8" : "";
         return(
             <li key={page} className={`mx-1 ${style}`} onClick={()=>{selectPage(page)}}> {page} </li>
         )})}
