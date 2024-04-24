@@ -9,6 +9,7 @@ import productsFake from "@/utils/json/productsFake.json"
 import {verifyPerPageExist} from "@/utils/ts/validations"
 
 import { useRouter, useSearchParams } from "next/navigation";
+import HistoryNavigation from "@/components/HistoryNavigation";
 
 type ProductsProps = {}
 
@@ -45,7 +46,7 @@ const Products : React.FC<ProductsProps> = () =>{
         <div className="w-11/12 m-auto
             md:w-4/5
         ">
-            <div className="my-2"> <span className="text-black-mafer/50"> Inicio &gt; </span>  <span className="font-bold"> Productos </span> </div>
+            <HistoryNavigation items={[{"names":"Productos","url":"/productos"}]}/>
             
             <Clasificaciones/>
 

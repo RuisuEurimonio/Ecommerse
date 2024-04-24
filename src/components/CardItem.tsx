@@ -26,8 +26,14 @@ const CardItem : React.FC<{item : CardProductProps}> = ({item}) => {
                 xl:text-lg
                 2xl:text-base
             ">
-                <button className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition"> Agregar al carrito </button>
-                <Link href="" className="hover:underline"> Más información. </Link>
+                <button className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
+                    lg:text-xs
+                    2xl:text-sm
+                "> Agregar al carrito </button>
+                <Link href={`/productos/${item.id}`} className="hover:underline
+                    lg:text-xs
+                    2xl:text-sm
+                "> Más información. </Link>
             </div>
             
         </div>
