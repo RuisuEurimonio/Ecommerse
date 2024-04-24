@@ -50,7 +50,7 @@ const Products : React.FC<ProductsProps> = () =>{
             
             <Clasificaciones/>
 
-            <div className="flex my-4 flex-col
+            <div className="flex my-4 flex-col justify-between
                 md:flex-row
             ">
                 <Filters/>

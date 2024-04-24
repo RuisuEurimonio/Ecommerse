@@ -8,6 +8,7 @@ export type CardProductProps = {
     marca: string;
     clasificacion: string;
     descuento: boolean;
+    categoria: string;
 }
 
 export type ObjBranchProps = {
