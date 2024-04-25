@@ -59,7 +59,7 @@ const Products : React.FC<ProductsProps> = () =>{
                         <div className="bg-blue-mafer p-1 rounded-sm flex flex-col items-center">
                             <div className="mt-2">
                                 <label className="text-white-mafer"> Ordenar por: </label>
-                                <select name="order" className="outline-none">
+                                <select name="order" className="outline-none cursor-pointer mx-1 rounded-sm">
                                     {options.map((option)=>(
                                         <option key={option.id} > {option.tipo} </option>
                                     ))}
@@ -84,7 +84,7 @@ const Products : React.FC<ProductsProps> = () =>{
                         <div className="bg-blue-mafer p-1 flex flex-col-reverse items-center rounded-sm">
                             <div className="mb-3">
                                 <label className="text-white-mafer"> Cantidad por pagina: </label>
-                                <select name="order" className="outline-none" value={perPage} onChange={handleChange}>
+                                <select name="order" className="outline-none cursor-pointer rounded-sm mx-1" value={perPage} onChange={handleChange}>
                                     {perPageOptions.map((option)=>(
                                         <option key={option.id} value={option.cantidad}> {option.cantidad} </option>
                                     ))}
