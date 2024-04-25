@@ -5,6 +5,13 @@ import HistoryNavigation from "@/components/HistoryNavigation";
 import Clasificaciones from "@/components/Clasficaciones";
 import image from "@/assets/img/imageNotFound.jpg"
 import Image from "next/image";
+import Comments from "@/components/Comments";
+import CardItem from "@/components/CardItem";
+import { randomInt } from "crypto";
+import CardItemWrapper from "@/components/CardItemWrapper";
+import ProductsRecomended from "@/components/ProductsRecomended";
+
+const dataProducts = productsFake.slice(0, 10);
 
 const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
 
@@ -72,12 +79,17 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
                             <p> Disponibilidad de envio. </p>
                         </li>
                     </ul>
-                </div>
 
+
+                </div>
             </div>
+            
+            <Comments/>
+
+            <ProductsRecomended data={dataProducts}/>
 
         </div>
     )
 }
 
-export default ProductPage
+export default ProductPage;

@@ -34,3 +34,21 @@ export type CategoryProps = {
     fechaCreacion: String,
     fechaModificacion: String
 }
+
+export type UserProps = {
+    id: number,
+    numeroDocumento?: string,
+    tipoDocumento?: string,
+    correo: string,
+    telefono?: string,
+    celular: string,
+    nombres: string,
+    apellidos: string,
+    direccion: string,
+    permisos: "Usuario" | "Administrador",
+    metodoPago: number,
+    fechaCreacion: string,
+    fechaModificacion: string,
+    contraseña: string,
+    datosActualizados: boolean
+}

@@ -11,7 +11,7 @@ const CardItem : React.FC<{item : CardProductProps}> = ({item}) => {
                 <div className="w-full">
                     <Image src={imageNotFound} alt="image not found"/>
                 </div>
-                <p className="text-sm mt-2
+                <p className="text-sm mt-2 line-clamp-1
                     xl:text-base
                 "> {item.id} {item.clasificacion} </p>
                 <p className="text-base font-semibold
