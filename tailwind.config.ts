@@ -13,7 +13,8 @@ const config: Config = {
       'white-mafer': "#ffffff",
       "black-mafer": "#000000",
       "transparent": "transparent",
-      "light-white-mafer": "#FFFFF7"
+      "light-white-mafer": "#FFFFF7",
+      "gray": "#d3d3d3 "
     },
   },
   plugins: [],

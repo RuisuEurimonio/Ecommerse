@@ -22,7 +22,6 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
     useEffect(()=>{
         let totalPage =getNumeration(data, itemsByPage);
         verifyPageUrlExistAndIsNumber(totalPage, pageNum, itemsByPage, router);
-        console.log(pageNum)
         let numeration:number[] = [];
         for(let i:number = 0 ; i < totalPage ; i++){
             numeration.push(i+1);

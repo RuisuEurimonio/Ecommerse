@@ -1,6 +1,5 @@
 import React from "react";
-import CardItemWrapper from "./CardItemWrapper";
-import CardItem from "./CardItem";
+import CardItemWrapper from "./CardWrapper";
 import { CardProductProps } from "@/types/Props";
 import CardSimple from "./CardSimple";
 

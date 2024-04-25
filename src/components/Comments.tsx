@@ -15,8 +15,16 @@ const Comments : React.FC<CommentsProps> = () => {
         <h3 className="text-lg font-bold"> Comentarios. </h3>
             {data.slice(1,5).map((user)=>(
                 <div key={user.id} className="flex flex-row gap-2 my-2">
-                    <div className="basis-1/4">
-                        <Image src={image} alt={""} className="rounded-full"></Image>
+                    <div className="basis-1/4 flex justify-center
+                        sm:items-center
+                    ">
+                        <div className="size-16 flex justify-center items-center bg-gray rounded-full
+                            sm:size-24
+                        ">
+                            <span className="text-2xl font-bold
+                                sm:text-4xl
+                            "> {user.nombres.charAt(0)} </span>
+                        </div>
                     </div>
                     <div className="basis-3/4">
                         <h4 className="text-sm font-bold"> {user.nombres} {user.apellidos} </h4>
