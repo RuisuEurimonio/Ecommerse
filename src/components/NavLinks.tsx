@@ -15,8 +15,8 @@ type LinkProps ={
 
 const links=[
     {href:"/",nameLink:"Inicio"},
-    {href:"/productos",nameLink:"Productos"},
-    {href:"/descuentos",nameLink:"Descuentos"},
+    {href:"/products",nameLink:"Productos"},
+    {href:"/discounts",nameLink:"Descuentos"},
     {href:"/josc",nameLink:"JOSC"},
     {href:"/eventos",nameLink:"Eventos"},
     {href:"/sobre-nosotros",nameLink:"Sobre nosotros"}

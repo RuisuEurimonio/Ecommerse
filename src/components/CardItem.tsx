@@ -4,11 +4,22 @@ import React from "react";
 import { CardProductProps } from "@/types/Props";
 import imageNotFound from "@/assets/img/imageNotFound.jpg"
 
-const CardItem : React.FC<{item : CardProductProps}> = ({item}) => {
+type CardItemProps = {
+    item : CardProductProps,
+    discount?: boolean,
+}
+
+const CardItem : React.FC<CardItemProps> = ({item, discount = false}) => {
     return(
         <div className="flex-[20%] flex flex-col justify-between min-w-32">
             <div className="">
-                <div className="w-full">
+                <div className="w-full relative">
+                    { discount &&
+                        <React.Fragment>
+                            <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-red-mafer border-l-transparent border-b-transparent"> </span>
+                            <span className="absolute top-0.8 right-1 font-bold text-lg"> % </span>
+                        </React.Fragment>
+                    }
                     <Image src={imageNotFound} alt="image not found"/>
                 </div>
                 <p className="text-sm mt-2 line-clamp-1
