@@ -41,7 +41,7 @@ const CardItem : React.FC<CardItemProps> = ({item, discount = false}) => {
                     lg:text-xs
                     2xl:text-sm
                 "> Agregar al carrito </button>
-                <Link href={`/productos/${item.id}`} className="hover:underline
+                <Link href={`/products/${item.id}`} className="hover:underline
                     lg:text-xs
                     2xl:text-sm
                 "> Más información. </Link>
