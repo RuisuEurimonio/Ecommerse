@@ -62,7 +62,7 @@ const Discounts : React.FC<DisctountsProps> = () =>{
                             xl:grid-cols-5
                         ">
                             {data.slice(((perPage*pageNum)-perPage),perPage*pageNum).map((item)=>(
-                                <CardItem key={item.id} item={item} discount/>
+                                <CardItem key={item.id} item={item} discount link={"discounts"} />
 
                             ))}
                         </ul>

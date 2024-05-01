@@ -7,9 +7,10 @@ import imageNotFound from "@/assets/img/imageNotFound.jpg"
 type CardItemProps = {
     item : CardProductProps,
     discount?: boolean,
+    link: string
 }
 
-const CardItem : React.FC<CardItemProps> = ({item, discount = false}) => {
+const CardItem : React.FC<CardItemProps> = ({item, discount = false, link}) => {
     return(
         <div className="flex-[20%] flex flex-col justify-between min-w-32">
             <div className="">
@@ -41,7 +42,7 @@ const CardItem : React.FC<CardItemProps> = ({item, discount = false}) => {
                     lg:text-xs
                     2xl:text-sm
                 "> Agregar al carrito </button>
-                <Link href={`/products/${item.id}`} className="hover:underline
+                <Link href={`/${link}/${item.id}`} className="hover:underline
                     lg:text-xs
                     2xl:text-sm
                 "> Más información. </Link>
