@@ -63,7 +63,7 @@ const Products : React.FC<ProductsProps> = () =>{
                             xl:grid-cols-5
                         ">
                             {data.slice(((perPage*pageNum)-perPage),perPage*pageNum).map((item)=>(
-                                <CardItem key={item.id} item={item} link={"products"}/>
+                                <CardItem key={item.id} item={item} link={"JOSC"}/>
 
                             ))}
                         </ul>

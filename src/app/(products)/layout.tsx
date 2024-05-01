@@ -14,10 +14,6 @@ const ProductsLayout : React.FC<ProductLayoutProps> = ({children}) => {
 
     const path = usePathname();
 
-    useEffect(()=>{
-        console.log(path)
-    },[])
-
     return (
         <div className="w-11/12 m-auto
         md:w-4/5">

@@ -34,7 +34,7 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
             ">
 
                 <div className="basis-1/2 border-2
-                    lg:basis-1/3
+                    xl:basis-1/3
                 "> 
                     <div>
                         <Image className="w-3/4 m-auto mt-2 rounded-sm" src={image} alt={data?.descripcion ?? "Description product not found"}></Image>
@@ -48,7 +48,7 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
                 </div>
 
                 <div className="basis-1/2 border-2 p-2 rounded-sm flex justify-between flex-col
-                    lg:basis-2/3 xl:py-4 xl:px-8
+                    xl:basis-2/3 xl:py-4 xl:px-8
                 "> 
                     <div className="flex text-sm justify-between
                         xl:text-base
@@ -74,7 +74,8 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
                     "> {data?.descripcion} </p>
                     </div>
                     <div className="flex justify-around items-center flex-col gap-2 
-                        lg:flex-row lg:justify-end
+                        lg:flex-row
+                        xl:justify-end
                     ">
                         <div className="grid grid-cols-3 border-2 divide-x-2 font-bold rounded-lg">
                             <button className="w-7 text-xl h-full
