@@ -13,7 +13,13 @@ type CardItemProps = {
 const CardItem : React.FC<CardItemProps> = ({item, discount = false, link}) => {
     return(
         <div className="flex-[20%] flex flex-col justify-between min-w-32">
-            <div className="">
+            <div className="relative">
+                { discount &&
+                        <React.Fragment>
+                            <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-red-mafer border-l-transparent border-b-transparent"> </span>
+                            <span className="absolute top-0.8 right-1 font-bold text-lg"> % </span>
+                        </React.Fragment>
+                    }
                 <div className="w-full">
                     <Image src={imageNotFound} alt="image not found"/>
                 </div>

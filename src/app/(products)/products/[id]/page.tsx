@@ -1,12 +1,11 @@
 import React from "react";
 import {CardProductProps} from "@/types/Props"
 import productsFake from "@/utils/json/productsFake.json"
-import HistoryNavigation from "@/components/HistoryNavigation";
-import Clasificaciones from "@/components/Clasficaciones";
 import image from "@/assets/img/imageNotFound.jpg"
 import Image from "next/image";
 import Comments from "@/components/Comments";
 import ProductsRecomended from "@/components/ProductsRecomended";
+import AddProductCant from "@/components/AddProductCant";
 
 const dataProducts = productsFake.slice(0, 10);
 
@@ -20,14 +19,8 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
     ]
 
     return (
-        <div className="w-11/12 m-auto
-            md:w-4/5
-        ">
-            <HistoryNavigation items={navigation}/>
-
-            <Clasificaciones/>
-
-            <h2 className="text-center font-bold text-red-mafer mt-2 text-xl"> Descripción de producto. </h2>
+        <div className="">
+            <h2 className="text-center font-bold text-red-mafer mt-4 text-xl"> Descripción de producto. </h2>
 
             <div className="flex w-full my-4 flex-col-reverse gap-2
                 sm:flex-row sm:justify-between
@@ -76,17 +69,7 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
                     <div className="flex justify-around items-center flex-col gap-2 
                         lg:flex-row lg:justify-end
                     ">
-                        <div className="grid grid-cols-3 border-2 divide-x-2 font-bold rounded-lg">
-                            <button className="w-7 text-xl h-full
-                                xl:text-2xl xl:w-10
-                            "> - </button>
-                            <button className="w-7 h-full
-                                xl:text-xl xl:w-10
-                            "> 0 </button>
-                            <button className="w-7 text-xl h-full
-                                xl:text-2xl xl:w-10
-                            "> + </button>
-                        </div>
+                        <AddProductCant/>
                         <div className="border-2 rounded-lg px-1 bg-red-mafer text-blue-mafer text-base
                             xl:py-1
                         ">

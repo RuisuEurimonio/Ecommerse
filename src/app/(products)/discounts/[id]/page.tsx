@@ -21,13 +21,7 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
     ]
 
     return (
-        <div className="w-11/12 m-auto
-            md:w-4/5
-        ">
-            <HistoryNavigation items={navigation}/>
-
-            <Clasificaciones/>
-
+        <div className="">
             <h2 className="text-center font-bold text-red-mafer mt-2 text-xl"> Descripción de producto. </h2>
 
             <div className="flex w-full my-4 flex-col-reverse gap-2

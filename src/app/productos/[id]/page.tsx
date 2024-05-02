@@ -7,6 +7,7 @@ import image from "@/assets/img/imageNotFound.jpg"
 import Image from "next/image";
 import Comments from "@/components/Comments";
 import ProductsRecomended from "@/components/ProductsRecomended";
+import AddProductCant from "@/components/AddProductCant";
 
 const dataProducts = productsFake.slice(0, 10);
 
@@ -77,17 +78,7 @@ const ProductPage : React.FC<CardProductProps> = ({params}:any) => {
                         lg:flex-row
                         xl:justify-end
                     ">
-                        <div className="grid grid-cols-3 border-2 divide-x-2 font-bold rounded-lg">
-                            <button className="w-7 text-xl h-full
-                                xl:text-2xl xl:w-10
-                            "> - </button>
-                            <button className="w-7 h-full
-                                xl:text-xl xl:w-10
-                            "> 0 </button>
-                            <button className="w-7 text-xl h-full
-                                xl:text-2xl xl:w-10
-                            "> + </button>
-                        </div>
+                        <AddProductCant/>
                         <div className="border-2 rounded-lg px-1 bg-red-mafer text-blue-mafer text-base
                             xl:py-1
                         ">

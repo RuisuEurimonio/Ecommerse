@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import productsFake from "@/utils/json/productsFake.json"
 import CardItem from "@/components/CardItem";
+import Filters from "@/components/Filters";
 
 type DisctountsProps = {
 
@@ -39,7 +40,12 @@ const Discounts : React.FC<DisctountsProps> = () =>{
         )
     }
     return (
-        <>            
+        <div
+      className="flex my-4 flex-col justify-between
+                    md:flex-row
+                "
+    >
+      <Filters />    
             <div className="md:basis-3/4">
                 <div className=""> 
                     <div className="bg-blue-mafer p-1 rounded-sm flex flex-col items-center">
@@ -82,7 +88,7 @@ const Discounts : React.FC<DisctountsProps> = () =>{
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

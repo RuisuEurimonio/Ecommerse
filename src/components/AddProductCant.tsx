@@ -22,7 +22,7 @@ const AddProductCant : React.FC<AddProductCantProps> = () => {
 
     function handleChange(event:any){
         let value = event.target.value;
-        (parseInt(value) <= 100 && parseInt(value) >= 0) ?  setCant(value) : setCant(0);
+        (parseInt(value) <= 100 && parseInt(value) >= 0 || value === "") ?  setCant(value) : setCant(cant);
     }
 
     return(
