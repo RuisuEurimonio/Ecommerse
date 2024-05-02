@@ -4,7 +4,7 @@ import React from "react";
 type HistoryNavigationProps = {
     items: {
         names: string;
-        url: string
+        url?: string
     }[]
 }
 
@@ -17,8 +17,8 @@ const HistoryNavigation : React.FC<HistoryNavigationProps> = ({items}) => {
             <Link href="/" > <span> Inicio </span> </Link>
             {items.map((item)=>(
                 <React.Fragment key={item.names}>
-                    <span className="icon icon-arrowr"></span>
-                    <Link href={item.url}>
+                    {item.names && <span className="icon icon-arrowr"></span>}
+                    <Link href={item.url ?? "#"}>
                         <span className="text-black-mafer/50"> {item.names} </span>    
                     </Link>
                 </React.Fragment>
