@@ -35,7 +35,7 @@ const Products: React.FC<ProductsProps> = () => {
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
 
     function handleChange(event: any) {
-        router.push(`?page=1&perPage=${event.target.value}`, { scroll: true });
+        router.replace(`?page=1&perPage=${event.target.value}`, { scroll: false });
     }
 
     return (
@@ -88,6 +88,7 @@ const Products: React.FC<ProductsProps> = () => {
                                         key={item.id}
                                         item={item}
                                         link={"products"}
+                                        discount={item.descuento}
                                     />
                                 ))}
                         </ul>

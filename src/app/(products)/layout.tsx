@@ -3,7 +3,7 @@
 import Clasificaciones from "@/components/Clasficaciones";
 import HistoryNavigation from "@/components/HistoryNavigation";
 import { usePathname, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React from "react";
 
 type ProductLayoutProps = {
   children: any;
@@ -20,10 +20,6 @@ const ProductsLayout: React.FC<ProductLayoutProps> = ({ children }) => {
   const path = usePathname();
   const searchPath = useSearchParams();
   const nameProduct = searchPath.get("name") || "" as string;
-
-  useEffect(()=>{
-    console.log(path.split("/")[1]);
-  },[])
 
   return (
     <div

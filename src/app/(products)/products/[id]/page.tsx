@@ -9,6 +9,7 @@ import Comments from "@/components/Comments";
 import ProductsRecomended from "@/components/ProductsRecomended";
 import AddProductCant from "@/components/AddProductCant";
 import { useRouter } from "next/navigation";
+import ProductPrice from "@/components/ProductPrice";
 
 const dataProducts = productsFake.slice(0, 10);
 
@@ -18,7 +19,7 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
     const router = useRouter();
 
     useEffect(() => {
-        router.push(`?name=${data?.nombre}`);
+        router.replace(`?name=${data?.nombre}`);
     }, []);
 
     return (
@@ -109,14 +110,7 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
                         >
                             <li> ⭐⭐⭐⭐⭐ </li>
                         </ul>
-                        <h4
-                            className="my-2 text-red-mafer font-bold text-2xl
-                            xl:text-3xl
-                        "
-                        >
-                            {" "}
-                            {data?.precio ?? "Not found"}{" "}
-                        </h4>
+                        { data && <ProductPrice data={data}/>}
                         <p
                             className="my-2 text-sm
                         sm:line-clamp-2
