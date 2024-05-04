@@ -1,5 +1,6 @@
 "use client";
 
+import AboutJosc from "@/components/AboutJOSC";
 import Clasificaciones from "@/components/Clasficaciones";
 import HistoryNavigation from "@/components/HistoryNavigation";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -26,14 +27,22 @@ const ProductsLayout: React.FC<ProductLayoutProps> = ({ children }) => {
       className="w-11/12 m-auto
         md:w-4/5"
     >
-      {Object.entries(rootPaths).map(([pathEntity, namePath])=>{
-        return(
-          pathEntity === path.split("/")[1] && (
-            <HistoryNavigation key={pathEntity} items={[{ names: namePath, url: "/"+pathEntity },{names:nameProduct}]} />
+      {path != "/JOSC" && (
+        <>
+        {Object.entries(rootPaths).map(([pathEntity, namePath])=>{
+          return(
+            pathEntity === path.split("/")[1] && (
+              <HistoryNavigation key={pathEntity} items={[{ names: namePath, url: "/"+pathEntity },{names:nameProduct}]} />
+            )
           )
-        )
-      })}
-      <Clasificaciones />
+        })}
+        <Clasificaciones />
+        </>
+      )}
+      
+      {path === "/JOSC" &&
+        <AboutJosc fullContent={false}/>
+      }
 
       {children}
     </div>
