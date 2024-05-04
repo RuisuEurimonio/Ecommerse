@@ -52,3 +52,12 @@ export type UserProps = {
     contraseña: string,
     datosActualizados: boolean
 }
+
+export type NewsLetterProps ={
+    id: number,
+    title: string,
+    Subtitle: string,
+    text: string,
+    date: string,
+    img: string
+}
