@@ -16,7 +16,10 @@ const CardSimple: React.FC<CardSimpleProps> = ({
     newsletter,
 }) => {
     return (
-        <li className="flex-1 bg-black-mafer/5 min-w-[10rem] flex flex-col justify-between">
+        <li className={`bg-black-mafer/5 min-w-[10rem] flex flex-col justify-between
+            ${newsletter ? "" : "flex-1"}
+            
+        `}>
             <Link href="">
                 <div className="relative">
                     {discount && (
@@ -33,9 +36,8 @@ const CardSimple: React.FC<CardSimpleProps> = ({
                     <Image
                         src={product?.image || newsletter?.img || imageNotFound}
                         alt="Image not found"
-                        width={250}
-                        height={250}
-                        className="object-cover"
+                        width={400} height={150} style={{ width: "500px" }} // style attribute fix the Image component error 
+                        className="m-auto object-cover"
                     />
                 </div>
                 <div className="px-2">

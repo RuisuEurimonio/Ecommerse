@@ -30,7 +30,14 @@ const CardItem: React.FC<CardItemProps> = ({
                     </React.Fragment>
                 )}
                 <div className="w-full">
-                    <Image src={item.image} alt="image not found" width={400} height={400}/>
+                    <Image
+                        src={item.image}
+                        alt="image not found"
+                        width={400}
+                        height={150}
+                        style={{ width: "400px"}} // style attribute fix the Image component error 
+                        className="m-auto object-cover"
+                    />
                 </div>
                 <p
                     className="text-sm mt-2 line-clamp-1
