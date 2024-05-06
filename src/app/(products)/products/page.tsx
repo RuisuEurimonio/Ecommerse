@@ -2,41 +2,29 @@
 
 import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
+import Filters from "@/components/Filters";
 
 import productsFake from "@/utils/json/productsFake.json";
 import { verifyPerPageExist } from "@/utils/ts/validations";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import Filters from "@/components/Filters";
+import { perPageOptions } from "@/utils/ts/configuration";
+import { options } from "@/utils/ts/configuration";
+
+import { useSearchParams } from "next/navigation";
+import { SelectCantItems } from "@/components/SelectCantItems";
 
 type ProductsProps = {};
 
 const data = productsFake;
 
-const options = [
-    { id: 1, tipo: "alfabeticamente a > z" },
-    { id: 2, tipo: "alfabeticamente z > a" },
-];
-
-const perPageOptions = [
-    { id: 1, cantidad: 10 },
-    { id: 2, cantidad: 25 },
-    { id: 3, cantidad: 50 },
-];
-
 const Products: React.FC<ProductsProps> = () => {
     const searchParams = useSearchParams();
-    const router = useRouter();
 
     const pageNum = (searchParams.get("page") || 1) as number;
     const perPageParam = Number(
         searchParams.get("perPage") || perPageOptions[1].cantidad
     ) as number;
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
-
-    function handleChange(event: any) {
-        router.replace(`?page=1&perPage=${event.target.value}`, { scroll: false });
-    }
 
     return (
         <div
@@ -94,28 +82,7 @@ const Products: React.FC<ProductsProps> = () => {
                         </ul>
                     </div>
                     <div className="bg-blue-mafer p-1 flex flex-col-reverse items-center rounded-sm">
-                        <div className="mb-3">
-                            <label className="text-white-mafer">
-                                {" "}
-                                Cantidad por pagina:{" "}
-                            </label>
-                            <select
-                                name="order"
-                                className="outline-none cursor-pointer rounded-sm mx-1"
-                                value={perPage}
-                                onChange={handleChange}
-                            >
-                                {perPageOptions.map((option) => (
-                                    <option
-                                        key={option.id}
-                                        value={option.cantidad}
-                                    >
-                                        {" "}
-                                        {option.cantidad}{" "}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                        <SelectCantItems perPage={perPage} />
                         <div>
                             <Numeration data={data} itemsByPage={perPage} />
                         </div>

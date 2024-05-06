@@ -36,8 +36,15 @@ const Events : React.FC<eventsProps> = () => {
                     {data.slice(6,12).map((item)=>(
                         <InfoItemCard data={item} key={item.id}/>
                     ))}
+                    <div className="bg-blue-mafer w-full">
+                        <label> Mostrar: </label>
+                        <select>
+                            <option>  </option>
+                        </select>
+                    </div>
                 </div>
             </div>
+
         </div>
     )
 }
