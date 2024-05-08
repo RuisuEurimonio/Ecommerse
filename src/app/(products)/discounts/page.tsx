@@ -80,11 +80,9 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                 ))}
                         </ul>
                     </div>
-                    <div className="bg-blue-mafer p-1 flex flex-col-reverse items-center rounded-sm">
+                    <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
                         <SelectCantItems perPage={perPage} />
-                        <div>
-                            <Numeration data={data} itemsByPage={perPage} />
-                        </div>
+                        <Numeration data={data} itemsByPage={perPage} />
                     </div>
                 </div>
             </div>

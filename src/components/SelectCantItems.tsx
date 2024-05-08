@@ -4,11 +4,12 @@ import { perPageOptions } from "@/utils/ts/configuration";
 import { useRouter } from "next/navigation";
 
 type SelectCantItemsProps = {
-    perPage : number
+    perPage : number,
+    className?: string
 };
 
 
-export const SelectCantItems: React.FC<SelectCantItemsProps> = ({perPage}) => {
+export const SelectCantItems: React.FC<SelectCantItemsProps> = ({perPage, className}) => {
 
     const router = useRouter();
 
@@ -17,7 +18,7 @@ export const SelectCantItems: React.FC<SelectCantItemsProps> = ({perPage}) => {
     }
 
     return (
-        <div className="mb-3">
+        <div className={className}>
             <label className="text-white-mafer"> Cantidad por pagina: </label>
             <select
                 name="order"

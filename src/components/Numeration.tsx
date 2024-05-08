@@ -5,13 +5,15 @@ import { verifyPageUrlExistAndIsNumber } from "@/utils/ts/validations"
 import { getNumeration } from "@/utils/ts/getNumeration";
 
 import { CardProductProps } from "@/types/Props"
+import { NewsLetterProps } from "@/types/Props";
 
 type NumerationProps ={
-    data: CardProductProps[],
-    itemsByPage: number
+    data: CardProductProps[] | NewsLetterProps[],
+    itemsByPage: number,
+    className?: string
 }
 
-const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
+const Numeration : React.FC<NumerationProps> = ({data, itemsByPage, className}) => {
 
     const searchParam = useSearchParams();
     const router = useRouter();
@@ -33,7 +35,7 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
         if(pageNum<=pages.length-1){
             let sum : number= pageNum+1;
             router.push(`?page=${sum}&perPage=${itemsByPage}`,
-            {scroll:false})
+            {scroll:true})
         }
     }
 
@@ -41,20 +43,20 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage}) => {
         if(pageNum>1){
             let sum : number= pageNum-1;
             router.push(`?page=${sum}&perPage=${itemsByPage}`,
-            {scroll:false})
+            {scroll:true})
         } else {
             router.push(`?page=1&perPage=${itemsByPage}`,
-            {scroll:false})
+            {scroll:true})
         }
     }
 
     function selectPage(number:number){
         router.push(`?page=${number}&perPage=${itemsByPage}`,
-        {scroll:false})
+        {scroll:true})
     }
 
     return(
-    <ul className="text-white-mafer flex flex-wrap justify-center my-2 text-lg items-center">
+    <ul className={`text-white-mafer flex flex-wrap justify-center text-lg items-center ${className}`}>
         <li className="mr-2 py-2" onClick={before}> <span className="icon icon-arrowl cursor-pointer" ></span></li>
         {pages.slice(
             (pageNum<=paginationCant)?0:pageNum-paginationCant-1,

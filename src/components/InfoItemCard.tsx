@@ -26,13 +26,13 @@ const InfoItemCard: React.FC<InfoItemCardProps> = ({ data }) => {
             <div className="overflow-hidden xl:basis-8/12">
                 <h2 className="text-xl font-bold mt-1
                     md:text-lg
-                "> {data.title} </h2>
+                "> {data.title} {data.id} </h2>
                 <h3 className="text-lg text-black-mafer/50
                     md:text-base
                 "> {data.Subtitle} </h3>
-                <p className="line-clamp-[10] float-left
-                    md:text-sm md:line-clamp-[8]
-                    xl:line-clamp-6
+                <p className="line-clamp-[8] float-left
+                    md:text-sm md:line-clamp-[6]
+                    xl:line-clamp-4
                 "> {data.text} </p>
                 <button className="bg-black-mafer text-white-mafer py-1.5 px-3 rounded-sm float-right">
                     {" "}
