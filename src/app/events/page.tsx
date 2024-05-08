@@ -66,7 +66,7 @@ const Events: React.FC<eventsProps> = () => {
                     {data
                         .slice(perPage * pageNum - perPage, perPage * pageNum)
                         .map((item) => (
-                            <InfoItemCard data={item} key={item.id} />
+                            <InfoItemCard data={item} key={item.id} link="events"/>
                         ))}
                     <div className="bg-blue-mafer w-full flex flex-col-reverse items-center py-2
                         lg:flex-row lg:justify-evenly lg:py-0
