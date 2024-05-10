@@ -61,3 +61,9 @@ export type NewsLetterProps ={
     date: string,
     img: string
 }
+
+export type PayMethodProps = {
+    id: number,
+    metodo: string,
+    img: string
+}
