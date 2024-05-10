@@ -39,13 +39,13 @@ const Experiencie: React.FC<ExperiencieProps> = () => {
     return (
         <div className="bg-red-mafer p-4 rounded-sm h-full">
             <ul
-                className="text-white-mafer flex flex-col items-center divide-y-2 text-center h-full
+                className="text-white-mafer flex flex-col divide-y-2 text-center h-full
                 md:flex-row md:divide-y-0 md:justify-center md:divide-x-2
             "
             >
                 <li
-                    className="flex flex-col items-center w-full pb-4
-                    md:p-0 md:h-full 
+                    className="flex flex-col items-center justify-center w-full pb-4
+                    md:p-0  
                 "
                 >
                     <span className="icon text-5xl icon-users-g"></span>
@@ -53,8 +53,8 @@ const Experiencie: React.FC<ExperiencieProps> = () => {
                     Clientes satisfechos.{" "}
                 </li>
                 <li
-                    className="flex flex-col items-center w-full py-4
-                    md:p-0 md:h-full
+                    className="flex flex-col items-center justify-center w-full py-4
+                    md:p-0 
                 "
                 >
                     <span className="icon text-5xl icon-business"></span>
@@ -62,16 +62,16 @@ const Experiencie: React.FC<ExperiencieProps> = () => {
                     Miembros de MAFER.{" "}
                 </li>
                 <li
-                    className="flex flex-col items-center w-full py-4
-                    md:p-0 md:h-full
+                    className="flex flex-col items-center justify-center w-full py-4
+                    md:p-0 
                 "
                 >
                     <span className="icon text-5xl icon-user-c"></span>
                     <span className="text-2xl font-bold">24/7</span> de soporte.{" "}
                 </li>
                 <li
-                    className="flex flex-col items-center w-full pt-4
-                    md:p-0 md:h-full
+                    className="flex flex-col items-center justify-center w-full pt-4
+                    md:p-0 
                 "
                 >
                     <span className="icon text-5xl icon-branch"></span>
