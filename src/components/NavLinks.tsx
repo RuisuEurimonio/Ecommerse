@@ -19,7 +19,7 @@ const links=[
     {href:"/discounts",nameLink:"Descuentos"},
     {href:"/JOSC",nameLink:"JOSC"},
     {href:"/events",nameLink:"Eventos"},
-    {href:"/sobre-nosotros",nameLink:"Sobre nosotros"}
+    {href:"/about-us",nameLink:"Sobre nosotros"}
 ]
 
 const NavLinks:React.FC<NavLinksProps> = () => {
