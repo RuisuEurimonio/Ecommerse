@@ -3,6 +3,7 @@ import image from "@/assets/img/Fachadas-MAFER-5.png";
 import Experiencie from "@/components/Experiencie";
 import PayMethods from "@/components/PayMethods";
 import OurOffices from "@/components/OurOffices";
+import Reviews from "@/components/Reviews";
 
 
 type AboutUsProps = {
@@ -36,6 +37,7 @@ const AboutUs : React.FC<AboutUsProps> = ( ) => {
                 <Experiencie/>
                 <PayMethods />
                 <OurOffices/>
+                <Reviews/>
             </div>
         </>
     )

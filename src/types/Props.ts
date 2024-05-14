@@ -67,3 +67,13 @@ export type PayMethodProps = {
     metodo: string,
     img: string
 }
+
+export type ReviewsProps = {
+    id: number, 
+    first_name: string,
+    last_name: string,
+    date: string,
+    review: string,
+    rank: number, 
+    key_points: string
+}
