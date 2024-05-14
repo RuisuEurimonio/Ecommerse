@@ -12,7 +12,7 @@ type AboutUsProps = {
 const AboutUs : React.FC<AboutUsProps> = ( ) => {
     return(
         <>
-            <Image src={image} alt="" className="w-full h-[50vh] object-bottom object-cover "/>
+            <Image src={image} alt="" className="w-full h-[50vh] object-bottom object-cover" priority={false} loading="lazy"/>
             <div className="w-11/12 mx-auto  my-2
             md:w-4/5">
                 <h2 className="text-center text-blue-mafer font-bold text-2xl"> Centro Ferretero Mafer SAS</h2>
