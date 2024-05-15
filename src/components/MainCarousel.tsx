@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import mainImage from "@/assets/img/2024.jpg"
 import navidad from "@/assets/img/navidad.jpg"
 import Image from "next/image";
@@ -31,7 +31,7 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
     useEffect(()=>{
         const interval = setInterval(()=>{
             next();
-        }, intervalImages)
+        }, intervalImages);
         return ()=> clearInterval(interval);
     }
     , [position])
