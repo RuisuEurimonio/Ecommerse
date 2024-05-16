@@ -35,7 +35,7 @@ const AboutUs : React.FC<AboutUsProps> = ( ) => {
                     </div>
                 </div>
                 <Experiencie/>
-                <PayMethods />
+                <PayMethods id="paymethods" />
                 <OurOffices/>
                 <Reviews/>
             </div>

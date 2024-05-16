@@ -82,32 +82,32 @@ const Footer: React.FC<FooterProps> = () => {
                                 xl:text-lg"> Tienda: </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/productos"> Productos. </Link> </li>
+                            "> <Link href="/products"> Productos. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/"> Marcas. </Link> </li>
+                            "> <Link href="/products"> Marcas. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/"> Categorias. </Link> </li>
+                            "> <Link href="/products"> Categorias. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/"> Descuentos. </Link> </li>
+                            "> <Link href="/discounts"> Descuentos. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/"> JOSC. </Link> </li>
+                            "> <Link href="/JOSC"> JOSC. </Link> </li>
                         </ul> 
                         <ul className="text-black-mafer font-semibold">
                             <li className="font-bold text-base
                                 xl:text-lg"> Información: </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/about"> Sobre nosotros.  </Link> </li>
+                            "> <Link href="/about-us"> Sobre nosotros.  </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/josc"> Nuestra marca. </Link> </li>
+                            "> <Link href="/JOSC"> Nuestra marca. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/"> Medios de pago. </Link> </li>
+                            "> <Link href="/about-us#paymethods"> Medios de pago. </Link> </li>
                         </ul>
                     </div>
                 </div>
