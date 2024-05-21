@@ -70,7 +70,7 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                     <hr className="md:hidden"/>
                     <ul className="md:hidden text-lg my-4 font-semibold">
                         <li> <Link href="/">Ingresar. </Link>  </li>
-                        <li> <Link href="/">Mi cuenta </Link>  </li>
+                        <li> <Link href="/my-account">Mi cuenta </Link>  </li>
                     </ul>
                     <hr className="md:hidden"/>
                     <ul className="md:hidden text-lg my-4 font-semibold">

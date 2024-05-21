@@ -1,6 +1,7 @@
 import Link from "next/link";
 import fakeUser from "@/utils/json/usersFake.json"
 import { randomInt } from "crypto";
+import FormUser from "@/components/FormUser";
 
 type MyAccountProps = {}
 
@@ -65,7 +66,9 @@ const MyAccount : React.FC<MyAccountProps> = () => {
                     </div>
                     <hr className="w-11/12 m-auto
                         lg:w-4/5
-                    "></hr>
+                    "/>
+                    <FormUser className="w-11/12 mx-auto my-4
+                        lg:w-4/5" />
                 </div>
             </div>
         </div>
