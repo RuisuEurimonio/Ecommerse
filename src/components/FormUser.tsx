@@ -4,6 +4,7 @@ import { userSchequema } from "@/utils/Schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
+import { InputErrorText } from "./utils";
 
 type FormUserProps = {
     className?: string;
@@ -27,22 +28,22 @@ const FormUser: React.FC<FormUserProps> = ({ className }) => {
         resolver: zodResolver(userSchequema),
     });
 
-    const onSubmit : SubmitHandler<formProps> = (data) => {
+    const onSubmit: SubmitHandler<formProps> = (data) => {
         console.log(data);
-    }
+    };
 
     return (
-        <form
-            onSubmit={handleSubmit(onSubmit)}
-            className={className}
-        >
-            <div className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className={className}>
+            <div className="flex flex-col gap-4
+                lg:gap-6
+            ">
                 <h3 className="font-bold text-lg"> Detalles. </h3>
-                <div className="inline ml-5">
+                <div className="inline ml-5
+                lg:max-w-[35vw] lg:relative">
                     <label htmlFor="numberDocument">
-                        <p className="inline-block">Documento:</p>
+                        <p className="inline-block w-5/12">Documento*:</p>
                         <select
-                            className="border rounded-sm ml-2"
+                            className="border rounded-sm w-2/12"
                             {...register("TypeDocument")}
                         >
                             {document.map((item) => (
@@ -58,129 +59,185 @@ const FormUser: React.FC<FormUserProps> = ({ className }) => {
                         <input
                             id="numberDocument"
                             type="text"
-                            className="border rounded-sm"
+                            className="border rounded-sm w-5/12"
                             {...register("numberDocument")}
                         />
                     </label>
                     {errors.TypeDocument && (
-                        <p> {errors.TypeDocument.message} </p>
+                        <InputErrorText>
+                            {" "}
+                            {errors.TypeDocument?.message}{" "}
+                        </InputErrorText>
                     )}
                     {errors.numberDocument && (
-                        <p> {errors.numberDocument.message} </p>
+                        <InputErrorText>
+                            {" "}
+                            {errors.numberDocument?.message}{" "}
+                        </InputErrorText>
                     )}
                 </div>
-                <div className="ml-5">
+                <div className="ml-5
+                lg:max-w-[35vw] lg:relative">
                     <label htmlFor="names">
-                        Nombres:
+                        <p className="inline-block w-1/3">Nombres*:</p>
                         <input
                             id="names"
                             type="text"
-                            className="border rounded-sm ml-2"
+                            className="border rounded-sm w-2/3"
                             {...register("names")}
                         />
                     </label>
-                    {errors.names && <p> {errors.names.message} </p>}
+                    {errors.names && (
+                        <InputErrorText>
+                            {" "}
+                            {errors.names.message}{" "}
+                        </InputErrorText>
+                    )}
                 </div>
-                <div className="ml-5">
+                <div className="ml-5
+                lg:max-w-[35vw] lg:relative">
                     <label htmlFor="lastNames">
-                        Apellidos:
+                    <p className="inline-block w-1/3">Apellidos*:</p>
                         <input
                             id="lastNames"
                             type="text"
-                            className="border rounded-sm ml-2"
-                            {...register("lastNames")}
+                            className="border rounded-sm w-2/3"
+                        {...register("lastNames")}
                         />
                     </label>
-                    {errors.lastNames && <p> {errors.lastNames.message} </p>}
+                    {errors.lastNames && (
+                        <InputErrorText>
+                            {" "}
+                            {errors.lastNames.message}{" "}
+                        </InputErrorText>
+                    )}
                 </div>
-                <div className="ml-5">
+                <div className="ml-5
+                lg:max-w-[35vw] lg:relative">
                     <label htmlFor="numberPhone">
-                        Teléfono:
+                    <p className="inline-block w-1/3">Teléfono*:</p>
                         <input
                             id="numberPhone"
                             type="text"
-                            className="border rounded-sm ml-2"
-                            {...register("numberPhone")}
+                            className="border rounded-sm w-2/3"
+                        {...register("numberPhone")}
                         />
                     </label>
                     {errors.numberPhone && (
-                        <p> {errors.numberPhone.message} </p>
+                        <InputErrorText>
+                            {" "}
+                            {errors.numberPhone.message}{" "}
+                        </InputErrorText>
                     )}
                 </div>
-                <div className="ml-5">
+                <div className="ml-5
+                lg:max-w-[35vw] lg:relative">
                     <label htmlFor="address">
-                        Dirección:
+                    <p className="inline-block w-1/3">Dirección*:</p>
                         <input
                             id="address"
                             type="text"
-                            className="border rounded-sm ml-2"
-                            {...register("address")}
+                            className="border rounded-sm w-2/3"
+                        {...register("address")}
                         />
                     </label>
-                    {errors.address && <p> {errors.address.message} </p>}
+                    {errors.address && (
+                        <InputErrorText>
+                            {" "}
+                            {errors.address.message}{" "}
+                        </InputErrorText>
+                    )}
                 </div>
                 <h3 className="font-bold text-lg"> Dirección de correo. </h3>
-                <div className="ml-5">
+                <div className="ml-5
+                lg:max-w-[35vw] lg:relative">
                     <label htmlFor="email">
-                        Correo:
+                    <p className="inline-block w-1/3">Correo*:</p>
                         <input
                             id="email"
                             type="email"
-                            className="border rounded-sm ml-2"
-                            {...register("email")}
+                            className="border rounded-sm w-2/3"
+                        {...register("email")}
                         />
                     </label>
-                    {errors.email && <p> {errors.email.message} </p>}
+                    {errors.email && (
+                        <InputErrorText>
+                            {" "}
+                            {errors.email.message}{" "}
+                        </InputErrorText>
+                    )}
                 </div>
                 <h3 className="font-bold text-lg"> Seguridad. </h3>
-                <div className="ml-5">
-                    <label htmlFor="password">
-                        Contraseña actual:
+                <div className="flex text-center
+                    sm:inline sm:text-left sm:ml-5
+                    lg:max-w-[35vw] lg:relative
+                ">
+                    <label htmlFor="password" className="m-auto">
+                        <p className="sm:inline-block sm:w-1/3">Contraseña actual*:</p>
                         <input
                             id="password"
                             type="password"
-                            className="border rounded-sm ml-2"
-                            {...register("password")}
+                            className="border rounded-sm
+                                sm:w-2/3"
+                        {...register("password")}
                         />
+                        {errors.password && (
+                            <InputErrorText>
+                                {" "}
+                                {errors.password.message}{" "}
+                            </InputErrorText>
+                        )}
                     </label>
-                    {errors.password && <p> {errors.password.message} </p>}
                 </div>
-                <div className="ml-5">
-                    <label htmlFor="newPassword">
-                        Nueva contraseña:
+                <div className="flex text-center
+                    sm:inline sm:text-left sm:ml-5
+                    lg:max-w-[35vw] lg:relative
+                ">
+                    <label htmlFor="newPassword" className="m-auto">
+                    <p className="sm:inline-block sm:w-1/3">Nueva contraseña*:</p>
                         <input
                             id="newPassword"
                             type="password"
-                            className="border rounded-sm ml-2"
-                            {...register("newPassword")}
+                            className="border rounded-sm 
+                                sm:w-2/3"
+                        {...register("newPassword")}
                         />
+                        {errors.newPassword && (
+                            <InputErrorText>
+                                {" "}
+                                {errors.newPassword.message}{" "}
+                            </InputErrorText>
+                        )}
                     </label>
-                    {errors.newPassword && (
-                        <p> {errors.newPassword.message} </p>
-                    )}
                 </div>
-                <div className="ml-5">
-                    <label htmlFor="repeatPassword">
-                        Confirmar nueva contraseña:
+                <div className="flex text-center
+                    sm:inline sm:text-left sm:ml-5
+                    lg:max-w-[35vw] lg:relative
+                ">
+                    <label htmlFor="repeatPassword" className="m-auto">
+                        <p className="sm:inline-block sm:w-1/3">Confirmar nueva contraseña*:</p>
                         <input
                             id="repeatPassword"
                             type="password"
-                            className="border rounded-sm ml-2"
-                            {...register("repeatPassword")}
+                            className="border rounded-sm 
+                                sm:w-2/3 sm:translate-y-[-50%]"
+                        {...register("repeatPassword")}
                         />
+                        {errors.repeatPassword && (
+                            <InputErrorText>
+                                {" "}
+                                {errors.repeatPassword.message}{" "}
+                            </InputErrorText>
+                        )}
                     </label>
-                    {errors.repeatPassword && (
-                        <p> {errors.repeatPassword.message} </p>
-                    )}
                 </div>
                 <h3 className="font-bold text-lg"> Pagos. </h3>
             </div>
             <input
                 type="submit"
                 value="Enviar"
-                className="bg-blue-mafer text-white px-2 py-1 rounded-sm text-right cursor-pointer"
+                className="bg-blue-mafer text-white px-2 py-1 rounded-sm text-right cursor-pointer float-right"
             />
-            {JSON.stringify(watch(), null, 2)}
         </form>
     );
 };

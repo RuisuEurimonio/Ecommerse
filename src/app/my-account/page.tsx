@@ -9,7 +9,7 @@ const data = fakeUser.find((value) => value.id === 2);
 
 const MyAccount : React.FC<MyAccountProps> = () => {
     return(
-        <div>
+        <div className="mb-4">
             <div className="bg-blue-mafer h-8 mb-5 flex items-center pb-3">
                 <div className="w-4/5 m-auto text-white-mafer">
                     <Link className="flex items-center gap-3" href="/">
@@ -68,7 +68,7 @@ const MyAccount : React.FC<MyAccountProps> = () => {
                         lg:w-4/5
                     "/>
                     <FormUser className="w-11/12 mx-auto my-4
-                        lg:w-4/5" />
+                        sm:w-3/4" />
                 </div>
             </div>
         </div>
