@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
                 <div
                     className="mx-4 
-                    md:basis-[15%] md:ml-10 md:my-16
+                    md:flex-none md:w-[15%] md:ml-10 md:my-16
                 "
                 >
                     <ul>
