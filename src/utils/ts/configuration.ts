@@ -1,4 +1,4 @@
-export const options : {id: number, tipo: string}[] = [
+export const alphabetOptions : {id: number, tipo: string}[] = [
     { id: 1, tipo: "alfabeticamente a > z" },
     { id: 2, tipo: "alfabeticamente z > a" },
   ];

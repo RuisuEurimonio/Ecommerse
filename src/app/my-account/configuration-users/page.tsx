@@ -1,10 +1,20 @@
+"use client"
+
+import Numeration from "@/components/Numeration";
 import usersFake from "@/utils/json/usersFake.json";
+import { useSearchParams } from "next/navigation";
 
 type ConfigurationUsersProps = {};
 
 const data = usersFake;
 
+const perPage : number = 20;
+
 const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
+
+    const searchParam = useSearchParams();
+    const pageNum = (searchParam.get('page') || 1) as number;
+
     return (
         <div
             className="
@@ -28,7 +38,8 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.slice(0, 15).map((data) => (
+                            {data.slice(perPage * pageNum - perPage,
+                                    perPage * pageNum).map((data) => (
                                 <tr key={data.id} className="text-center odd:bg-blue-mafer/10  break-words text-xs
                                             xl:text-sm
                                         ">
@@ -50,11 +61,15 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                             ))}
                         </tbody>
                     </table>
-                </div>
-                <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"> Agregar. </button>
             </div>
-
+            <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
+                <div>
+                    <Numeration dataLength={data.length} itemsByPage={10} />
+                </div>
+            </div>
+            <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"> Agregar. </button>
         </div>
+    </div>
     );
 };
 

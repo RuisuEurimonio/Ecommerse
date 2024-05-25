@@ -8,7 +8,7 @@ import productsFake from "@/utils/json/productsFake.json";
 import { verifyPerPageExist } from "@/utils/ts/validations";
 
 import { perPageOptions } from "@/utils/ts/configuration";
-import { options } from "@/utils/ts/configuration";
+import { alphabetOptions } from "@/utils/ts/configuration";
 
 import { useSearchParams } from "next/navigation";
 import { SelectCantItems } from "@/components/SelectCantItems";
@@ -46,7 +46,7 @@ const Products: React.FC<ProductsProps> = () => {
                                 name="order"
                                 className="outline-none cursor-pointer mx-1 rounded-sm"
                             >
-                                {options.map((option) => (
+                                {alphabetOptions.map((option) => (
                                     <option key={option.id}>
                                         {" "}
                                         {option.tipo}{" "}
@@ -55,7 +55,7 @@ const Products: React.FC<ProductsProps> = () => {
                             </select>
                         </div>
                         <div>
-                            <Numeration data={data} itemsByPage={perPage} />
+                            <Numeration dataLength={data.length} itemsByPage={perPage} />
                         </div>
                     </div>
                     <div className="m-2">
@@ -83,7 +83,7 @@ const Products: React.FC<ProductsProps> = () => {
                     </div>
                     <div className="bg-blue-mafer p-1 flex flex-col-reverse items-center rounded-sm">
                         <SelectCantItems perPage={perPage} />
-                        <Numeration data={data} itemsByPage={perPage} />
+                        <Numeration dataLength={data.length} itemsByPage={perPage} />
                     </div>
                 </div>
             </div>

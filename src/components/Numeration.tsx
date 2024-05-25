@@ -1,19 +1,18 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { verifyPageUrlExistAndIsNumber } from "@/utils/ts/validations"
 import { getNumeration } from "@/utils/ts/getNumeration";
 
-import { CardProductProps } from "@/types/Props"
-import { NewsLetterProps } from "@/types/Props";
-
 type NumerationProps ={
-    data: CardProductProps[] | NewsLetterProps[],
+    dataLength: number,
     itemsByPage: number,
     className?: string
 }
 
-const Numeration : React.FC<NumerationProps> = ({data, itemsByPage, className}) => {
+const Numeration : React.FC<NumerationProps> = ({dataLength, itemsByPage, className}) => {
 
     const searchParam = useSearchParams();
     const router = useRouter();
@@ -22,14 +21,14 @@ const Numeration : React.FC<NumerationProps> = ({data, itemsByPage, className}) 
     const paginationCant:number = 4;
 
     useEffect(()=>{
-        let totalPage =getNumeration(data, itemsByPage);
+        let totalPage = getNumeration(dataLength, itemsByPage);
         verifyPageUrlExistAndIsNumber(totalPage, pageNum, itemsByPage, router);
         let numeration:number[] = [];
         for(let i:number = 0 ; i < totalPage ; i++){
             numeration.push(i+1);
         }
         setPages(numeration);
-    },[itemsByPage, data])
+    },[itemsByPage, dataLength])
 
     function next(){
         if(pageNum<=pages.length-1){
