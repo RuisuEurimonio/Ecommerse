@@ -1,3 +1,4 @@
+import NavBarAccount from "@/components/NavBarAccount";
 import Link from "next/link";
 
 type LayoutProps = {
@@ -25,35 +26,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     md:flex-none md:w-[15%] md:ml-10 md:my-16
                 "
                 >
-                    <ul>
-                        <li>
-                            <p className="font-bold text-lg"> Personal. </p>
-                            <ul className="list-disc">
-                                <li className="ml-5 my-2">
-                                    {" "}
-                                    <Link href="/my-account">
-                                        Información.
-                                    </Link>{" "}
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <p className="font-bold text-lg">
-                                {" "}
-                                Configuración empresarial.{" "}
-                            </p>
-                            <ul className="list-disc">
-                                <li className="ml-5 my-2">
-                                    {" "}
-                                    <Link href="/my-account/configuration-users">
-                                        Usuarios.
-                                    </Link>{" "}
-                                </li>
-                                <li className="ml-5 my-2"> Articulos. </li>
-                                <li className="ml-5 my-2"> Imagenes. </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <NavBarAccount />
                 </div>
                 
                 {children}
