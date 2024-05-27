@@ -8,7 +8,7 @@ import { verifyPerPageExist } from "@/utils/ts/validations";
 import productsFake from "@/utils/json/productsFake.json";
 
 import { perPageOptions } from "@/utils/ts/configuration";
-import { options } from "@/utils/ts/configuration";
+import { alphabetOptions } from "@/utils/ts/configuration";
 
 import { useSearchParams } from "next/navigation";
 import { SelectCantItems } from "@/components/SelectCantItems";
@@ -45,7 +45,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                 name="order"
                                 className="outline-none cursor-pointer mx-1 rounded-sm"
                             >
-                                {options.map((option) => (
+                                {alphabetOptions.map((option) => (
                                     <option key={option.id}>
                                         {" "}
                                         {option.tipo}{" "}
@@ -54,7 +54,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             </select>
                         </div>
                         <div>
-                            <Numeration data={data} itemsByPage={perPage} />
+                            <Numeration dataLength={data.length} itemsByPage={perPage} />
                         </div>
                     </div>
                     <div className="m-2">
@@ -82,7 +82,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                     </div>
                     <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
                         <SelectCantItems perPage={perPage} />
-                        <Numeration data={data} itemsByPage={perPage} />
+                        <Numeration dataLength={data.length} itemsByPage={perPage} />
                     </div>
                 </div>
             </div>

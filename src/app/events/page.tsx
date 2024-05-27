@@ -72,7 +72,7 @@ const Events: React.FC<eventsProps> = () => {
                         lg:flex-row lg:justify-evenly lg:py-0
                     ">
                         <SelectCantItems perPage={perPage}/>
-                        <Numeration data={data} itemsByPage={perPage} />
+                        <Numeration dataLength={data.length} itemsByPage={perPage} />
                     </div>
                 </div>
             </div>
