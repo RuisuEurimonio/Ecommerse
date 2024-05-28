@@ -1,8 +1,10 @@
 "use client"
 
+import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import usersFake from "@/utils/json/usersFake.json";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 type ConfigurationUsersProps = {};
 
@@ -14,6 +16,13 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     const searchParam = useSearchParams();
     const pageNum = (searchParam.get('page') || 1) as number;
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [type, setType] = useState("");
+
+    function openCloseModal(){
+        setModalVisible(!modalVisible);
+    }
 
     return (
         <div
@@ -67,8 +76,11 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                     <Numeration dataLength={data.length} itemsByPage={10} />
                 </div>
             </div>
-            <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"> Agregar. </button>
+            <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
+                onClick={()=>{setType("post") ,openCloseModal()}}
+            > Agregar. </button>
         </div>
+        <Modal openCloseModal={openCloseModal} state={modalVisible} type={type}></Modal>
     </div>
     );
 };
