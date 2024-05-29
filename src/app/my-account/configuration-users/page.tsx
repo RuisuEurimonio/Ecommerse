@@ -1,5 +1,6 @@
 "use client"
 
+import FormUser from "@/components/FormUser";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import usersFake from "@/utils/json/usersFake.json";
@@ -80,7 +81,13 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 onClick={()=>{setType("post") ,openCloseModal()}}
             > Agregar. </button>
         </div>
-        <Modal openCloseModal={openCloseModal} state={modalVisible} type={type}></Modal>
+        <Modal openCloseModal={openCloseModal} state={modalVisible}>
+            <div className="w-full relative">
+                <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
+            </div>
+            <h2 className="font-bold text-blue-mafer text-xl m-2"> Agregar usuario. </h2>
+            <FormUser className="w-11/12 h-full" modal/>
+        </Modal>
     </div>
     );
 };
