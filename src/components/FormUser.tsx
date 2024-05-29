@@ -7,7 +7,8 @@ import { z } from "zod";
 import { InputErrorText } from "./utils";
 
 type FormUserProps = {
-    className?: string;
+    className?: string,
+    modal?: boolean
 };
 
 type formProps = z.infer<typeof userSchequema>;
@@ -18,7 +19,7 @@ const document = [
     { nombre: "Cedula de extranjeria", abreviatura: "CED" },
 ];
 
-const FormUser: React.FC<FormUserProps> = ({ className }) => {
+const FormUser: React.FC<FormUserProps> = ({ className, modal = false }) => {
     const {
         register,
         handleSubmit,
@@ -38,8 +39,9 @@ const FormUser: React.FC<FormUserProps> = ({ className }) => {
                 lg:gap-6
             ">
                 <h3 className="font-bold text-lg"> Detalles. </h3>
-                <div className="inline ml-5
-                lg:max-w-[35vw] lg:relative">
+                <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
                     <label htmlFor="numberDocument">
                         <p className="inline-block w-5/12">Documento*:</p>
                         <select
@@ -64,20 +66,25 @@ const FormUser: React.FC<FormUserProps> = ({ className }) => {
                         />
                     </label>
                     {errors.TypeDocument && (
-                        <InputErrorText>
+                        <InputErrorText
+                            modal={modal}
+                        >
                             {" "}
                             {errors.TypeDocument?.message}{" "}
                         </InputErrorText>
                     )}
                     {errors.numberDocument && (
-                        <InputErrorText>
+                        <InputErrorText
+                            modal={modal}
+                        >
                             {" "}
                             {errors.numberDocument?.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <div className="ml-5
-                lg:max-w-[35vw] lg:relative">
+                <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
                     <label htmlFor="names">
                         <p className="inline-block w-1/3">Nombres*:</p>
                         <input
@@ -88,151 +95,176 @@ const FormUser: React.FC<FormUserProps> = ({ className }) => {
                         />
                     </label>
                     {errors.names && (
-                        <InputErrorText>
+                        <InputErrorText
+                            modal={modal}
+                        >
                             {" "}
                             {errors.names.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <div className="ml-5
-                lg:max-w-[35vw] lg:relative">
+                <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
                     <label htmlFor="lastNames">
-                    <p className="inline-block w-1/3">Apellidos*:</p>
+                        <p className="inline-block w-1/3">Apellidos*:</p>
                         <input
                             id="lastNames"
                             type="text"
                             className="border rounded-sm w-2/3"
-                        {...register("lastNames")}
+                            {...register("lastNames")}
                         />
                     </label>
                     {errors.lastNames && (
-                        <InputErrorText>
+                        <InputErrorText
+                            modal={modal}
+                        >
                             {" "}
                             {errors.lastNames.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <div className="ml-5
-                lg:max-w-[35vw] lg:relative">
+                <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
                     <label htmlFor="numberPhone">
-                    <p className="inline-block w-1/3">Teléfono*:</p>
+                        <p className="inline-block w-1/3">Teléfono*:</p>
                         <input
                             id="numberPhone"
                             type="text"
                             className="border rounded-sm w-2/3"
-                        {...register("numberPhone")}
+                            {...register("numberPhone")}
                         />
                     </label>
                     {errors.numberPhone && (
-                        <InputErrorText>
+                        <InputErrorText
+                            modal={modal}
+                        >
                             {" "}
                             {errors.numberPhone.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <div className="ml-5
-                lg:max-w-[35vw] lg:relative">
+                <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
                     <label htmlFor="address">
-                    <p className="inline-block w-1/3">Dirección*:</p>
+                        <p className="inline-block w-1/3">Dirección*:</p>
                         <input
                             id="address"
                             type="text"
                             className="border rounded-sm w-2/3"
-                        {...register("address")}
+                            {...register("address")}
                         />
                     </label>
                     {errors.address && (
-                        <InputErrorText>
+                        <InputErrorText
+                            modal={modal}
+                        >
                             {" "}
                             {errors.address.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
                 <h3 className="font-bold text-lg"> Dirección de correo. </h3>
-                <div className="ml-5
-                lg:max-w-[35vw] lg:relative">
+                <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
                     <label htmlFor="email">
-                    <p className="inline-block w-1/3">Correo*:</p>
+                        <p className="inline-block w-1/3">Correo*:</p>
                         <input
                             id="email"
                             type="email"
                             className="border rounded-sm w-2/3"
-                        {...register("email")}
+                            {...register("email")}
                         />
                     </label>
                     {errors.email && (
-                        <InputErrorText>
+                        <InputErrorText
+                            modal={modal}
+                        >
                             {" "}
                             {errors.email.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <h3 className="font-bold text-lg"> Seguridad. </h3>
-                <div className="flex text-center
+                {!modal &&
+                    <>
+                        <h3 className="font-bold text-lg"> Seguridad. </h3>
+                        <div className="flex text-center
                     sm:inline sm:text-left sm:ml-5
                     lg:max-w-[35vw] lg:relative
                 ">
-                    <label htmlFor="password" className="m-auto">
-                        <p className="sm:inline-block sm:w-1/3">Contraseña actual*:</p>
-                        <input
-                            id="password"
-                            type="password"
-                            className="border rounded-sm
+                            <label htmlFor="password" className="m-auto">
+                                <p className="sm:inline-block sm:w-1/3">Contraseña actual*:</p>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    className="border rounded-sm
                                 sm:w-2/3"
-                        {...register("password")}
-                        />
-                        {errors.password && (
-                            <InputErrorText>
-                                {" "}
-                                {errors.password.message}{" "}
-                            </InputErrorText>
-                        )}
-                    </label>
-                </div>
-                <div className="flex text-center
+                                    {...register("password")}
+                                />
+                                {errors.password && (
+                                    <InputErrorText
+                                        modal={modal}
+                                    >
+                                        {" "}
+                                        {errors.password.message}{" "}
+                                    </InputErrorText>
+                                )}
+                            </label>
+                        </div>
+                        <div className="flex text-center
                     sm:inline sm:text-left sm:ml-5
                     lg:max-w-[35vw] lg:relative
                 ">
-                    <label htmlFor="newPassword" className="m-auto">
-                    <p className="sm:inline-block sm:w-1/3">Nueva contraseña*:</p>
-                        <input
-                            id="newPassword"
-                            type="password"
-                            className="border rounded-sm 
+                            <label htmlFor="newPassword" className="m-auto">
+                                <p className="sm:inline-block sm:w-1/3">Nueva contraseña*:</p>
+                                <input
+                                    id="newPassword"
+                                    type="password"
+                                    className="border rounded-sm 
                                 sm:w-2/3"
-                        {...register("newPassword")}
-                        />
-                        {errors.newPassword && (
-                            <InputErrorText>
-                                {" "}
-                                {errors.newPassword.message}{" "}
-                            </InputErrorText>
-                        )}
-                    </label>
-                </div>
-                <div className="flex text-center
+                                    {...register("newPassword")}
+                                />
+                                {errors.newPassword && (
+                                    <InputErrorText
+                                        modal={modal}
+                                    >
+                                        {" "}
+                                        {errors.newPassword.message}{" "}
+                                    </InputErrorText>
+                                )}
+                            </label>
+                        </div>
+                        <div className="flex text-center
                     sm:inline sm:text-left sm:ml-5
                     lg:max-w-[35vw] lg:relative
                 ">
-                    <label htmlFor="repeatPassword" className="m-auto">
-                        <p className="sm:inline-block sm:w-1/3">Confirmar nueva contraseña*:</p>
-                        <input
-                            id="repeatPassword"
-                            type="password"
-                            className="border rounded-sm 
+                            <label htmlFor="repeatPassword" className="m-auto">
+                                <p className="sm:inline-block sm:w-1/3">Confirmar nueva contraseña*:</p>
+                                <input
+                                    id="repeatPassword"
+                                    type="password"
+                                    className="border rounded-sm 
                                 sm:w-2/3 sm:translate-y-[-50%]"
-                        {...register("repeatPassword")}
-                        />
-                        {errors.repeatPassword && (
-                            <InputErrorText>
-                                {" "}
-                                {errors.repeatPassword.message}{" "}
-                            </InputErrorText>
-                        )}
-                    </label>
-                </div>
+                                    {...register("repeatPassword")}
+                                />
+                                {errors.repeatPassword && (
+                                    <InputErrorText
+                                        modal={modal}
+                                    >
+                                        {" "}
+                                        {errors.repeatPassword.message}{" "}
+                                    </InputErrorText>
+                                )}
+                            </label>
+                        </div>
+                    </>
+                }
                 <h3 className="font-bold text-lg"> Pagos. </h3>
             </div>
+
             <input
                 type="submit"
                 value="Enviar"
