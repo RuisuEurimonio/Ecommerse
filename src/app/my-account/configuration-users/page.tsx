@@ -18,9 +18,12 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [dataUserSelect, setDataUserSelect] = useState<UserProps | null>(null);
+    const [keyModal, setKeyModal] = useState("");
 
     function openCloseModal(){
+        setKeyModal("main")
         setModalVisible(!modalVisible);
+        setDataUserSelect(null);
     }
 
     function openCloseSubModal(data: UserProps){
@@ -29,6 +32,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
         }else{
             setDataUserSelect(data);
         }
+        setKeyModal(data.correo)
         setModalVisible(!modalVisible);
     }
 
@@ -51,7 +55,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 onClick={openCloseModal}
             > Agregar. </button>
         </div>
-        <Modal openCloseModal={openCloseModal} state={modalVisible}>
+        <Modal key={keyModal} openCloseModal={openCloseModal} state={modalVisible}>
             <div className="w-full relative">
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>

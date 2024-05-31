@@ -25,10 +25,17 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm<formProps>({
         resolver: zodResolver(userSchequema),
+        defaultValues: {
+            numberDocument: data?.numeroDocumento,
+            names: data?.nombres,
+            lastNames: data?.apellidos,
+            numberPhone: (data?.celular ?? "") + "",
+            address: data?.direccion,
+            email: data?.correo
+        }
     });
 
     const onSubmit: SubmitHandler<formProps> = (data) => {
@@ -66,7 +73,6 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             type="text"
                             className="border rounded-sm w-5/12"
                             {...register("numberDocument")}
-                            value={data?.numeroDocumento || ""}
                         />
                     </label>
                     {errors.TypeDocument && (
@@ -96,7 +102,6 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             type="text"
                             className="border rounded-sm w-2/3"
                             {...register("names")}
-                            value={data?.nombres || ""}
                         />
                     </label>
                     {errors.names && (
