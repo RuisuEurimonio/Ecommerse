@@ -36,21 +36,21 @@ export type CategoryProps = {
 }
 
 export type UserProps = {
-    id: number,
-    numeroDocumento?: string,
-    tipoDocumento?: string,
-    correo: string,
-    telefono?: string,
-    celular: string,
-    nombres: string,
-    apellidos: string,
-    direccion: string,
-    permisos: "Usuario" | "Administrador",
-    metodoPago: number,
-    fechaCreacion: string,
-    fechaModificacion: string,
-    contraseña: string,
-    datosActualizados: boolean
+        id: number;
+        numeroDocumento: string;
+        tipoDocumento: string;
+        correo: string;
+        telefono: string;
+        celular: number;
+        nombres: string;
+        apellidos: string;
+        direccion: string;
+        permisos: string;
+        metodoPago: string;
+        fechaCreacion: string;
+        fechaModificacion: string;
+        contraseña: string;
+        datosActualizados: boolean;
 }
 
 export type NewsLetterProps ={

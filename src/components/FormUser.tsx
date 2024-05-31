@@ -5,10 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { InputErrorText } from "./utils";
+import { UserProps } from "@/types/Props";
 
 type FormUserProps = {
     className?: string,
-    modal?: boolean
+    modal?: boolean,
+    data?: UserProps | null;
 };
 
 type formProps = z.infer<typeof userSchequema>;
@@ -19,7 +21,7 @@ const document = [
     { nombre: "Cedula de extranjeria", abreviatura: "CED" },
 ];
 
-const FormUser: React.FC<FormUserProps> = ({ className, modal = false }) => {
+const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) => {
     const {
         register,
         handleSubmit,
@@ -47,6 +49,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false }) => {
                         <select
                             className="border rounded-sm w-2/12"
                             {...register("TypeDocument")}
+                            defaultValue={data?.tipoDocumento || ""}
                         >
                             {document.map((item) => (
                                 <option
@@ -63,6 +66,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false }) => {
                             type="text"
                             className="border rounded-sm w-5/12"
                             {...register("numberDocument")}
+                            value={data?.numeroDocumento || ""}
                         />
                     </label>
                     {errors.TypeDocument && (
@@ -92,6 +96,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false }) => {
                             type="text"
                             className="border rounded-sm w-2/3"
                             {...register("names")}
+                            value={data?.nombres || ""}
                         />
                     </label>
                     {errors.names && (

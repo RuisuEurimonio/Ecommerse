@@ -1,7 +1,5 @@
 "use client"
 
-import FormUser from "./FormUser";
-
 type ModalProps = {
     openCloseModal: React.MouseEventHandler<HTMLDivElement>,
     state: boolean,
