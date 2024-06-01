@@ -2,12 +2,20 @@
 
 import { UserProps } from "@/types/Props";
 import { useSearchParams } from "next/navigation";
+import  Swal  from "sweetalert2"
 
 type TableProps = {
     data: UserProps[],
     perPage: number,
     openCloseSubModal: (data: UserProps) => void;
 }
+
+const alert = (nombre:string) =>  {Swal.fire({
+    title: "Eliminar usuario",
+    text: "¿Estás seguro de eliminar al usuario: "+nombre,
+    icon: "question",
+    showCancelButton: true
+})}
 
 const Table : React.FC<TableProps> = ({data, perPage, openCloseSubModal}) => {
 
@@ -42,7 +50,7 @@ const Table : React.FC<TableProps> = ({data, perPage, openCloseSubModal}) => {
                                     <td scope="row" className="py-2 px-2">{data.correo}</td>
                                     <td scope="row" className="py-2 px-2">{data.permisos}</td>
                                     <td scope="row" className="py-2 px-2">
-                                        <button className="mx-1 hover:scale-105 transition">
+                                        <button className="mx-1 hover:scale-105 transition" onClick={()=>{alert(data.nombres)}}>
                                             <span className="icon icon-delete text-base"></span>
                                         </button>
                                         <button className="mx-1 hover:scale-105 transition" onClick={()=>{openCloseSubModal(data)}}>
