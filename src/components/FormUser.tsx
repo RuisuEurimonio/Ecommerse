@@ -6,12 +6,35 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { InputErrorText } from "./utils";
 import { UserProps } from "@/types/Props";
+import Swal from "sweetalert2";
 
 type FormUserProps = {
     className?: string,
     modal?: boolean,
     data?: UserProps | null;
 };
+
+const alertFire = ():Promise<boolean> => {
+    return Swal.fire({
+        title: "Guardar usuario.",
+        text: "Desea guardar este usuario con los datos ingresados?",
+        icon: "question",
+        showCancelButton: true
+    }).then((response)=>{
+        if(response.isConfirmed){
+            let Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                icon: "success",
+                timer: 1500,
+                title: "Usuario guardado."
+            })
+            Toast.fire();
+            return true;
+        } else { return false}
+    })
+}
 
 type formProps = z.infer<typeof userSchequema>;
 
@@ -38,8 +61,11 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         }
     });
 
-    const onSubmit: SubmitHandler<formProps> = (data) => {
-        console.log(data);
+    const onSubmit: SubmitHandler<formProps> = async (data) => {
+        const response = await alertFire();
+        if(response){
+            alert("Usuario guardado");
+        }
     };
 
     return (

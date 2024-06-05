@@ -15,6 +15,18 @@ const alert = (nombre:string) =>  {Swal.fire({
     text: "¿Estás seguro de eliminar al usuario: "+nombre,
     icon: "question",
     showCancelButton: true
+}).then((response)=>{
+    if(response.isConfirmed){
+        let Toast = Swal.mixin({
+            toast: true,
+            position: "bottom-end",
+            showConfirmButton: false,
+            icon: "success",
+            timer: 1500,
+            title: "Usuario "+nombre+" eliminado"
+        })
+        Toast.fire();
+    }
 })}
 
 const Table : React.FC<TableProps> = ({data, perPage, openCloseSubModal}) => {
