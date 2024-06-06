@@ -1,20 +1,24 @@
 "use client"
 
 import React, { useEffect } from "react";
-import { CardProductProps } from "@/types/Props";
-import productsFake from "@/utils/json/productsFake.json";
-import image from "@/assets/img/imageNotFound.jpg";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+
 import Comments from "@/components/Comments";
 import ProductsRecomended from "@/components/ProductsRecomended";
 import AddProductCant from "@/components/AddProductCant";
-import { useRouter } from "next/navigation";
 import ProductPrice from "@/components/ProductPrice";
 
-const dataProducts = productsFake.slice(0, 10);
+import { CardProductProps } from "@/types/Props";
+
+import productsFake from "@/utils/json/productsFake.json";
+
+import image from "@/assets/img/imageNotFound.jpg";
+
+const dataProducts = productsFake.slice(0, 10); //TODO Temporal data, implement fetch
 
 const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
-    const data = productsFake.find((item) => item.id === parseInt(params.id));
+    const data = productsFake.find((item) => item.id === parseInt(params.id)); //TODO Temporal data, delete this when implement the fetch data
 
     const router = useRouter();
 
@@ -23,21 +27,18 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
     }, []);
 
     return (
-        <div className="">
+        <div>
             <h2 className="text-center font-bold text-red-mafer mt-4 text-xl">
-                {" "}
-                Descripción de producto.{" "}
+                Descripción de producto.
             </h2>
 
             <div
                 className="flex w-full my-4 flex-col-reverse gap-2
-                sm:flex-row sm:justify-between
-            "
+                sm:flex-row sm:justify-between"
             >
                 <div
                     className="basis-1/2 border-2
-                    lg:basis-1/3
-                "
+                    lg:basis-1/3"
                 >
                     <div>
                         <Image
@@ -47,35 +48,35 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
                                 data?.descripcion ??
                                 "Description product not found"
                             }
-                        ></Image>
+                        />
                         <ul className="grid grid-cols-4 m-1 gap-1">
                             <li>
                                 <Image
                                     className="rounded-sm"
                                     src={image}
                                     alt={data?.descripcion ?? ""}
-                                ></Image>
+                                />
                             </li>
                             <li>
                                 <Image
                                     className="rounded-sm"
                                     src={image}
                                     alt={data?.descripcion ?? ""}
-                                ></Image>
+                                />
                             </li>
                             <li>
                                 <Image
                                     className="rounded-sm"
                                     src={image}
                                     alt={data?.descripcion ?? ""}
-                                ></Image>
+                                />
                             </li>
                             <li>
                                 <Image
                                     className="rounded-sm"
                                     src={image}
                                     alt={data?.descripcion ?? ""}
-                                ></Image>
+                                />
                             </li>
                         </ul>
                     </div>
@@ -83,13 +84,11 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
 
                 <div
                     className="basis-1/2 border-2 p-2 rounded-sm flex justify-between flex-col
-                    lg:basis-2/3 xl:py-4 xl:px-8
-                "
+                    lg:basis-2/3 xl:py-4 xl:px-8"
                 >
                     <div
                         className="flex text-sm justify-between
-                        xl:text-base
-                    "
+                        xl:text-base"
                     >
                         <p>{data?.categoria ?? "Not found"}</p>
                         <p> SKU: {data?.SKU ?? "Not found"}</p>
@@ -97,74 +96,62 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
                     <div>
                         <h3
                             className="text-red-mafer uppercase font-bold text-lg
-                            xl:text-xl
-                        "
+                            xl:text-xl"
                         >
-                            {" "}
-                            {data?.nombre ?? "Not found"}{" "}
+                            {data?.nombre ?? "Not found"}
                         </h3>
                         <ul
                             className="flex flex-row text-sm
-                            xl:text-base
-                        "
+                            xl:text-base"
                         >
                             <li> ⭐⭐⭐⭐⭐ </li>
                         </ul>
                         { data && <ProductPrice data={data}/>}
                         <p
                             className="my-2 text-sm
-                        sm:line-clamp-2
-                        lg:text-base lg:line-clamp-3
-                    "
+                            sm:line-clamp-2
+                            lg:text-base lg:line-clamp-3"
                         >
-                            {" "}
-                            {data?.descripcion}{" "}
+                            {data?.descripcion}
                         </p>
                     </div>
                     <div
                         className="flex justify-around items-center flex-col gap-2 
-                        lg:flex-row lg:justify-end
-                    "
+                        lg:flex-row lg:justify-end"
                     >
                         <AddProductCant />
                         <div
                             className="border-2 rounded-lg px-1 bg-red-mafer text-blue-mafer text-base
-                            xl:py-1
-                        "
+                            xl:py-1"
                         >
                             <button className="h-full w-full uppercase">
-                                {" "}
-                                Agregar al carrito.{" "}
+                                Agregar al carrito.
                             </button>
                         </div>
                     </div>
                     <ul
                         className="grid grid-cols-3 gap-2 text-xs text-center mt-4
-                        xl:text-base
-                    "
+                        xl:text-base"
                     >
                         <li className="basis-2/6">
                             <span
                                 className="icon icon-shop text-2xl
-                                xl:text-4xl
-                            "
-                            ></span>
+                                xl:text-4xl"
+                            />
                             <p> Reclama en nuestro punto. </p>
                         </li>
                         <li className="basis-2/6">
                             <span
                                 className="icon icon-ranking text-2xl
-                                xl:text-4xl
-                            "
-                            ></span>
+                                xl:text-4xl"
+                            />
                             <p> Calidad garantizada. </p>
                         </li>
                         <li className="basis-2/6">
                             <span
                                 className="icon icon-truck text-2xl
-                                xl:text-4xl
-                            "
-                            ></span>
+                                xl:text-4xl"
+                            />
                             <p> Disponibilidad de envio. </p>
                         </li>
                     </ul>
@@ -173,16 +160,11 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
 
             <div
                 className="hidden
-                sm:inline
-            "
+                sm:inline"
             >
                 <h3 className="text-lg font-bold"> Descripción. </h3>
-                <p
-                    className="my-2 text-base text-justify
-                    "
-                >
-                    {" "}
-                    {data?.descripcion}{" "}
+                <p className="my-2 text-base text-justify">
+                    {data?.descripcion}
                 </p>
             </div>
 
