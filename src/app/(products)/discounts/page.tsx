@@ -1,8 +1,11 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
 import Filters from "@/components/Filters";
+import { SelectCantItems } from "@/components/SelectCantItems";
 
 import { verifyPerPageExist } from "@/utils/ts/validations";
 import productsFake from "@/utils/json/productsFake.json";
@@ -10,14 +13,12 @@ import productsFake from "@/utils/json/productsFake.json";
 import { perPageOptions } from "@/utils/ts/configuration";
 import { alphabetOptions } from "@/utils/ts/configuration";
 
-import { useSearchParams } from "next/navigation";
-import { SelectCantItems } from "@/components/SelectCantItems";
-
 type DisctountsProps = {};
 
-const data = productsFake;
+const data = productsFake; //TODO Temporal data, implement fetch
 
 const Discounts: React.FC<DisctountsProps> = () => {
+
     const searchParams = useSearchParams();
 
     const pageNum = (searchParams.get("page") || 1) as number;
@@ -29,17 +30,15 @@ const Discounts: React.FC<DisctountsProps> = () => {
     return (
         <div
             className="flex my-4 flex-col justify-between
-                    md:flex-row
-                "
+                    md:flex-row"
         >
             <Filters />
             <div className="md:basis-3/4">
-                <div className="">
+                <div>
                     <div className="bg-blue-mafer p-1 rounded-sm flex flex-col items-center">
                         <div className="mt-2">
                             <label className="text-white-mafer">
-                                {" "}
-                                Ordenar por:{" "}
+                                Ordenar por:
                             </label>
                             <select
                                 name="order"
@@ -47,8 +46,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             >
                                 {alphabetOptions.map((option) => (
                                     <option key={option.id}>
-                                        {" "}
-                                        {option.tipo}{" "}
+                                        {option.tipo}
                                     </option>
                                 ))}
                             </select>
@@ -62,8 +60,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             className="grid grid-cols-2 gap-2
                             md:grid-cols-3
                             lg:grid-cols-4
-                            xl:grid-cols-5
-                        "
+                            xl:grid-cols-5"
                         >
                             {data
                                 .slice(
