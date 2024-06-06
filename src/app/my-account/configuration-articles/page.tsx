@@ -1,12 +1,15 @@
 "use client"
 
+import { useState } from "react";
+
 import FormArticle from "@/components/FormArticle";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableArticles";
+
 import { CardProductProps} from "@/types/Props";
+
 import productsFake from "@/utils/json/productsFake.json"
-import { useState } from "react";
 
 type ConfigurationProductsProps = {};
 
