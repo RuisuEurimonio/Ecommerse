@@ -5,19 +5,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { InputErrorText } from "./utils";
-import { UserProps } from "@/types/Props";
+import { CardProductProps } from "@/types/Props";
 import Swal from "sweetalert2";
 
-type FormUserProps = {
+type FormArticleProps = {
     className?: string,
     modal?: boolean,
-    data?: UserProps | null;
+    data?: CardProductProps | null;
 };
 
 const alertFire = ():Promise<boolean> => {
     return Swal.fire({
-        title: "Guardar usuario.",
-        text: "Desea guardar este usuario con los datos ingresados?",
+        title: "Guardar artículo.",
+        text: "Desea guardar este artículo con los datos ingresados?",
         icon: "question",
         showCancelButton: true
     }).then((response)=>{
@@ -28,7 +28,7 @@ const alertFire = ():Promise<boolean> => {
                 showConfirmButton: false,
                 icon: "success",
                 timer: 1500,
-                title: "Usuario guardado."
+                title: "Articulo guardado."
             })
             Toast.fire();
             return true;
@@ -38,22 +38,16 @@ const alertFire = ():Promise<boolean> => {
 
 type formProps = z.infer<typeof userSchequema>;
 
-const document = [
-    { nombre: "Tarjeta de identidad", abreviatura: "TI" },
-    { nombre: "Cedula de Ciudadania", abreviatura: "CC" },
-    { nombre: "Cedula de extranjeria", abreviatura: "CED" },
-];
-
-const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) => {
+const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, data}) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset
     } = useForm<formProps>({
-        resolver: zodResolver(userSchequema),
+        resolver: zodResolver(),
         defaultValues: {
-            numberDocument: data?.numeroDocumento,
+            nameArticle: data?.,
             names: data?.nombres,
             lastNames: data?.apellidos,
             numberPhone: (data?.celular ?? "") + "",
@@ -66,7 +60,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         const response = await alertFire();
         if(response){
             reset();
-            alert("Usuario guardado");
+            alert("Articulo guardado");
         }
     };
 
@@ -75,32 +69,16 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
             <div className="flex flex-col gap-4
                 lg:gap-6
             ">
-                <h3 className="font-bold text-lg"> Detalles. </h3>
                 <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="numberDocument">
-                        <p className="inline-block w-5/12">Documento*:</p>
-                        <select
-                            className="border rounded-sm w-2/12"
-                            {...register("TypeDocument")}
-                            defaultValue={data?.tipoDocumento || ""}
-                        >
-                            {document.map((item) => (
-                                <option
-                                    key={item.abreviatura}
-                                    value={item.nombre}
-                                >
-                                    {" "}
-                                    {item.abreviatura}{" "}
-                                </option>
-                            ))}
-                        </select>
+                    <label htmlFor="nameArticle">
+                        <p className="inline-block w-5/12">Nombre*:</p>    
                         <input
-                            id="numberDocument"
+                            id="nameArticle"
                             type="text"
                             className="border rounded-sm w-5/12"
-                            {...register("numberDocument")}
+                            {...register("nameArticle")}
                         />
                     </label>
                     {errors.TypeDocument && (
@@ -111,12 +89,12 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             {errors.TypeDocument?.message}{" "}
                         </InputErrorText>
                     )}
-                    {errors.numberDocument && (
+                    {errors.nameArticle && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.numberDocument?.message}{" "}
+                            {errors.nameArticle?.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
@@ -312,4 +290,4 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     );
 };
 
-export default FormUser;
+export default FormArticle;

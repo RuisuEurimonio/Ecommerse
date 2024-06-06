@@ -1,18 +1,18 @@
 "use client"
 
-import { UserProps } from "@/types/Props";
+import { CardProductProps } from "@/types/Props";
 import { useSearchParams } from "next/navigation";
 import  Swal  from "sweetalert2"
 
-type TableProps = {
-    data: UserProps[],
+type TableArticleProps = {
+    data: CardProductProps[],
     perPage: number,
-    openCloseSubModal: (data: UserProps) => void;
+    openCloseSubModal: (data: CardProductProps) => void;
 }
 
 const alert = (nombre:string) =>  {Swal.fire({
-    title: "Eliminar usuario",
-    text: "¿Estás seguro de eliminar al usuario: "+nombre,
+    title: "Eliminar articulo",
+    text: "¿Estás seguro de eliminar al articulo: "+nombre,
     icon: "question",
     showCancelButton: true
 }).then((response)=>{
@@ -23,13 +23,13 @@ const alert = (nombre:string) =>  {Swal.fire({
             showConfirmButton: false,
             icon: "success",
             timer: 1500,
-            title: "Usuario "+nombre+" eliminado"
+            title: "Artículo "+nombre+" eliminado"
         })
         Toast.fire();
     }
 })}
 
-const Table : React.FC<TableProps> = ({data, perPage, openCloseSubModal}) => {
+const TableArticle : React.FC<TableArticleProps> = ({data, perPage, openCloseSubModal}) => {
 
     const searchParam = useSearchParams();
     const pageNum = (searchParam.get('page') || 1) as number;
@@ -41,11 +41,11 @@ const Table : React.FC<TableProps> = ({data, perPage, openCloseSubModal}) => {
                             ">
                             <tr>
                                 <th scope="col" className="px-1 w-10">#</th>
-                                <th scope="col" className="px-1 w-24">Documento.</th>
-                                <th scope="col" className="px-1 w-24">Nombres.</th>
-                                <th scope="col" className="px-1 w-24 md:hidden lg:table-cell">Celular.</th>
-                                <th scope="col" className="px-1 w-32">Correo.</th>
-                                <th scope="col" className="px-1 w-24">Permisos.</th>
+                                <th scope="col" className="px-1 w-24">Nombre.</th>
+                                <th scope="col" className="px-1 w-24">Categoria.</th>
+                                <th scope="col" className="px-1 w-24 md:hidden lg:table-cell">SKU.</th>
+                                <th scope="col" className="px-1 w-32">descripción.</th>
+                                <th scope="col" className="px-1 w-24">imagen.</th>
                                 <th scope="col" className="px-1 w-24">Opciones.</th>
                             </tr>
                         </thead>
@@ -56,13 +56,13 @@ const Table : React.FC<TableProps> = ({data, perPage, openCloseSubModal}) => {
                                             xl:text-sm
                                         ">
                                     <td scope="row" className="py-2 px-2">{data.id}</td>
-                                    <td scope="row" className="py-2 px-2">{data.tipoDocumento} {data.numeroDocumento}</td>
-                                    <td scope="row" className="py-2 px-2">{data.nombres} {data.apellidos}</td>
-                                    <td scope="row" className="py-2 px-2 md:hidden lg:table-cell">{data.celular}</td>
-                                    <td scope="row" className="py-2 px-2">{data.correo}</td>
-                                    <td scope="row" className="py-2 px-2">{data.permisos}</td>
+                                    <td scope="row" className="py-2 px-2">{data.nombre}</td>
+                                    <td scope="row" className="py-2 px-2">{data.categoria} </td>
+                                    <td scope="row" className="py-2 px-2 md:hidden lg:table-cell">{data.SKU}</td>
+                                    <td scope="row" className="py-2 px-2">{data.descripcion}</td>
+                                    <td scope="row" className="py-2 px-2">{data.image}</td>
                                     <td scope="row" className="py-2 px-2">
-                                        <button className="mx-1 hover:scale-105 transition" onClick={()=>{alert(data.nombres)}}>
+                                        <button className="mx-1 hover:scale-105 transition" onClick={()=>{alert(data.nombre)}}>
                                             <span className="icon icon-delete text-base"></span>
                                         </button>
                                         <button className="mx-1 hover:scale-105 transition" onClick={()=>{openCloseSubModal(data)}}>
@@ -76,4 +76,4 @@ const Table : React.FC<TableProps> = ({data, perPage, openCloseSubModal}) => {
     )
 }
 
-export default Table;
+export default TableArticle;

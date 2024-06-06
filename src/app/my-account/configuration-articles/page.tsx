@@ -3,36 +3,36 @@
 import FormUser from "@/components/FormUser";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
-import Table from "@/components/TableUser";
-import { UserProps } from "@/types/Props";
-import usersFake from "@/utils/json/usersFake.json";
+import Table from "@/components/TableArticles";
+import { CardProductProps} from "@/types/Props";
+import productsFake from "@/utils/json/productsFake.json"
 import { useState } from "react";
 
-type ConfigurationUsersProps = {};
+type ConfigurationProductsProps = {};
 
-const data = usersFake;
+const data = productsFake;
 
 const perPage : number = 20;
 
-const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
+const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [dataUserSelect, setDataUserSelect] = useState<UserProps | null>(null);
+    const [dataProductSelect, setDataProductSelect] = useState<CardProductProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
 
     function openCloseModal(){
         setKeyModal("main")
         setModalVisible(!modalVisible);
-        setDataUserSelect(null);
+        setDataProductSelect(null);
     }
 
-    function openCloseSubModal(data: UserProps){
+    function openCloseSubModal(data: CardProductProps){
         if(modalVisible){
-            setDataUserSelect(null);
+            setDataProductSelect(null);
         }else{
-            setDataUserSelect(data);
+            setDataProductSelect(data);
         }
-        setKeyModal(data.correo)
+        setKeyModal(data.SKU)
         setModalVisible(!modalVisible);
     }
 
@@ -60,10 +60,10 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> Agregar usuario. </h2>
-            <FormUser className="w-11/12 h-full" modal data={dataUserSelect}/>
+            <FormUser className="w-11/12 h-full" modal data={dataProductSelect}/>
         </Modal>
     </div>
     );
 };
 
-export default ConfigurationUsers;
+export default ConfigurationProducts;
