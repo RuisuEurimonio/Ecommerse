@@ -1,10 +1,10 @@
 "use client";
 
+import { usePathname, useSearchParams } from "next/navigation";
+
 import AboutJosc from "@/components/AboutJOSC";
 import Clasificaciones from "@/components/Clasficaciones";
 import HistoryNavigation from "@/components/HistoryNavigation";
-import { usePathname, useSearchParams } from "next/navigation";
-import React from "react";
 
 type ProductLayoutProps = {
   children: any;
@@ -18,6 +18,7 @@ const rootPaths : {products: string, discounts: string, JOSC: string}  = {
 
 
 const ProductsLayout: React.FC<ProductLayoutProps> = ({ children }) => {
+  
   const path = usePathname();
   const searchPath = useSearchParams();
   const nameProduct = searchPath.get("name") || "" as string;

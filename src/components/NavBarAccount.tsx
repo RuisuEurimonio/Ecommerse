@@ -47,7 +47,14 @@ const NavBarAccount: React.FC<NavBarAccountProps> = () => {
                             Usuarios.
                         </Link>{" "}
                     </li>
-                    <li className="ml-5 my-2">
+                    <li className="ml-5 my-2"
+                        style={{
+                            textDecoration:
+                                pathName === "configuration-articles"
+                                    ? "underline"
+                                    : "none",
+                        }}
+                    >
                         {" "}
                         <Link href="/my-account/configuration-articles">
                             {" "}
