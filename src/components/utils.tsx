@@ -1,4 +1,5 @@
 import React, {ReactNode} from 'react'
+import Swal from 'sweetalert2';
 
 type inputErrorTextProps = {
     children: ReactNode,
@@ -16,3 +17,25 @@ export const InputErrorText : React.FC<inputErrorTextProps>  = ({ children, moda
         </p>
     );
 };
+
+export const alertFire = (name:string):Promise<boolean> => {
+    return Swal.fire({
+        title: `Guardar ${name}.`,
+        text: `Desea guardar este ${name} con los datos ingresados?`,
+        icon: "question",
+        showCancelButton: true
+    }).then((response)=>{
+        if(response.isConfirmed){
+            let Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                icon: "success",
+                timer: 1500,
+                title: `${name} guardado.`
+            })
+            Toast.fire();
+            return true;
+        } else { return false}
+    })
+}

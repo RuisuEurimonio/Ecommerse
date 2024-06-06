@@ -1,12 +1,13 @@
 "use client";
 
-import { userSchequema } from "@/utils/Schemas/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { InputErrorText } from "./utils";
 import { CardProductProps } from "@/types/Props";
-import Swal from "sweetalert2";
+import { alertFire } from "./utils";
+import brandFake from "@/utils/json/branchFake.json"
+import { articleSchequema } from "@/utils/Schemas/articleSchema";
 
 type FormArticleProps = {
     className?: string,
@@ -14,29 +15,12 @@ type FormArticleProps = {
     data?: CardProductProps | null;
 };
 
-const alertFire = ():Promise<boolean> => {
-    return Swal.fire({
-        title: "Guardar artículo.",
-        text: "Desea guardar este artículo con los datos ingresados?",
-        icon: "question",
-        showCancelButton: true
-    }).then((response)=>{
-        if(response.isConfirmed){
-            let Toast = Swal.mixin({
-                toast: true,
-                position: "bottom-end",
-                showConfirmButton: false,
-                icon: "success",
-                timer: 1500,
-                title: "Articulo guardado."
-            })
-            Toast.fire();
-            return true;
-        } else { return false}
-    })
-}
+const brand = brandFake;
+const clasification = brandFake;
+const category = brandFake;
 
-type formProps = z.infer<typeof userSchequema>;
+
+type formProps = z.infer<typeof articleSchequema>;
 
 const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, data}) => {
     const {
@@ -45,19 +29,21 @@ const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, dat
         formState: { errors },
         reset
     } = useForm<formProps>({
-        resolver: zodResolver(),
+        resolver: zodResolver(articleSchequema),
         defaultValues: {
-            nameArticle: data?.,
-            names: data?.nombres,
-            lastNames: data?.apellidos,
-            numberPhone: (data?.celular ?? "") + "",
-            address: data?.direccion,
-            email: data?.correo
+            nameArticle: data?.nombre,
+            description: data?.descripcion,
+            SKU: data?.SKU,
+            price: data?.precio,
+            image: data?.image,
+            brand: data?.marca,
+            clasification: data?.clasificacion,
+            category: data?.categoria
         }
     });
 
     const onSubmit: SubmitHandler<formProps> = async (data) => {
-        const response = await alertFire();
+        const response = await alertFire("Articulo");
         if(response){
             reset();
             alert("Articulo guardado");
@@ -69,26 +55,18 @@ const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, dat
             <div className="flex flex-col gap-4
                 lg:gap-6
             ">
-                <div className={`inline ml-5
+                <div className={`inline
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
                     <label htmlFor="nameArticle">
-                        <p className="inline-block w-5/12">Nombre*:</p>    
+                        <p className="inline-block w-1/3">Nombre*:</p>    
                         <input
                             id="nameArticle"
                             type="text"
-                            className="border rounded-sm w-5/12"
+                            className="border rounded-sm w-2/3"
                             {...register("nameArticle")}
                         />
                     </label>
-                    {errors.TypeDocument && (
-                        <InputErrorText
-                            modal={modal}
-                        >
-                            {" "}
-                            {errors.TypeDocument?.message}{" "}
-                        </InputErrorText>
-                    )}
                     {errors.nameArticle && (
                         <InputErrorText
                             modal={modal}
@@ -98,195 +76,186 @@ const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, dat
                         </InputErrorText>
                     )}
                 </div>
-                <div className={`inline ml-5
+                <div className={`inline
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="names">
-                        <p className="inline-block w-1/3">Nombres*:</p>
+                    <label htmlFor="description">
+                        <p className="inline-block w-1/3">Descripción*:</p>
                         <input
-                            id="names"
+                            id="description"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("names")}
+                            {...register("description")}
                         />
                     </label>
-                    {errors.names && (
+                    {errors.description && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.names.message}{" "}
+                            {errors.description.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <div className={`inline ml-5
+                <div className={`inline
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="lastNames">
-                        <p className="inline-block w-1/3">Apellidos*:</p>
+                    <label htmlFor="SKU">
+                        <p className="inline-block w-1/3">SKU*:</p>
                         <input
-                            id="lastNames"
+                            id="SKU"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("lastNames")}
+                            {...register("SKU")}
                         />
                     </label>
-                    {errors.lastNames && (
+                    {errors.SKU && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.lastNames.message}{" "}
+                            {errors.SKU.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <div className={`inline ml-5
+                <div className={`inline
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="numberPhone">
-                        <p className="inline-block w-1/3">Teléfono*:</p>
+                    <label htmlFor="price">
+                        <p className="inline-block w-1/3">precio*:</p>
                         <input
-                            id="numberPhone"
+                            id="price"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("numberPhone")}
+                            {...register("price")}
                         />
                     </label>
-                    {errors.numberPhone && (
+                    {errors.price && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.numberPhone.message}{" "}
+                            {errors.price.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <div className={`inline ml-5
+                <div className={`inline
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="address">
-                        <p className="inline-block w-1/3">Dirección*:</p>
+                    <label htmlFor="image">
+                        <p className="inline-block w-1/3">Imagen*:</p>
                         <input
-                            id="address"
+                            id="image"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("address")}
+                            {...register("image")}
                         />
                     </label>
-                    {errors.address && (
+                    {errors.image && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.address.message}{" "}
+                            {errors.image.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
-                <h3 className="font-bold text-lg"> Dirección de correo. </h3>
-                <div className={`inline ml-5
-                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
-                `}>
-                    <label htmlFor="email">
-                        <p className="inline-block w-1/3">Correo*:</p>
-                        <input
-                            id="email"
-                            type="email"
-                            className="border rounded-sm w-2/3"
-                            {...register("email")}
-                        />
-                    </label>
-                    {errors.email && (
-                        <InputErrorText
-                            modal={modal}
-                        >
-                            {" "}
-                            {errors.email.message}{" "}
-                        </InputErrorText>
-                    )}
-                </div>
-                {!modal &&
-                    <>
-                        <h3 className="font-bold text-lg"> Seguridad. </h3>
-                        <div className="flex text-center
-                    sm:inline sm:text-left sm:ml-5
-                    lg:max-w-[35vw] lg:relative
+                <div className="flex flex-col mb-2 gap-2
+                    md:flex-row  md:justify-around
                 ">
-                            <label htmlFor="password" className="m-auto">
-                                <p className="sm:inline-block sm:w-1/3">Contraseña actual*:</p>
-                                <input
-                                    id="password"
-                                    type="password"
-                                    className="border rounded-sm
-                                sm:w-2/3"
-                                    {...register("password")}
-                                />
-                                {errors.password && (
-                                    <InputErrorText
-                                        modal={modal}
+                    <div className={`inline
+                    ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                    `}>
+                        <p> Marca </p>
+                        <select
+                                className="border rounded-sm w-full"
+                                {...register("brand")}
+                                defaultValue={data?.marca || ""}
+                            >
+                                {brand.map((item) => (
+                                    <option
+                                        key={item.id}
+                                        value={item.nombre}
                                     >
                                         {" "}
-                                        {errors.password.message}{" "}
-                                    </InputErrorText>
-                                )}
-                            </label>
-                        </div>
-                        <div className="flex text-center
-                    sm:inline sm:text-left sm:ml-5
-                    lg:max-w-[35vw] lg:relative
-                ">
-                            <label htmlFor="newPassword" className="m-auto">
-                                <p className="sm:inline-block sm:w-1/3">Nueva contraseña*:</p>
-                                <input
-                                    id="newPassword"
-                                    type="password"
-                                    className="border rounded-sm 
-                                sm:w-2/3"
-                                    {...register("newPassword")}
-                                />
-                                {errors.newPassword && (
-                                    <InputErrorText
-                                        modal={modal}
+                                        {item.nombre}{" "}
+                                    </option>
+                                ))}
+                                </select>
+                                {errors.brand && (
+                            <InputErrorText
+                                modal={modal}
+                            >
+                                {" "}
+                                {errors.brand?.message}{" "}
+                            </InputErrorText>
+                        )}
+                    </div>
+                    <div className={`inline
+                    ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                    `}>
+                        <p> Clasificación </p>
+                        <select
+                                className="border rounded-sm w-full"
+                                {...register("clasification")}
+                                defaultValue={data?.clasificacion || ""}
+                            >
+                                {clasification.map((item) => (
+                                    <option
+                                        key={item.id}
+                                        value={item.nombre}
                                     >
                                         {" "}
-                                        {errors.newPassword.message}{" "}
-                                    </InputErrorText>
-                                )}
-                            </label>
-                        </div>
-                        <div className="flex text-center
-                    sm:inline sm:text-left sm:ml-5
-                    lg:max-w-[35vw] lg:relative
-                ">
-                            <label htmlFor="repeatPassword" className="m-auto">
-                                <p className="sm:inline-block sm:w-1/3">Confirmar nueva contraseña*:</p>
-                                <input
-                                    id="repeatPassword"
-                                    type="password"
-                                    className="border rounded-sm 
-                                sm:w-2/3 sm:translate-y-[-50%]"
-                                    {...register("repeatPassword")}
-                                />
-                                {errors.repeatPassword && (
-                                    <InputErrorText
-                                        modal={modal}
+                                        {item.nombre}{" "}
+                                    </option>
+                                ))}
+                                </select>
+                                {errors.clasification && (
+                            <InputErrorText
+                                modal={modal}
+                            >
+                                {" "}
+                                {errors.clasification?.message}{" "}
+                            </InputErrorText>
+                        )}
+                    </div>
+                    <div className={`inline
+                    ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                    `}>
+                        <p> Categoria </p>
+                        <select
+                                className="border rounded-sm w-full"
+                                {...register("category")}
+                                defaultValue={data?.categoria || ""}
+                            >
+                                {category.map((item) => (
+                                    <option
+                                        key={item.id}
+                                        value={item.nombre}
                                     >
                                         {" "}
-                                        {errors.repeatPassword.message}{" "}
-                                    </InputErrorText>
-                                )}
-                            </label>
-                        </div>
-                    </>
-                }
-                <h3 className="font-bold text-lg"> Pagos. </h3>
+                                        {item.nombre}{" "}
+                                    </option>
+                                ))}
+                                </select>
+                                {errors.category && (
+                            <InputErrorText
+                                modal={modal}
+                            >
+                                {" "}
+                                {errors.category?.message}{" "}
+                            </InputErrorText>
+                        )}
+                    </div>
+                </div>
             </div>
-
             <input
                 type="submit"
                 value="Enviar"
                 className="bg-blue-mafer text-white px-2 py-1 rounded-sm text-right cursor-pointer float-right"
             />
         </form>
+        
     );
 };
 

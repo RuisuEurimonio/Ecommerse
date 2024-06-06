@@ -59,7 +59,7 @@ const TableArticle : React.FC<TableArticleProps> = ({data, perPage, openCloseSub
                                     <td scope="row" className="py-2 px-2">{data.nombre}</td>
                                     <td scope="row" className="py-2 px-2">{data.categoria} </td>
                                     <td scope="row" className="py-2 px-2 md:hidden lg:table-cell">{data.SKU}</td>
-                                    <td scope="row" className="py-2 px-2">{data.descripcion}</td>
+                                    <td scope="row" className="py-2 px-2"> <p className="line-clamp-3"> {data.descripcion} </p></td>
                                     <td scope="row" className="py-2 px-2">{data.image}</td>
                                     <td scope="row" className="py-2 px-2">
                                         <button className="mx-1 hover:scale-105 transition" onClick={()=>{alert(data.nombre)}}>

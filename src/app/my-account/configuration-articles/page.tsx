@@ -1,6 +1,6 @@
 "use client"
 
-import FormUser from "@/components/FormUser";
+import FormArticle from "@/components/FormArticle";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableArticles";
@@ -59,8 +59,8 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             <div className="w-full relative">
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
-            <h2 className="font-bold text-blue-mafer text-xl m-2"> Agregar usuario. </h2>
-            <FormUser className="w-11/12 h-full" modal data={dataProductSelect}/>
+            <h2 className="font-bold text-blue-mafer text-xl m-2"> Agregar articulo. </h2>
+            <FormArticle className="w-11/12 h-full" modal data={dataProductSelect}/>
         </Modal>
     </div>
     );
