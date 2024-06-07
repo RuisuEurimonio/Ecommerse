@@ -18,7 +18,7 @@ export const InputErrorText : React.FC<inputErrorTextProps>  = ({ children, moda
     );
 };
 
-export const alertFire = (name:string):Promise<boolean> => {
+export const saveAlert = (name:string):Promise<boolean> => {
     return Swal.fire({
         title: `Guardar ${name}.`,
         text: `Desea guardar este ${name} con los datos ingresados?`,
@@ -39,3 +39,22 @@ export const alertFire = (name:string):Promise<boolean> => {
         } else { return false}
     })
 }
+
+export const deleteAlert = (name:string, type:string) =>  {Swal.fire({
+    title: `Eliminar ${type}`,
+    text: `¿Estás seguro de eliminar al ${type}: ${name}?`,
+    icon: "question",
+    showCancelButton: true
+}).then((response)=>{
+    if(response.isConfirmed){
+        let Toast = Swal.mixin({
+            toast: true,
+            position: "bottom-end",
+            showConfirmButton: false,
+            icon: "success",
+            timer: 1500,
+            title: `${type} ${name} eliminado`
+        })
+        Toast.fire();
+    }
+})}

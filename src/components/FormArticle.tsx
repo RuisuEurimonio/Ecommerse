@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { InputErrorText } from "./utils";
 import { CardProductProps } from "@/types/Props";
-import { alertFire } from "./utils";
+import { saveAlert } from "./utils";
 import brandFake from "@/utils/json/branchFake.json"
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 
@@ -43,7 +43,7 @@ const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, dat
     });
 
     const onSubmit: SubmitHandler<formProps> = async (data) => {
-        const response = await alertFire("Articulo");
+        const response = await saveAlert("Articulo");
         if(response){
             reset();
             alert("Articulo guardado");

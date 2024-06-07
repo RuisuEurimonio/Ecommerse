@@ -45,14 +45,12 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                 md:flex-1
             ">
             <div className="w-4/5 mx-auto">
-                <h2 className="font-bold text-xl mt-4 mb-2">Usuarios.</h2>
+                <h2 className="font-bold text-xl mt-4 mb-2">Artículos.</h2>
                 <div className="w-full relative overflow-x-auto">
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table>
             </div>
-            <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
-                <div>
-                    <Numeration dataLength={data.length} itemsByPage={10} />
-                </div>
+            <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
+                <Numeration dataLength={data.length} itemsByPage={10} />
             </div>
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}

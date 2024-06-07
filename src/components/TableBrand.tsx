@@ -2,6 +2,7 @@
 
 import { UserProps } from "@/types/Props";
 import { useSearchParams } from "next/navigation";
+import  Swal  from "sweetalert2"
 import { deleteAlert } from "./utils";
 
 type TableUserProps = {
@@ -43,7 +44,7 @@ const TableUser : React.FC<TableUserProps> = ({data, perPage, openCloseSubModal}
                                     <td scope="row" className="py-2 px-2">{data.correo}</td>
                                     <td scope="row" className="py-2 px-2">{data.permisos}</td>
                                     <td scope="row" className="py-2 px-2">
-                                        <button className="mx-1 hover:scale-105 transition" onClick={()=>{deleteAlert(data.nombres, "Usuario")}}>
+                                        <button className="mx-1 hover:scale-105 transition" onClick={()=>{deleteAlert(data.nombres, "Marca")}}>
                                             <span className="icon icon-delete text-base"></span>
                                         </button>
                                         <button className="mx-1 hover:scale-105 transition" onClick={()=>{openCloseSubModal(data)}}>

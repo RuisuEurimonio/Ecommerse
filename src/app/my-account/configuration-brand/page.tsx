@@ -46,8 +46,10 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 <div className="w-full relative overflow-x-auto">
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table>
             </div>
-            <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
+            <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
+                <div>
                     <Numeration dataLength={data.length} itemsByPage={10} />
+                </div>
             </div>
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}

@@ -3,31 +3,13 @@
 import { CardProductProps } from "@/types/Props";
 import { useSearchParams } from "next/navigation";
 import  Swal  from "sweetalert2"
+import { deleteAlert } from "./utils";
 
 type TableArticleProps = {
     data: CardProductProps[],
     perPage: number,
     openCloseSubModal: (data: CardProductProps) => void;
 }
-
-const alert = (nombre:string) =>  {Swal.fire({
-    title: "Eliminar articulo",
-    text: "¿Estás seguro de eliminar al articulo: "+nombre,
-    icon: "question",
-    showCancelButton: true
-}).then((response)=>{
-    if(response.isConfirmed){
-        let Toast = Swal.mixin({
-            toast: true,
-            position: "bottom-end",
-            showConfirmButton: false,
-            icon: "success",
-            timer: 1500,
-            title: "Artículo "+nombre+" eliminado"
-        })
-        Toast.fire();
-    }
-})}
 
 const TableArticle : React.FC<TableArticleProps> = ({data, perPage, openCloseSubModal}) => {
 
@@ -62,7 +44,7 @@ const TableArticle : React.FC<TableArticleProps> = ({data, perPage, openCloseSub
                                     <td scope="row" className="py-2 px-2"> <p className="line-clamp-3"> {data.descripcion} </p></td>
                                     <td scope="row" className="py-2 px-2">{data.image}</td>
                                     <td scope="row" className="py-2 px-2">
-                                        <button className="mx-1 hover:scale-105 transition" onClick={()=>{alert(data.nombre)}}>
+                                        <button className="mx-1 hover:scale-105 transition" onClick={()=>{deleteAlert(data.nombre, "Artículo")}}>
                                             <span className="icon icon-delete text-base"></span>
                                         </button>
                                         <button className="mx-1 hover:scale-105 transition" onClick={()=>{openCloseSubModal(data)}}>
