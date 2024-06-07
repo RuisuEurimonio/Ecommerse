@@ -61,6 +61,20 @@ const NavBarAccount: React.FC<NavBarAccountProps> = () => {
                             Articulos.{" "}
                         </Link>{" "}
                     </li>
+                    <li className="ml-5 my-2"
+                        style={{
+                            textDecoration:
+                                pathName === "configuration-brand"
+                                    ? "underline"
+                                    : "none",
+                        }}
+                    >
+                        {" "}
+                        <Link href="/my-account/configuration-brand">
+                            {" "}
+                            Marcas.{" "}
+                        </Link>{" "}
+                    </li>
                     <li className="ml-5 my-2"> Imagenes. </li>
                 </ul>
             </li>

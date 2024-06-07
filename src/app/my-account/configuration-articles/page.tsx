@@ -60,7 +60,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             <div className="w-full relative">
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
-            <h2 className="font-bold text-blue-mafer text-xl m-2"> Agregar articulo. </h2>
+            <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataProductSelect == null ? "Agregar" : "Actualizar"} articulo. </h2>
             <FormArticle className="w-11/12 h-full" modal data={dataProductSelect}/>
         </Modal>
     </div>

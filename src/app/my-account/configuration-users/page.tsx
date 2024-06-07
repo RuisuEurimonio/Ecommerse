@@ -57,7 +57,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
             <div className="w-full relative">
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
-            <h2 className="font-bold text-blue-mafer text-xl m-2"> Agregar usuario. </h2>
+            <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataUserSelect == null ? "Agregar" : "Actualizar"} usuario. </h2>
             <FormUser className="w-11/12 h-full" modal data={dataUserSelect}/>
         </Modal>
     </div>
