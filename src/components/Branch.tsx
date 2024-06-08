@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import branchFake from "@/utils/json/branchFake.json"
 import CarouselSimple from "./CarouselSimple";
+
+import branchFake from "@/utils/json/branchFake.json"
 
 type BranchProps = {}
 
-const data = branchFake;
+const data = branchFake;  // TODO : delete this when we implement fetch data
 
 const intervalMove = 5000;
 
