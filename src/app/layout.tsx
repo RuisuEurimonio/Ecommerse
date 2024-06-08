@@ -1,6 +1,8 @@
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
-import "./globals.css";
+
 import Navbar from "@/components/Navbar";
 import UnderLineNav from "@/components/UnderLineNav";
 import Footer from "@/components/Footer";

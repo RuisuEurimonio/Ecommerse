@@ -1,14 +1,16 @@
-import React from "react";
-import CardItem from "./CardItem";
-import {CardProductProps} from "@/types/Props";
 import Link from "next/link";
+
+import CardItem from "./CardItem";
+
+import {CardProductProps} from "@/types/Props";
+
 import dataFake from "@/utils/json/productsFake.json";
 
 type AboutJoscProps = {
     fullContent?: boolean
 } 
 
-const data = dataFake;
+const data = dataFake;  //TODO : delete this when we implement fetch data
 
 const AboutJosc : React.FC<AboutJoscProps> = ({fullContent = true}) => {
     return(

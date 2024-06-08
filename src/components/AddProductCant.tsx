@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 type AddProductCantProps = {}
 
@@ -28,19 +28,16 @@ const AddProductCant : React.FC<AddProductCantProps> = () => {
     return(
         <div className="grid grid-cols-3 border-2 divide-x-2 font-bold rounded-lg">
         <button className="w-7 text-xl h-full
-            xl:text-2xl xl:w-10
-        "
+            xl:text-2xl xl:w-10"
             onClick={subtract}
         > - </button>
         <input className="w-7 h-full appearance-none text-center outline-none
-            xl:text-xl xl:w-10
-        "
+            xl:text-xl xl:w-10"
             value={cant}
             onChange={handleChange}
         />
         <button className="w-7 text-xl h-full
-            xl:text-2xl xl:w-10
-        "
+            xl:text-2xl xl:w-10"
             onClick={add}
         > + </button>
     </div>
