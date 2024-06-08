@@ -19,7 +19,7 @@ export type ObjBranchProps = {
     fechaModificacion: String
 }
 
-export type ClassificationProps = {
+export type ClasificationProps = {
     id: number,
     nombre: string,
     descripcion: string,
