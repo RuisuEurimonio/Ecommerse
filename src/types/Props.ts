@@ -77,3 +77,13 @@ export type ReviewsProps = {
     rank: number, 
     key_points: string
 }
+
+export type discountProps = {
+    id: number,
+    nombre: string, 
+    descripcion: string, 
+    porcentaje: number,
+    active: boolean,
+    fechaCreacion: string, 
+    fechaModificacion: string
+}
