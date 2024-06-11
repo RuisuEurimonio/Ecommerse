@@ -1,16 +1,21 @@
 "use client"
 
-import { discountProps } from "@/types/Props";
 import { useSearchParams } from "next/navigation";
 import { deleteAlert } from "./utils";
 
-type TableDiscountsProps = {
-    data: discountProps[],
+type TableGeneralProps<T> = {
+    data: T[],
     perPage: number,
-    openCloseSubModal: (data: discountProps) => void;
+    openCloseSubModal: (data: T) => void,
+    titles: {
+        className: string,
+        titleName: string,
+        value: string;
+        dataAccess: keyof T;
+    }[]
 }
 
-const TableDiscounts : React.FC<TableDiscountsProps> = ({data, perPage, openCloseSubModal}) => {
+const TableGeneral = <T,>({data, perPage, openCloseSubModal, titles}: TableGeneralProps<T>)  => {
 
     const searchParam = useSearchParams();
     const pageNum = (searchParam.get('page') || 1) as number;
@@ -22,13 +27,9 @@ const TableDiscounts : React.FC<TableDiscountsProps> = ({data, perPage, openClos
                             ">
                             <tr>
                                 <th scope="col" className="px-1 w-10">#</th>
-                                <th scope="col" className="px-1 w-24">Nombre.</th>
-                                <th scope="col" className="px-1 w-24">Descripción.</th>
-                                <th scope="col" className="px-1 w-24">Porcentaje.</th>
-                                <th scope="col" className="px-1 w-24">Activo.</th>
-                                <th scope="col" className="px-1 w-24 md:hidden lg:table-cell">Fecha creación.</th>
-                                <th scope="col" className="px-1 w-24 md:hidden lg:table-cell">Fecha Modificación.</th>
-                                <th scope="col" className="px-1 w-24">Opciones.</th>
+                                {titles.map((className, titleName) => (
+                                    <th key={titleName} scope="col" className={`px-1 w-24 ${className}`}> {titleName} </th>
+                                ))}
                             </tr>
                         </thead>
                         <tbody>
@@ -38,12 +39,9 @@ const TableDiscounts : React.FC<TableDiscountsProps> = ({data, perPage, openClos
                                             xl:text-sm
                                         ">
                                     <td scope="row" className="py-2 px-2">{data.id}</td>
-                                    <td scope="row" className="py-2 px-2">{data.nombre}</td>
-                                    <td scope="row" className="py-2 px-2"><p className="line-clamp-3"> {data.descripcion} </p></td>
-                                    <td scope="row" className="py-2 px-2">{data.porcentaje}</td>
-                                    <td scope="row" className="py-2 px-2">{data.active ? "Activado" : "Desactivado"}</td>
-                                    <td scope="row" className="py-2 px-2 md:hidden lg:table-cell">{data.fechaCreacion}</td>
-                                    <td scope="row" className="py-2 px-2 md:hidden lg:table-cell">{data.fechaModificacion}</td>
+                                    {titles.map((className, value, dataAccess) => (
+                                        <td key={dataAccess} scope="row" className={`py-2 px-2 ${className}`}> {value} </td>
+                                    ))}
                                     <td scope="row" className="py-2 px-2">
                                         <button className="mx-1 hover:scale-105 transition" onClick={()=>{deleteAlert(data.nombre, "Marca")}}>
                                             <span className="icon icon-delete text-base"></span>
@@ -59,4 +57,4 @@ const TableDiscounts : React.FC<TableDiscountsProps> = ({data, perPage, openClos
     )
 }
 
-export default TableDiscounts;
+export default TableGeneral;
