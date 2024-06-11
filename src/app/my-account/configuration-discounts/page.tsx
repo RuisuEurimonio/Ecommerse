@@ -48,7 +48,7 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
             </div>
             <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
                 <div>
-                    <Numeration dataLength={data.length} itemsByPage={10} />
+                    <Numeration dataLength={data.length} itemsByPage={perPage} />
                 </div>
             </div>
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"

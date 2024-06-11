@@ -50,7 +50,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table>
             </div>
             <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
-                <Numeration dataLength={data.length} itemsByPage={10} />
+                <Numeration dataLength={data.length} itemsByPage={perPage} />
             </div>
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}
