@@ -15,6 +15,25 @@ const data = discountsFake;
 
 const perPage : number = 20;
 
+const titlesTable = [
+    {className:"", titleName: "nombre"},
+    {className:"", titleName: "descripción"},
+    {className:"", titleName: "porcentaje"},
+    {className:"", titleName: "activo"},
+    {className:"md:hidden lg:table-cell", titleName: "fecha creación"},
+    {className:"md:hidden lg:table-cell", titleName: "fecha modificación"}
+]
+
+const subDataTable : {className: string, columnName: keyof discountProps}[] = [
+    {className:"", columnName: "id"},
+    {className:"", columnName: "nombre"},
+    {className:"line-clamp-3", columnName: "descripcion"},
+    {className:"", columnName: "porcentaje"},
+    {className:"", columnName: "active"},
+    {className:"md:hidden lg:table-cell", columnName: "fechaCreacion"},
+    {className:"md:hidden lg:table-cell", columnName: "fechaModificacion"}
+]
+
 const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -46,32 +65,27 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
                 <h2 className="font-bold text-xl mt-4 mb-2"> Descuentos.</h2>
                 <div className="w-full relative overflow-x-auto">
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table>
-            </div>
-            <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
-                <div>
-                    <Numeration dataLength={data.length} itemsByPage={perPage} />
                 </div>
+                <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
+                    <Numeration dataLength={data.length} itemsByPage={perPage} />
+                </div>    
+                <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
+                    onClick={openCloseModal}
+                > Agregar. </button>
             </div>
-            <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
-                onClick={openCloseModal}
-            > Agregar. </button>
-        </div>
 
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2"> Descuentos.</h2>
                 <div className="w-full relative overflow-x-auto">
-                    <Table2 data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table2>
+                    <Table2 data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable}></Table2>
                 </div>
-            </div>
-            <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
-                <div>
+                <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
                     <Numeration dataLength={data.length} itemsByPage={perPage} />
                 </div>
+                <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
+                    onClick={openCloseModal}
+                > Agregar. </button>
             </div>
-            <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
-                onClick={openCloseModal}
-            > Agregar. </button>
-
         
         <Modal key={keyModal} openCloseModal={openCloseModal} state={modalVisible}>
             <div className="w-full relative">
