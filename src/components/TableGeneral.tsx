@@ -8,16 +8,28 @@ type TableGeneralProps<T extends { id: number, }> = {
     perPage: number,
     openCloseSubModal: (data: T) => void,
     titles: {
-        className: string,
+        className?: string,
         titleName: string,
     }[],
     subData: {
-        className: string,
+        className?: string,
+        type?: string,
         columnName: keyof T;
     }[]
 };
 
+
 const TableGeneral = <T extends { id: number },>({ data, perPage, openCloseSubModal, titles, subData }: TableGeneralProps<T>) => {
+
+    
+const renderCell = (value: T[keyof T], type: string = "text", className: string = "") =>{
+    switch(type){
+        case "boolean":
+            return value ? <span className={className}> Activo </span> : <span className={className}> Inactivo </span>
+        default:
+            return <p className={`text-center ${className}`}> {String(value)} </p>
+    }
+}
 
     const searchParam = useSearchParams();
     const pageNum = (searchParam.get('page') || 1) as number;
@@ -42,9 +54,7 @@ const TableGeneral = <T extends { id: number },>({ data, perPage, openCloseSubMo
                 ">
                         {subData.map((sub) => (
                             <td key={String(sub.columnName)} scope="row" className={`py-2 px-2`}>
-                                <p className={sub.className}>
-                                    {String(item[sub.columnName])}
-                                </p>
+                                    {renderCell(item[sub.columnName] as T[keyof T], sub.type, sub.className)}
                             </td>
                         ))}
                         <td scope="row" className="py-2 px-2">

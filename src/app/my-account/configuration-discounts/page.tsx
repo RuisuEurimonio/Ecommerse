@@ -16,22 +16,22 @@ const data = discountsFake;
 const perPage : number = 20;
 
 const titlesTable = [
-    {className:"", titleName: "nombre"},
-    {className:"", titleName: "descripción"},
-    {className:"", titleName: "porcentaje"},
-    {className:"", titleName: "activo"},
+    {titleName: "nombre"},
+    {titleName: "descripción"},
+    {titleName: "porcentaje"},
+    {titleName: "Estado"},
     {className:"md:hidden lg:table-cell", titleName: "fecha creación"},
     {className:"md:hidden lg:table-cell", titleName: "fecha modificación"}
 ]
 
-const subDataTable : {className: string, columnName: keyof discountProps}[] = [
-    {className:"", columnName: "id"},
-    {className:"", columnName: "nombre"},
+const subDataTable : {className?: string, type?: string, columnName: keyof discountProps}[] = [
+    {columnName: "id"},
+    {columnName: "nombre"},
     {className:"line-clamp-3", columnName: "descripcion"},
-    {className:"", columnName: "porcentaje"},
-    {className:"", columnName: "active"},
-    {className:"md:hidden lg:table-cell", columnName: "fechaCreacion"},
-    {className:"md:hidden lg:table-cell", columnName: "fechaModificacion"}
+    {columnName: "porcentaje"},
+    {type: "boolean", columnName: "active"},
+    {className:"md:hidden lg:block", columnName: "fechaCreacion"},
+    {className:"md:hidden lg:block", columnName: "fechaModificacion"}
 ]
 
 const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
@@ -61,19 +61,6 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
             className="
                 md:flex-1
             ">
-            <div className="w-4/5 mx-auto">
-                <h2 className="font-bold text-xl mt-4 mb-2"> Descuentos.</h2>
-                <div className="w-full relative overflow-x-auto">
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table>
-                </div>
-                <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
-                    <Numeration dataLength={data.length} itemsByPage={perPage} />
-                </div>    
-                <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
-                    onClick={openCloseModal}
-                > Agregar. </button>
-            </div>
-
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2"> Descuentos.</h2>
                 <div className="w-full relative overflow-x-auto">
