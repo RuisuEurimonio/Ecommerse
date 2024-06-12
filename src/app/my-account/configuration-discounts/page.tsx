@@ -3,8 +3,7 @@
 import FormDiscount from "@/components/FormDiscount";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
-import Table from "@/components/TableDiscounts";
-import Table2 from "@/components/TableGeneral"
+import Table from "@/components/TableGeneral"
 import { discountProps } from "@/types/Props";
 import discountsFake from "@/utils/json/discountFakeData.json"
 import { useState } from "react";
@@ -24,14 +23,14 @@ const titlesTable = [
     {className:"md:hidden lg:table-cell", titleName: "fecha modificación"}
 ]
 
-const subDataTable : {className?: string, type?: string, columnName: keyof discountProps}[] = [
+const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof discountProps}[] = [
     {columnName: "id"},
     {columnName: "nombre"},
     {className:"line-clamp-3", columnName: "descripcion"},
     {columnName: "porcentaje"},
     {type: "boolean", columnName: "active"},
-    {className:"md:hidden lg:block", columnName: "fechaCreacion"},
-    {className:"md:hidden lg:block", columnName: "fechaModificacion"}
+    {hiddenMobile: true, columnName: "fechaCreacion"},
+    {hiddenMobile: true, columnName: "fechaModificacion"}
 ]
 
 const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
@@ -64,7 +63,7 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2"> Descuentos.</h2>
                 <div className="w-full relative overflow-x-auto">
-                    <Table2 data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable}></Table2>
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable}/>
                 </div>
                 <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
                     <Numeration dataLength={data.length} itemsByPage={perPage} />

@@ -14,6 +14,7 @@ type TableGeneralProps<T extends { id: number, }> = {
     subData: {
         className?: string,
         type?: string,
+        hiddenMobile?: boolean,
         columnName: keyof T;
     }[]
 };
@@ -53,7 +54,7 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                     xl:text-sm
                 ">
                         {subData.map((sub) => (
-                            <td key={String(sub.columnName)} scope="row" className={`py-2 px-2`}>
+                            <td key={String(sub.columnName)} scope="row" className={`py-2 px-2 ${(sub.hiddenMobile ? "md:hidden lg:table-cell" : "")}`}>
                                     {renderCell(item[sub.columnName] as T[keyof T], sub.type, sub.className)}
                             </td>
                         ))}
