@@ -19,10 +19,10 @@ const perPage : number = 20;
 
 const titlesTable = [
     {titleName: "nombre"},
-    {titleName: "categoria"},
+    {className:"md:hidden lg:table-cell", titleName: "categoria"},
     {titleName: "SKU"},
     {titleName: "descripcion"},
-    {titleName: "Imagen"},
+    {className:"md:hidden lg:table-cell", titleName: "Imagen"},
 ]
 
 const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof CardProductProps}[] = [
