@@ -22,10 +22,10 @@ const titlesTable = [
     {titleName: "Rol"},
 ]
 
-const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof UserProps}[] = [
+const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, mergeData?: keyof UserProps , columnName: keyof UserProps}[] = [
     {columnName: "id"},
-    {columnName: "numeroDocumento"},
-    {columnName: "nombres"},
+    {type: "combined", mergeData: "tipoDocumento", columnName: "numeroDocumento"},
+    {type: "combined", mergeData: "apellidos" ,columnName: "nombres"},
     {hiddenMobile: true, columnName: "celular"},
     {columnName: "correo"},
     {columnName: "permisos"},

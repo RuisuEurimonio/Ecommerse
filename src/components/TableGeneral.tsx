@@ -15,6 +15,7 @@ type TableGeneralProps<T extends { id: number, }> = {
         className?: string,
         type?: string,
         hiddenMobile?: boolean,
+        mergeData?: keyof T,
         columnName: keyof T;
     }[]
 };
@@ -23,10 +24,12 @@ type TableGeneralProps<T extends { id: number, }> = {
 const TableGeneral = <T extends { id: number },>({ data, perPage, openCloseSubModal, titles, subData }: TableGeneralProps<T>) => {
 
     
-const renderCell = (value: T[keyof T], type: string = "text", className: string = "") =>{
+const renderCell = (value: T[keyof T], type: string = "text", className: string = "", mergeData: T[keyof T] | string = "") =>{
     switch(type){
         case "boolean":
             return value ? <span className={className}> Activo </span> : <span className={className}> Inactivo </span>
+        case "combined":
+            return <p className={`text-center ${className}`}> {String(value)} {String(mergeData)} </p>
         default:
             return <p className={`text-center ${className}`}> {String(value)} </p>
     }
@@ -53,11 +56,14 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                     <tr key={item.id} className="text-center odd:bg-blue-mafer/10  break-words text-xs
                     xl:text-sm
                 ">
-                        {subData.map((sub) => (
+                        {subData.map((sub) => { 
+                            const mergeValue =  (sub.mergeData != null || sub.mergeData != null) ? item[sub.mergeData] : "";
+                            return (
+                            
                             <td key={String(sub.columnName)} scope="row" className={`py-2 px-2 ${(sub.hiddenMobile ? "md:hidden lg:table-cell" : "")}`}>
-                                    {renderCell(item[sub.columnName] as T[keyof T], sub.type, sub.className)}
+                                    {renderCell(item[sub.columnName] as T[keyof T], sub.type, sub.className, mergeValue)}
                             </td>
-                        ))}
+                        )})}
                         <td scope="row" className="py-2 px-2">
                             <button className="mx-1 hover:scale-105 transition" onClick={() => { deleteAlert(String(item.id), "Marca") }}>
                                 <span className="icon icon-delete text-base"></span>
