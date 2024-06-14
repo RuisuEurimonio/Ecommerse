@@ -31,7 +31,8 @@ const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean,
     {hiddenMobile: true, columnName: "categoria"},
     {columnName: "SKU"},
     {className:"line-clamp-3", columnName: "descripcion"},
-    {columnName: "image"}
+    {hiddenMobile: true, columnName: "image"},
+    
 ]
 
 const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
