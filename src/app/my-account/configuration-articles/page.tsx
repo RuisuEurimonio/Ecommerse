@@ -5,7 +5,7 @@ import { useState } from "react";
 import FormArticle from "@/components/FormArticle";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
-import Table from "@/components/TableArticles";
+import Table from "@/components/TableGeneral";
 
 import { CardProductProps} from "@/types/Props";
 
@@ -16,6 +16,23 @@ type ConfigurationProductsProps = {};
 const data = productsFake;
 
 const perPage : number = 20;
+
+const titlesTable = [
+    {titleName: "Nombre"},
+    {className: "md:hidden lg:table-cell" ,titleName: "Categoria"},
+    {titleName: "SKU"},
+    {titleName: "descripción"},
+    {className:"md:hidden lg:table-cell", titleName: "Imagen"},
+]
+
+const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof CardProductProps}[] = [
+    {columnName: "id"},
+    {columnName: "nombre"},
+    {hiddenMobile: true, columnName: "categoria"},
+    {columnName: "SKU"},
+    {className:"line-clamp-3", columnName: "descripcion"},
+    {columnName: "image"}
+]
 
 const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
 
@@ -47,7 +64,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Artículos.</h2>
                 <div className="w-full relative overflow-x-auto">
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table>
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
             </div>
             <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
                 <Numeration dataLength={data.length} itemsByPage={perPage} />
