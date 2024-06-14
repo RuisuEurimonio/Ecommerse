@@ -3,7 +3,7 @@
 import FormUser from "@/components/FormUser";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
-import Table from "@/components/TableUser";
+import Table from "@/components/TableGeneral";
 import { UserProps } from "@/types/Props";
 import usersFake from "@/utils/json/usersFake.json";
 import { useState } from "react";
@@ -13,6 +13,23 @@ type ConfigurationUsersProps = {};
 const data = usersFake;
 
 const perPage : number = 20;
+
+const titlesTable = [
+    {titleName: "Documento"},
+    {titleName: "Nombres"},
+    {className:"md:hidden lg:table-cell", titleName: "Celular"},
+    {titleName: "Correo"},
+    {titleName: "Rol"},
+]
+
+const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof UserProps}[] = [
+    {columnName: "id"},
+    {columnName: "numeroDocumento"},
+    {columnName: "nombres"},
+    {hiddenMobile: true, columnName: "celular"},
+    {columnName: "correo"},
+    {columnName: "permisos"},
+]
 
 const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
@@ -44,7 +61,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Usuarios.</h2>
                 <div className="w-full relative overflow-x-auto">
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal}></Table>
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
             </div>
             <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
                     <Numeration dataLength={data.length} itemsByPage={perPage} />

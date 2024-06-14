@@ -39,8 +39,7 @@ const CardItemWrapper: React.FC<CardItemWrapper> = ({
             </div>
             <div
                 className="absolute left-2
-                        md:left-5
-                    "
+                        md:left-5"
             >
                 <button onClick={before}>
                     <span
@@ -51,14 +50,12 @@ const CardItemWrapper: React.FC<CardItemWrapper> = ({
             </div>
             <div
                 className="absolute right-2
-                    md:right-5
-                "
+                    md:right-5"
             >
                 <button onClick={next}>
                     <span
                         className="icon icon-arrowr text-xl
-                        md:text-4xl
-                    "
+                        md:text-4xl"
                     />
                 </button>
             </div>
