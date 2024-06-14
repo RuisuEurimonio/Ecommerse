@@ -1,10 +1,12 @@
 "use client"
 
+import Form from "@/components/Form";
 import FormDiscount from "@/components/FormDiscount";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral"
 import { discountProps } from "@/types/Props";
+import { discountSchequema } from "@/utils/Schemas/discountSchema";
 import discountsFake from "@/utils/json/discountFakeData.json"
 import { useState } from "react";
 
@@ -31,6 +33,13 @@ const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean,
     {type: "boolean", columnName: "active"},
     {hiddenMobile: true, columnName: "fechaCreacion"},
     {hiddenMobile: true, columnName: "fechaModificacion"}
+]
+
+const inputsForm = [
+    {type: "text", id: "nombre", name: "Nombre"},
+    {type: "text", id: "descripcion", name: "Descripción"},
+    {type: "text", id: "porcentaje", name: "Porcentaje"},
+    {type: "checkbox", id: "active", name: "Estado"}
 ]
 
 const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
@@ -78,7 +87,8 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataDiscountSelect == null ? "Agregar" : "Actualizar"} descuento. </h2>
-            <FormDiscount className="w-11/12 h-full" modal data={dataDiscountSelect}/>
+            {/*<FormDiscount className="w-11/12 h-full" modal data={dataDiscountSelect}/>*/}
+            <Form className="w-11/12 h-full" modal data={dataDiscountSelect} dataName="Descuento" schequema={discountSchequema} inputsList={inputsForm}/> 
         </Modal>
     </div>
     );

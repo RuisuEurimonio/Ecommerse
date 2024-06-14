@@ -2,18 +2,18 @@ import { z } from "zod";
 
 export const discountSchequema = z
     .object({
-        nameDiscount: z
+        nombre: z
             .string()
             .min(5, "Ingrese una marca válida")
             .max(150, "Ingrese una marca valida"),
-        description: z
+        descripcion: z
             .string()
             .min(5, "Ingrese una descripción válida")
-            .max(200, "Ingrese una descripción válida")
+            .max(500, "Ingrese una descripción válida")
             ,
-        porcentage: z
+        porcentaje: z
             .string()
-            .refine((number) => !isNaN(parseInt(number)), {
+            .refine((number) => !isNaN(parseFloat(number)), {
                 message: "Debe ser un número"
             }),
         active: z
