@@ -1,10 +1,11 @@
 "use client"
 
-import FormBrand from "@/components/FormBrand";
+import Form from "@/components/Form";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 import { ObjBranchProps } from "@/types/Props";
+import { brandSchequema } from "@/utils/Schemas/brandSchema";
 import branchFake from "@/utils/json/branchFake.json"
 import { useState } from "react";
 
@@ -13,6 +14,11 @@ type ConfigurationUsersProps = {};
 const data = branchFake;
 
 const perPage: number = 20;
+
+const inputsForm = [
+    {type: "text", id: "nombre", name: "Nombre"},
+    {type: "textarea", id: "descripcion", name: "Descripción"},
+]
 
 const titlesTable = [
     { titleName: "nombre" },
@@ -73,7 +79,8 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                     <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
                 </div>
                 <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataBrandSelect == null ? "Agregar" : "Actualizar"} marca. </h2>
-                <FormBrand className="w-11/12 h-full" modal data={dataBrandSelect} />
+                {/* <FormBrand className="w-11/12 h-full" modal data={dataBrandSelect} /> */}
+                <Form className="w-11/12 h-full" modal data={dataBrandSelect} dataName="marca" schequema={brandSchequema} inputsList={inputsForm} />
             </Modal>
         </div>
     );

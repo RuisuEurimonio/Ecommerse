@@ -42,6 +42,8 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
         switch(type){
             case ("select"):
                 return selectInput(id, name, type, subList);
+            case ("textarea"):
+                return textAreaInput(id,name);
             default:
                 return defaultInput(id, name, type);
         }
@@ -71,6 +73,32 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
                 </div>
         )
     }
+
+    const textAreaInput = (id: string, name: string) => {
+        return (
+        <div key={id+name} className={` ml-5
+            ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+            `}>
+                <div className="flex items-center justify-between">
+                <label htmlFor={id}>
+                    <p className="inline-block w-1/3"> {name}*:</p>
+                </label>
+                    <textarea
+                        id={id}
+                        className="border rounded-sm w-2/3 resize-none"
+                        rows={3}
+                        {...register(id)}
+                    />
+                </div>
+                {errors[id] && (
+                    <InputErrorText
+                        modal={modal}
+                    >
+                        {errors[id]?.message as string}
+                    </InputErrorText>
+                )}
+            </div>
+    )}
 
     const selectInput = <U extends {id: number, nombre: string}>(id: string, name: string, type: string, subList: U[]) => {
         return(
