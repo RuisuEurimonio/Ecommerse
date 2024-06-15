@@ -38,6 +38,71 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
         defaultValues: data ?? {} as T,
     });
 
+    const selectComponent = <U extends {id: number, nombre: string} >(id: string, name: string, type: string, subList  : U[] = []) => {
+        switch(type){
+            case ("select"):
+                return selectInput(id, name, type, subList);
+            default:
+                return defaultInput(id, name, type);
+        }
+    }
+
+    const defaultInput = (id: string, name: string, type: string) => {
+        return(
+            <div key={id+name} className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
+                    <label htmlFor={id}>
+                        <p className="inline-block w-1/3"> {name}*:</p>
+                        <input
+                            id={id}
+                            type={type}
+                            className="border rounded-sm w-2/3"
+                            {...register(id)}
+                        />
+                    </label>
+                    {errors[id] && (
+                        <InputErrorText
+                            modal={modal}
+                        >
+                            {errors[id]?.message as string}
+                        </InputErrorText>
+                    )}
+                </div>
+        )
+    }
+
+    const selectInput = <U extends {id: number, nombre: string}>(id: string, name: string, type: string, subList: U[]) => {
+        return(
+            <div className={`inline
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
+                    <p> {name} </p>
+                    <select
+                            className="border rounded-sm w-full"
+                            {...register("category")}
+                            defaultValue={id || ""}
+                        >
+                            {subList.map((item) => (
+                                <option
+                                    key={item.id}
+                                    value={item.nombre}
+                                >
+                                    {item.nombre}
+                                </option>
+                            ))}
+                            </select>
+                            {errors[id] && (
+                        <InputErrorText
+                            modal={modal}
+                        >
+                            {errors[id]?.message as string}
+                        </InputErrorText>
+                    )}
+                </div>
+        )
+    }
+
     const formvalues = watch();
 
     type formProps = z.infer<typeof schequema>;
@@ -102,29 +167,8 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
                     )}
                 </div> */}
                 {inputsList.map((item)=>{
-                    console.log(errors)
-                    console.log(item.name)
                     return(
-                    <div key={item.id+item.name} className={`inline ml-5
-                    ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
-                    `}>
-                        <label htmlFor={item.id}>
-                            <p className="inline-block w-1/3"> {item.name}*:</p>
-                            <input
-                                id={item.id}
-                                type={item.type}
-                                className="border rounded-sm w-2/3"
-                                {...register(item.id)}
-                            />
-                        </label>
-                        {errors[item.id] && (
-                            <InputErrorText
-                                modal={modal}
-                            >
-                                {errors[item.id]?.message as string}
-                            </InputErrorText>
-                        )}
-                    </div>
+                        selectComponent(item.id, item.name, item.type ? item.type : "")
                 )})}
                 
                 {/* {!modal &&
@@ -210,7 +254,7 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
                 value="Enviar"
                 className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm text-right cursor-pointer float-right"
             />
-            <pre>{JSON.stringify(formvalues, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(formvalues, null, 2)}</pre> */}
         </form>
     );
 };
