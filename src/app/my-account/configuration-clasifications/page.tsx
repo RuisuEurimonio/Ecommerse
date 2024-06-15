@@ -36,7 +36,7 @@ const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean,
 
 const inputsForm = [
     {type: "text", id: "nombre", name: "Nombre"},
-    {type: "text", id: "descripcion", name: "Descripción"},
+    {type: "textarea", id: "descripcion", name: "Descripción"},
 ]
 
 const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = () => {
