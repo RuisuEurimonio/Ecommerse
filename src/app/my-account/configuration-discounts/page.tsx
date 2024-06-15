@@ -1,7 +1,6 @@
 "use client"
 
 import Form from "@/components/Form";
-import FormDiscount from "@/components/FormDiscount";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral"

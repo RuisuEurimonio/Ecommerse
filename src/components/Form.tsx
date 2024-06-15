@@ -254,7 +254,7 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
                 value="Enviar"
                 className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm text-right cursor-pointer float-right"
             />
-            {/* <pre>{JSON.stringify(formvalues, null, 2)}</pre> */}
+            <p>{JSON.stringify(formvalues, null, 2)}</p>
         </form>
     );
 };

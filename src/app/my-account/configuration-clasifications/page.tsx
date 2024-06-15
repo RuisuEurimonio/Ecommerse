@@ -10,6 +10,8 @@ import { ClasificationProps } from "@/types/Props";
 
 import clasificationFake from "@/utils/json/branchFake.json"
 import FormClasification from "@/components/FormClasification";
+import Form from "@/components/Form";
+import { ClasificationSchequema } from "@/utils/Schemas/clasificationSchema";
 
 type ConfigurationClasificationsProps = {};
 
@@ -30,6 +32,11 @@ const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean,
     {className:"line-clamp-3", columnName: "descripcion"},
     {hiddenMobile: true, columnName: "fechaCreacion"},
     {hiddenMobile: true, columnName: "fechaModificacion"}
+]
+
+const inputsForm = [
+    {type: "text", id: "nombre", name: "Nombre"},
+    {type: "text", id: "descripcion", name: "Descripción"},
 ]
 
 const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = () => {
@@ -76,7 +83,8 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataClasificationSelect == null ? "Agregar" : "Actualizar"} clasificación. </h2>
-            <FormClasification className="w-11/12 h-full" modal data={dataClasificationSelect}/>
+            {/* <FormClasification className="w-11/12 h-full" modal data={dataClasificationSelect}/> */}
+            <Form className="w-11/12 h-full" modal data={dataClasificationSelect} dataName="Clasificación" schequema={ClasificationSchequema} inputsList={inputsForm} />
         </Modal>
     </div>
     );
