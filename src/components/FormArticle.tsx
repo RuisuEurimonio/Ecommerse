@@ -170,7 +170,6 @@ const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, dat
                         <select
                                 className="border rounded-sm w-full"
                                 {...register("brand")}
-                                defaultValue={data?.marca || ""}
                             >
                                 {brand.map((item) => (
                                     <option
@@ -198,7 +197,6 @@ const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, dat
                         <select
                                 className="border rounded-sm w-full"
                                 {...register("clasification")}
-                                defaultValue={data?.clasificacion || ""}
                             >
                                 {clasification.map((item) => (
                                     <option
@@ -226,7 +224,6 @@ const FormArticle: React.FC<FormArticleProps> = ({ className, modal = false, dat
                         <select
                                 className="border rounded-sm w-full"
                                 {...register("category")}
-                                defaultValue={data?.categoria || ""}
                             >
                                 {category.map((item) => (
                                     <option

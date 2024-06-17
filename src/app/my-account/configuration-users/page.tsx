@@ -31,6 +31,12 @@ const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean,
     {columnName: "permisos"},
 ]
 
+const document = [
+    { nombre: "Tarjeta de identidad", abreviatura: "TI" },
+    { nombre: "Cedula de Ciudadania", abreviatura: "CC" },
+    { nombre: "Cedula de extranjeria", abreviatura: "CED" },
+];
+
 const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);

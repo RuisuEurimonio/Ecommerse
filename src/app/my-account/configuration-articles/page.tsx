@@ -10,6 +10,9 @@ import Table from "@/components/TableGeneral";
 import { CardProductProps} from "@/types/Props";
 
 import productsFake from "@/utils/json/productsFake.json"
+import Form from "@/components/Form";
+import { articleSchequema } from "@/utils/Schemas/articleSchema";
+import subData from "@/utils/json/branchFake.json"
 
 type ConfigurationProductsProps = {};
 
@@ -31,8 +34,18 @@ const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean,
     {hiddenMobile: true, columnName: "categoria"},
     {columnName: "SKU"},
     {className:"line-clamp-3", columnName: "descripcion"},
-    {hiddenMobile: true, columnName: "image"},
-    
+    {hiddenMobile: true, columnName: "image"},   
+]
+
+const inputsForm = [
+    {type: "text", id: "nombre", name: "Nombre"},
+    {type: "textarea", id: "descripcion", name: "Descripción"},
+    {type: "text", id: "SKU", name: "SKU"},
+    {type: "text", id: "precio", name: "Precio"},
+    {type: "text", id: "image", name: "Imagen"},
+    {type: "select", id: "selectBrand", name: "Marca", extraData: subData},
+    {type: "select", id: "selectClass", name: "Clasificación", extraData: subData},
+    {type: "select", id: "selectCategory", name: "Categoria", extraData: subData},
 ]
 
 const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
@@ -79,7 +92,8 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataProductSelect == null ? "Agregar" : "Actualizar"} articulo. </h2>
-            <FormArticle className="w-11/12 h-full" modal data={dataProductSelect}/>
+            {/* <FormArticle className="w-11/12 h-full" modal data={dataProductSelect}/> */}
+            <Form className="w-11/12 h-full" modal data={dataProductSelect} schequema={articleSchequema} dataName="Articulos" inputsList={inputsForm} />
         </Modal>
     </div>
     );

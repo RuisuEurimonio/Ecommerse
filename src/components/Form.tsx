@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { InputErrorText, saveAlert } from "./utils";
 
-type FormProps<T, U> = {
+type FormProps<T, U extends {id? : number , nombre?: string}> = {
     className?: string,
     modal?: boolean,
     data?: T | null,
@@ -20,13 +20,7 @@ type FormProps<T, U> = {
     }[]
 };
 
-const document = [
-    { nombre: "Tarjeta de identidad", abreviatura: "TI" },
-    { nombre: "Cedula de Ciudadania", abreviatura: "CC" },
-    { nombre: "Cedula de extranjeria", abreviatura: "CED" },
-];
-
-const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inputsList} : FormProps<T, U>) => {
+const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
     const {
         register,
         handleSubmit,
@@ -38,51 +32,55 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
         defaultValues: data ?? {} as T,
     });
 
-    const selectComponent = <U extends {id: number, nombre: string} >(id: string, name: string, type: string, subList  : U[] = []) => {
-        switch(type){
+    const selectComponent = <U extends { id?: number, nombre?: string }>(
+        id: string, 
+        name: string, 
+        type: string, 
+        extraData?: U[] | null | undefined,) => {
+        switch (type) {
             case ("select"):
-                return selectInput(id, name, type, subList);
+                return selectInput(id, name, type, extraData ?? []);
             case ("textarea"):
-                return textAreaInput(id,name);
+                return textAreaInput(id, name);
             default:
                 return defaultInput(id, name, type);
         }
     }
 
     const defaultInput = (id: string, name: string, type: string) => {
-        return(
-            <div key={id+name} className={`inline ml-5
+        return (
+            <div key={id + name} className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor={id}>
-                        <p className="inline-block w-1/3"> {name}*:</p>
-                        <input
-                            id={id}
-                            type={type}
-                            className="border rounded-sm w-2/3"
-                            {...register(id)}
-                        />
-                    </label>
-                    {errors[id] && (
-                        <InputErrorText
-                            modal={modal}
-                        >
-                            {errors[id]?.message as string}
-                        </InputErrorText>
-                    )}
-                </div>
+                <label htmlFor={id}>
+                    <p className="inline-block w-1/3"> {name}*:</p>
+                    <input
+                        id={id}
+                        type={type}
+                        className="border rounded-sm w-2/3"
+                        {...register(id)}
+                    />
+                </label>
+                {errors[id] && (
+                    <InputErrorText
+                        modal={modal}
+                    >
+                        {errors[id]?.message as string}
+                    </InputErrorText>
+                )}
+            </div>
         )
     }
 
     const textAreaInput = (id: string, name: string) => {
         return (
-        <div key={id+name} className={` ml-5
+            <div key={id + name} className={` ml-5
             ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
             `}>
                 <div className="flex items-center justify-between">
-                <label htmlFor={id}>
-                    <p className="inline-block w-1/3"> {name}*:</p>
-                </label>
+                    <label htmlFor={id}>
+                        <p className="inline-block w-1/3"> {name}*:</p>
+                    </label>
                     <textarea
                         id={id}
                         className="border rounded-sm w-2/3 resize-none"
@@ -98,36 +96,36 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
                     </InputErrorText>
                 )}
             </div>
-    )}
+        )
+    }
 
-    const selectInput = <U extends {id: number, nombre: string}>(id: string, name: string, type: string, subList: U[]) => {
-        return(
+    const selectInput = <U extends { id?: number , nombre?: string }>(id: string, name: string, type: string, subList: U[]) => {
+        return (
             <div className={`inline
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <p> {name} </p>
-                    <select
-                            className="border rounded-sm w-full"
-                            {...register("category")}
-                            defaultValue={id || ""}
+                <p> {name} </p>
+                <select
+                    className="border rounded-sm w-full"
+                    {...register(id)}
+                >
+                    {subList.map((item) => (
+                        <option
+                            key={item.id}
+                            value={item.nombre}
                         >
-                            {subList.map((item) => (
-                                <option
-                                    key={item.id}
-                                    value={item.nombre}
-                                >
-                                    {item.nombre}
-                                </option>
-                            ))}
-                            </select>
-                            {errors[id] && (
-                        <InputErrorText
-                            modal={modal}
-                        >
-                            {errors[id]?.message as string}
-                        </InputErrorText>
-                    )}
-                </div>
+                            {item.nombre}
+                        </option>
+                    ))}
+                </select>
+                {errors[id] && (
+                    <InputErrorText
+                        modal={modal}
+                    >
+                        {errors[id]?.message as string}
+                    </InputErrorText>
+                )}
+            </div>
         )
     }
 
@@ -138,7 +136,7 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
     const onSubmit: SubmitHandler<formProps> = async (data) => {
         console.log("aaaaaaaaaaaa")
         const response = await saveAlert(dataName);
-        if(response){
+        if (response) {
             reset();
             alert(`${dataName} guardado`);
         }
@@ -150,6 +148,13 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
                 lg:gap-6
             ">
                 <h3 className="font-bold text-lg"> Detalles. </h3>
+
+                {inputsList.map((item) => {
+                    return (
+                        selectComponent(item.id, item.name, item.type ? item.type : "", item.extraData)
+                    )
+                })}
+
                 {/* <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
@@ -194,11 +199,8 @@ const Form = <T, U> ({ className, modal = false, data, dataName, schequema, inpu
                         </InputErrorText>
                     )}
                 </div> */}
-                {inputsList.map((item)=>{
-                    return(
-                        selectComponent(item.id, item.name, item.type ? item.type : "")
-                )})}
-                
+
+
                 {/* {!modal &&
                     <>
                         <h3 className="font-bold text-lg"> Seguridad. </h3>
