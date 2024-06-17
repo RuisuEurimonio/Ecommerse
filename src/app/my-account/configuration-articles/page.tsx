@@ -43,9 +43,9 @@ const inputsForm = [
     {type: "text", id: "SKU", name: "SKU"},
     {type: "text", id: "precio", name: "Precio"},
     {type: "text", id: "image", name: "Imagen"},
-    {type: "select", id: "selectBrand", name: "Marca", extraData: subData},
-    {type: "select", id: "selectClass", name: "Clasificación", extraData: subData},
-    {type: "select", id: "selectCategory", name: "Categoria", extraData: subData},
+    {type: "select", id: "brand", name: "Marca", extraData: subData},
+    {type: "select", id: "clasification", name: "Clasificación", extraData: subData},
+    {type: "select", id: "category", name: "Categoria", extraData: subData},
 ]
 
 const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
