@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { InputErrorText, saveAlert } from "./utils";
+import React, { useState } from "react";
 
 type FormProps<T, U extends {id? : number , nombre?: string}> = {
     className?: string,
@@ -11,16 +12,22 @@ type FormProps<T, U extends {id? : number , nombre?: string}> = {
     data?: T | null,
     dataName: string,
     schequema: ZodType,
-    inputsList: {
-        type?: string,
-        id: string,
-        name: string,
-        extraData?: U[] | null,
-        className?: String
-    }[]
+    inputsList: InputsListProps<U>[]
 };
 
+type InputsListProps<U extends {id? : number , nombre?: string}> = {
+    type?: string,
+    id: string,
+    groupData?: boolean,
+    name: string,
+    extraData?: U[] | null,
+    className?: String
+}
+
 const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
+
+    const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number , nombre: string}>[]>([]);
+
     const {
         register,
         handleSubmit,
@@ -46,6 +53,25 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
                 return defaultInput(id, name, type);
         }
     }
+
+    const groupElements = (
+        inputList: InputsListProps<{id?: number, nombre?: string}>[]
+    ) => {
+            return(
+                <div className="flex flex-col mb-2 gap-2
+                    md:flex-row  md:justify-around
+                ">
+                    {inputList.map((item)=>{
+                        console.log(item);
+                        return(
+                            <React.Fragment key={item.id+item.name}>
+                                {selectComponent(item.id, item.name, item.type = "", item.extraData)}
+                            </React.Fragment>
+                        )
+                    })}
+                </div>
+            )
+        }
 
     const defaultInput = (id: string, name: string, type: string) => {
         return (
@@ -149,7 +175,16 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
             ">
                 <h3 className="font-bold text-lg"> Detalles. </h3>
 
-                {inputsList.map((item) => {
+                {inputsList.map((item, index) => {
+                    console.log(item.groupData);
+                    if (typeof item.id !== 'undefined' && item.groupData) {
+                        setListOfItemWithGroup([...listOfItemWithGroup, item as InputsListProps<{ id?: number; nombre: string; }>]);
+                    } else
+                    if(index == inputsList.length - 1 && listOfItemWithGroup.length > 0){
+                        return(
+                            groupElements(listOfItemWithGroup)
+                        )
+                    }
                     return (
                         selectComponent(item.id, item.name, item.type ? item.type : "", item.extraData)
                     )
