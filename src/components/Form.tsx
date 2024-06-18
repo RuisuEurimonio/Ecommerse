@@ -26,7 +26,9 @@ type InputsListProps<U extends {id? : number , nombre?: string}> = {
 
 const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
 
-    const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number , nombre: string}>[]>([]);
+    console.log(inputsList)
+
+    const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number , nombre?: string}>[]>([]);
 
     const {
         register,
@@ -44,6 +46,7 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
         name: string, 
         type: string, 
         extraData?: U[] | null | undefined,) => {
+            //console.log(listOfItemWithGroup)
         switch (type) {
             case ("select"):
                 return selectInput(id, name, type, extraData ?? []);
@@ -64,7 +67,7 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
                     {inputList.map((item)=>{
                         return(
                             <React.Fragment key={item.id+item.name}>
-                                {selectComponent(item.id, item.name, item.type = "", item.extraData)}
+                                {selectComponent(item.id, item.name, item.type?? "", item.extraData)}
                             </React.Fragment>
                         )
                     })}

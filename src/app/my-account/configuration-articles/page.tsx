@@ -58,7 +58,6 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
         setKeyModal("main")
         setModalVisible(!modalVisible);
         setDataProductSelect(null);
-        console.log("holaaa "+inputsForm.toString)
     }
 
     function openCloseSubModal(data: CardProductProps){
