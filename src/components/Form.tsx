@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ZodType, z } from "zod";
 import { InputErrorText, saveAlert } from "./utils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type FormProps<T, U extends {id? : number , nombre?: string}> = {
     className?: string,
@@ -62,7 +62,6 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
                     md:flex-row  md:justify-around
                 ">
                     {inputList.map((item)=>{
-                        console.log(item);
                         return(
                             <React.Fragment key={item.id+item.name}>
                                 {selectComponent(item.id, item.name, item.type = "", item.extraData)}
@@ -127,7 +126,7 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
 
     const selectInput = <U extends { id?: number , nombre?: string }>(id: string, name: string, type: string, subList: U[]) => {
         return (
-            <div className={`inline
+            <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
                 <p> {name} </p>
@@ -160,13 +159,18 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
     type formProps = z.infer<typeof schequema>;
 
     const onSubmit: SubmitHandler<formProps> = async (data) => {
-        console.log("aaaaaaaaaaaa")
         const response = await saveAlert(dataName);
         if (response) {
             reset();
             alert(`${dataName} guardado`);
         }
     };
+
+    useEffect(() => {
+        console.log(inputsList)
+        const groupedItems = inputsList.filter(item => typeof item.id !== 'undefined' && item.groupData);
+        setListOfItemWithGroup(groupedItems as InputsListProps<{ id?: number; nombre: string; }>[]);
+    }, [inputsList]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={className}>
@@ -176,19 +180,16 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
                 <h3 className="font-bold text-lg"> Detalles. </h3>
 
                 {inputsList.map((item, index) => {
-                    console.log(item.groupData);
-                    if (typeof item.id !== 'undefined' && item.groupData) {
-                        setListOfItemWithGroup([...listOfItemWithGroup, item as InputsListProps<{ id?: number; nombre: string; }>]);
-                    } else
-                    if(index == inputsList.length - 1 && listOfItemWithGroup.length > 0){
-                        return(
-                            groupElements(listOfItemWithGroup)
+                    if(!item.groupData){
+                        return (
+                            <React.Fragment key={item.name+index}>
+                                {selectComponent(item.id, item.name, item.type ? item.type : "", item.extraData)}
+                            </React.Fragment>
                         )
                     }
-                    return (
-                        selectComponent(item.id, item.name, item.type ? item.type : "", item.extraData)
-                    )
                 })}
+
+                {listOfItemWithGroup.length > 0 && groupElements(listOfItemWithGroup)}
 
                 {/* <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
