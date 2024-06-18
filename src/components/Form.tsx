@@ -6,7 +6,7 @@ import { ZodType, z } from "zod";
 import { InputErrorText, saveAlert } from "./utils";
 import React, { useEffect, useState } from "react";
 
-type FormProps<T, U extends {id? : number , nombre?: string}> = {
+type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
     className?: string,
     modal?: boolean,
     data?: T | null,
@@ -15,20 +15,19 @@ type FormProps<T, U extends {id? : number , nombre?: string}> = {
     inputsList: InputsListProps<U>[]
 };
 
-type InputsListProps<U extends {id? : number , nombre?: string}> = {
+type InputsListProps<U extends {id? : number | string, nombre?: string}> = {
     type?: string,
     id: string,
     groupData?: boolean,
     name: string,
     extraData?: U[] | null,
     className?: String
+    secondId?: string;
 }
 
-const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
+const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
 
-    console.log(inputsList)
-
-    const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number , nombre?: string}>[]>([]);
+    const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number | string, nombre?: string}>[]>([]);
 
     const {
         register,
@@ -41,24 +40,27 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
         defaultValues: data ?? {} as T,
     });
 
-    const selectComponent = <U extends { id?: number, nombre?: string }>(
+    const selectComponent = <U extends { id?: number | string, nombre?: string }>(
         id: string, 
         name: string, 
         type: string, 
-        extraData?: U[] | null | undefined,) => {
-            //console.log(listOfItemWithGroup)
+        extraData?: U[] | null | undefined,
+        secondId?: string
+    ) => {
         switch (type) {
             case ("select"):
                 return selectInput(id, name, type, extraData ?? []);
             case ("textarea"):
                 return textAreaInput(id, name);
+            case ("combined"):
+                return inputWithSelect(id, name, type, extraData ?? [], secondId ?? "");
             default:
                 return defaultInput(id, name, type);
         }
     }
 
     const groupElements = (
-        inputList: InputsListProps<{id?: number, nombre?: string}>[]
+        inputList: InputsListProps<{id?: number | string, nombre?: string}>[]
     ) => {
             return(
                 <div className="flex flex-col mb-2 gap-2
@@ -74,6 +76,58 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
                 </div>
             )
         }
+
+    const inputWithSelect = <U extends {nombre?: string, id?: number | string, otherData?: string} >(
+        id: string,
+        name: string,
+        type: string,
+        extraData: U[],
+        secondId: string
+    ) => {
+        return(
+            <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
+                    <label htmlFor={id}>
+                        <p className="inline-block w-5/12">{name}*:</p>
+                        <select
+                            className="border rounded-sm w-2/12"
+                            {...register(secondId)}
+                        >
+                            {extraData.map((item) => (
+                                <option
+                                    key={item.nombre?? "" + item.id}
+                                    value={item.id}
+                                >
+                                    {item.otherData?? item.nombre}
+                                </option>
+                            ))}
+                        </select>
+                        <input
+                            id={id}
+                            type={type}
+                            className="border rounded-sm w-5/12"
+                            {...register(id)}
+                        />
+                    </label>
+                    {errors[secondId] && (
+                        <InputErrorText
+                            modal={modal}
+                        >
+                            {" "}
+                            {errors[secondId]?.message as string}
+                        </InputErrorText>
+                    )}
+                    {errors[id] && (
+                        <InputErrorText
+                            modal={modal}
+                        >
+                            {errors[id]?.message as string}
+                        </InputErrorText>
+                    )}
+                </div>
+        )
+    }
 
     const defaultInput = (id: string, name: string, type: string) => {
         return (
@@ -127,7 +181,7 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
         )
     }
 
-    const selectInput = <U extends { id?: number , nombre?: string }>(id: string, name: string, type: string, subList: U[]) => {
+    const selectInput = <U extends { id?: number | string, nombre?: string }>(id: string, name: string, type: string, subList: U[]) => {
         return (
             <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
@@ -170,9 +224,8 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
     };
 
     useEffect(() => {
-        console.log(inputsList)
         const groupedItems = inputsList.filter(item => typeof item.id !== 'undefined' && item.groupData);
-        setListOfItemWithGroup(groupedItems as InputsListProps<{ id?: number; nombre: string; }>[]);
+        setListOfItemWithGroup(groupedItems as InputsListProps<{ id?: number | string; nombre: string; }>[]);
     }, [inputsList]);
 
     return (
@@ -186,7 +239,7 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
                     if(!item.groupData){
                         return (
                             <React.Fragment key={item.name+index}>
-                                {selectComponent(item.id, item.name, item.type ? item.type : "", item.extraData)}
+                                {selectComponent(item.id, item.name, item.type ? item.type : "", item.extraData, item.secondId)}
                             </React.Fragment>
                         )
                     }
@@ -194,50 +247,7 @@ const Form = <T, U extends {id? : number , nombre?: string}>({ className, modal 
 
                 {listOfItemWithGroup.length > 0 && groupElements(listOfItemWithGroup)}
 
-                {/* <div className={`inline ml-5
-                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
-                `}>
-                    <label htmlFor="numberDocument">
-                        <p className="inline-block w-5/12">Documento*:</p>
-                        <select
-                            className="border rounded-sm w-2/12"
-                            {...register("TypeDocument")}
-                            defaultValue={data?.tipoDocumento || ""}
-                        >
-                            {document.map((item) => (
-                                <option
-                                    key={item.abreviatura}
-                                    value={item.nombre}
-                                >
-                                    {" "}
-                                    {item.abreviatura}{" "}
-                                </option>
-                            ))}
-                        </select>
-                        <input
-                            id="numberDocument"
-                            type="text"
-                            className="border rounded-sm w-5/12"
-                            {...register("numberDocument")}
-                        />
-                    </label>
-                    {errors.TypeDocument && (
-                        <InputErrorText
-                            modal={modal}
-                        >
-                            {" "}
-                            {errors.TypeDocument?.message}{" "}
-                        </InputErrorText>
-                    )}
-                    {errors.numberDocument && (
-                        <InputErrorText
-                            modal={modal}
-                        >
-                            {" "}
-                            {errors.numberDocument?.message}{" "}
-                        </InputErrorText>
-                    )}
-                </div> */}
+                {/*  */}
 
 
                 {/* {!modal &&
