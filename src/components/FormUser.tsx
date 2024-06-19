@@ -30,12 +30,12 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     } = useForm<formProps>({
         resolver: zodResolver(userSchequema),
         defaultValues: {
-            numberDocument: data?.numeroDocumento,
-            names: data?.nombres,
-            lastNames: data?.apellidos,
-            numberPhone: (data?.celular ?? "") + "",
-            address: data?.direccion,
-            email: data?.correo
+            numeroDocumento: data?.numeroDocumento,
+            nombres: data?.nombres,
+            apellidos: data?.apellidos,
+            telefono: (data?.telefono ?? "") + "",
+            direccion: data?.direccion,
+            correo: data?.correo
         }
     });
 
@@ -56,12 +56,11 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                 <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="numberDocument">
+                    <label htmlFor="tipoDocumento">
                         <p className="inline-block w-5/12">Documento*:</p>
                         <select
                             className="border rounded-sm w-2/12"
-                            {...register("TypeDocument")}
-                            defaultValue={data?.tipoDocumento || ""}
+                            {...register("tipoDocumento")}
                         >
                             {document.map((item) => (
                                 <option
@@ -74,110 +73,110 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             ))}
                         </select>
                         <input
-                            id="numberDocument"
+                            id="numeroDocumento"
                             type="text"
                             className="border rounded-sm w-5/12"
-                            {...register("numberDocument")}
+                            {...register("numeroDocumento")}
                         />
                     </label>
-                    {errors.TypeDocument && (
+                    {errors.tipoDocumento && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.TypeDocument?.message}{" "}
+                            {errors.tipoDocumento?.message}{" "}
                         </InputErrorText>
                     )}
-                    {errors.numberDocument && (
+                    {errors.numeroDocumento && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.numberDocument?.message}{" "}
+                            {errors.numeroDocumento?.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
                 <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="names">
+                    <label htmlFor="nombres">
                         <p className="inline-block w-1/3">Nombres*:</p>
                         <input
-                            id="names"
+                            id="nombres"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("names")}
+                            {...register("nombres")}
                         />
                     </label>
-                    {errors.names && (
+                    {errors.nombres && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.names.message}{" "}
+                            {errors.nombres.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
                 <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="lastNames">
+                    <label htmlFor="apellidos">
                         <p className="inline-block w-1/3">Apellidos*:</p>
                         <input
-                            id="lastNames"
+                            id="apellidos"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("lastNames")}
+                            {...register("apellidos")}
                         />
                     </label>
-                    {errors.lastNames && (
+                    {errors.apellidos && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.lastNames.message}{" "}
+                            {errors.apellidos.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
                 <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="numberPhone">
+                    <label htmlFor="telefono">
                         <p className="inline-block w-1/3">Teléfono*:</p>
                         <input
-                            id="numberPhone"
+                            id="telefono"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("numberPhone")}
+                            {...register("telefono")}
                         />
                     </label>
-                    {errors.numberPhone && (
+                    {errors.telefono && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.numberPhone.message}{" "}
+                            {errors.telefono.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
                 <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="address">
+                    <label htmlFor="direccion">
                         <p className="inline-block w-1/3">Dirección*:</p>
                         <input
-                            id="address"
+                            id="direccion"
                             type="text"
                             className="border rounded-sm w-2/3"
-                            {...register("address")}
+                            {...register("direccion")}
                         />
                     </label>
-                    {errors.address && (
+                    {errors.direccion && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.address.message}{" "}
+                            {errors.direccion.message}{" "}
                         </InputErrorText>
                     )}
                 </div>
@@ -185,21 +184,21 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                 <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
-                    <label htmlFor="email">
+                    <label htmlFor="correo">
                         <p className="inline-block w-1/3">Correo*:</p>
                         <input
-                            id="email"
+                            id="correo"
                             type="email"
                             className="border rounded-sm w-2/3"
-                            {...register("email")}
+                            {...register("correo")}
                         />
                     </label>
-                    {errors.email && (
+                    {errors.correo && (
                         <InputErrorText
                             modal={modal}
                         >
                             {" "}
-                            {errors.email.message}{" "}
+                            {errors.correo.message}{" "}
                         </InputErrorText>
                     )}
                 </div>

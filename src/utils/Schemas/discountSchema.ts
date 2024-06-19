@@ -12,10 +12,8 @@ export const discountSchequema = z
             .max(500, "Ingrese una descripción válida")
             ,
         porcentaje: z
-            .string()
-            .refine((number) => !isNaN(parseFloat(number)), {
-                message: "Debe ser un número"
-            }),
+            .number({message:"Ingresa un numero"})
+            .positive("Debe ser un número positivo"),
         active: z
             .boolean(),
     });

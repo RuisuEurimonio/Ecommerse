@@ -1,6 +1,4 @@
-import Link from "next/link";
 import fakeUser from "@/utils/json/usersFake.json";
-import { randomInt } from "crypto";
 import FormUser from "@/components/FormUser";
 
 type MyAccountProps = {};

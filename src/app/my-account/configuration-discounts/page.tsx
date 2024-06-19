@@ -1,13 +1,16 @@
 "use client"
 
+import { useState } from "react";
+
 import Form from "@/components/Form";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral"
+
 import { discountProps } from "@/types/Props";
+
 import { discountSchequema } from "@/utils/Schemas/discountSchema";
 import discountsFake from "@/utils/json/discountFakeData.json"
-import { useState } from "react";
 
 type ConfigurationDiscountsProps = {};
 
@@ -65,9 +68,7 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
 
     return (
         <div
-            className="
-                md:flex-1
-            ">
+            className="md:flex-1">
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2"> Descuentos.</h2>
                 <div className="w-full relative overflow-x-auto">
@@ -86,7 +87,6 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataDiscountSelect == null ? "Agregar" : "Actualizar"} descuento. </h2>
-            {/*<FormDiscount className="w-11/12 h-full" modal data={dataDiscountSelect}/>*/}
             <Form className="w-11/12 h-full" modal data={dataDiscountSelect} dataName="Descuento" schequema={discountSchequema} inputsList={inputsForm}/> 
         </Modal>
     </div>

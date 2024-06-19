@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 
-import FormArticle from "@/components/FormArticle";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
+import Form from "@/components/Form";
 
 import { CardProductProps} from "@/types/Props";
 
 import productsFake from "@/utils/json/productsFake.json"
-import Form from "@/components/Form";
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import subData from "@/utils/json/branchFake.json"
 
@@ -92,8 +91,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataProductSelect == null ? "Agregar" : "Actualizar"} articulo. </h2>
-            {/* <FormArticle className="w-11/12 h-full" modal data={dataProductSelect}/> */}
-            <Form className="w-11/12 h-full" modal data={dataProductSelect} schequema={articleSchequema} dataName="Articulos" inputsList={inputsForm} />
+            <Form className="w-11/12 h-full" modal data={dataProductSelect} schequema={articleSchequema} dataName="Articulo" inputsList={inputsForm} />
         </Modal>
     </div>
     );

@@ -1,3 +1,5 @@
+import { ZodType } from "zod";
+
 export type CardProductProps = {
     id: number;
     image: string;
@@ -86,4 +88,23 @@ export type discountProps = {
     active: boolean,
     fechaCreacion: string, 
     fechaModificacion: string
+}
+
+export type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
+    className?: string,
+    modal?: boolean,
+    data?: T | null,
+    dataName: string,
+    schequema: ZodType,
+    inputsList: InputsListProps<U>[]
+};
+
+export type InputsListProps<U extends {id? : number | string, nombre?: string}> = {
+    type?: string,
+    id: string,
+    groupData?: boolean,
+    name: string,
+    extraData?: U[] | null,
+    className?: String
+    secondId?: string;
 }

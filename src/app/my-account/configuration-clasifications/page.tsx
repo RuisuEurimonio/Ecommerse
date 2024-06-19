@@ -5,12 +5,11 @@ import { useState } from "react";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
+import Form from "@/components/Form";
 
 import { ClasificationProps } from "@/types/Props";
 
 import clasificationFake from "@/utils/json/branchFake.json"
-import FormClasification from "@/components/FormClasification";
-import Form from "@/components/Form";
 import { ClasificationSchequema } from "@/utils/Schemas/clasificationSchema";
 
 type ConfigurationClasificationsProps = {};
@@ -63,9 +62,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
 
     return (
         <div
-            className="
-                md:flex-1
-            ">
+            className="md:flex-1">
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Clasificaciones.</h2>
                 <div className="w-full relative overflow-x-auto">
@@ -83,7 +80,6 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataClasificationSelect == null ? "Agregar" : "Actualizar"} clasificación. </h2>
-            {/* <FormClasification className="w-11/12 h-full" modal data={dataClasificationSelect}/> */}
             <Form className="w-11/12 h-full" modal data={dataClasificationSelect} dataName="Clasificación" schequema={ClasificationSchequema} inputsList={inputsForm} />
         </Modal>
     </div>

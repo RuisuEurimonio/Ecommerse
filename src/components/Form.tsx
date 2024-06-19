@@ -1,29 +1,17 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { ZodType, z } from "zod";
-import { InputErrorText, saveAlert } from "./utils";
 import React, { useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
-    className?: string,
-    modal?: boolean,
-    data?: T | null,
-    dataName: string,
-    schequema: ZodType,
-    inputsList: InputsListProps<U>[]
-};
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type InputsListProps<U extends {id? : number | string, nombre?: string}> = {
-    type?: string,
-    id: string,
-    groupData?: boolean,
-    name: string,
-    extraData?: U[] | null,
-    className?: String
-    secondId?: string;
-}
+import { z } from "zod";
+
+import { InputsListProps,  FormProps} from "@/types/Props"
+
+import { InputErrorText, saveAlert } from "./utils";
+
+
 
 const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
 

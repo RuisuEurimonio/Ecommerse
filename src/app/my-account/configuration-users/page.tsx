@@ -1,14 +1,16 @@
 "use client"
 
+import { useState } from "react";
+
 import Form from "@/components/Form";
-import FormUser from "@/components/FormUser";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
+
 import { UserProps } from "@/types/Props";
+
 import { userSchequema } from "@/utils/Schemas/userSchema";
 import usersFake from "@/utils/json/usersFake.json";
-import { useState } from "react";
 
 type ConfigurationUsersProps = {};
 
@@ -72,9 +74,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     return (
         <div
-            className="
-                md:flex-1
-            ">
+            className="md:flex-1">
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Usuarios.</h2>
                 <div className="w-full relative overflow-x-auto">
@@ -92,7 +92,6 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataUserSelect == null ? "Agregar" : "Actualizar"} usuario. </h2>
-            {/* <FormUser className="w-11/12 h-full" modal data={dataUserSelect}/> */}
             <Form className="w-11/12 h-full" modal data={dataUserSelect} schequema={userSchequema} dataName="Usuario" inputsList={inputsForm} />
         </Modal>
     </div>
