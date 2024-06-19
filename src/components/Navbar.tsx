@@ -61,9 +61,11 @@ const NavBar: React.FC<navProps> = () => {
                     md:block
                 "
                 >
-                    <button className="h-full border-r-[0.5px]">
-                        <span className=" h-full px-3 icon icon-cart before:content-['\e906'] before:text-black-mafer"></span>
-                    </button>
+                    <Link href="/shopping-cart">
+                        <button className="h-full border-r-[0.5px]">
+                            <span className=" h-full px-3 icon icon-cart before:content-['\e906'] before:text-black-mafer"></span>
+                        </button>
+                    </Link>
                     <Link href="/my-account">
                         <button className="h-full border-l-[0.5px]">
                             <span className="h-full px-3 icon icon-user before:content-['\e907'] before:text-black-mafer"></span>

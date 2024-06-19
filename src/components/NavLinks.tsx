@@ -74,7 +74,7 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                     </ul>
                     <hr className="md:hidden"/>
                     <ul className="md:hidden text-lg my-4 font-semibold">
-                        <li> <Link href="/"> Carrito </Link>  </li>
+                        <li> <Link href="/shopping-cart"> Carrito </Link>  </li>
                     </ul>
                 </div>
             </div>

@@ -31,7 +31,7 @@ export const saveAlert = (name:string):Promise<boolean> => {
                 position: "bottom-end",
                 showConfirmButton: false,
                 icon: "success",
-                timer: 1500,
+                timer: 4000,
                 title: `${name} guardado.`
             })
             Toast.fire();
