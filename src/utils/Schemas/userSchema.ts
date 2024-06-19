@@ -2,34 +2,34 @@ import { z } from "zod";
 
 export const userSchequema = z
     .object({
-        TypeDocument: z.enum([
+        tipoDocumento: z.enum([
             "Tarjeta de identidad",
             "Cedula de Ciudadania",
             "Cedula de extranjeria",
         ]),
-        numberDocument: z
+        numeroDocumento: z
             .string()
             .refine((number) => !isNaN(parseInt(number)), {
                 message: "El documento debe tener solo números",
             }),
-        names: z
-            .string()
-            .min(3, "Ingrese un nombre válido")
-            .max(30, "Ingrese un nombre válido"),
-        lastNames: z
+        nombres: z
             .string()
             .min(3, "Ingrese un apellido válido")
             .max(30, "Ingrese un apellido válido"),
-        numberPhone: z
+        apellidos: z
+            .string()
+            .min(3, "Ingrese un apellido válido")
+            .max(30, "Ingrese un apellido válido"),
+        telefono: z
             .string()
             .refine((number) => !isNaN(parseInt(number)), {
                 message: "Debe ingresar solo números",
             }),
-        address: z
+        direccion: z
             .string()
             .min(13, "Ingrese una dirección válida")
             .max(45, "Ingrese una dirección válida"),
-        email: z.string().email({ message: "ingrese un correo valido" }),
+        correo: z.string().email({ message: "ingrese un correo valido" }),
         password: z
             .string()
             .regex(

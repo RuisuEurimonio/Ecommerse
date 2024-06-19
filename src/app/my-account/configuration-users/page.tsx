@@ -40,7 +40,7 @@ const document = [
 ];
 
 const inputsForm = [
-    {type: "combined", id: "numberDocument", name: "Nombre", extraData: document, secondId: "typeDocument"},
+    {type: "combined", id: "numeroDocumento", name: "Documento", extraData: document, secondId: "tipoDocumento"},
     {type: "text", id: "nombres", name: "Nombre"},
     {type: "text", id: "apellidos", name: "Apellidos"},
     {type: "text", id: "telefono", name: "Teléfono"},
