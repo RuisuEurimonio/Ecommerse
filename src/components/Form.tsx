@@ -11,8 +11,6 @@ import { InputsListProps,  FormProps} from "@/types/Props"
 
 import { InputErrorText, saveAlert } from "./utils";
 
-
-
 const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
 
     const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number | string, nombre?: string}>[]>([]);
@@ -201,10 +199,6 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
         )
     }
 
-    const formvalues = watch();
-
-
-
     const onSubmit: SubmitHandler<formProps> = async (data) => {
         const response = await saveAlert(dataName);
         if (response) {
@@ -243,7 +237,6 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
                 value="Enviar"
                 className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm text-right cursor-pointer float-right"
             />
-            <p>{JSON.stringify(formvalues, null, 2)}</p>
         </form>
     );
 };
