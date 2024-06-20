@@ -14,6 +14,7 @@ import image from "@/assets/img/imageNotFound.jpg";
 import { CardProductProps } from "@/types/Props";
 
 import productsFake from "@/utils/json/productsFake.json";
+import { askForSaveProcduct } from "@/components/utils";
 
 const dataProducts = productsFake.slice(0, 10); //TODO Temporal data, implement fetch
 
@@ -126,12 +127,12 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
                             className="border-2 rounded-lg px-1 bg-red-mafer text-blue-mafer text-base
                             xl:py-1"
                         >
-                            <button className="h-full w-full uppercase">
+                            <button className="h-full w-full uppercase" onClick={()=>{data ? askForSaveProcduct(data): ""}}>
                                 Agregar al carrito.
                             </button>
                         </div>
                     </div>
-                    <ul
+                    <ul 
                         className="grid grid-cols-3 gap-2 text-xs text-center mt-4
                         xl:text-base"
                     >

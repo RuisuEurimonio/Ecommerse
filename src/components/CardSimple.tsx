@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,9 +8,10 @@ import React from "react";
 import { CardProductProps, NewsLetterProps } from "@/types/Props";
 
 import imageNotFound from "@/assets/img/imageNotFound.jpg";
+import { askForSaveProcduct } from "./utils";
 
 type CardSimpleProps = {
-    product?: CardProductProps;
+    product: CardProductProps;
     discount?: boolean;
     newsletter?: NewsLetterProps;
 };
@@ -18,6 +21,7 @@ const CardSimple: React.FC<CardSimpleProps> = ({
     discount = false,
     newsletter,
 }) => {
+
     return (
         <li
             className={`bg-black-mafer/5 min-w-[10rem] flex flex-col justify-between
@@ -55,6 +59,7 @@ const CardSimple: React.FC<CardSimpleProps> = ({
             <button
                 className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs
                     lg:text-sm"
+                    onClick={()=> askForSaveProcduct(product) }
             >
                 {newsletter ? "Mas información" : "Agregar al carrito"}
             </button>
