@@ -60,32 +60,41 @@ export const deleteAlert = (name:string, type:string) =>  {Swal.fire({
     }
 })}
 
-export const askForSaveProcduct = (item:CardProductProps) =>{
+export const askForSaveProcduct = (item:CardProductProps, cantidad?: number) =>{
     Swal.fire({
         title: "Guardar producto",
         text: "Deseas guardar el producto: " + item.nombre+" ?",
         showCancelButton: true,
         cancelButtonText: "Cancelar",
-        confirmButtonText: "Agregar"
+        confirmButtonText: "Agregar",
+        input: "text",
+        inputLabel: "Cantidad de producto",
+        inputValidator: (value) => {
+            if(parseInt(value) < 1 || parseInt(value) > 100 || Number.isNaN(parseInt(value))){
+                return "Agrega una cantidad del 1 al 100";
+            }
+        },
+        inputValue: cantidad?? 0
     }).then((question)=>{
         if(question.isConfirmed){
-            addToCart(item);
+            addToCart(item, question.value);
             let Toast = Swal.mixin({
                 toast: true,
                 position: "bottom-end",
                 showConfirmButton: false,
                 icon: "success",
                 timer: 4000,
-                title: `${item.nombre} guardado.`
+                title: `${item.nombre} guardado con cantidad ${question.value}.`
             })
             Toast.fire();
         }
     })
 }
 
-export function addToCart(item:CardProductProps){
+export function addToCart(item:CardProductProps, cantidad: number){
     const products = localStorage.getItem("products");
     const currentProducts = products ? JSON.parse(products) : [];
-    const listToAdd = [...currentProducts, item];
+    const itemWithCant = [item, cantidad];
+    const listToAdd = [...currentProducts, itemWithCant];
     localStorage.setItem("products", JSON.stringify(listToAdd));
 }
