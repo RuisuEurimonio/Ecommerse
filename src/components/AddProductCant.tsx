@@ -1,28 +1,49 @@
 "use client"
 
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 type AddProductCantProps = {}
 
 const AddProductCant : React.FC<AddProductCantProps> = () => {
 
-    const [cant, setCant] = useState(0);
+    const searchParams = useSearchParams()
+    const name = searchParams.get("name");
+    const router = useRouter();
+
+    const [cant, setCant] = useState<number>(0);
 
     function add() {
         if(cant<100) {
-            setCant(cant+1);
+            const sum = cant+1;
+            setCant(sum);
+            updateCantUrl(sum);
         }
     }
 
     function subtract() {
         if(cant>0){
-            setCant(cant-1);
+            const sub = cant-1;
+            setCant(sub);
+            updateCantUrl(sub);
         }
     }
 
     function handleChange(event:any){
         let value = event.target.value;
-        (parseInt(value) <= 100 && parseInt(value) >= 0 || value === "") ?  setCant(value) : setCant(cant);
+        if(parseInt(value) <= 100 && parseInt(value) >= 0) {
+            setCant(parseInt(value));
+            updateCantUrl(value);
+        } else if (value === ""){
+            setCant(0);
+        }
+        else {
+            setCant(cant);
+        }
+    }
+
+    function updateCantUrl(value : number){
+        router.push(`?name=${name}&cant=`+value)
     }
 
     return(
