@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
 import Comments from "@/components/Comments";
@@ -14,7 +14,7 @@ import { CardProductProps } from "@/types/Props";
 import productsFake from "@/utils/json/productsFake.json";
 
 import image from "@/assets/img/imageNotFound.jpg";
-import { askForSaveProcduct } from "@/components/utils";
+import { askForSaveProcduct, getCantOfUrlParams } from "@/components/utils";
 
 const dataProducts = productsFake.slice(0, 10); //TODO Temporal data, implement fetch
 
@@ -22,6 +22,7 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
     const data = productsFake.find((item) => item.id === parseInt(params.id)); //TODO Temporal data, delete this when implement the fetch data
 
     const router = useRouter();
+    const searchParam = useSearchParams();
 
     useEffect(() => {
         router.replace(`?name=${data?.nombre}`);
@@ -125,7 +126,7 @@ const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
                             className="border-2 rounded-lg px-1 bg-red-mafer text-blue-mafer text-base
                             xl:py-1"
                         >
-                            <button className="h-full w-full uppercase" onClick={()=>{data ? askForSaveProcduct(data): ""}}>
+                            <button className="h-full w-full uppercase" onClick={()=>{data ? askForSaveProcduct(data, getCantOfUrlParams(searchParam)): ""}}>
                                 Agregar al carrito.
                             </button>
                         </div>

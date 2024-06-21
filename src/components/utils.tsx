@@ -1,4 +1,5 @@
 import { CardProductProps } from '@/types/Props';
+import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
 import Swal from 'sweetalert2';
 
@@ -61,6 +62,7 @@ export const deleteAlert = (name:string, type:string) =>  {Swal.fire({
 })}
 
 export const askForSaveProcduct = (item:CardProductProps, cantidad?: number) =>{
+    console.log(cantidad)
     Swal.fire({
         title: "Guardar producto",
         text: "Deseas guardar el producto: " + item.nombre+" ?",
@@ -97,4 +99,12 @@ export function addToCart(item:CardProductProps, cantidad: number){
     const itemWithCant = [item, cantidad];
     const listToAdd = [...currentProducts, itemWithCant];
     localStorage.setItem("products", JSON.stringify(listToAdd));
+}
+
+export function getCantOfUrlParams(searchParams : ReadonlyURLSearchParams) : number{
+
+    const cant = searchParams.get("cant");
+    console.log(cant)
+    const res: string = cant !== null ? cant : "0";
+    return parseInt(res);
 }
