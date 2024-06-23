@@ -8,11 +8,11 @@ import Link from "next/link";
 import { CardProductProps } from "@/types/Props";
 import { askForSaveProcduct } from "./utils";
 
-type CardItemProps = {
-    item: CardProductProps;
-    discount?: boolean;
-    link: string;
-};
+    type CardItemProps = {
+        item: CardProductProps;
+        discount?: boolean;
+        link: string;
+    };
 
 const CardItem: React.FC<CardItemProps> = ({
     item,

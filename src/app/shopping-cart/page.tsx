@@ -1,14 +1,16 @@
 "use client"
 
-import { UserProps } from "@/types/Props";
+import CardItem from "@/components/CardItem";
+import CardItemWrapper from "@/components/CardItemWrapper";
+import { CardProductProps, UserProps } from "@/types/Props";
 import Link from "next/link";
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 
 type ShoppingCartProps = {}
 
 const ShoppingCart : React.FC<ShoppingCartProps> = () => {
 
-    const [listOfItems, setListOfItems] = useState([]);
+    const [listOfItems, setListOfItems] = useState<{0: CardProductProps, 1: number}[]>([]);
     const [dataUser, setDataUser] = useState<UserProps>();
 
     useEffect(()=>{
@@ -16,6 +18,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         const user = localStorage.getItem("user");
         setListOfItems(products ? JSON.parse(products) : [])
         setDataUser(user ? JSON.parse(user) : "");
+        console.log(products ? JSON.parse(products) : [])
     },[])
 
     return(
@@ -27,11 +30,18 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                 {listOfItems.length == 0 ?
                 <div className="flex justify-center flex-col h-full">
                     <h3 className="font-bold text-center text-lg"> No tienes articulos en el carrito </h3>
-                    <p className="text-center"> Agrega asmún artículo de nuestro catalogo. </p>
+                    <p className="text-center"> Agrega algún artículo de nuestro catalogo. </p>
                     <Link href="/products"> <p  className="font-bold underline text-blue-700 text-center"> Articulos </p> </Link>
                 </div>
                 :
-                <h3> Tienes articulos en el carrito </h3>
+                <div className="grid grid-cols-4 gap-5 my-4">
+                    {listOfItems.map((item, index)=> {
+                        return(
+                            <React.Fragment key={index}>
+                                <CardItem item={item[0]} link="products" />
+                            </React.Fragment>
+                    )})}
+                </div>
             }   
             </div>
             <div className="sm:basis-1/4">
