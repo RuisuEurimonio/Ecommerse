@@ -9,14 +9,18 @@ import { CardProductProps } from "@/types/Props";
 import { askForSaveProcduct } from "./utils";
 
     type CardItemProps = {
-        item: CardProductProps;
-        discount?: boolean;
-        link: string;
+        item: CardProductProps,
+        discount?: boolean,
+        itemCart?: boolean,
+        cantidad?: number,
+        link: string,
     };
 
 const CardItem: React.FC<CardItemProps> = ({
     item,
     discount = false,
+    itemCart = false,
+    cantidad = 0,
     link,
 }) => {
     return (
@@ -63,22 +67,38 @@ const CardItem: React.FC<CardItemProps> = ({
                 xl:text-lg
                 2xl:text-base"
             >
-                <button
-                    className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
-                    lg:text-xs
-                    2xl:text-sm"
-                    onClick={()=> askForSaveProcduct(item) }
-                >
-                    Agregar al carrito
-                </button>
-                <Link
-                    href={`/${link}/${item.id}`}
-                    className="hover:underline
-                    lg:text-xs
-                    2xl:text-sm"
-                >
-                    Más información.
-                </Link>
+                {!itemCart ?
+                <>
+                    <button
+                        className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
+                        lg:text-xs
+                        2xl:text-sm"
+                        onClick={()=> askForSaveProcduct(item) }
+                    >
+                        Agregar al carrito
+                    </button>
+                    <Link
+                        href={`/${link}/${item.id}`}
+                        className="hover:underline
+                        lg:text-xs
+                        2xl:text-sm"
+                    >
+                        Más información.
+                    </Link>
+                </>
+                :
+                <>
+                    <button
+                            className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
+                            lg:text-xs
+                            2xl:text-sm"
+                            onClick={()=> askForSaveProcduct(item) }
+                        >
+                            Eliminar del carrito
+                    </button>
+                    <h3> Cantidad: {cantidad} </h3>
+                </>
+                }
             </div>
         </div>
     );

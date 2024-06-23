@@ -38,7 +38,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                     {listOfItems.map((item, index)=> {
                         return(
                             <React.Fragment key={index}>
-                                <CardItem item={item[0]} link="products" />
+                                <CardItem item={item[0]} link="products" itemCart cantidad={item[1]}/>
                             </React.Fragment>
                     )})}
                 </div>
