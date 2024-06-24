@@ -8,7 +8,7 @@ import React from "react";
 import { CardProductProps, NewsLetterProps } from "@/types/Props";
 
 import imageNotFound from "@/assets/img/imageNotFound.jpg";
-import { askForSaveProcduct } from "./utils";
+import { askForSaveProduct } from "./utils";
 
 type CardSimpleProps = {
     product: CardProductProps;
@@ -59,7 +59,7 @@ const CardSimple: React.FC<CardSimpleProps> = ({
             <button
                 className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs
                     lg:text-sm"
-                    onClick={()=> askForSaveProcduct(product) }
+                    onClick={()=> askForSaveProduct(product) }
             >
                 {newsletter ? "Mas información" : "Agregar al carrito"}
             </button>

@@ -2,6 +2,7 @@
 
 import CardItem from "@/components/CardItem";
 import CardItemWrapper from "@/components/CardItemWrapper";
+import { confirmOrder, moneyFormatter } from "@/components/utils";
 import { CardProductProps, UserProps } from "@/types/Props";
 import Link from "next/link";
 import React, { useEffect, useState } from "react"
@@ -12,6 +13,9 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
 
     const [listOfItems, setListOfItems] = useState<{0: CardProductProps, 1: number}[]>([]);
     const [dataUser, setDataUser] = useState<UserProps>();
+    const [totalBill, setTotalBill] = useState(0);
+    const [totalDiscounts, setTotalDiscounts] = useState(0);
+    const [sendPrice, setsendPrice] = useState(0);
 
     useEffect(()=>{
         const products = localStorage.getItem("products");
@@ -19,7 +23,37 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         setListOfItems(products ? JSON.parse(products) : [])
         setDataUser(user ? JSON.parse(user) : "");
         console.log(products ? JSON.parse(products) : [])
+
+        
     },[])
+
+    useEffect(()=>{
+        getBillDeatils();
+        getDiscounts();
+        getSendPrice();
+    },[listOfItems])
+
+    function getBillDeatils(){
+        let total = 0;
+        listOfItems.forEach((item)=>{
+            total += parseInt(item[0].precio) * item[1];
+        })
+        setTotalBill(total);
+    }
+
+    function getDiscounts(){
+        let total = 0;
+        listOfItems.forEach((item)=>{
+            if (item[0].descuento){
+                total += (parseInt(item[0].precio) * 0.14) * item[1]; //TODO: Implement with the real database data.
+            }
+        })
+        setTotalDiscounts(total);
+    }
+
+    function getSendPrice(){
+        setsendPrice(0); //TODO: Implement this function with the user data.
+    }
 
     return(
         <div className="w-11/12 my-4 mx-auto flex gap-5 flex-col
@@ -29,12 +63,16 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                 <hr className="mt-4"/>
                 {listOfItems.length == 0 ?
                 <div className="flex justify-center flex-col h-full">
-                    <h3 className="font-bold text-center text-lg"> No tienes articulos en el carrito </h3>
+                    <h3 className="font-bold text-center text-lg"> No tienes artículos en el carrito </h3>
                     <p className="text-center"> Agrega algún artículo de nuestro catalogo. </p>
                     <Link href="/products"> <p  className="font-bold underline text-blue-700 text-center"> Articulos </p> </Link>
                 </div>
                 :
-                <div className="grid grid-cols-4 gap-5 my-4">
+                <div className="grid grid-cols-2 gap-5 my-4
+                    sm:grid-cols-3
+                    lg:grid-cols-4
+                    xl:grid-cols-5
+                    2xl:grid-cols-6">
                     {listOfItems.map((item, index)=> {
                         return(
                             <React.Fragment key={index}>
@@ -65,15 +103,17 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                     <h2 className="font-bold text-lg"> Detalles. </h2>
                     <hr className="mt-4"/>
                     <ul className="my-3">
-                        <li> Subtotal: {"$"}   </li>
-                        <li> Descuentos: {"$"}   </li>
-                        <li> Envio: {"$"}   </li>
-                        <li className="my-3"> Total: {"$"}   </li>
+                        <li> Subtotal: {moneyFormatter(totalBill)}   </li>
+                        <li> Descuentos: {moneyFormatter(totalDiscounts)}   </li>
+                        <li> Envio: {moneyFormatter(sendPrice)}   </li>
+                        <li className="my-3"> Total: {moneyFormatter(totalBill-totalDiscounts+sendPrice)}   </li>
                     </ul>
-                    <Link href="/my-account" className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center
-                    lg:w-2/4"><button> Confirmar </button></Link>
                     <button className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
-                    lg:w-2/4"> Generar cotización </button>
+                        lg:w-2/4"
+                            onClick={()=>{confirmOrder(totalBill, listOfItems.length)}}
+                    > Confirmar. </button>
+                    <button className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
+                        lg:w-2/4"> Generar cotización </button>
                 </div>
             </div>
         </div>

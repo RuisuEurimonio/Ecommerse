@@ -61,8 +61,7 @@ export const deleteAlert = (name:string, type:string) =>  {Swal.fire({
     }
 })}
 
-export const askForSaveProcduct = (item:CardProductProps, cantidad?: number) =>{
-    console.log(cantidad)
+export const askForSaveProduct = (item:CardProductProps, cantidad?: number) =>{
     Swal.fire({
         title: "Guardar producto",
         text: "Deseas guardar el producto: " + item.nombre+" ?",
@@ -107,4 +106,30 @@ export function getCantOfUrlParams(searchParams : ReadonlyURLSearchParams) : num
     console.log(cant)
     const res: string = cant !== null ? cant : "0";
     return parseInt(res);
+}
+
+export function moneyFormatter(number : number) : string{
+    const formatter = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP'
+    })
+
+    return formatter.format(number);
+}
+
+export function confirmOrder(total: number, cantOfItem: number){
+    Swal.fire({
+        title: "Confirmar pedido",
+        text: `Confirmar pedido de ${cantOfItem} productos con un total de ${moneyFormatter(total)}`,
+        icon: 'question',
+        showCancelButton: true
+    }).then((res)=>{
+        if(res.isConfirmed){
+            Swal.fire({
+                title: "Pedido Confirmado.",
+                text: "A continuación le llegara un correo con tota la información, gracias por la compra.",
+                icon: "success"
+            })
+        }
+    })
 }

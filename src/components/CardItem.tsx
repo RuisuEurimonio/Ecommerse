@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CardProductProps } from "@/types/Props";
-import { askForSaveProcduct } from "./utils";
+import { askForSaveProduct } from "./utils";
 
     type CardItemProps = {
         item: CardProductProps,
@@ -73,7 +73,7 @@ const CardItem: React.FC<CardItemProps> = ({
                         className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
                         lg:text-xs
                         2xl:text-sm"
-                        onClick={()=> askForSaveProcduct(item) }
+                        onClick={()=> askForSaveProduct(item) }
                     >
                         Agregar al carrito
                     </button>
@@ -92,7 +92,7 @@ const CardItem: React.FC<CardItemProps> = ({
                             className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
                             lg:text-xs
                             2xl:text-sm"
-                            onClick={()=> askForSaveProcduct(item) }
+                            onClick={()=> askForSaveProduct(item) }
                         >
                             Eliminar del carrito
                     </button>
