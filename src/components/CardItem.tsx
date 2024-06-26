@@ -6,13 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CardProductProps } from "@/types/Props";
-import { askForSaveProduct } from "./utils";
+import { askForEditProduct, askForSaveProduct } from "./utils";
 
     type CardItemProps = {
         item: CardProductProps,
         discount?: boolean,
         itemCart?: boolean,
         cantidad?: number,
+        index?: number,
+        functionFather?: () => void;
         link: string,
     };
 
@@ -21,6 +23,8 @@ const CardItem: React.FC<CardItemProps> = ({
     discount = false,
     itemCart = false,
     cantidad = 0,
+    index = -1,
+    functionFather = () => {},
     link,
 }) => {
     return (
@@ -92,9 +96,9 @@ const CardItem: React.FC<CardItemProps> = ({
                             className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
                             lg:text-xs
                             2xl:text-sm"
-                            onClick={()=> askForSaveProduct(item) }
+                            onClick={()=> askForEditProduct(item, index, functionFather, cantidad) }
                         >
-                            Eliminar del carrito
+                            Modificar
                     </button>
                     <h3> Cantidad: {cantidad} </h3>
                 </>

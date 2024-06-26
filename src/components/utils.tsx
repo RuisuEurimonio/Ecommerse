@@ -92,6 +92,51 @@ export const askForSaveProduct = (item:CardProductProps, cantidad?: number) =>{
     })
 }
 
+export const askForEditProduct = (item:CardProductProps, index: number, functionFather : () => void , cantidad?: number ) =>{
+
+    let products = localStorage.getItem("products");
+    let parseProducts : [CardProductProps, number][] = products ? JSON.parse(products) : [];
+
+    Swal.fire({
+        title: "Editar producto",
+        text: "Editando articulo: " + item.nombre,
+        showCancelButton: true,
+        showDenyButton: true,
+        denyButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Editar",
+        input: "text",
+        inputLabel: "Cantidad de producto",
+        inputValidator: (value) => {
+            if(parseInt(value) < 1 || parseInt(value) > 100 || Number.isNaN(parseInt(value))){
+                return "Agrega una cantidad del 1 al 100";
+            }
+        },
+        inputValue: cantidad?? 0
+    }).then((question)=>{
+        if(question.isConfirmed){
+            
+            parseProducts[index][1] =  question.value;
+
+            let Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                icon: "success",
+                timer: 4000,
+                title: `${item.nombre} actualizado con cantidad ${question.value}.`
+            })
+            Toast.fire();
+        }
+        if(question.isDenied){
+            parseProducts.splice(index);
+        }
+
+        localStorage.setItem("products", JSON.stringify(parseProducts));
+        functionFather();
+    })
+}
+
 export function addToCart(item:CardProductProps, cantidad: number){
     const products = localStorage.getItem("products");
     const currentProducts = products ? JSON.parse(products) : [];

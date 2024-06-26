@@ -1,7 +1,6 @@
 "use client"
 
 import CardItem from "@/components/CardItem";
-import CardItemWrapper from "@/components/CardItemWrapper";
 import { confirmOrder, moneyFormatter } from "@/components/utils";
 import { CardProductProps, UserProps } from "@/types/Props";
 import Link from "next/link";
@@ -16,6 +15,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
     const [totalBill, setTotalBill] = useState(0);
     const [totalDiscounts, setTotalDiscounts] = useState(0);
     const [sendPrice, setsendPrice] = useState(0);
+    const [updateData, setUpdateData] = useState(false);
 
     useEffect(()=>{
         const products = localStorage.getItem("products");
@@ -23,9 +23,9 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         setListOfItems(products ? JSON.parse(products) : [])
         setDataUser(user ? JSON.parse(user) : "");
         console.log(products ? JSON.parse(products) : [])
-
+        setUpdateData(false);
         
-    },[])
+    },[updateData])
 
     useEffect(()=>{
         getBillDeatils();
@@ -55,6 +55,10 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         setsendPrice(0); //TODO: Implement this function with the user data.
     }
 
+    function updateLocalStorageData(){
+        setUpdateData(true);
+    }
+
     return(
         <div className="w-11/12 my-4 mx-auto flex gap-5 flex-col
         sm:divide-x sm:flex-row">
@@ -76,7 +80,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                     {listOfItems.map((item, index)=> {
                         return(
                             <React.Fragment key={index}>
-                                <CardItem item={item[0]} link="products" itemCart cantidad={item[1]}/>
+                                <CardItem item={item[0]} link="products" itemCart cantidad={item[1]} index={index} functionFather={updateLocalStorageData}/>
                             </React.Fragment>
                     )})}
                 </div>
