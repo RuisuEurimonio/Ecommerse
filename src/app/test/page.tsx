@@ -8,14 +8,19 @@ import PricePdf from "@/components/PricePdf";
 export default function App() {
   useEffect(() => {
     const rootElement = document.getElementById("hola");
+
+    const products = localStorage.getItem("products");
+    const productsVerify = products ? JSON.parse(products) : [];
+
     if (rootElement) {
       ReactDOM.render(
         <PDFViewer className="w-full h-full">
-          <PricePdf />
+          <PricePdf items={productsVerify} subtotal={0} discounts={0} sendPrice={0} total={0}/>
         </PDFViewer>,
         rootElement
       );
     }
+
   }, []);
 
   return (
