@@ -1,10 +1,21 @@
 "use client"
 
 import CardItem from "@/components/CardItem";
+import PricePdf from "@/components/PricePdf";
 import { confirmOrder, moneyFormatter } from "@/components/utils";
 import { CardProductProps, UserProps } from "@/types/Props";
 import Link from "next/link";
 import React, { useEffect, useState } from "react"
+
+import dynamic from "next/dynamic";
+
+const PDFDownloadLink = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod. PDFDownloadLink),
+  {
+    ssr: false,
+    loading: () => <p>Cargando...</p>,
+  },
+);
 
 type ShoppingCartProps = {}
 
@@ -16,6 +27,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
     const [totalDiscounts, setTotalDiscounts] = useState(0);
     const [sendPrice, setsendPrice] = useState(0);
     const [updateData, setUpdateData] = useState(false);
+    const [observations, setObservations] = useState("");
 
     useEffect(()=>{
         const products = localStorage.getItem("products");
@@ -59,6 +71,13 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         setUpdateData(true);
     }
 
+    function onChangeText(event:any){
+        const text : string = event.target.value;
+        if(text.length < 200){
+            setObservations(event.target.value);
+        }
+    }
+
     return(
         <div className="w-11/12 my-4 mx-auto flex gap-5 flex-col
         sm:divide-x sm:flex-row">
@@ -79,9 +98,9 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                     2xl:grid-cols-6">
                     {listOfItems.map((item, index)=> {
                         return(
-                            <React.Fragment key={index}>
+                            <Link href={`/products/${item[0].id}?name=${item[0].nombre}`} key={index}>
                                 <CardItem item={item[0]} link="products" itemCart cantidad={item[1]} index={index} functionFather={updateLocalStorageData}/>
-                            </React.Fragment>
+                            </Link>
                     )})}
                 </div>
             }   
@@ -111,13 +130,19 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                         <li> Descuentos: {moneyFormatter(totalDiscounts)}   </li>
                         <li> Envio: {moneyFormatter(sendPrice)}   </li>
                         <li className="my-3"> Total: {moneyFormatter(totalBill-totalDiscounts+sendPrice)}   </li>
+                        <label htmlFor="observations">
+                        Observaciones:
+                        </label>
+                        <textarea id="observations" className="border rounded-sm block w-full resize-none px-1" rows={4} value={observations} onChange={(e)=>(onChangeText(e))}/>
                     </ul>
                     <button className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
                         lg:w-2/4"
                             onClick={()=>{confirmOrder(totalBill, listOfItems.length)}}
                     > Confirmar. </button>
+                    <PDFDownloadLink document={<PricePdf items={listOfItems} subtotal={totalBill} discounts={totalDiscounts} sendPrice={0} total={totalBill-totalDiscounts+sendPrice} observations={observations}/>} fileName="Cotización">
                     <button className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
                         lg:w-2/4"> Generar cotización </button>
+                    </PDFDownloadLink>
                 </div>
             </div>
         </div>

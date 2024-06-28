@@ -75,7 +75,7 @@ export const askForSaveProduct = (item:CardProductProps, cantidad?: number) =>{
                 return "Agrega una cantidad del 1 al 100";
             }
         },
-        inputValue: cantidad?? 0
+        inputValue: cantidad?? 1
     }).then((question)=>{
         if(question.isConfirmed){
             addToCart(item, question.value);
@@ -112,7 +112,7 @@ export const askForEditProduct = (item:CardProductProps, index: number, function
                 return "Agrega una cantidad del 1 al 100";
             }
         },
-        inputValue: cantidad?? 0
+        inputValue: cantidad?? 1
     }).then((question)=>{
         if(question.isConfirmed){
             
