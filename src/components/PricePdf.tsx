@@ -32,83 +32,87 @@ const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPri
         <Page style={styles.page}>
             <View style={styles.header}>
                 <View>
-                    <Text style={styles.headerTitle}>
-                        COTIZACIÓN
-                    </Text>
-                    <Text style={styles.headerSubitems}>
-                        {formattedDate}
-                    </Text>
-                    <Text style={styles.headerSubitems}>
-                        Cliente: Lauro Tauro                                                
-                    </Text>
-                    <Text style={styles.headerSubitems}>
-                        Vendedor: Generado por página web.
-                    </Text>
+                    <Text style={styles.headerTitle}>COTIZACIÓN</Text>
+                    <Text style={styles.headerSubitems}>{formattedDate}</Text>
+                    <Text style={styles.headerSubitems}>Cliente: Lauro Tauro</Text>
+                    <Text style={styles.headerSubitems}>Vendedor: Generado por página web.</Text>
                 </View>
                 <View>
                     <Image style={styles.logo} src={image.src} /> 
                 </View>
             </View>
             <View style={styles.section}>
-                <Text style={styles.tableTitle}>
-                    Artículos.
-                </Text>
+                <Text style={styles.tableTitle}>Artículos.</Text>
                 <View style={styles.table}>
                     <View style={styles.tableRowView}>
-                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.borderOfLastElement, styles.tableCellTopHeader]}> <Text style={styles.tableTextCell}>  Total </Text> </View>
-                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}> <Text style={styles.tableTextCell}>  Cantidad </Text> </View>
-                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}> <Text style={styles.tableTextCell}>  Precio </Text> </View>
-                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}> <Text style={styles.tableTextCell}>  Nombre </Text> </View>
-                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}> <Text style={styles.tableTextCell}>  SKU </Text> </View>
+                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.borderOfLastElement, styles.tableCellTopHeader]}>
+                                    <Text style={styles.tableTextCell}>  Total </Text>
+                                </View>
+                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}>
+                                    <Text style={styles.tableTextCell}>Cantidad</Text>
+                                </View>
+                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}>
+                                    <Text style={styles.tableTextCell}>Precio</Text>
+                                </View>
+                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}>
+                                    <Text style={styles.tableTextCell}>Nombre</Text>
+                                </View>
+                                <View style={[styles.tableCell, styles.negativeColorDecoration,  styles.tableCellTopHeader]}>
+                                    <Text style={styles.tableTextCell}>SKU</Text>
+                                </View>
                             </View>
                     {items.map((item)=>{
                         return(
                             <View style={styles.tableRowView} key={item[0].SKU}>
-                                <View style={[styles.tableCell, styles.borderOfLastElement]}> <Text> {moneyFormatter(parseFloat(item[0].precio) * item[1])} </Text> </View>
-                                <View style={styles.tableCell}> <Text> {item[1]} </Text> </View>
-                                <View style={styles.tableCell}> <Text> {moneyFormatter(parseFloat(item[0].precio))} </Text> </View>
-                                <View style={styles.tableCell}> <Text> {item[0].nombre} </Text> </View>
-                                <View style={styles.tableCell}> <Text> {item[0].SKU} </Text> </View>
+                                <View style={[styles.tableCell, styles.borderOfLastElement]}>
+                                    <Text>{moneyFormatter(parseFloat(item[0].precio) * item[1])}</Text>
+                                </View>
+                                <View style={styles.tableCell}>
+                                    <Text>{item[1]}</Text>
+                                </View>
+                                <View style={styles.tableCell}>
+                                    <Text>{moneyFormatter(parseFloat(item[0].precio))}</Text>
+                                </View>
+                                <View style={styles.tableCell}>
+                                    <Text>{item[0].nombre}</Text>
+                                </View>
+                                <View style={styles.tableCell}>
+                                    <Text>{item[0].SKU}</Text>
+                                </View>
                             </View>
                         )
                     })}
                     <View style={styles.tableRowView}>
-                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text> {moneyFormatter(subtotal)}  </Text></View> 
-                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text> Subtotal: </Text></View>
+                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text>{moneyFormatter(subtotal)}</Text></View> 
+                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text>Subtotal:</Text></View>
                         <View style={styles.tableCellEmpty}></View>
                     </View>
                     <View style={styles.tableRowView}>
-                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text> {moneyFormatter(discounts)}  </Text></View> 
-                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text> Descuentos: </Text></View>
+                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text>{moneyFormatter(discounts)}</Text></View> 
+                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text>Descuentos:</Text></View>
                         <View style={styles.tableCellEmpty}></View>
                     </View>
                     <View style={styles.tableRowView}>
-                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text> {moneyFormatter(sendPrice)}  </Text></View> 
-                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text> Envio: </Text></View>
+                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text>{moneyFormatter(sendPrice)}</Text></View> 
+                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text>Envio:</Text></View>
                         <View style={styles.tableCellEmpty}></View>
                     </View>
                     <View style={styles.tableRowView}>
-                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text> {moneyFormatter(total)}  </Text></View> 
-                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text> Total: </Text></View>
+                        <View style={[styles.tableCellDetails, styles.detailsBorder, styles.detailsBorderLastElement]}><Text>{moneyFormatter(total)}</Text></View> 
+                        <View style={[styles.tableCellDetails, styles.detailsBorder]}><Text>Total:</Text></View>
                         <View style={styles.tableCellEmpty}></View>
                     </View>
                 </View>
             </View>
             <View style={styles.subSection}>
                 <View>
-                    <Text style={styles.observationsTitle}> Observaciones: </Text>
-                    <Text style={styles.observations}> {observations} </Text>
+                    <Text style={styles.observationsTitle}>Observaciones:</Text>
+                    <Text style={styles.observations}>{observations}</Text>
                 </View>
                 <View style={styles.footer}>
-                    <Text>
-                        Cotización valida por 15 días a partir de su generación.
-                    </Text>
-                    <Text>
-                        Generado por:
-                    </Text>
-                    <Text>
-                        Ruisu's Software
-                    </Text>
+                    <Text>Cotización valida por 15 días a partir de su generación.</Text>
+                    <Text>Generado por:</Text>
+                    <Text>Ruisu's Software</Text>
                 </View>    
             </View>
         </Page>
