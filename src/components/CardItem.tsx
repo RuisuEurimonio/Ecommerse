@@ -96,7 +96,11 @@ const CardItem: React.FC<CardItemProps> = ({
                             className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
                             lg:text-xs
                             2xl:text-sm"
-                            onClick={()=> askForEditProduct(item, index, functionFather, cantidad) }
+                            onClick={(event)=> {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                askForEditProduct(item, index, functionFather, cantidad);
+                            }}
                         >
                             Modificar
                     </button>
