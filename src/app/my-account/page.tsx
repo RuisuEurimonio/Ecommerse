@@ -5,6 +5,7 @@ import FormUser from "@/components/FormUser";
 import { UserProps } from "@/types/Props";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 
 type MyAccountProps = {};
 
@@ -62,11 +63,11 @@ const MyAccount: React.FC<MyAccountProps> = () => {
                     />
                 </>
                 :
-                <div className="w-full h-full flex items-center justify-center flex-col">
-                    <h1 className="font-bold text-center text-lg"> No has iniciado sesión. </h1>
-                    <p className="text-center"> Ingresa sesión o registrate por medio del siguiente Link </p>
-                    <Link href="/authForm" className="font-bold underline text-blue-700 text-center"> Iniciar sesión </Link>
-                </div>
+                <DataNotFoundMessage 
+                    title="No has iniciado sesión." 
+                    text="Ingresa sesión o registrate por medio del siguiente Link." 
+                    redirectLink="/authForm"
+                    redirectName="Iniciar sesión."/>
             }
         </div>
     );

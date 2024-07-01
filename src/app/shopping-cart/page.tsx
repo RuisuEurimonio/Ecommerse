@@ -10,6 +10,7 @@ import PricePdf from "@/components/PricePdf";
 import { confirmOrder, moneyFormatter } from "@/components/utils";
 
 import { CardProductProps, UserProps } from "@/types/Props";
+import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 
 const PDFDownloadLink = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod. PDFDownloadLink),
@@ -87,11 +88,11 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                 <h2 className="font-bold text-lg"> Artículos </h2>
                 <hr className="mt-4"/>
                 {listOfItems.length == 0 ?
-                <div className="flex justify-center flex-col h-full">
-                    <h3 className="font-bold text-center text-lg"> No tienes artículos en el carrito </h3>
-                    <p className="text-center"> Agrega algún artículo de nuestro catalogo. </p>
-                    <Link href="/products"> <p  className="font-bold underline text-blue-700 text-center"> Articulos </p> </Link>
-                </div>
+                <DataNotFoundMessage 
+                    title="No tienes artículos en el carrito." 
+                    text="Agrega algún artículo de nuestro catalogo." 
+                    redirectLink="/products" 
+                    redirectName="Articulos."/>
                 :
                 <div className="grid grid-cols-2 gap-5 my-4
                     sm:grid-cols-3
