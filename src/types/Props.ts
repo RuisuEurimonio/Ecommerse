@@ -97,6 +97,7 @@ export type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
     dataName: string,
     schequema: ZodType,
     inputsList: InputsListProps<U>[]
+    children?: React.ReactElement<any>;
 };
 
 export type InputsListProps<U extends {id? : number | string, nombre?: string}> = {

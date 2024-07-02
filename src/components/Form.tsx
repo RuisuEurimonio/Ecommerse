@@ -11,7 +11,7 @@ import { InputsListProps,  FormProps} from "@/types/Props"
 
 import { InputErrorText, saveAlert } from "./utils";
 
-const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList }: FormProps<T, U>) => {
+const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList, children }: FormProps<T, U>) => {
 
     const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number | string, nombre?: string}>[]>([]);
 
@@ -232,6 +232,7 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
                 {listOfItemWithGroup.length > 0 && groupElements(listOfItemWithGroup)}
 
             </div>
+            {children}
             <input
                 type="submit"
                 value="Enviar"
