@@ -25,7 +25,7 @@ type ShoppingCartProps = {}
 const ShoppingCart : React.FC<ShoppingCartProps> = () => {
 
     const [listOfItems, setListOfItems] = useState<{0: CardProductProps, 1: number}[]>([]);
-    const [dataUser, setDataUser] = useState<UserProps>();
+    const [dataUser, setDataUser] = useState<UserProps | null>(null);
     const [totalBill, setTotalBill] = useState(0);
     const [totalDiscounts, setTotalDiscounts] = useState(0);
     const [sendPrice, setsendPrice] = useState(0);
@@ -113,16 +113,25 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                     sm:w-4/5 ">
                     <h2 className="font-bold text-lg"> Cliente. </h2>
                     <hr className="mt-4"/>
-                    <ul className="my-3">
-                        <li> {dataUser?.tipoDocumento ?? "Error" + " " + dataUser?.numeroDocumento ?? ""}   </li>
-                        <li> {dataUser?.nombres ?? "Error"}   </li>
-                        <li> {dataUser?.apellidos ?? "Error"}   </li>
-                        <li> {dataUser?.correo ?? "Error"}   </li>
-                        <li> {dataUser?.telefono ?? "Error"}   </li>
-                        <li> {dataUser?.direccion ?? "Error"}   </li>
-                    </ul>
-                    <Link href="/my-account" className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center
-                    lg:w-2/4"><button> Configurar </button></Link>
+                    {dataUser ? 
+                        <ul className="my-3">
+                            <li> {dataUser?.tipoDocumento + " " + dataUser?.numeroDocumento}   </li>
+                            <li> {dataUser?.nombres}   </li>
+                            <li> {dataUser?.apellidos}   </li>
+                            <li> {dataUser?.correo}   </li>
+                            <li> {dataUser?.telefono}   </li>
+                            <li> {dataUser?.direccion}   </li>
+                        </ul>
+                        :
+                        <DataNotFoundMessage 
+                            title="No has ingresado sesión"
+                            text="Inicia sesión o crea una cuenta por medio del siguiente link para validar la información"
+                            redirectLink="/authForm"
+                            redirectName="Iniciar sesión"
+                        />
+                    }
+                    {dataUser && <Link href="/my-account" className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center
+                    lg:w-2/4"><button> Configurar </button></Link>}
                 </div>
                 <div className="mx-auto
                     sm:w-4/5">
