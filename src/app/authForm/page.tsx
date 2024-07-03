@@ -5,6 +5,7 @@ import { authFormLogin } from "@/utils/Schemas/authFormLogin";
 import Link from "next/link";
 import image from "@/assets/img/imageNotFound.jpg"
 import Image from "next/image";
+import { useState } from "react";
 
 type AuthFormProps = {
 
@@ -18,10 +19,20 @@ const document = [
 
 const AuthForm : React.FC<AuthFormProps> = () => {
 
+    const [stateViewPasswordInput, setStateViewPasswordInput] = useState("password");
+
     const inputsList = [
         {type: "combined", id: "numeroDocumento", name: "Documento", extraData: document, secondId: "tipoDocumento"},
-        {type: "password", id: "password", name: "Contraseña"}
+        {type: stateViewPasswordInput, id: "password", name: "Contraseña"}
     ]
+
+    function onChange(){
+        if(stateViewPasswordInput === "password"){
+            setStateViewPasswordInput("text")
+        } else {
+            setStateViewPasswordInput("password")
+        }
+    }
 
     return (
         <div className="w-11/12 min-h-[70vh] mx-auto flex items-center justify-center"> 
@@ -37,7 +48,7 @@ const AuthForm : React.FC<AuthFormProps> = () => {
                         modal>
                     <div className="flex items-center flex-col my-4">
                         <label htmlFor="showPassword">
-                            <input type="checkbox" id="showPassword"/>
+                            <input type="checkbox" id="showPassword" onClick={onChange}/>
                             Mostrar contraseña.
                         </label>
                         <label htmlFor="saveSession">
