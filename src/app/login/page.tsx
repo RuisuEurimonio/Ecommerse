@@ -55,8 +55,8 @@ const AuthForm : React.FC<AuthFormProps> = () => {
                             <input type="checkbox" id="saveSession"/>
                             Mantener sesión.
                         </label>
-                        <p className="text-center text-sm mt-2"> ¿No tienes una cuenta? <button className="font-bold underline text-blue-700 text-center"> Registrate aquí. </button> </p>
-                        <p className="text-center text-sm"> ¿Olvidaste la contraseña? <Link href="" className="font-bold underline text-blue-700 text-center"> Recuperar contraseña. </Link> </p>
+                        <p className="text-center text-sm mt-2"> ¿No tienes una cuenta? <Link href="/register" className="font-bold underline text-blue-700 text-center"> Registrate aquí. </Link> </p>
+                        <p className="text-center text-sm"> ¿Olvidaste la contraseña? <Link href="/" className="font-bold underline text-blue-700 text-center"> Recuperar contraseña. </Link> </p>
                     </div>
                     </Form>
                 </div>

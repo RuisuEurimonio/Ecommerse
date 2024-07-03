@@ -67,7 +67,7 @@ const MyAccount: React.FC<MyAccountProps> = () => {
                     <DataNotFoundMessage 
                         title="No has iniciado sesión." 
                         text="Ingresa sesión o registrate por medio del siguiente Link." 
-                        redirectLink="/authForm"
+                        redirectLink="/login"
                         redirectName="Iniciar sesión."/>
                 </div>
             }
