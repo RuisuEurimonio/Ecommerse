@@ -14,11 +14,11 @@ export const AuthFormRegister = z.object({
         .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número." })
         .regex(/[^a-zA-Z0-9]/, { message: "La contraseña debe contener al menos un carácter especial." }),
     repeatPassword:  z.string()
-    .min(8, { message: "La contraseña debe tener al menos 8 caracteres." })
-    .regex(/[a-z]/, { message: "La contraseña debe contener al menos una letra minúscula." })
-    .regex(/[A-Z]/, { message: "La contraseña debe contener al menos una letra mayúscula." })
-    .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número." })
-    .regex(/[^a-zA-Z0-9]/, { message: "La contraseña debe contener al menos un carácter especial." })
+        .min(8, { message: "La contraseña debe tener al menos 8 caracteres." })
+        .regex(/[a-z]/, { message: "La contraseña debe contener al menos una letra minúscula." })
+        .regex(/[A-Z]/, { message: "La contraseña debe contener al menos una letra mayúscula." })
+        .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número." })
+        .regex(/[^a-zA-Z0-9]/, { message: "La contraseña debe contener al menos un carácter especial." })
 }).refine((data)=>data.password === data.repeatPassword,{
     message: "Las contraseñas deben ser iguales",
     path: ["repeatPassword"]

@@ -20,7 +20,7 @@ const MyAccount: React.FC<MyAccountProps> = () => {
     }, [])
 
     return (
-        <div className="md:basis-[85%]">
+        <div className={`md:basis-[85%] ${(data != null) ? "" : "flex justify-center items-center"}`} >
             { data != null ? 
                 <>
                     <div
