@@ -60,7 +60,7 @@ const AuthForm : React.FC<AuthFormProps> = () => {
                     </div>
                     </Form>
                 </div>
-                <div className="bg-slate-900 flex justify-center flex-col gap-3 w-full">
+                <div className="bg-blue-mafer flex justify-center flex-col gap-3 w-full">
                     <h2 className="text-center text-xl font-bold text-white"> Bienvenido a nuestro espacio de clientes. </h2>
                     <div className="flex items-center justify-center"><Image src={image} alt="" width={150} height={150} className=""/></div>
                     <ul className="flex w-3/4 mx-auto my-2 justify-around text-white text-2xl">
