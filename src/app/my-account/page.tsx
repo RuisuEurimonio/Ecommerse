@@ -1,9 +1,7 @@
 "use client"
 
-import fakeUser from "@/utils/json/usersFake.json";
 import FormUser from "@/components/FormUser";
 import { UserProps } from "@/types/Props";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 

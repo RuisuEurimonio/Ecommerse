@@ -48,12 +48,13 @@ const AuthForm : React.FC<AuthFormProps> = () => {
                             xl:w-8/12
             ">
                 <div className="bg-light-white-mafer p-3 flex justify-center flex-col w-full">
-                    <h2 className="text-blue-mafer font-bold text-center text-xl"> Crear cuenta. </h2>
+                    <h2 className="text-blue-mafer font-bold text-center text-xl mb-4"> Crear cuenta. </h2>
                     <Form 
                         dataName="Iniciar sesión"
                         schequema={AuthFormRegister}
                         inputsList={inputsList}
-                        modal>
+                        modal
+                        isLoginRegister>
                     <div className="flex items-center flex-col my-4">
                         <label htmlFor="showPassword">
                             <input type="checkbox" id="showPassword" onClick={onChange}/>

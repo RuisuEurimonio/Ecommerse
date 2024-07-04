@@ -11,7 +11,7 @@ import { InputsListProps,  FormProps} from "@/types/Props"
 
 import { InputErrorText, saveAlert } from "./utils";
 
-const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList, children }: FormProps<T, U>) => {
+const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList, children, isLoginRegister}: FormProps<T, U>) => {
 
     const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number | string, nombre?: string}>[]>([]);
 
@@ -200,10 +200,14 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
     }
 
     const onSubmit: SubmitHandler<formProps> = async (data) => {
-        const response = await saveAlert(dataName);
-        if (response) {
+        if(!isLoginRegister){
+            const response = await saveAlert(dataName);
+            if (response) {
+                reset();
+                alert(`${dataName} guardado`);
+            }
+        } else {
             reset();
-            alert(`${dataName} guardado`);
         }
     };
 
@@ -217,7 +221,8 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
             <div className="flex flex-col gap-4
                 lg:gap-6
             ">
-                <h3 className="font-bold text-lg"> Detalles. </h3>
+
+                {!isLoginRegister && <h3 className="font-bold text-lg"> Detalles. </h3>}
 
                 {inputsList.map((item, index) => {
                     if(!item.groupData){
@@ -232,12 +237,24 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
                 {listOfItemWithGroup.length > 0 && groupElements(listOfItemWithGroup)}
 
             </div>
+            
             {children}
-            <input
-                type="submit"
-                value="Enviar"
-                className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm text-right cursor-pointer float-right"
-            />
+
+            {isLoginRegister ? 
+                <div className="flex justify-center">
+                    <input
+                        type="submit"
+                        value="Confirmar"
+                        className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm cursor-pointer"
+                    />
+                </div>
+                :
+                <input
+                    type="submit"
+                    value="Enviar"
+                    className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm cursor-pointer float-right"
+                />
+            }
         </form>
     );
 };
