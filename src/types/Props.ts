@@ -40,14 +40,14 @@ export type CategoryProps = {
 export type UserProps = {
         id: number;
         numeroDocumento: string;
-        tipoDocumento: string;
+        tipoDocumento: TypeDocumentProps;
         correo: string;
         telefono: string;
         celular: number;
         nombres: string;
         apellidos: string;
         direccion: string;
-        permisos: string;
+        permisos: RolProps;
         metodoPago: string;
         fechaCreacion: string;
         fechaModificacion: string;
@@ -109,4 +109,21 @@ export type InputsListProps<U extends {id? : number | string, nombre?: string}> 
     extraData?: U[] | null,
     className?: String
     secondId?: string;
+}
+
+export type TypeDocumentProps = {
+    id: number,
+    nombre: string,
+    descripcion: string,
+    abreviacion: string,
+    fechaCreacion: string,
+    fechaModificacion: string
+}
+
+export type RolProps = {
+    id: number,
+    nombre: string,
+    descripcion: string,
+    fechaCreacion: string,
+    fechaModificacion: string
 }

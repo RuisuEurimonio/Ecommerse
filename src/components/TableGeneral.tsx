@@ -15,6 +15,7 @@ type TableGeneralProps<T extends { id: number, }> = {
         className?: string,
         type?: string,
         hiddenMobile?: boolean,
+        secondObject?: string,
         mergeData?: keyof T,
         columnName: keyof T;
     }[]
@@ -24,12 +25,14 @@ type TableGeneralProps<T extends { id: number, }> = {
 const TableGeneral = <T extends { id: number },>({ data, perPage, openCloseSubModal, titles, subData }: TableGeneralProps<T>) => {
 
     
-const renderCell = (value: T[keyof T], type: string = "text", className: string = "", mergeData: T[keyof T] | string = "") =>{
+const renderCell = (value: T[keyof T], type: string = "text", className: string = "", mergeData: T[keyof T] | string = "", secondObject?: string) =>{
     switch(type){
         case "boolean":
             return value ? <span className={className}> Activo </span> : <span className={className}> Inactivo </span>
         case "combined":
             return <p className={`text-center ${className}`}> {String(value)} {String(mergeData)} </p>
+        case "object":
+            return <p className={`text-center ${className}`}> {String(secondObject)} </p>
         default:
             return <p className={`text-center ${className}`}> {String(value)} </p>
     }
@@ -56,10 +59,15 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                                                 xl:text-sm">
                         {subData.map((sub) => { 
                             const mergeValue =  (sub.mergeData != null || sub.mergeData != null) ? item[sub.mergeData] : "";
+                            let secondObject = "";
+                            console.log(item[sub.columnName]);
+                            if(sub.type === "object" && sub.type === "object" && sub.secondObject !== undefined && item[sub.columnName]){
+                                secondObject = String(item[sub.columnName][sub.secondObject])
+                            }
                             return (
                             
                             <td key={String(sub.columnName)} scope="row" className={`py-2 px-2 ${(sub.hiddenMobile ? "md:hidden lg:table-cell" : "")}`}>
-                                    {renderCell(item[sub.columnName] as T[keyof T], sub.type, sub.className, mergeValue)}
+                                    {renderCell(item[sub.columnName] as T[keyof T], sub.type, sub.className, mergeValue, secondObject)}
                             </td>
                         )})}
                         <td scope="row" className="py-2 px-2">

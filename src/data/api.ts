@@ -1,5 +1,4 @@
 export async function getUsersApi(){
-    console.log("llamando usuarios")
     try{
         const response = await fetch("http://localhost:8080/api/usuario/all");
         if(!response.ok){

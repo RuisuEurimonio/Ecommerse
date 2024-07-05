@@ -20,14 +20,6 @@ type ConfigurationUsersProps = {
 
 const perPage : number = 20;
 
-const titlesTableError = [
-    {titleName: "Usuarios"},
-]
-
-const dataTableError = [
-    {columnName: "No se encontro información de usuarios"}
-]
-
 const titlesTable = [
     {titleName: "Documento"},
     {titleName: "Nombres"},
@@ -36,13 +28,13 @@ const titlesTable = [
     {titleName: "Rol"},
 ]
 
-const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, mergeData?: keyof UserProps , columnName: keyof UserProps}[] = [
+const subDataTable : {secondObject?: string, className?: string, type?: string, hiddenMobile?: boolean, mergeData?: keyof UserProps , columnName: keyof UserProps, }[] = [
     {columnName: "id"},
     {type: "combined", mergeData: "tipoDocumento", columnName: "numeroDocumento"},
     {type: "combined", mergeData: "apellidos" ,columnName: "nombres"},
     {hiddenMobile: true, columnName: "celular"},
     {columnName: "correo"},
-    {columnName: "permisos"},
+    {type:"object", columnName: "permisos", secondObject: "nombre"},
 ]
 
 const document = [
@@ -91,7 +83,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
             }else{
                 console.log("Datos no encontrados")
             }
-            
+            console.log(response);
         }
 
         get();
