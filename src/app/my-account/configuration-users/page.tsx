@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Form from "@/components/Form";
 import Modal from "@/components/Modal";
@@ -11,12 +11,22 @@ import { UserProps } from "@/types/Props";
 
 import { userSchequema } from "@/utils/Schemas/userSchema";
 import usersFake from "@/utils/json/usersFake.json";
+import { getUsersApi } from "@/data/api";
+import NoDataTable from "@/components/NoDataTable";
 
-type ConfigurationUsersProps = {};
-
-const data = usersFake;
+type ConfigurationUsersProps = {
+    
+};
 
 const perPage : number = 20;
+
+const titlesTableError = [
+    {titleName: "Usuarios"},
+]
+
+const dataTableError = [
+    {columnName: "No se encontro información de usuarios"}
+]
 
 const titlesTable = [
     {titleName: "Documento"},
@@ -55,6 +65,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [dataUserSelect, setDataUserSelect] = useState<UserProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
+    const [data, setData] = useState<UserProps[] | null>();
 
     function openCloseModal(){
         setKeyModal("main")
@@ -72,17 +83,35 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
         setModalVisible(!modalVisible);
     }
 
+    useEffect(()=>{
+        const get = async () =>{
+            const response = await getUsersApi();
+            if(response){
+                setData(response);
+            }else{
+                console.log("Datos no encontrados")
+            }
+            
+        }
+
+        get();
+    },[])
+
     return (
         <div
             className="md:flex-1">
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Usuarios.</h2>
                 <div className="w-full relative overflow-x-auto">
+                    {data?
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
+                    :
+                    <NoDataTable message="No se encontro información de usuarios registrados." secondaryMessage="Ingresa algún usuario por medio del botón inferior." />
+                }
             </div>
-            <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
+            {data && <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
                     <Numeration dataLength={data.length} itemsByPage={perPage} />
-            </div>
+            </div>}
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}
             > Agregar. </button>
@@ -99,3 +128,4 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 };
 
 export default ConfigurationUsers;
+

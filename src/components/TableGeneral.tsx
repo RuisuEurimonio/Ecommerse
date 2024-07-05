@@ -41,8 +41,7 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
     return (
         <table className="table-fixed w-full">
             <thead className="bg-blue-mafer text-white text-sm
-                                xl:text-base
-                            ">
+                                xl:text-base">
                 <tr>
                     <th scope="col" className="px-1 w-10">#</th>
                     {titles.map((data) => (
@@ -54,8 +53,7 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
             <tbody>
                 {data.slice(perPage * (pageNum - 1), perPage * pageNum).map((item) => (
                     <tr key={item.id} className="text-center odd:bg-blue-mafer/10  break-words text-xs
-                    xl:text-sm
-                ">
+                                                xl:text-sm">
                         {subData.map((sub) => { 
                             const mergeValue =  (sub.mergeData != null || sub.mergeData != null) ? item[sub.mergeData] : "";
                             return (
