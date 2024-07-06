@@ -15,7 +15,7 @@ type TableGeneralProps<T extends { id: number, }> = {
         className?: string,
         type?: string,
         hiddenMobile?: boolean,
-        secondObject: string,
+        secondObject?: string,
         mergeData?: keyof T,
         columnName: keyof T;
     }[]
@@ -30,7 +30,7 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
         case "boolean":
             return value ? <span className={className}> Activo </span> : <span className={className}> Inactivo </span>
         case "combined":
-            return <p className={`text-center ${className}`}> {String(value)} {String(mergeData)} </p>
+            return <p className={`text-center ${className}`}> {secondObject ? String(secondObject) : String(mergeData)} {String(value)} </p>
         case "object":
             return <p className={`text-center ${className}`}> {String(secondObject)} </p>
         default:
@@ -60,9 +60,13 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                         {subData.map((sub) => { 
                             const mergeValue =  (sub.mergeData != null || sub.mergeData != null) ? item[sub.mergeData] : "";
                             let secondObject = "";
-                            if(sub.type === "object" && sub.secondObject !== undefined && item[sub.columnName] && typeof item[sub.columnName] === "object" ){
+                            if(sub.secondObject !== undefined && item[sub.columnName] && typeof item[sub.columnName] === "object" ){
                                 const object = item[sub.columnName] as Record<string,unknown>;
                                 secondObject  = String(object[sub.secondObject]);
+                            }
+                            if(sub.mergeData !== undefined && sub.secondObject !== undefined && item[sub.mergeData] && typeof item[sub.mergeData] === "object" ){
+                                const object = item[sub.mergeData] as Record<string,unknown>;
+                                secondObject = String(object[sub.secondObject]);
                             }
                             return (
                             

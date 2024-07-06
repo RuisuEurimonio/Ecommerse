@@ -30,7 +30,7 @@ const titlesTable = [
 
 const subDataTable : {secondObject?: string, className?: string, type?: string, hiddenMobile?: boolean, mergeData?: keyof UserProps , columnName: keyof UserProps, }[] = [
     {columnName: "id"},
-    {type: "combined", mergeData: "tipoDocumento", columnName: "numeroDocumento"},
+    {type: "combined", mergeData: "tipoDocumento", columnName: "numeroDocumento", secondObject: "abreviacion"},
     {type: "combined", mergeData: "apellidos" ,columnName: "nombres"},
     {hiddenMobile: true, columnName: "celular"},
     {columnName: "correo"},
