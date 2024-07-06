@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
@@ -12,6 +12,7 @@ import { ArticleProps} from "@/types/Props";
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import subData from "@/utils/json/branchFake.json"
 import NoDataTable from "@/components/NoDataTable";
+import { getArticlesApi } from "@/data/api";
 
 type ConfigurationProductsProps = {};
 
@@ -68,6 +69,20 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
         setModalVisible(!modalVisible);
     }
 
+    useEffect(()=>{
+        const get = async () =>{
+            const data = await getArticlesApi();
+            if(data){
+                setData(data)
+            }else{
+                console.log("Some gone wrong")
+            }
+            console.log(data)
+        }
+
+        get();
+    },[])
+
     return (
         <div
             className="
@@ -82,7 +97,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                     <NoDataTable message="No se encontraron artículos ingresados." secondaryMessage="Ingrese nuevos articulos por medio del botón infeior"/ >
                     }
             </div>
-            {data && <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
+            {data && <div className="bg-blue-mafer flex flex-col-reverse items-center rounded-sm">
                 <Numeration dataLength={data.length} itemsByPage={perPage} />
             </div>}
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
