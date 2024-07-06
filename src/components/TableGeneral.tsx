@@ -15,7 +15,7 @@ type TableGeneralProps<T extends { id: number, }> = {
         className?: string,
         type?: string,
         hiddenMobile?: boolean,
-        secondObject?: string,
+        secondObject: string,
         mergeData?: keyof T,
         columnName: keyof T;
     }[]
@@ -60,9 +60,9 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                         {subData.map((sub) => { 
                             const mergeValue =  (sub.mergeData != null || sub.mergeData != null) ? item[sub.mergeData] : "";
                             let secondObject = "";
-                            console.log(item[sub.columnName]);
-                            if(sub.type === "object" && sub.type === "object" && sub.secondObject !== undefined && item[sub.columnName]){
-                                secondObject = String(item[sub.columnName][sub.secondObject])
+                            if(sub.type === "object" && sub.secondObject !== undefined && item[sub.columnName] && typeof item[sub.columnName] === "object" ){
+                                const object = item[sub.columnName] as Record<string,unknown>;
+                                secondObject  = String(object[sub.secondObject]);
                             }
                             return (
                             
