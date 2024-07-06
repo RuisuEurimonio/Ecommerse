@@ -7,7 +7,7 @@ import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 
-import { ObjBranchProps } from "@/types/Props";
+import { BrandProps } from "@/types/Props";
 
 import { brandSchequema } from "@/utils/Schemas/brandSchema";
 import branchFake from "@/utils/json/branchFake.json"
@@ -30,7 +30,7 @@ const titlesTable = [
     { className: "md:hidden lg:table-cell", titleName: "fecha modificación" }
 ]
 
-const subDataTable: { className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof ObjBranchProps }[] = [
+const subDataTable: { className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof BrandProps }[] = [
     { columnName: "id" },
     { columnName: "nombre" },
     { className: "line-clamp-3", columnName: "descripcion" },
@@ -41,7 +41,7 @@ const subDataTable: { className?: string, type?: string, hiddenMobile?: boolean,
 const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [dataBrandSelect, setDataBrandSelect] = useState<ObjBranchProps | null>(null);
+    const [dataBrandSelect, setDataBrandSelect] = useState<BrandProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
 
     function openCloseModal() {
@@ -50,7 +50,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
         setDataBrandSelect(null);
     }
 
-    function openCloseSubModal(data: ObjBranchProps) {
+    function openCloseSubModal(data: BrandProps) {
         if (modalVisible) {
             setDataBrandSelect(null);
         } else {

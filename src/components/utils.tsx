@@ -1,4 +1,4 @@
-import { CardProductProps } from '@/types/Props';
+import { ArticleProps } from '@/types/Props';
 import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
 import Swal from 'sweetalert2';
@@ -61,7 +61,7 @@ export const deleteAlert = (name:string, type:string) =>  {Swal.fire({
     }
 })}
 
-export const askForSaveProduct = (item:CardProductProps, cantidad?: number) =>{
+export const askForSaveProduct = (item:ArticleProps, cantidad?: number) =>{
     Swal.fire({
         title: "Guardar producto",
         text: "Deseas guardar el producto: " + item.nombre+" ?",
@@ -92,10 +92,10 @@ export const askForSaveProduct = (item:CardProductProps, cantidad?: number) =>{
     })
 }
 
-export const askForEditProduct = (item:CardProductProps, index: number, functionFather : () => void , cantidad?: number ) =>{
+export const askForEditProduct = (item:ArticleProps, index: number, functionFather : () => void , cantidad?: number ) =>{
 
     let products = localStorage.getItem("products");
-    let parseProducts : [CardProductProps, number][] = products ? JSON.parse(products) : [];
+    let parseProducts : [ArticleProps, number][] = products ? JSON.parse(products) : [];
 
     Swal.fire({
         title: "Editar producto",
@@ -137,7 +137,7 @@ export const askForEditProduct = (item:CardProductProps, index: number, function
     })
 }
 
-export function addToCart(item:CardProductProps, cantidad: number){
+export function addToCart(item:ArticleProps, cantidad: number){
     const products = localStorage.getItem("products");
     const currentProducts = products ? JSON.parse(products) : [];
     const itemWithCant = [item, cantidad];

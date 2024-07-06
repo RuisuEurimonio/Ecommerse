@@ -11,14 +11,14 @@ import ProductPrice from "@/components/ProductPrice";
 
 import image from "@/assets/img/imageNotFound.jpg";
 
-import { CardProductProps } from "@/types/Props";
+import { ArticleProps } from "@/types/Props";
 
 import productsFake from "@/utils/json/productsFake.json";
 import { askForSaveProduct, getCantOfUrlParams } from "@/components/utils";
 
 const dataProducts = productsFake.slice(0, 10); //TODO Temporal data, implement fetch
 
-const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
+const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
     const data = productsFake.find((item) => item.id === parseInt(params.id)); //TODO temporal function, delete this with implement of fetch data.
 

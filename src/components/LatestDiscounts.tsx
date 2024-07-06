@@ -1,7 +1,7 @@
 import React from "react";
 import dataFake from "@/utils/json/productsFake.json";
 import CardSimple from "./CardSimple";
-import { CardProductProps } from "@/types/Props";
+import { ArticleProps } from "@/types/Props";
 import CardItemWrapper from "./CardWrapper";
 
 type LatestDiscountsProps = {
@@ -16,7 +16,7 @@ const LatestDiscounts : React.FC<LatestDiscountsProps> = () => {
         <div className="custom_content">
             <h2 className="custom_title"> Últimos descuentos. </h2>
                 <CardItemWrapper dataLength={data.length}>
-                        {data.map((product : CardProductProps)=>(
+                        {data.map((product : ArticleProps)=>(
                             <CardSimple key={product.id} product={product} discount/>
                         ))}
                 </CardItemWrapper>

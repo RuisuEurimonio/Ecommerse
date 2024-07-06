@@ -1,12 +1,12 @@
 "use client";
 
-import { ObjBranchProps, PayMethodProps } from "@/types/Props";
+import { BrandProps, PayMethodProps } from "@/types/Props";
 import imageNotFound from "@/assets/img/imageNotFound.jpg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type CarouselSimpleProps = {
-    data: ObjBranchProps[] | PayMethodProps[];
+    data: BrandProps[] | PayMethodProps[];
     intervalMove: number;
 };
 

@@ -1,8 +1,8 @@
 import React from "react";
-import { CardProductProps } from "@/types/Props";
+import { ArticleProps } from "@/types/Props";
 
 type ProductPriceProp = {
-    data: CardProductProps;
+    data: ArticleProps;
 };
 
 const ProductPrice: React.FC<ProductPriceProp> = ({ data }) => {

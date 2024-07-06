@@ -1,19 +1,22 @@
 import { ZodType } from "zod";
 
-export type CardProductProps = {
-    id: number;
-    image: string;
-    nombre: string;
-    descripcion: string;
-    SKU: string;
-    precio: string;
-    marca: string;
-    clasificacion: string;
-    descuento: boolean;
-    categoria: string;
+export type ArticleProps = {
+    id: number,
+    nombre: string,
+    descripcion: string,
+    sku: number,
+    precio: number,
+    imagen: string,
+    categoria: CategoryProps,
+    clasificacion: ClasificationProps,
+    descuento: DiscountProps,
+    marca: BrandProps,
+    fechaCreacion: string,
+    fechaModificacion: string,
+    detalleCarrito: any[]
 }
 
-export type ObjBranchProps = {
+export type CategoryProps = {
     id: number,
     nombre: string,
     descripcion: string,
@@ -29,7 +32,18 @@ export type ClasificationProps = {
     fechaModificacion: String
 }
 
-export type CategoryProps = {
+export type DiscountProps = {
+    id: number,
+    nombre: string, 
+    descripcion: string, 
+    porcentaje: number,
+    active: boolean,
+    fechaCreacion: string, 
+    fechaModificacion: string
+}
+
+
+export type BrandProps = {
     id: number,
     nombre: string,
     descripcion: string,
@@ -80,15 +94,6 @@ export type ReviewsProps = {
     key_points: string
 }
 
-export type discountProps = {
-    id: number,
-    nombre: string, 
-    descripcion: string, 
-    porcentaje: number,
-    active: boolean,
-    fechaCreacion: string, 
-    fechaModificacion: string
-}
 
 export type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
     className?: string,

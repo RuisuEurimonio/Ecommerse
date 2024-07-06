@@ -5,13 +5,13 @@ import Link from "next/link";
 
 import React from "react";
 
-import { CardProductProps, NewsLetterProps } from "@/types/Props";
+import { ArticleProps, NewsLetterProps } from "@/types/Props";
 
 import imageNotFound from "@/assets/img/imageNotFound.jpg";
 import { askForSaveProduct } from "./utils";
 
 type CardSimpleProps = {
-    product: CardProductProps;
+    product: ArticleProps;
     discount?: boolean;
     newsletter?: NewsLetterProps;
 };

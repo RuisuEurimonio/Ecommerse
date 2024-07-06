@@ -9,7 +9,7 @@ import ProductsRecomended from "@/components/ProductsRecomended";
 import AddProductCant from "@/components/AddProductCant";
 import ProductPrice from "@/components/ProductPrice";
 
-import { CardProductProps } from "@/types/Props";
+import { ArticleProps } from "@/types/Props";
 
 import productsFake from "@/utils/json/productsFake.json";
 
@@ -18,7 +18,7 @@ import { askForSaveProduct, getCantOfUrlParams } from "@/components/utils";
 
 const dataProducts = productsFake.slice(0, 10); //TODO Temporal data, implement fetch
 
-const ProductPage: React.FC<CardProductProps> = ({ params }: any) => {
+const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
     const data = productsFake.find((item) => item.id === parseInt(params.id)); //TODO Temporal data, delete this when implement real data.
 

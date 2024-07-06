@@ -7,15 +7,13 @@ import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 import Form from "@/components/Form";
 
-import { CardProductProps} from "@/types/Props";
+import { ArticleProps} from "@/types/Props";
 
-import productsFake from "@/utils/json/productsFake.json"
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import subData from "@/utils/json/branchFake.json"
+import NoDataTable from "@/components/NoDataTable";
 
 type ConfigurationProductsProps = {};
-
-const data = productsFake;
 
 const perPage : number = 20;
 
@@ -27,13 +25,13 @@ const titlesTable = [
     {className:"md:hidden lg:table-cell", titleName: "Imagen"},
 ]
 
-const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof CardProductProps}[] = [
+const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof ArticleProps}[] = [
     {columnName: "id"},
     {columnName: "nombre"},
     {hiddenMobile: true, columnName: "categoria"},
-    {columnName: "SKU"},
+    {columnName: "sku"},
     {className:"line-clamp-3", columnName: "descripcion"},
-    {hiddenMobile: true, columnName: "image"},   
+    {hiddenMobile: true, columnName: "imagen"},   
 ]
 
 const inputsForm = [
@@ -50,8 +48,9 @@ const inputsForm = [
 const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [dataProductSelect, setDataProductSelect] = useState<CardProductProps | null>(null);
+    const [dataProductSelect, setDataProductSelect] = useState<ArticleProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
+    const [data, setData] = useState<ArticleProps[] | null>(null)
 
     function openCloseModal(){
         setKeyModal("main")
@@ -59,13 +58,13 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
         setDataProductSelect(null);
     }
 
-    function openCloseSubModal(data: CardProductProps){
+    function openCloseSubModal(data: ArticleProps){
         if(modalVisible){
             setDataProductSelect(null);
         }else{
             setDataProductSelect(data);
         }
-        setKeyModal(data.SKU)
+        setKeyModal(String(data.sku))
         setModalVisible(!modalVisible);
     }
 
@@ -77,11 +76,15 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Artículos.</h2>
                 <div className="w-full relative overflow-x-auto">
+                    {data ?
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
+                    :
+                    <NoDataTable message="No se encontraron artículos ingresados." secondaryMessage="Ingrese nuevos articulos por medio del botón infeior"/ >
+                    }
             </div>
-            <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
+            {data && <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
                 <Numeration dataLength={data.length} itemsByPage={perPage} />
-            </div>
+            </div>}
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}
             > Agregar. </button>

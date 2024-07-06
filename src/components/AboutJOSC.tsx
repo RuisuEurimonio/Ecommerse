@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import CardItem from "./CardItem";
 
-import {CardProductProps} from "@/types/Props";
+import {ArticleProps} from "@/types/Props";
 
 import dataFake from "@/utils/json/productsFake.json";
 
@@ -22,7 +22,7 @@ const AboutJosc : React.FC<AboutJoscProps> = ({fullContent = true}) => {
             {fullContent && (
             <>
                 <div className="my-3 flex flex-wrap gap-4">
-                    {data.slice(0,8).map((item:CardProductProps)=>(
+                    {data.slice(0,8).map((item:ArticleProps)=>(
                         <CardItem key={item.id} item={item} discount={item.descuento} link={(item.descuento ? "discounts" : "product")} />
                     ))}
                 </div>

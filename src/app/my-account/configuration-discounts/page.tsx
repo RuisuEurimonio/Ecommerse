@@ -7,7 +7,7 @@ import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral"
 
-import { discountProps } from "@/types/Props";
+import { DiscountProps } from "@/types/Props";
 
 import { discountSchequema } from "@/utils/Schemas/discountSchema";
 import discountsFake from "@/utils/json/discountFakeData.json"
@@ -27,7 +27,7 @@ const titlesTable = [
     {className:"md:hidden lg:table-cell", titleName: "fecha modificación"}
 ]
 
-const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof discountProps}[] = [
+const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof DiscountProps}[] = [
     {columnName: "id"},
     {columnName: "nombre"},
     {className:"line-clamp-3", columnName: "descripcion"},
@@ -47,7 +47,7 @@ const inputsForm = [
 const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [dataDiscountSelect, setDataDiscountSelect] = useState<discountProps | null>(null);
+    const [dataDiscountSelect, setDataDiscountSelect] = useState<DiscountProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
 
     function openCloseModal(){
@@ -56,7 +56,7 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
         setDataDiscountSelect(null);
     }
 
-    function openCloseSubModal(data: discountProps){
+    function openCloseSubModal(data: DiscountProps){
         if(modalVisible){
             setDataDiscountSelect(null);
         }else{

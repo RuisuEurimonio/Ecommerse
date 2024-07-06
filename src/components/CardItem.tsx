@@ -5,11 +5,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CardProductProps } from "@/types/Props";
+import { ArticleProps } from "@/types/Props";
 import { askForEditProduct, askForSaveProduct } from "./utils";
 
     type CardItemProps = {
-        item: CardProductProps,
+        item: ArticleProps,
         discount?: boolean,
         itemCart?: boolean,
         cantidad?: number,

@@ -9,7 +9,7 @@ import CardItem from "@/components/CardItem";
 import PricePdf from "@/components/PricePdf";
 import { confirmOrder, moneyFormatter } from "@/components/utils";
 
-import { CardProductProps, UserProps } from "@/types/Props";
+import { ArticleProps, UserProps } from "@/types/Props";
 import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 
 const PDFDownloadLink = dynamic(
@@ -24,7 +24,7 @@ type ShoppingCartProps = {}
 
 const ShoppingCart : React.FC<ShoppingCartProps> = () => {
 
-    const [listOfItems, setListOfItems] = useState<{0: CardProductProps, 1: number}[]>([]);
+    const [listOfItems, setListOfItems] = useState<{0: ArticleProps, 1: number}[]>([]);
     const [dataUser, setDataUser] = useState<UserProps | null>(null);
     const [totalBill, setTotalBill] = useState(0);
     const [totalDiscounts, setTotalDiscounts] = useState(0);

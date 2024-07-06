@@ -1,13 +1,13 @@
 "use client"
 
-import { CardProductProps } from "@/types/Props";
+import { ArticleProps } from "@/types/Props";
 import { Page, Text, View, Document, StyleSheet, Font, Image } from "@react-pdf/renderer";
 import { moneyFormatter } from "./utils";
 import image from "@/assets/img/logo.png"
 
 type PricePdfProps = {
     items:{
-        0: CardProductProps,
+        0: ArticleProps,
         1: number
     }[],
     subtotal: number,
