@@ -7,15 +7,16 @@ import CardItem from "@/components/CardItem";
 import Filters from "@/components/Filters";
 import { SelectCantItems } from "@/components/SelectCantItems";
 
-import productsFake from "@/utils/json/productsFake.json";
 import { verifyPerPageExist } from "@/utils/ts/validations";
 
 import { perPageOptions } from "@/utils/ts/configuration";
 import { alphabetOptions } from "@/utils/ts/configuration";
+import { useEffect, useState } from "react";
+import DataNotFoundMessage from "@/components/DataNotFoundMessage";
+import { ArticleProps } from "@/types/Props";
+import { getElementsApi } from "@/data/api";
 
 type ProductsProps = {};
-
-const data = productsFake; //TODO Temporal data, implement fetch
 
 const Products: React.FC<ProductsProps> = () => {
 
@@ -26,6 +27,19 @@ const Products: React.FC<ProductsProps> = () => {
         searchParams.get("perPage") || perPageOptions[1].cantidad
     ) as number;
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
+    
+    const[data, setData] = useState<ArticleProps[] | null>(null);
+
+    useEffect(()=>{
+        const get = async () => {
+            const data = await getElementsApi("http://localhost:8080/api/producto/all");
+            if(data){
+                setData(data);
+            }
+        }
+
+        get();
+    },[])
 
     return (
         <div
@@ -53,7 +67,7 @@ const Products: React.FC<ProductsProps> = () => {
                             </select>
                         </div>
                         <div>
-                            <Numeration dataLength={data.length} itemsByPage={perPage} />
+                            { data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                         </div>
                     </div>
                     <div className="m-2">
@@ -63,24 +77,38 @@ const Products: React.FC<ProductsProps> = () => {
                             lg:grid-cols-4
                             xl:grid-cols-5"
                         >
-                            {data
+                            {data &&
+                            data
                                 .slice(
                                     perPage * pageNum - perPage,
                                     perPage * pageNum
                                 )
-                                .map((item) => (
+                                .map((item) => {
+                                    console.log(data);
+                                    return(
                                     <CardItem
                                         key={item.id}
                                         item={item}
                                         link={"products"}
-                                        discount={item.descuento}
+                                        discount={true}
                                     />
-                                ))}
+                                )})
+                            }
                         </ul>
+                        {!data && 
+                        <div className="w-full flex justify-center items-center">
+                            <DataNotFoundMessage
+                                title="Error"
+                                text="Ingrese algún nuevo artículo por medio de la siguiente configuración."
+                                redirectName="Artículos"
+                                redirectLink="/my-account/configuration-articles"
+                            />
+                        </div>
+                        }
                     </div>
                     <div className="bg-blue-mafer p-1 flex flex-col-reverse items-center rounded-sm">
                         <SelectCantItems perPage={perPage} />
-                        <Numeration dataLength={data.length} itemsByPage={perPage} />
+                        {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                     </div>
                 </div>
             </div>

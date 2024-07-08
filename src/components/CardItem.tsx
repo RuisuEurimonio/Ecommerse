@@ -38,7 +38,7 @@ const CardItem: React.FC<CardItemProps> = ({
                 )}
                 <div className="w-full">
                     <Image
-                        src={item.image}
+                        src={item.imagen}
                         alt="image not found"
                         width={400}
                         height={150}
@@ -50,7 +50,7 @@ const CardItem: React.FC<CardItemProps> = ({
                     className="text-sm mt-2 line-clamp-1
                     xl:text-base"
                 >
-                    {item.id} {item.clasificacion}
+                    {item.id} {item.clasificacion.nombre}
                 </p>
                 <p
                     className="text-base font-semibold
