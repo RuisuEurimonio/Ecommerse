@@ -7,7 +7,7 @@ import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 import Form from "@/components/Form";
 
-import { ArticleProps} from "@/types/Props";
+import { ArticleProps, subDataTableProps} from "@/types/Props";
 
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import subData from "@/utils/json/branchFake.json"
@@ -26,10 +26,10 @@ const titlesTable = [
     {className:"md:hidden lg:table-cell", titleName: "Imagen"},
 ]
 
-const subDataTable : {className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof ArticleProps}[] = [
+const subDataTable : subDataTableProps<any>[] = [
     {columnName: "id"},
     {columnName: "nombre"},
-    {hiddenMobile: true, columnName: "categoria"},
+    {hiddenMobile: true, columnName: "categoria", type: "object", secondObject: "nombre"},
     {columnName: "sku"},
     {className:"line-clamp-3", columnName: "descripcion"},
     {hiddenMobile: true, columnName: "imagen"},   

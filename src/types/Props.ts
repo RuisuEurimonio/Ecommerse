@@ -132,3 +132,12 @@ export type RolProps = {
     fechaCreacion: string,
     fechaModificacion: string
 }
+
+export type subDataTableProps<T> = {
+    className?: string,
+    type?: "boolean" | "combined" | "object" | "text",
+    hiddenMobile?: boolean,
+    secondObject?: string,
+    mergeData?: keyof T,
+    columnName: keyof T;
+}

@@ -7,7 +7,7 @@ import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 
-import { UserProps } from "@/types/Props";
+import { subDataTableProps, UserProps } from "@/types/Props";
 
 import { userSchequema } from "@/utils/Schemas/userSchema";
 import usersFake from "@/utils/json/usersFake.json";
@@ -28,7 +28,7 @@ const titlesTable = [
     {titleName: "Rol"},
 ]
 
-const subDataTable : {secondObject?: string, className?: string, type?: string, hiddenMobile?: boolean, mergeData?: keyof UserProps , columnName: keyof UserProps, }[] = [
+const subDataTable : subDataTableProps<any>[] = [
     {columnName: "id"},
     {type: "combined", mergeData: "tipoDocumento", columnName: "numeroDocumento", secondObject: "abreviacion"},
     {type: "combined", mergeData: "apellidos" ,columnName: "nombres"},

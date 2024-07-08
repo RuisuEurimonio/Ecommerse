@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { deleteAlert } from "./utils";
+import { subDataTableProps } from "@/types/Props";
 
 type TableGeneralProps<T extends { id: number, }> = {
     data: T[],
@@ -11,14 +12,7 @@ type TableGeneralProps<T extends { id: number, }> = {
         className?: string,
         titleName: string,
     }[],
-    subData: {
-        className?: string,
-        type?: string,
-        hiddenMobile?: boolean,
-        secondObject?: string,
-        mergeData?: keyof T,
-        columnName: keyof T;
-    }[]
+    subData: subDataTableProps<T>[];
 };
 
 
@@ -62,8 +56,23 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                             let secondObject = "";
                             if(sub.secondObject !== undefined && item[sub.columnName] && typeof item[sub.columnName] === "object" ){
                                 const object = item[sub.columnName] as Record<string,unknown>;
-                                secondObject  = String(object[sub.secondObject]);
+                                const objectLength = object.length as number;
+                                let res = "";
+                                if(objectLength > 0){
+                                    for(let i = 0 ; i < objectLength ; i++){
+                                        let currentObject = object[i] as Record<string,unknown>;
+                                        res += String(currentObject[sub.secondObject]);
+                                        if(i != objectLength){res += " ";}
+                                    }
+                                }else{
+                                    res = String(object[sub.secondObject]);
+                                }
+
+                                secondObject  = res;
+
+
                             }
+
                             if(sub.mergeData !== undefined && sub.secondObject !== undefined && item[sub.mergeData] && typeof item[sub.mergeData] === "object" ){
                                 const object = item[sub.mergeData] as Record<string,unknown>;
                                 secondObject = String(object[sub.secondObject]);
