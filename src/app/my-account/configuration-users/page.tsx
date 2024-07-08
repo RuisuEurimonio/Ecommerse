@@ -98,9 +98,9 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                     <NoDataTable message="No se encontro información de usuarios registrados." secondaryMessage="Ingresa algún usuario por medio del botón inferior." />
                 }
             </div>
-            {data && <div className="bg-blue-mafer flex flex-col-reverse items-center rounded-sm">
-                    <Numeration dataLength={data.length} itemsByPage={perPage} />
-            </div>}
+            <div className="bg-blue-mafer flex flex-col-reverse items-center rounded-sm min-h-5">
+                    {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
+            </div>
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}
             > Agregar. </button>

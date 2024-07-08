@@ -84,7 +84,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                     <NoDataTable message="No se encontro datos de marcas" secondaryMessage="Agrega nuevas marcas por medio del botón inferior" />
                 }
                 </div>
-                <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
+                <div className="bg-blue-mafer rounded-sm flex flex-col items-center min-h-5">
                         {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                 </div>
                 <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"

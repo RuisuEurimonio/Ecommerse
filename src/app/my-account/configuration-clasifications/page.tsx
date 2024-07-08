@@ -83,7 +83,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                     <NoDataTable message="No se encontraron datos de clasificaciones" secondaryMessage="Ingresa una nueva clasificación por medio del botón inferior." />
                 }
             </div>
-            <div className="bg-blue-mafer flex flex-col-reverse items-center rounded-sm">
+            <div className="bg-blue-mafer min-h-5 flex flex-col-reverse items-center rounded-sm">
                 {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
             </div>
             <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
