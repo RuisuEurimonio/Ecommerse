@@ -10,9 +10,8 @@ import Table from "@/components/TableGeneral";
 import { subDataTableProps, UserProps } from "@/types/Props";
 
 import { userSchequema } from "@/utils/Schemas/userSchema";
-import usersFake from "@/utils/json/usersFake.json";
-import { getUsersApi } from "@/data/api";
 import NoDataTable from "@/components/NoDataTable";
+import { getElementsApi } from "@/data/api";
 
 type ConfigurationUsersProps = {
     
@@ -77,7 +76,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     useEffect(()=>{
         const get = async () =>{
-            const response = await getUsersApi();
+            const response = await getElementsApi("http://localhost:8080/api/usuario/all");
             if(response){
                 setData(response);
             }

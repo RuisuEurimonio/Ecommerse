@@ -11,7 +11,7 @@ import { ClasificationProps, subDataTableProps } from "@/types/Props";
 
 import { ClasificationSchequema } from "@/utils/Schemas/clasificationSchema";
 import NoDataTable from "@/components/NoDataTable";
-import { getClassificationsApi } from "@/data/api";
+import { getElementsApi } from "@/data/api";
 
 type ConfigurationClasificationsProps = {};
 
@@ -62,7 +62,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
 
     useEffect(()=>{
         const get = async () => {
-            const data = await getClassificationsApi();
+            const data = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
             if(data){
                 setData(data);
             }

@@ -11,7 +11,7 @@ import { BrandProps, subDataTableProps } from "@/types/Props";
 
 import { brandSchequema } from "@/utils/Schemas/brandSchema";
 import NoDataTable from "@/components/NoDataTable";
-import { getBrandsApi } from "@/data/api";
+import { getElementsApi } from "@/data/api";
 
 type ConfigurationUsersProps = {};
 
@@ -62,7 +62,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     useEffect(()=>{
         const get = async () =>{
-            const data = await getBrandsApi();
+            const data = await getElementsApi("http://localhost:8080/api/producto/marca/all");
             if(data){
                 setData(data);
             }

@@ -12,7 +12,7 @@ import { ArticleProps, subDataTableProps} from "@/types/Props";
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import subData from "@/utils/json/branchFake.json"
 import NoDataTable from "@/components/NoDataTable";
-import { getArticlesApi } from "@/data/api";
+import { getElementsApi } from "@/data/api";
 
 type ConfigurationProductsProps = {};
 
@@ -71,7 +71,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
 
     useEffect(()=>{
         const get = async () =>{
-            const data = await getArticlesApi();
+            const data = await getElementsApi("http://localhost:8080/api/producto/all");
             if(data){
                 setData(data)
             }
