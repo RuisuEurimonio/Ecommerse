@@ -74,10 +74,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             const data = await getArticlesApi();
             if(data){
                 setData(data)
-            }else{
-                console.log("Some gone wrong")
             }
-            console.log(data)
         }
 
         get();

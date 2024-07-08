@@ -80,8 +80,6 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
             const response = await getUsersApi();
             if(response){
                 setData(response);
-            }else{
-                console.log("Datos no encontrados")
             }
         }
 

@@ -1,20 +1,19 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Form from "@/components/Form";
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 
-import { BrandProps } from "@/types/Props";
+import { BrandProps, subDataTableProps } from "@/types/Props";
 
 import { brandSchequema } from "@/utils/Schemas/brandSchema";
-import branchFake from "@/utils/json/branchFake.json"
+import NoDataTable from "@/components/NoDataTable";
+import { getBrandsApi } from "@/data/api";
 
 type ConfigurationUsersProps = {};
-
-const data = branchFake;
 
 const perPage: number = 20;
 
@@ -30,7 +29,7 @@ const titlesTable = [
     { className: "md:hidden lg:table-cell", titleName: "fecha modificación" }
 ]
 
-const subDataTable: { className?: string, type?: string, hiddenMobile?: boolean, columnName: keyof BrandProps }[] = [
+const subDataTable: subDataTableProps<any>[] = [
     { columnName: "id" },
     { columnName: "nombre" },
     { className: "line-clamp-3", columnName: "descripcion" },
@@ -43,6 +42,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [dataBrandSelect, setDataBrandSelect] = useState<BrandProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
+    const [data, setData] = useState<BrandProps[] | null>(null);
 
     function openCloseModal() {
         setKeyModal("main")
@@ -60,16 +60,32 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
         setModalVisible(!modalVisible);
     }
 
+    useEffect(()=>{
+        const get = async () =>{
+            const data = await getBrandsApi();
+            if(data){
+                setData(data);
+            }
+            console.log(data);
+        }
+
+        get();
+    },[])
+
     return (
         <div
             className="md:flex-1">
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2"> Marcas.</h2>
                 <div className="w-full relative overflow-x-auto">
+                    {data ? 
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable}/>
+                    :
+                    <NoDataTable message="No se encontro datos de marcas" secondaryMessage="Agrega nuevas marcas por medio del botón inferior" />
+                }
                 </div>
                 <div className="bg-blue-mafer rounded-sm flex flex-col items-center">
-                        <Numeration dataLength={data.length} itemsByPage={perPage} />
+                        {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                 </div>
                 <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
                     onClick={openCloseModal}
