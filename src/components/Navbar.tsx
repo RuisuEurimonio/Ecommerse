@@ -42,7 +42,7 @@ const NavBar: React.FC<navProps> = () => {
                             placeholder="Buscar"
                         />
                         <button
-                            className="w-1/5 bg-third-color rounded-r-3xl h-full border-l-2 text-base
+                            className="w-1/5 bg-fifth-color rounded-r-3xl h-full border-l-2 text-base
                             md:h-full"
                             name="Buscar"
                         >
@@ -57,12 +57,12 @@ const NavBar: React.FC<navProps> = () => {
                     md:block"
                 >
                     <Link href="/shopping-cart">
-                        <button className="h-full border-r-[0.5px]">
+                        <button className="h-full border-r-[0.5px] border-fifth-color">
                             <span className=" h-full px-3 icon icon-cart before:content-['\e906'] before:text-fourth-color"></span>
                         </button>
                     </Link>
                     <Link href="/my-account">
-                        <button className="h-full border-l-[0.5px]">
+                        <button className="h-full border-l-[0.5px] border-fifth-color">
                             <span className="h-full px-3 icon icon-user before:content-['\e907'] before:text-fourth-color"></span>
                         </button>
                     </Link>
