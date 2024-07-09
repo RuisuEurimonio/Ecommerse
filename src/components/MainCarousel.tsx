@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import mainImage from "@/assets/img/2024.jpg"
-import navidad from "@/assets/img/navidad.jpg"
+import mainImage from "@/assets/img/ruisus.png"
+import navidad from "@/assets/img/welcome.png"
 import Image from "next/image";
 
 type MainCarouselProps = {

@@ -1,7 +1,8 @@
-import Image from "next/image";
+
 import React from "react";
 import logo from "@/assets/SVG/logo.svg";
 import Link from "next/link";
+import Image from "next/image";
 
 type FooterProps ={
 
@@ -13,28 +14,34 @@ const Footer: React.FC<FooterProps> = () => {
             <div className="w-[90%] m-auto
                 lg:w-[80%]
             ">
-                <div className="flex flex-col justify-around py-5
+                <div className="flex flex-col justify-between py-5
                     xl:flex-row xl:py-7
                 ">
-                    <div className="flex flex-col gap-1 justify-center items-center
-                        sm:flex-row sm:gap-3 xl:w-1/2
-                        xl:justify-center xl:gap-5 xl:mx-5 
+                    <div className="flex-1 justify-center items-center w-full h-full
+                        sm:flex 
                     ">
-                        <Image className=""
-                            src={logo}
-                            alt={"Logo de Centro Ferretero Mafer S.A.S."}
-                            width={180}
-                        />
+                        <div className="w-4/5 h-full bg-black rounded-md p-2 m-auto
+                            sm:w-4/12">
+                            <Image
+                                src={logo}
+                                alt={"Logo de Centro Ferretero Mafer S.A.S."}
+                                width={0}
+                                height={0}
+                                sizes="500"
+                                className="w-full h-auto object-cover"
+                            />
+                        </div>
                         <p className="block mx-5 text-justify py-4 text-sm 
+                            sm:w-8/12
                             xl:py-0
                             2xl:text-base
-                        "> <span className="font-semibold">Centro Ferretero Mafer</span> es una entidad debidamente constituida, especializada en la venta de productos de ferretería en general y construcción, con el objeto de ofrecer un servicio integral a todos nuestros clientes, contamos con el personal humano mas idóneo, una infraestructura organizacional, la cual nos permite que el desarrollo de nuestro objeto social trascienda a nuestros clientes en una calidad de servicio, brindando una oportuna y efectiva atención, lo que garantiza los resultados mas confiables. </p>
+                        "> <span className="font-semibold">Ruisu's Software</span> es una tienda de cómputo dedicada a proporcionar soluciones tecnológicas innovadoras y de alta calidad. Nuestro propósito es equipar a individuos y empresas con el mejor software y hardware disponible, facilitando su acceso a herramientas esenciales para la productividad y el entretenimiento. Ofrecemos una amplia gama de productos, desde software especializado hasta componentes de hardware, respaldados por un servicio al cliente excepcional y soporte técnico experto para garantizar la satisfacción y el éxito de nuestros clientes. </p>
                     </div>
-                    <div className="flex gap-4 justify-around flex-wrap
-                        sm:flex-nowrap
-                        xl:gap-8 xl:justify-normal 
+                    <div className="flex-1 flex-wrap flex items-center
+                        sm:flex-nowrap sm:items-start
+                        xl:justify-normal 
                     ">
-                        <ul className="text-black-mafer text-sm">
+                        <ul className="text-black-mafer text-sm text-center basis-full">
                             <li className="font-bold text-base
                                 xl:text-lg
                             "> Contactanos:  </li>
@@ -44,7 +51,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 "> Ubicación: </h3> 
                                 <p className="pl-3 text-xs
                                     xl:text-sm
-                                "> Calle 12 # 15 - 30 / Carrera 15 # 12 - 61 </p>
+                                "> Éngativa </p>
                                 <p className="pl-3 text-xs
                                     xl:text-sm
                                 "> Bogotá Colombia. </p>
@@ -55,7 +62,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 "> Correo: </h3> 
                                 <p className="pl-3 text-xs
                                     xl:text-sm
-                                ">ventas@centroferreteromafer.com </p>
+                                "> soporte@ruisussoftware.com </p>
                             </li>
                             <li>
                                 <h3 className="pl-1 text-sm font-semibold
@@ -63,7 +70,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 "> Telefono: </h3> 
                                 <p className="pl-3 text-xs
                                     xl:text-sm
-                                ">PBX: 742 19 81 </p>
+                                ">PBX: 601 9494 </p>
                             </li>
                             <li> 
                                 <h3 className="pl-1 text-sm font-semibold
@@ -77,7 +84,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 "> Sábado /7:00 AM - 4:00 PM. </p>
                             </li>
                         </ul>
-                        <ul className="text-black-mafer font-semibold">
+                        <ul className="text-black-mafer font-semibold text-center basis-1/2">
                             <li className="font-bold text-base
                                 xl:text-lg"> Tienda: </li>
                             <li className="pl-1 text-sm font-semibold
@@ -94,9 +101,9 @@ const Footer: React.FC<FooterProps> = () => {
                             "> <Link href="/discounts"> Descuentos. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/JOSC"> JOSC. </Link> </li>
+                            "> <Link href="/Ruisus"> Marca Propia. </Link> </li>
                         </ul> 
-                        <ul className="text-black-mafer font-semibold">
+                        <ul className="text-black-mafer font-semibold text-center basis-1/2">
                             <li className="font-bold text-base
                                 xl:text-lg"> Información: </li>
                             <li className="pl-1 text-sm font-semibold
@@ -104,7 +111,7 @@ const Footer: React.FC<FooterProps> = () => {
                             "> <Link href="/about-us"> Sobre nosotros.  </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/JOSC"> Nuestra marca. </Link> </li>
+                            "> <Link href="/Ruisus"> Nuestra marca. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
                             "> <Link href="/about-us#paymethods"> Medios de pago. </Link> </li>
