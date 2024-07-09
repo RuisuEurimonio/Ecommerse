@@ -36,11 +36,11 @@ const CardSimple: React.FC<CardSimpleProps> = ({
                         </React.Fragment>
                     )}
                     <Image
-                        src={product?.image || newsletter?.img || imageNotFound}
+                        src={product?.imagen || newsletter?.img || imageNotFound}
                         alt="Image not found"
                         width={400}
                         height={150}
-                        style={{ width: "500px" }} // style attribute fix the Image component error
+                        style={{ width: 400, height: 150}} // style attribute fix the Image component error
                         className="m-auto object-cover"
                     />
                 </div>

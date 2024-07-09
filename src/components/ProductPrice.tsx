@@ -1,5 +1,6 @@
 import React from "react";
 import { ArticleProps } from "@/types/Props";
+import { moneyFormatter } from "./utils";
 
 type ProductPriceProp = {
     data: ArticleProps;
@@ -10,22 +11,21 @@ const ProductPrice: React.FC<ProductPriceProp> = ({ data }) => {
         <>
             <h4
                 className={`mt-2 text-red-mafer inline-block font-bold 
-                            ${data?.descuento ? "xl:text-xl" : "text-2xl"}
-                            ${data?.descuento ? "xl:text-2xl" : "xl:text-3xl"}
-                            ${data?.descuento && "line-through"}
+                            ${data.descuento ? "xl:text-xl" : "text-2xl"}
+                            ${data.descuento ? "xl:text-2xl" : "xl:text-3xl"}
+                            ${data.descuento && "line-through"}
                         `}
             >
-                {" "}
-                {data?.precio ?? "Not found"}{" "}
+                {moneyFormatter(data.precio)}
             </h4>
-            {data?.descuento && (
+            {data.descuento && (
                 <h4
                     className="no-underline text-2xl my-1 text-red-mafer font-bold 
                                     sm:inline-block sm:mx-2
                                     xl:text-3xl
                             "
                 >
-                    ${parseInt(data?.precio.replace("$", "")) * 0.85}
+                    {moneyFormatter(data.precio * 0.85)} {/* TODO: set the correct discount */}
                 </h4>
             )}
         </>
