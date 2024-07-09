@@ -6,12 +6,13 @@ import { Open_Sans } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import UnderLineNav from "@/components/UnderLineNav";
 import Footer from "@/components/Footer";
+import logo from "@/assets/img/logotipo-sin-fondo.ico"
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Centro Ferretero Mafer – Su distribuidor de Confianza",
-  description: "Centro Ferretero Mafer S.A.S, es una entidad debidamente constituida, especializada en la venta de productos de ferretería en general y construcción, con el objeto de ofrecer un servicio integral a todos nuestros clientes, contamos con el personal humano mas idóneo, una infraestructura organizacional, la cual nos permite que el desarrollo de nuestro objeto social trascienda a nuestros clientes en una calidad de servicio, brindando una oportuna y efectiva atención, lo que garantiza los resultados mas confiables.",
+  title: "Ruisu's Software",
+  description: "Somos una tienda de cómputo dedicada a proporcionar soluciones tecnológicas innovadoras y de alta calidad. Nuestro propósito es equipar a individuos y empresas con el mejor software y hardware disponible, facilitando su acceso a herramientas esenciales para la productividad y el entretenimiento. Ofrecemos una amplia gama de productos, desde software especializado hasta componentes de hardware, respaldados por un servicio al cliente excepcional y soporte técnico experto para garantizar la satisfacción y el éxito de nuestros clientes.",
 };
 
 export default function RootLayout({
@@ -21,6 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href={logo.src} sizes="any" />
+      </head>
       <body className={openSans.className}>
         <Navbar/>
         <UnderLineNav/>

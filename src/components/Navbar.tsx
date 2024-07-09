@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import logoGif from "@/assets/img/LogoCompletoRojo.gif";
+import logo from "@/assets/img/logo sin fondo.png";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
 
@@ -19,7 +19,7 @@ const NavBar: React.FC<navProps> = () => {
                     href="/"
                 >
                     <Image
-                        src={logoGif}
+                        src={logo}
                         alt="Logo en movimiento de Centro Ferretero Mafer"
                         width={720 / 2.5}
                         height={140 / 2.5}
