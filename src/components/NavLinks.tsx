@@ -17,7 +17,7 @@ const links=[
     {href:"/",nameLink:"Inicio"},
     {href:"/products",nameLink:"Productos"},
     {href:"/discounts",nameLink:"Descuentos"},
-    {href:"/JOSC",nameLink:"JOSC"},
+    {href:"/ruisus",nameLink:"Marca Propia"},
     {href:"/events",nameLink:"Eventos"},
     {href:"/about-us",nameLink:"Sobre nosotros"}
 ]

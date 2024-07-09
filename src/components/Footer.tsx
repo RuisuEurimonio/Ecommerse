@@ -101,7 +101,7 @@ const Footer: React.FC<FooterProps> = () => {
                             "> <Link href="/discounts"> Descuentos. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/Ruisus"> Marca Propia. </Link> </li>
+                            "> <Link href="/ruisus"> Marca Propia. </Link> </li>
                         </ul> 
                         <ul className="text-black-mafer font-semibold text-center basis-1/2">
                             <li className="font-bold text-base
@@ -111,7 +111,7 @@ const Footer: React.FC<FooterProps> = () => {
                             "> <Link href="/about-us"> Sobre nosotros.  </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
-                            "> <Link href="/Ruisus"> Nuestra marca. </Link> </li>
+                            "> <Link href="/ruisus"> Nuestra marca. </Link> </li>
                             <li className="pl-1 text-sm font-semibold
                                 xl:text-base
                             "> <Link href="/about-us#paymethods"> Medios de pago. </Link> </li>
@@ -120,14 +120,14 @@ const Footer: React.FC<FooterProps> = () => {
                 </div>
                 <hr/>
                 <div className="relative py-3">
-                    <h4 className="text-xs text-center"> © Centro Ferretero Mafer 2024. Todos los derechos reservados. Desarrollado por Ruisu's Software </h4>
+                    <h4 className="text-xs text-center"> © Ruisu's Software 2024. Todos los derechos reservados. </h4>
                     <ul className="justify-center flex gap-5  mt-3
                         xl:absolute xl:right-0 xl:top-1/2 xl:-translate-y-1/2 xl:text-xl xl:justify-normal xl:mt-0
                     ">
-                        <li> <Link target="_blank" href="https://www.instagram.com/centro_ferretero_mafer_sas"> <span className="icon icon-instagram"/> </Link> </li>
-                        <li> <Link target="_blank" href="https://www.facebook.com/CentroFerreteroMaferSAS"> <span className="icon icon-facebook"/> </Link> </li>
-                        <li> <Link target="_blank" href="https://www.tiktok.com/@centrofmafer"> <span className="icon icon-tiktok"/> </Link> </li>
-                        <li> <Link target="_blank" href="https://centroferreteromafer.com/"> <span className="icon icon-globe"/> </Link> </li>
+                        <li> <Link target="_blank" href="https://www.instagram.com"> <span className="icon icon-instagram"/> </Link> </li>
+                        <li> <Link target="_blank" href="https://www.facebook.com"> <span className="icon icon-facebook"/> </Link> </li>
+                        <li> <Link target="_blank" href="https://www.tiktok.com"> <span className="icon icon-tiktok"/> </Link> </li>
+                        <li> <Link target="_blank" href="https://github.com/RuisuEurimonio"> <span className="icon icon-globe"/> </Link> </li>
                     </ul>
                 </div>
             </div>

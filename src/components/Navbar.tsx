@@ -29,25 +29,21 @@ const NavBar: React.FC<navProps> = () => {
                 <div
                     className="
                     w-[50%]
-                    md:w-[30%]
-                "
+                    md:w-[30%]"
                 >
                     <form
                         className="w-[90%] m-auto flex 
                         md:h-7
-                        xl:h-10 xl:w-full
-                        "
+                        xl:h-10 xl:w-full"
                     >
                         <input
                             className="w-4/5 rounded-l-3xl pl-5 outline-none text-base
-                            md:h-full 
-                        "
+                            md:h-full"
                             placeholder="Buscar"
                         />
                         <button
                             className="w-1/5 bg-white-mafer rounded-r-3xl h-full border-l-2 text-base
-                            md:h-full 
-                        "
+                            md:h-full"
                             name="Buscar"
                         >
                             <span className="icon icon-search"></span>
@@ -58,8 +54,7 @@ const NavBar: React.FC<navProps> = () => {
                 <div
                     className="text-base text-nowrap h-7 hidden
                     xl:text-xl xl:h-full
-                    md:block
-                "
+                    md:block"
                 >
                     <Link href="/shopping-cart">
                         <button className="h-full border-r-[0.5px]">
