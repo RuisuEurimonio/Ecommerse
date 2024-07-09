@@ -34,7 +34,7 @@ const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPri
                 <View>
                     <Text style={styles.headerTitle}>COTIZACIÓN</Text>
                     <Text style={styles.headerSubitems}>{formattedDate}</Text>
-                    <Text style={styles.headerSubitems}>Cliente: Lauro Tauro</Text>
+                    <Text style={styles.headerSubitems}>Cliente: Lauro Tauro</Text> {/* TODO: update the client info */}
                     <Text style={styles.headerSubitems}>Vendedor: Generado por página web.</Text>
                 </View>
                 <View>
@@ -63,21 +63,21 @@ const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPri
                             </View>
                     {items.map((item)=>{
                         return(
-                            <View style={styles.tableRowView} key={item[0].SKU}>
+                            <View style={styles.tableRowView} key={item[0].sku}>
                                 <View style={[styles.tableCell, styles.borderOfLastElement]}>
-                                    <Text>{moneyFormatter(parseFloat(item[0].precio) * item[1])}</Text>
+                                    <Text>{moneyFormatter(item[0].precio * item[1])}</Text>
                                 </View>
                                 <View style={styles.tableCell}>
                                     <Text>{item[1]}</Text>
                                 </View>
                                 <View style={styles.tableCell}>
-                                    <Text>{moneyFormatter(parseFloat(item[0].precio))}</Text>
+                                    <Text>{moneyFormatter(item[0].precio)}</Text>
                                 </View>
                                 <View style={styles.tableCell}>
                                     <Text>{item[0].nombre}</Text>
                                 </View>
                                 <View style={styles.tableCell}>
-                                    <Text>{item[0].SKU}</Text>
+                                    <Text>{item[0].sku}</Text>
                                 </View>
                             </View>
                         )

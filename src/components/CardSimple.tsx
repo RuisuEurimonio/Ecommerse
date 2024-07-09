@@ -27,7 +27,7 @@ const CardSimple: React.FC<CardSimpleProps> = ({
             className={`bg-black-mafer/5 min-w-[10rem] flex flex-col justify-between
             ${newsletter ? "" : "flex-1"}`}
         >
-            <Link href="">  {/* TODO, ajustar este link para que sea dinamico  */}
+            <Link href={"/products/"+product.id+"?name="+product.nombre}> 
                 <div className="relative">
                     {discount && (
                         <React.Fragment>
@@ -38,10 +38,12 @@ const CardSimple: React.FC<CardSimpleProps> = ({
                     <Image
                         src={product?.imagen || newsletter?.img || imageNotFound}
                         alt="Image not found"
-                        width={400}
-                        height={150}
-                        style={{ width: 400, height: 150}} // style attribute fix the Image component error
+                        width={0}
+                        height={0}
+                        sizes="300"
+                        style={{ width: 400, height: 150}} 
                         className="m-auto object-cover"
+                        priority={false}
                     />
                 </div>
                 <div className="px-2">

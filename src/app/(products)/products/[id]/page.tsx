@@ -67,9 +67,11 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                             className="w-3/4 m-auto mt-2 rounded-sm"
                             src={data.imagen}
                             alt={data.descripcion}
-                            width={200}
-                            height={150}
-                            style={{width: 200, height: 150}}
+                            width={0}
+                            height={0}
+                            sizes="200"
+                            style={{ width: 300, height: "auto"}}
+                            priority={false}
                         />
                         <ul className="grid grid-cols-4 m-1 gap-1">
                             <li className="m-auto">
@@ -77,8 +79,11 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                                     className="rounded-sm"
                                     src={data.imagen}
                                     alt={data.descripcion}
-                                    width={50}
-                                    height={50}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: "auto"}}
+                                    priority={false}
                                 />
                             </li>
                             <li className="m-auto">
@@ -86,8 +91,11 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                                     className="rounded-sm"
                                     src={data.imagen}
                                     alt={data.descripcion}
-                                    width={50}
-                                    height={50}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: "auto"}}
+                                    priority={false}
                                 />
                             </li>
                             <li className="m-auto">
@@ -95,8 +103,11 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                                     className="rounded-sm"
                                     src={data.imagen}
                                     alt={data.descripcion}
-                                    width={50}
-                                    height={50}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: "auto"}}
+                                    priority={false}
                                 />
                             </li>
                             <li className="m-auto">
@@ -104,8 +115,11 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                                     className="rounded-sm"
                                     src={data.imagen}
                                     alt={data.descripcion}
-                                    width={50}
-                                    height={50}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: 50}}
+                                    priority={false}
                                 />
                             </li>
                         </ul>

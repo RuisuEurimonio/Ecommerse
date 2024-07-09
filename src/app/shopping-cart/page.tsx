@@ -51,7 +51,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
     function getBillDeatils(){
         let total = 0;
         listOfItems.forEach((item)=>{
-            total += parseInt(item[0].precio) * item[1];
+            total += item[0].precio * item[1];
         })
         setTotalBill(total);
     }
@@ -60,7 +60,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         let total = 0;
         listOfItems.forEach((item)=>{
             if (item[0].descuento){
-                total += (parseInt(item[0].precio) * 0.14) * item[1]; //TODO: Implement with the real database data.
+                total += (item[0].precio * 0.14) * item[1]; //TODO: Implement with the real database data.
             }
         })
         setTotalDiscounts(total);

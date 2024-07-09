@@ -84,7 +84,6 @@ const Products: React.FC<ProductsProps> = () => {
                                     perPage * pageNum
                                 )
                                 .map((item) => {
-                                    console.log(data);
                                     return(
                                     <CardItem
                                         key={item.id}
