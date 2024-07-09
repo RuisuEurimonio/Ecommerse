@@ -14,7 +14,7 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
 
     return (
         <div>
-            <h1 className="text-lg text-blue-mafer font-bold text-center my-2">
+            <h1 className="text-lg text-secondary-color font-bold text-center my-2">
                 {" "}
                 Nuestras sedes.{" "}
             </h1>
@@ -55,7 +55,7 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
                 ">
                     <label
                         htmlFor="selectOffice1"
-                        className=" block bg-blue-mafer font-bold py-1 px-2 text-white-mafer rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
+                        className=" block bg-secondary-color font-bold py-1 px-2 text-third-color rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
                     >
                         Sede principal
                         <input
@@ -70,7 +70,7 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
                     </label>
                     <label
                         htmlFor="selectOffice2"
-                        className=" block bg-blue-mafer font-bold py-1 px-2 text-white-mafer rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
+                        className=" block bg-secondary-color font-bold py-1 px-2 text-third-color rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
                     >
                         Sede Paloquemao
                         <input
@@ -85,7 +85,7 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
                     </label>
                     <label
                         htmlFor="selectOffice3"
-                        className=" block bg-blue-mafer font-bold py-1 px-2 text-white-mafer rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
+                        className=" block bg-secondary-color font-bold py-1 px-2 text-third-color rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
                     >
                         Sede MetroTech
                         <input

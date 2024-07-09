@@ -282,7 +282,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
             <input
                 type="submit"
                 value="Enviar"
-                className="bg-blue-mafer text-white px-2 py-1 rounded-sm text-right cursor-pointer float-right"
+                className="bg-secondary-color text-white px-2 py-1 rounded-sm text-right cursor-pointer float-right"
             />
         </form>
     );

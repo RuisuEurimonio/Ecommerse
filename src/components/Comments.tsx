@@ -36,7 +36,7 @@ const Comments : React.FC<CommentsProps> = () => {
                 </div>
             ))}
             <div className="flex flex-row-reverse justify-center">
-                <button className="py-1 px-3 mb-2 bg-black-mafer/80 text-white-mafer hover:bg-black-mafer"> Escribir una opinión. </button>
+                <button className="py-1 px-3 mb-2 bg-fourth-color/80 text-third-color hover:bg-fourth-color"> Escribir una opinión. </button>
             </div>
         </>
     )

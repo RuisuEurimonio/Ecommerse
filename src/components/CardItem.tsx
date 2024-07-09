@@ -32,7 +32,7 @@ const CardItem: React.FC<CardItemProps> = ({
             <div className="relative">
                 {discount && (
                     <React.Fragment>
-                        <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-red-mafer border-l-transparent border-b-transparent"/>
+                        <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-principal-color border-l-transparent border-b-transparent"/>
                         <span className="absolute top-0.8 right-1 font-bold text-lg"> % </span>
                     </React.Fragment>
                 )}
@@ -74,7 +74,7 @@ const CardItem: React.FC<CardItemProps> = ({
                 {!itemCart ?
                 <>
                     <button
-                        className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
+                        className="bg-secondary-color/80 hover:bg-secondary-color text-third-color py-1 px-2 rounded-md transition
                         lg:text-xs
                         2xl:text-sm"
                         onClick={()=> askForSaveProduct(item) }
@@ -93,7 +93,7 @@ const CardItem: React.FC<CardItemProps> = ({
                 :
                 <>
                     <button
-                            className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition
+                            className="bg-secondary-color/80 hover:bg-secondary-color text-third-color py-1 px-2 rounded-md transition
                             lg:text-xs
                             2xl:text-sm"
                             onClick={(event)=> {

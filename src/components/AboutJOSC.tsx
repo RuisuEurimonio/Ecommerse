@@ -18,7 +18,7 @@ const AboutJosc : React.FC<AboutJoscProps> = ({fullContent = true}) => {
             <h2 className="custom_title"> Nuestra marca JOSC. </h2>
             <p className="text-justify
                 xl:text-base
-            "> <span className="text-blue-mafer font-bold"> JOSC </span> es la insignia líder en productos ferreteros y de construcción, destacando por su excelente relación calidad-precio. Nuestra oferta abarca una amplia gama de productos, desde siliconas de alta calidad hasta sprays especializados y pegamentos cerámicos confiables. Cada artículo está diseñado meticulosamente para brindar un rendimiento óptimo en diversas aplicaciones. Mantenemos un compromiso firme con la calidad sin sacrificar la accesibilidad, asegurando que nuestros clientes obtengan el mejor valor por su inversión en cada producto <span className="text-blue-mafer font-bold"> JOSC. </span> </p>
+            "> <span className="text-secondary-color font-bold"> JOSC </span> es la insignia líder en productos ferreteros y de construcción, destacando por su excelente relación calidad-precio. Nuestra oferta abarca una amplia gama de productos, desde siliconas de alta calidad hasta sprays especializados y pegamentos cerámicos confiables. Cada artículo está diseñado meticulosamente para brindar un rendimiento óptimo en diversas aplicaciones. Mantenemos un compromiso firme con la calidad sin sacrificar la accesibilidad, asegurando que nuestros clientes obtengan el mejor valor por su inversión en cada producto <span className="text-secondary-color font-bold"> JOSC. </span> </p>
             {fullContent && (
             <>
                 <div className="my-3 flex flex-wrap gap-4">
@@ -27,7 +27,7 @@ const AboutJosc : React.FC<AboutJoscProps> = ({fullContent = true}) => {
                     ))}
                 </div>
                 <div className="flex items-center">
-                    <button className="text-lg text-center bg-red-mafer/85 hover:bg-red-mafer transition text-black-mafer py-1 px-2 inline mx-auto rounded-md"> <Link href=""> Conoce más. </Link> </button>
+                    <button className="text-lg text-center bg-principal-color/85 hover:bg-principal-color transition text-fourth-color py-1 px-2 inline mx-auto rounded-md"> <Link href=""> Conoce más. </Link> </button>
                 </div>
             </>)
             }

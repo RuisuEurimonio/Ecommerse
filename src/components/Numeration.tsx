@@ -55,7 +55,7 @@ const Numeration : React.FC<NumerationProps> = ({dataLength, itemsByPage, classN
     }
 
     return(
-    <ul className={`text-white-mafer flex flex-wrap justify-center text-lg items-center ${className}`}>
+    <ul className={`text-third-color flex flex-wrap justify-center text-lg items-center ${className}`}>
         <li className="mr-2 py-2" onClick={before}> <span className="icon icon-arrowl cursor-pointer" ></span></li>
         {pages.slice(
             (pageNum<=paginationCant)?0:pageNum-paginationCant-1,

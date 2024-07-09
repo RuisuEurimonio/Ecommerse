@@ -36,12 +36,12 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                 onClick={()=>{setActive(!active)}}>
                     <span className="icon icon-bars" />
             </button>
-            <div className={`fixed right-0 top-0 w-[320px] h-screen bg-light-white-mafer border-2 transition duration-500 z-40
+            <div className={`fixed right-0 top-0 w-[320px] h-screen bg-light-third-color border-2 transition duration-500 z-40
                 md:static md:translate-x-0 md:px-0 md:py-0 md:h-auto md:border-0 md:w-auto
                 ${active ? "translate-x-0" : "translate-x-full"}
             `}
             >
-                <div className=" w-full bg-red-mafer">
+                <div className=" w-full bg-principal-color">
                     <div className="flex w-11/12 flex-row-reverse">
                         <button className="relative right-0 px-2 py-1 text-2xl
                         md:hidden"
@@ -52,10 +52,10 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                     </div>
                 </div>
                 <div className="px-6 py-2 
-                md:bg-red-mafer md:px-0
+                md:bg-principal-color md:px-0
                 ">
                     <h3 className="md:hidden font-bold text-lg"> Menu: </h3>
-                    <ul className="text-black-mafer text-center m-5 font-bold items-center gap-3 text-lg flex-col flex
+                    <ul className="text-fourth-color text-center m-5 font-bold items-center gap-3 text-lg flex-col flex
                         md:flex md:flex-row md:text-sm md:m-0
                         lg:gap-3 lg:m-2 
                         2xl:text-base
@@ -63,7 +63,7 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                         {links.map((link:LinkProps)=>{
                             const style = (pathName==link.href) ? "font-extrabold underline underline-offset-8" : "font-bold";
                         return(
-                            <li key={link.nameLink}><Link onClick={()=>{setActive(!active)}} href={link.href} className={`hover:text-black-mafer font- hover:underline hover:underline-offset-8 ${style}`}> {link.nameLink} </Link></li>
+                            <li key={link.nameLink}><Link onClick={()=>{setActive(!active)}} href={link.href} className={`hover:text-fourth-color font- hover:underline hover:underline-offset-8 ${style}`}> {link.nameLink} </Link></li>
                         )}
                         )}
                     </ul>

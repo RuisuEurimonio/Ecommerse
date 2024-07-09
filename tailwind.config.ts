@@ -9,13 +9,12 @@ const config: Config = {
   theme: {
     extend:{
       colors: {
-        'red-mafer': "#f11009",
-        'blue-mafer': "#0c1e5e",
-        'white-mafer': "#ffffff",
-        "black-mafer": "#000000",
-        "transparent": "transparent",
-        "light-white-mafer": "#FFFFF7",
-        "gray": "#d3d3d3 "
+        'principal-color': "#0D0D0D",
+        'secondary-color': "#442273",
+        'third-color': "#F2F2F2",
+        "fourth-color": "#9C5EF2",
+        "fifth-color": "#A772F2",
+        "sixth-color": "#B678F4"
       },
     }
   },

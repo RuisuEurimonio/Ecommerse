@@ -49,7 +49,7 @@ const Reviews: React.FC<ReviewProps> = () => {
 
     return (
         <div>
-            <h2 className="text-blue-mafer text-center font-bold text-lg">
+            <h2 className="text-secondary-color text-center font-bold text-lg">
                 {" "}
                 Testimonios.{" "}
             </h2>
@@ -66,7 +66,7 @@ const Reviews: React.FC<ReviewProps> = () => {
                                 className="shadow-2xl p-3 rounded-lg min-w-[12rem]"
                             >
                                 <div className="flex gap-3 items-center h-1/5">
-                                    <span className="size-8 p-4 border-2 flex justify-center items-center rounded-full font-bold text-xl border-black-mafer/50">
+                                    <span className="size-8 p-4 border-2 flex justify-center items-center rounded-full font-bold text-xl border-fourth-color/50">
                                         {" "}
                                         {item.first_name.slice(0, 1)}{" "}
                                     </span>
@@ -74,7 +74,7 @@ const Reviews: React.FC<ReviewProps> = () => {
                                         {" "}
                                         {item.first_name} {item.last_name}{" "}
                                     </h3>
-                                    <p className="text-sm text-black-mafer/60 text-center">
+                                    <p className="text-sm text-fourth-color/60 text-center">
                                         {" "}
                                         {date.getDate().toString()}{" "}
                                         {nombresMeses[date.getMonth()]}

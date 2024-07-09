@@ -19,7 +19,7 @@ const HistoryNavigation : React.FC<HistoryNavigationProps> = ({items}) => {
                 <React.Fragment key={item.names}>
                     {item.names && <span className="icon icon-arrowr"></span>}
                     <Link href={item.url ?? "#"}>
-                        <span className="text-black-mafer/50"> {item.names} </span>    
+                        <span className="text-fourth-color/50"> {item.names} </span>    
                     </Link>
                 </React.Fragment>
             ))}

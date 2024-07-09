@@ -10,7 +10,7 @@ const ProductPrice: React.FC<ProductPriceProp> = ({ data }) => {
     return (
         <>
             <h4
-                className={`mt-2 text-red-mafer inline-block font-bold 
+                className={`mt-2 text-principal-color inline-block font-bold 
                             ${data.descuento ? "xl:text-xl" : "text-2xl"}
                             ${data.descuento ? "xl:text-2xl" : "xl:text-3xl"}
                             ${data.descuento && "line-through"}
@@ -20,7 +20,7 @@ const ProductPrice: React.FC<ProductPriceProp> = ({ data }) => {
             </h4>
             {data.descuento && (
                 <h4
-                    className="no-underline text-2xl my-1 text-red-mafer font-bold 
+                    className="no-underline text-2xl my-1 text-principal-color font-bold 
                                     sm:inline-block sm:mx-2
                                     xl:text-3xl
                             "

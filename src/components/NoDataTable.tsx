@@ -7,18 +7,18 @@ type NoDataTableProps = {
 const NoDataTable : React.FC<NoDataTableProps> = ({message, titleName, secondaryMessage}) =>{
     return(
         <table className="table-fixed w-full">
-            <thead className="bg-blue-mafer text-white text-sm
+            <thead className="bg-secondary-color text-white text-sm
                     xl:text-base">
                 <tr>
                     <th> {titleName ? titleName : "Error"} </th>
                 </tr>
             </thead>
             <tbody>
-                <tr className="text-center odd:bg-blue-mafer/10  break-words text-xs
+                <tr className="text-center odd:bg-secondary-color/10  break-words text-xs
                                 xl:text-sm">
                     <td> {message} </td>
                 </tr>
-                {secondaryMessage && <tr className="text-center odd:bg-blue-mafer/10  break-words text-xs
+                {secondaryMessage && <tr className="text-center odd:bg-secondary-color/10  break-words text-xs
                                 xl:text-sm">
                     <td> {secondaryMessage} </td>
                 </tr>}

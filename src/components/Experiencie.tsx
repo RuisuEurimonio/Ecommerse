@@ -37,9 +37,9 @@ const Experiencie: React.FC<ExperiencieProps> = () => {
     }, [clients, employers, office]);
 
     return (
-        <div className="bg-red-mafer p-4 rounded-sm h-full">
+        <div className="bg-principal-color p-4 rounded-sm h-full">
             <ul
-                className="text-white-mafer flex flex-col divide-y-2 text-center h-full
+                className="text-third-color flex flex-col divide-y-2 text-center h-full
                 md:flex-row md:divide-y-0 md:justify-center md:divide-x-2
             "
             >

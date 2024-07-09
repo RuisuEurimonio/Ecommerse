@@ -10,7 +10,7 @@ type FooterProps ={
 
 const Footer: React.FC<FooterProps> = () => {
     return (
-        <footer className="bg-red-mafer w-full">
+        <footer className="bg-principal-color w-full">
             <div className="w-[90%] m-auto
                 lg:w-[80%]
             ">
@@ -41,7 +41,7 @@ const Footer: React.FC<FooterProps> = () => {
                         sm:flex-nowrap sm:items-start
                         xl:justify-normal 
                     ">
-                        <ul className="text-black-mafer text-sm text-center basis-full">
+                        <ul className="text-fourth-color text-sm text-center basis-full">
                             <li className="font-bold text-base
                                 xl:text-lg
                             "> Contactanos:  </li>
@@ -84,7 +84,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 "> Sábado /7:00 AM - 4:00 PM. </p>
                             </li>
                         </ul>
-                        <ul className="text-black-mafer font-semibold text-center basis-1/2">
+                        <ul className="text-fourth-color font-semibold text-center basis-1/2">
                             <li className="font-bold text-base
                                 xl:text-lg"> Tienda: </li>
                             <li className="pl-1 text-sm font-semibold
@@ -103,7 +103,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 xl:text-base
                             "> <Link href="/ruisus"> Marca Propia. </Link> </li>
                         </ul> 
-                        <ul className="text-black-mafer font-semibold text-center basis-1/2">
+                        <ul className="text-fourth-color font-semibold text-center basis-1/2">
                             <li className="font-bold text-base
                                 xl:text-lg"> Información: </li>
                             <li className="pl-1 text-sm font-semibold

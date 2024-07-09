@@ -24,14 +24,14 @@ const CardSimple: React.FC<CardSimpleProps> = ({
 
     return (
         <li
-            className={`bg-black-mafer/5 min-w-[10rem] flex flex-col justify-between
+            className={`bg-fourth-color/5 min-w-[10rem] flex flex-col justify-between
             ${newsletter ? "" : "flex-1"}`}
         >
             <Link href={"/products/"+product.id+"?name="+product.nombre}> 
                 <div className="relative">
                     {discount && (
                         <React.Fragment>
-                            <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-red-mafer border-l-transparent border-b-transparent" />
+                            <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-principal-color border-l-transparent border-b-transparent" />
                             <span className="absolute top-0.8 right-1 font-bold text-lg"> % </span>
                         </React.Fragment>
                     )}
@@ -59,7 +59,7 @@ const CardSimple: React.FC<CardSimpleProps> = ({
                 </div>
             </Link>
             <button
-                className="bg-blue-mafer/80 hover:bg-blue-mafer text-white-mafer py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs
+                className="bg-secondary-color/80 hover:bg-secondary-color text-third-color py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs
                     lg:text-sm"
                     onClick={()=> askForSaveProduct(product) }
             >

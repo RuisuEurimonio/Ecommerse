@@ -11,7 +11,7 @@ type InfoItemCardProps = {
 const InfoItemCard: React.FC<InfoItemCardProps> = ({ data, link }) => {
     return (
         <div className="w-full border-2 p-2 rounded-sm my-1 flex flex-wrap items-center justify-evenly">
-            <p className="text-black-mafer/50 text-sm left-0 text-end mb-1.5 flex-[100%]">
+            <p className="text-fourth-color/50 text-sm left-0 text-end mb-1.5 flex-[100%]">
                 {" "}
                 {data.date}{" "}
             </p>
@@ -29,7 +29,7 @@ const InfoItemCard: React.FC<InfoItemCardProps> = ({ data, link }) => {
                 <h2 className="text-xl font-bold mt-1
                     md:text-lg
                 "> {data.title} {data.id} </h2>
-                <h3 className="text-lg text-black-mafer/50
+                <h3 className="text-lg text-fourth-color/50
                     md:text-base
                 "> {data.Subtitle} </h3>
                 <p className="line-clamp-[8] float-left
@@ -37,7 +37,7 @@ const InfoItemCard: React.FC<InfoItemCardProps> = ({ data, link }) => {
                     xl:line-clamp-4
                 "> {data.text} </p>
                 <Link href={`/${link}/${data.id}`}>
-                    <button className="bg-black-mafer text-white-mafer py-1.5 px-3 rounded-sm float-right">
+                    <button className="bg-fourth-color text-third-color py-1.5 px-3 rounded-sm float-right">
                         {" "}
                         Conoce más.{" "}
                     </button>

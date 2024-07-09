@@ -245,14 +245,14 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
                     <input
                         type="submit"
                         value="Confirmar"
-                        className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm cursor-pointer"
+                        className="bg-secondary-color text-white mt-2 px-2 py-1 rounded-sm cursor-pointer"
                     />
                 </div>
                 :
                 <input
                     type="submit"
                     value="Enviar"
-                    className="bg-blue-mafer text-white mt-2 px-2 py-1 rounded-sm cursor-pointer float-right"
+                    className="bg-secondary-color text-white mt-2 px-2 py-1 rounded-sm cursor-pointer float-right"
                 />
             }
         </form>

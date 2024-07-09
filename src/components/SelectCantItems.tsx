@@ -19,7 +19,7 @@ export const SelectCantItems: React.FC<SelectCantItemsProps> = ({perPage, classN
 
     return (
         <div className={className}>
-            <label className="text-white-mafer"> Cantidad por pagina: </label>
+            <label className="text-third-color"> Cantidad por pagina: </label>
             <select
                 name="order"
                 className="outline-none cursor-pointer rounded-sm mx-1"
