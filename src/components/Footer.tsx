@@ -31,7 +31,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 className="w-full h-auto object-cover"
                             />
                         </div>
-                        <p className="block mx-5 text-justify py-4 text-sm 
+                        <p className="block mx-5 text-justify py-4 text-sm text-third-color
                             sm:w-8/12
                             xl:py-0
                             2xl:text-base
@@ -49,10 +49,10 @@ const Footer: React.FC<FooterProps> = () => {
                                 <h3 className="pl-1 text-sm font-semibold
                                     xl:text-base
                                 "> Ubicación: </h3> 
-                                <p className="pl-3 text-xs
+                                <p className="pl-3 text-xs text-third-color
                                     xl:text-sm
                                 "> Éngativa </p>
-                                <p className="pl-3 text-xs
+                                <p className="pl-3 text-xs text-third-color
                                     xl:text-sm
                                 "> Bogotá Colombia. </p>
                             </li>
@@ -60,7 +60,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 <h3 className="pl-1 text-sm font-semibold
                                     xl:text-base
                                 "> Correo: </h3> 
-                                <p className="pl-3 text-xs
+                                <p className="pl-3 text-xs text-third-color
                                     xl:text-sm
                                 "> soporte@ruisussoftware.com </p>
                             </li>
@@ -68,7 +68,7 @@ const Footer: React.FC<FooterProps> = () => {
                                 <h3 className="pl-1 text-sm font-semibold
                                     xl:text-base
                                 "> Telefono: </h3> 
-                                <p className="pl-3 text-xs
+                                <p className="pl-3 text-xs text-third-color
                                     xl:text-sm
                                 ">PBX: 601 9494 </p>
                             </li>
@@ -76,10 +76,10 @@ const Footer: React.FC<FooterProps> = () => {
                                 <h3 className="pl-1 text-sm font-semibold
                                     xl:text-base
                                 "> Horario: </h3>
-                                <p className="pl-3 text-xs
+                                <p className="pl-3 text-xs text-third-color
                                     xl:text-sm
                                 "> Lunes - Viernes / 7:00 AM - 5:00 PM.</p>
-                                <p className="pl-3 text-xs
+                                <p className="pl-3 text-xs text-third-color
                                     xl:text-sm
                                 "> Sábado /7:00 AM - 4:00 PM. </p>
                             </li>
@@ -87,32 +87,32 @@ const Footer: React.FC<FooterProps> = () => {
                         <ul className="text-fourth-color font-semibold text-center basis-1/2">
                             <li className="font-bold text-base
                                 xl:text-lg"> Tienda: </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/products"> Productos. </Link> </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/products"> Marcas. </Link> </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/products"> Categorias. </Link> </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/discounts"> Descuentos. </Link> </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/ruisus"> Marca Propia. </Link> </li>
                         </ul> 
                         <ul className="text-fourth-color font-semibold text-center basis-1/2">
                             <li className="font-bold text-base
                                 xl:text-lg"> Información: </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/about-us"> Sobre nosotros.  </Link> </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/ruisus"> Nuestra marca. </Link> </li>
-                            <li className="pl-1 text-sm font-semibold
+                            <li className="pl-1 text-sm font-semibold text-third-color
                                 xl:text-base
                             "> <Link href="/about-us#paymethods"> Medios de pago. </Link> </li>
                         </ul>
@@ -120,8 +120,8 @@ const Footer: React.FC<FooterProps> = () => {
                 </div>
                 <hr/>
                 <div className="relative py-3">
-                    <h4 className="text-xs text-center"> © Ruisu's Software 2024. Todos los derechos reservados. </h4>
-                    <ul className="justify-center flex gap-5  mt-3
+                    <h4 className="text-xs text-center text-third-color"> © Ruisu's Software 2024. Todos los derechos reservados. </h4>
+                    <ul className="justify-center flex gap-5  mt-3 text-fifth-color
                         xl:absolute xl:right-0 xl:top-1/2 xl:-translate-y-1/2 xl:text-xl xl:justify-normal xl:mt-0
                     ">
                         <li> <Link target="_blank" href="https://www.instagram.com"> <span className="icon icon-instagram"/> </Link> </li>
