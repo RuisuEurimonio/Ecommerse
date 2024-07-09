@@ -1,7 +1,7 @@
 import React from "react";
-import ferreteria from "@/assets/img/ferreteria.jpg"
-import construccion from "@/assets/img/construccion.jpeg"
-import seguridad from "@/assets/img/seguridad.jpg"
+import setup from "@/assets/img/setup.jpg"
+import components from "@/assets/img/components.avif"
+import peripherals from "@/assets/img/PC-Peripherals-scaled.webp"
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,8 +20,8 @@ import Link from "next/link";
                  ${(main) ? "lg:h-60" : "lg:h-44"}
              `}> 
                  <Link href="/" className="relative flex justify-center items-center h-full">
-                     <Image src={ferreteria} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
-                     <p className="absolute z-20 font-bold text-white-mafer bg-black-mafer/50 p-2 rounded-lg"> Ferreteria. </p>
+                     <Image src={setup} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
+                     <p className="absolute z-20 font-bold text-white-mafer bg-black-mafer/50 p-2 rounded-lg"> Setups. </p>
                  </Link> 
              </li>
              <li className={`flex-[100%] flex-grow-0 h-14
@@ -30,8 +30,8 @@ import Link from "next/link";
                  ${(main) ? "lg:h-60" : "lg:h-44"}
              `}> 
                  <Link href="/" className="relative flex justify-center items-center h-full ">
-                     <Image src={construccion} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
-                     <p className="absolute z-20 font-bold text-white-mafer bg-black-mafer/50 p-2 rounded-lg"> Construcción. </p>
+                     <Image src={components} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
+                     <p className="absolute z-20 font-bold text-white-mafer bg-black-mafer/50 p-2 rounded-lg"> Componentes. </p>
                  </Link> 
              </li>
              <li className={`flex-[100%] flex-grow-0 h-14
@@ -40,8 +40,8 @@ import Link from "next/link";
                  ${(main) ? "lg:h-60" : "lg:h-44"}
              `}> 
                  <Link href="/" className="relative flex justify-center items-center h-full ">
-                     <Image src={seguridad} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
-                     <p className="absolute z-20 font-bold text-white-mafer bg-black-mafer/50 p-2 rounded-lg"> Seguridad industrial. </p>
+                     <Image src={peripherals} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
+                     <p className="absolute z-20 font-bold text-white-mafer bg-black-mafer/50 p-2 rounded-lg"> Perífericos </p>
                  </Link> 
              </li>
          </ul>
