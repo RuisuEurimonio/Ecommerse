@@ -11,7 +11,7 @@ import imageNotFound from "@/assets/img/imageNotFound.jpg";
 import { askForSaveProduct } from "./utils";
 
 type CardSimpleProps = {
-    product: ArticleProps;
+    product?: ArticleProps;
     discount?: boolean;
     newsletter?: NewsLetterProps;
 };
@@ -27,11 +27,11 @@ const CardSimple: React.FC<CardSimpleProps> = ({
             className={`bg-fourth-color/5 min-w-[10rem] flex flex-col justify-between
             ${newsletter ? "" : "flex-1"}`}
         >
-            <Link href={"/products/"+product.id+"?name="+product.nombre}> 
+            <Link href={ product ? ("/products/"+product.id+"?name="+product.nombre) : ("/events/"+newsletter?.id)}> 
                 <div className="relative">
                     {discount && (
                         <React.Fragment>
-                            <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-principal-color border-l-transparent border-b-transparent" />
+                            <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-fifth-color border-l-transparent border-b-transparent" />
                             <span className="absolute top-0.8 right-1 font-bold text-lg"> % </span>
                         </React.Fragment>
                     )}
@@ -58,13 +58,21 @@ const CardSimple: React.FC<CardSimpleProps> = ({
                     </p>
                 </div>
             </Link>
-            <button
+            {product && <button
                 className="bg-secondary-color/80 hover:bg-secondary-color text-third-color py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs
                     lg:text-sm"
-                    onClick={()=> askForSaveProduct(product) }
+                    onClick={()=> {product ? askForSaveProduct(product) : ""} }
             >
-                {newsletter ? "Mas información" : "Agregar al carrito"}
-            </button>
+                Agregar al carrito
+            </button>}
+
+            {newsletter && <Link
+                className="bg-secondary-color/80 hover:bg-secondary-color text-third-color py-1 px-2 rounded-md transition w-4/5 mx-auto mb-2 text-xs text-center
+                    lg:text-sm"
+                    href={"/events/"+newsletter.id}
+            >
+                Agregar al carrito
+            </Link>}
         </li>
     );
 };

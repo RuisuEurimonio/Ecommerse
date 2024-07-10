@@ -34,18 +34,18 @@ const Events: React.FC<eventsProps> = () => {
             md:w-4/5"
         >
             <HistoryNavigation items={[{ names: "Eventos", url: "/events" }]} />
-            <h2 className="text text-center text-3xl text-blue-mafer font-bold"> Conocé lo último que esta pasando en MAFER. </h2>
+            <h2 className="text text-center text-3xl text-fourth-color font-bold"> Conocé lo último que esta pasando en MAFER. </h2>
             <div
                 className="flex flex-col-reverse my-3 gap-2
                 md:flex-row md:gap-5"
             >
                 <div
                     className="basis-1/4 flex flex-col gap-4
-                    md:border-2 md:my-1 md:p-2 md:rounded-sm md:h-full
+                    md:border-2 md:my-1 md:p-2 md:rounded-sm md:h-full md:border-fifth-color/50
                     xl:basis-1/5"
                 >
                     <h3
-                        className="font-bold text-blue-mafer text-2xl
+                        className="font-bold text-fourth-color text-2xl
                         md:text-center"
                     > Popular </h3>
                     {data.slice(0, 5).map((item) => (
@@ -61,7 +61,7 @@ const Events: React.FC<eventsProps> = () => {
                         .map((item) => (
                             <InfoItemCard data={item} key={item.id} link="events"/>
                         ))}
-                    <div className="bg-blue-mafer w-full flex flex-col-reverse items-center py-2
+                    <div className="bg-fifth-color w-full flex flex-col-reverse items-center py-2
                         lg:flex-row lg:justify-evenly lg:py-0">
                         <SelectCantItems perPage={perPage}/>
                         <Numeration dataLength={data.length} itemsByPage={perPage} />
