@@ -39,12 +39,12 @@ const Experiencie: React.FC<ExperiencieProps> = () => {
     return (
         <div className="bg-principal-color p-4 rounded-sm h-full">
             <ul
-                className="text-third-color flex flex-col divide-y-2 text-center h-full
-                md:flex-row md:divide-y-0 md:justify-center md:divide-x-2
+                className="text-fifth-color flex flex-col divide-y-2 text-center h-full
+                md:flex-row md:divide-y-0 md:justify-center md:divide-x-2 divide-fifth-color
             "
             >
                 <li
-                    className="flex flex-col items-center justify-center w-full pb-4
+                    className="flex flex-col items-center justify-center w-full pb-4 
                     md:p-0  
                 "
                 >
@@ -59,7 +59,7 @@ const Experiencie: React.FC<ExperiencieProps> = () => {
                 >
                     <span className="icon text-5xl icon-business"></span>
                     <span className="text-2xl font-bold">{employers}</span>{" "}
-                    Miembros de MAFER.{" "}
+                    Miembros del equipo.{" "}
                 </li>
                 <li
                     className="flex flex-col items-center justify-center w-full py-4
@@ -76,7 +76,7 @@ const Experiencie: React.FC<ExperiencieProps> = () => {
                 >
                     <span className="icon text-5xl icon-branch"></span>
                     <span className="text-2xl font-bold">{office}</span>{" "}
-                    Oficinas totales.{" "}
+                    Oficinas totales.
                 </li>
             </ul>
         </div>

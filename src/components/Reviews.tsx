@@ -49,9 +49,8 @@ const Reviews: React.FC<ReviewProps> = () => {
 
     return (
         <div>
-            <h2 className="text-secondary-color text-center font-bold text-lg">
-                {" "}
-                Testimonios.{" "}
+            <h2 className="text-fourth-color text-center font-bold text-lg">
+                Testimonios.
             </h2>
             <div className="w-full overflow-x-hidden rounded-md">
                 <ul
@@ -67,31 +66,26 @@ const Reviews: React.FC<ReviewProps> = () => {
                             >
                                 <div className="flex gap-3 items-center h-1/5">
                                     <span className="size-8 p-4 border-2 flex justify-center items-center rounded-full font-bold text-xl border-fourth-color/50">
-                                        {" "}
-                                        {item.first_name.slice(0, 1)}{" "}
+                                        {item.first_name.slice(0, 1)}
                                     </span>
-                                    <h3 className="text-sm">
-                                        {" "}
-                                        {item.first_name} {item.last_name}{" "}
+                                    <h3 className="text-sm text-fifth-color font-bold">
+                                        {item.first_name} {item.last_name}
                                     </h3>
-                                    <p className="text-sm text-fourth-color/60 text-center">
-                                        {" "}
-                                        {date.getDate().toString()}{" "}
+                                    <p className="text-sm text-fourth-color/60 text-center font-bold">
+                                        {date.getDate().toString()} {"\n"}
                                         {nombresMeses[date.getMonth()]}
                                     </p>
                                 </div>
                                 <div className="my-2 flex flex-col h-4/5">
                                     <p className="text-xs line-clamp-[10] text-justify">
-                                        {" "}
-                                        {item.review}{" "}
+                                        {item.review}
                                     </p>
                                     <div className="flex items-center gap-4">
                                         <p className="inline"> {item.rank} </p>
                                         <span className="inline text-xs">
-                                            {" "}
                                             {"⭐".repeat(
                                                 Math.floor(item.rank)
-                                            )}{" "}
+                                            )}
                                         </span>
                                     </div>
                                     <p
@@ -101,9 +95,8 @@ const Reviews: React.FC<ReviewProps> = () => {
                                                 : "border-red-400 text-red-400"
                                         }`}
                                     >
-                                        {" "}
-                                        {item.rank < 2.5 ? "-" : "+"}{" "}
-                                        {item.key_points}{" "}
+                                        {item.rank < 2.5 ? "-" : "+"}
+                                        {item.key_points}
                                     </p>
                                 </div>
                             </li>

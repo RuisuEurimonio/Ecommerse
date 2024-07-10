@@ -5,7 +5,7 @@ import PayMethods from "@/components/PayMethods";
 import OurOffices from "@/components/OurOffices";
 import Reviews from "@/components/Reviews";
 
-import image from "@/assets/img/Fachadas-MAFER-5.png";
+import image from "@/assets/img/about-us.jpg";
 
 type AboutUsProps = {}
 
@@ -15,20 +15,20 @@ const AboutUs : React.FC<AboutUsProps> = ( ) => {
             <Image src={image} alt="" className="w-full h-[50vh] object-bottom object-cover" priority={false} loading="lazy"/>
             <div className="w-11/12 mx-auto  my-2
                 md:w-4/5">
-                <h2 className="text-center text-blue-mafer font-bold text-2xl"> Centro Ferretero Mafer SAS</h2>
-                <p className="text-justify"> Se constituyo el 29 de Septiembre de 2.003 bajo escritura publica No 3901 de la notaria doce (12) de Bogotá, D.C. e inscrito en la cámara de comercio el 20 de Octubre de 2.003 con matrícula No. 01316985, abarcando gran parte del mercado de Bogotá, D.C. </p>
+                <h2 className="text-center text-fourth-color font-bold text-2xl"> Ruisu's Software. </h2>
+                <p className="text-justify"> Fundada en 2024, nació con la visión de revolucionar el mercado tecnológico. En sus inicios, la compañía se centró en proporcionar soluciones innovadoras y accesibles para empresas y usuarios individuales, combinando tecnología avanzada con un servicio al cliente excepcional. Desde su creación, Ruisu's Software ha trabajado incansablemente para establecerse como líder en la industria. </p>
                 <div className="flex flex-col gap-2 my-2
                     lg:flex-row lg:gap-4"
                 >
                     <div>
-                        <h3 className="text-xl text-blue-mafer font-bold
+                        <h3 className="text-xl text-fourth-color font-bold
                             lg:text-center"> Misión: </h3>
-                        <p className="text-justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aspernatur illo rem voluptates maxime quod suscipit reiciendis labore totam. Quasi doloremque, consequatur quis unde doloribus quo voluptates porro error nisi natus, dignissimos animi, magnam iure esse odit explicabo. Impedit consequatur qui provident non fuga quaerat nihil deserunt quidem blanditiis nobis, voluptas aliquid dolores necessitatibus officiis, consequuntur a tempora, sunt cum assumenda! Sed nobis exercitationem libero optio sit ullam fuga illo quis dolore ex! Quaerat neque debitis totam magnam eius doloremque dolorem animi blanditiis quam libero eligendi, nesciunt necessitatibus. Excepturi molestias ipsam voluptates ipsum quidem, aliquam numquam repellat vel asperiores harum?</p>
+                        <p className="text-justify">Nuestra misión en Ruisu's Software es desarrollar y entregar soluciones de software de alta calidad que satisfagan las necesidades únicas de cada cliente. Nos dedicamos a ofrecer productos innovadores que simplifiquen procesos complejos, mejoren la eficiencia operativa y fomenten la transformación digital. Trabajamos con pasión y dedicación, colaborando estrechamente con nuestros clientes para entender sus desafíos y proporcionarles soluciones que superen sus expectativas. Valoramos la excelencia, la integridad y el compromiso con el cliente, y nos esforzamos por crear un entorno de trabajo inspirador y colaborativo para nuestros empleados. A través de nuestra misión, buscamos no solo satisfacer a nuestros clientes, sino también contribuir al desarrollo tecnológico y al bienestar de la comunidad global.</p>
                     </div>
                     <div>
-                        <h3 className="text-xl text-blue-mafer font-bold
+                        <h3 className="text-xl text-fourth-color font-bold
                             lg:text-center"> Visión: </h3>
-                        <p className="text-justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aspernatur illo rem voluptates maxime quod suscipit reiciendis labore totam. Quasi doloremque, consequatur quis unde doloribus quo voluptates porro error nisi natus, dignissimos animi, magnam iure esse odit explicabo. Impedit consequatur qui provident non fuga quaerat nihil deserunt quidem blanditiis nobis, voluptas aliquid dolores necessitatibus officiis, consequuntur a tempora, sunt cum assumenda! Sed nobis exercitationem libero optio sit ullam fuga illo quis dolore ex! Quaerat neque debitis totam magnam eius doloremque dolorem animi blanditiis quam libero eligendi, nesciunt necessitatibus. Excepturi molestias ipsam voluptates ipsum quidem, aliquam numquam repellat vel asperiores harum?</p>
+                        <p className="text-justify">En Ruisu's Software, nuestra visión es ser reconocidos como líderes mundiales en innovación tecnológica y soluciones de software personalizadas. Aspiramos a transformar la manera en que las empresas y los individuos interactúan con la tecnología, proporcionando herramientas intuitivas y eficientes que impulsen el crecimiento y la productividad. Nos comprometemos a estar siempre a la vanguardia de la tecnología, adaptándonos rápidamente a los cambios del mercado y anticipándonos a las necesidades de nuestros clientes. Nuestro objetivo es crear un impacto positivo y duradero en la sociedad, promoviendo un entorno digital accesible y sostenible para todos.</p>
                     </div>
                 </div>
                 <Experiencie/>

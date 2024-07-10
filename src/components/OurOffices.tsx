@@ -14,9 +14,8 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
 
     return (
         <div>
-            <h1 className="text-lg text-secondary-color font-bold text-center my-2">
-                {" "}
-                Nuestras sedes.{" "}
+            <h1 className="text-lg text-fourth-color font-bold text-center my-2">
+                Nuestras sedes.
             </h1>
             <div className="w-full h-96 m-auto relative
                 lg:w-4/5
@@ -24,25 +23,25 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
                 <div className={`absolute w-full h-full ${radioValue == "Sede principal" ? "z-30" : ""}`}>
                     <iframe
                         className="w-full h-full"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.9450951733525!2d-74.08352482421819!3d4.60385454248787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f990bbb08520b%3A0x1f17d68a5807927a!2sCentro%20Ferretero%20MAFER!5e0!3m2!1ses-419!2sco!4v1715546398963!5m2!1ses-419!2sco"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.4715462583217!2d-74.06101292421782!3d4.687813941767505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9ac174d41b61%3A0xc6771e1123955b3a!2sAc.%20100%2C%20Bogot%C3%A1!5e0!3m2!1ses-419!2sco!4v1720647960555!5m2!1ses-419!2sco"
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         allowFullScreen={false}
                     ></iframe>
                 </div>
-                <div className={`absolute w-full h-full ${radioValue == "Sede Paloquemao" ? "z-30" : ""}`}>
+                <div className={`absolute w-full h-full ${radioValue == "Sede Secundaria" ? "z-30" : ""}`}>
                     <iframe
                         className="w-full h-full"
-                        src="https://www.google.com/maps/embed?pb=!3m2!1ses-419!2sco!4v1715553224432!5m2!1ses-419!2sco!6m8!1m7!1sDrNKzINiKr3GYEo-doF8Dg!2m2!1d4.612814372305595!2d-74.08647289812855!3f298.60361092024107!4f0.40919390369703024!5f0.7820865974627469"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.606658471299!2d-74.11296652421792!3d4.664012541972883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b969afb1e7f%3A0xf57c475c8de2bca9!2zQWMuIDI2LCBCb2dvdMOh!5e0!3m2!1ses-419!2sco!4v1720648039109!5m2!1ses-419!2sco"
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         allowFullScreen={false}
                     ></iframe>
                 </div>
-                <div className={`absolute w-full h-full ${radioValue == "Sede Metrotech" ? "z-30" : ""}`}>
+                <div className={`absolute w-full h-full ${radioValue == "Sede Tercearia" ? "z-30" : ""}`}>
                     <iframe
                         className="w-full h-full"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.944637959731!2d-74.08346262421813!3d4.603936342487138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99cd4c9b9e1f%3A0x33e1a4aaea06c30e!2sMetro%20Tech!5e0!3m2!1ses-419!2sco!4v1715553432873!5m2!1ses-419!2sco"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.486891224896!2d-74.095248924218!3d4.685116841790832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b45d194fde3%3A0x5466b12d1e5d6e4d!2zQ2wuIDcyLCBCb2dvdMOh!5e0!3m2!1ses-419!2sco!4v1720648066545!5m2!1ses-419!2sco"
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
                         allowFullScreen={false}
@@ -72,14 +71,14 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
                         htmlFor="selectOffice2"
                         className=" block bg-secondary-color font-bold py-1 px-2 text-third-color rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
                     >
-                        Sede Paloquemao
+                        Sede Secundaria
                         <input
                             type="radio"
                             id="selectOffice2"
                             name="selectOffice"
                             className="hidden"
-                            value="Sede Paloquemao"
-                            checked={radioValue === "Sede Paloquemao"}
+                            value="Sede Secundaria"
+                            checked={radioValue === "Sede Secundaria"}
                             onChange={(e)=>{handleChange(e)}}
                         />
                     </label>
@@ -87,14 +86,14 @@ const OurOffices: React.FC<OurOfficesProps> = () => {
                         htmlFor="selectOffice3"
                         className=" block bg-secondary-color font-bold py-1 px-2 text-third-color rounded-sm hover:scale-105 transition has-[:checked]:scale-110 cursor-pointer"
                     >
-                        Sede MetroTech
+                        Sede Tercearia
                         <input
                             type="radio"
                             id="selectOffice3"
                             name="selectOffice"
                             className="hidden"
-                            value="Sede MetroTech"
-                            checked={radioValue === "Sede MetroTech"}
+                            value="Sede Tercearia"
+                            checked={radioValue === "Sede Tercearia"}
                             onChange={(e)=>{handleChange(e)}}
                         />
                     </label>
