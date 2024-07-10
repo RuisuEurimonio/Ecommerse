@@ -8,14 +8,15 @@ import Filters from "@/components/Filters";
 import { SelectCantItems } from "@/components/SelectCantItems";
 
 import { verifyPerPageExist } from "@/utils/ts/validations";
-import productsFake from "@/utils/json/productsFake.json";
 
 import { perPageOptions } from "@/utils/ts/configuration";
 import { alphabetOptions } from "@/utils/ts/configuration";
+import { useEffect, useState } from "react";
+import { ArticleProps } from "@/types/Props";
+import { getElementsApi } from "@/data/api";
+import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 
 type DisctountsProps = {};
-
-const data = productsFake; //TODO Temporal data, implement fetch
 
 const Discounts: React.FC<DisctountsProps> = () => {
 
@@ -26,6 +27,23 @@ const Discounts: React.FC<DisctountsProps> = () => {
         searchParams.get("perPage") || perPageOptions[1].cantidad
     ) as number;
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
+    const [data, setData] = useState<ArticleProps[] | null> (null);
+
+    useEffect(()=>{
+        const get = async () =>{
+            const response = await getElementsApi("http://localhost:8080/api/producto/all")
+            if(response){
+                let array : ArticleProps[] = [];
+                response.forEach((item : ArticleProps)=>{
+                    if(item.descuento != null){
+                        array.push(item);
+                    }
+                })
+                setData(array);
+            }
+        }
+        get();
+    },[])
 
     return (
         <div
@@ -35,7 +53,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
             <Filters />
             <div className="md:basis-3/4">
                 <div>
-                    <div className="bg-blue-mafer p-1 rounded-sm flex flex-col items-center">
+                    <div className="bg-fourth-color p-1 rounded-sm flex flex-col items-center">
                         <div className="mt-2">
                             <label className="text-white-mafer">
                                 Ordenar por:
@@ -52,7 +70,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             </select>
                         </div>
                         <div>
-                            <Numeration dataLength={data.length} itemsByPage={perPage} />
+                            {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                         </div>
                     </div>
                     <div className="m-2">
@@ -62,7 +80,8 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             lg:grid-cols-4
                             xl:grid-cols-5"
                         >
-                            {data
+                            {data &&
+                            data
                                 .slice(
                                     perPage * pageNum - perPage,
                                     perPage * pageNum
@@ -76,10 +95,24 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                     />
                                 ))}
                         </ul>
+                        {!data && 
+                        <div className="w-full flex justify-center items-center">
+                            <DataNotFoundMessage
+                                title="Error"
+                                text="Ingrese algún nuevo artículo por medio de la siguiente configuración."
+                                redirectName="Artículos"
+                                redirectLink="/my-account/configuration-articles"
+                            />
+                        </div>
+                        }
                     </div>
-                    <div className="bg-blue-mafer p-2 flex flex-col-reverse items-center rounded-sm">
-                        <SelectCantItems perPage={perPage} />
-                        <Numeration dataLength={data.length} itemsByPage={perPage} />
+                    <div className="bg-fourth-color p-2 flex flex-col-reverse items-center rounded-sm">
+                        {data &&
+                        <>
+                            <SelectCantItems perPage={perPage} />
+                            <Numeration dataLength={data.length} itemsByPage={perPage} />
+                        </>
+                        }
                     </div>
                 </div>
             </div>

@@ -51,7 +51,7 @@ const Products: React.FC<ProductsProps> = () => {
 
             <div className="md:basis-3/4">
                 <div>
-                    <div className="bg-blue-mafer p-1 rounded-sm flex flex-col items-center">
+                    <div className="bg-fourth-color p-1 rounded-sm flex flex-col items-center">
                         <div className="mt-2">
                             <label className="text-white-mafer">
                                 Ordenar por:
@@ -106,7 +106,7 @@ const Products: React.FC<ProductsProps> = () => {
                         </div>
                         }
                     </div>
-                    <div className="bg-blue-mafer p-1 flex flex-col-reverse items-center rounded-sm">
+                    <div className="bg-fourth-color p-1 flex flex-col-reverse items-center rounded-sm">
                         <SelectCantItems perPage={perPage} />
                         {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                     </div>
