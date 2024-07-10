@@ -46,7 +46,7 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
     return (
         <div>
-            <h2 className="text-center font-bold text-red-mafer mt-2 text-xl">
+            <h2 className="text-center font-bold text-sixth-color mt-2 text-xl">
                 Descripción de producto.
             </h2>
             {data ?
@@ -135,7 +135,7 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                     </div>
                     <div>
                         <h3
-                            className="text-red-mafer uppercase font-bold text-lg
+                            className="text-sixth-color uppercase font-bold text-lg
                             xl:text-xl"
                         >
                             {data.nombre}
@@ -161,7 +161,7 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                     >
                         <AddProductCant />
                         <div
-                            className="border-2 rounded-lg px-1 bg-red-mafer text-blue-mafer text-base
+                            className="border-2 rounded-lg px-1 bg-sixth-color text-principal-color text-base transition hover:scale-105 duration-300
                             xl:py-1"
                         >
                             <button className="h-full w-full uppercase"  onClick={()=>{data ? askForSaveProduct(data, getCantOfUrlParams(searchParam)): ""}}>

@@ -47,7 +47,7 @@ const AddProductCant : React.FC<AddProductCantProps> = () => {
     }
 
     return(
-        <div className="grid grid-cols-3 border-2 divide-x-2 font-bold rounded-lg">
+        <div className="grid grid-cols-3 border-2 divide-x-2 font-bold rounded-lg bg-fifth-color">
         <button className="w-7 text-xl h-full
             xl:text-2xl xl:w-10"
             onClick={subtract}
@@ -57,7 +57,7 @@ const AddProductCant : React.FC<AddProductCantProps> = () => {
             value={cant}
             onChange={handleChange}
         />
-        <button className="w-7 text-xl h-full
+        <button className="w-7 text-xl h-full bg-fifth-color rounded-r-lg
             xl:text-2xl xl:w-10"
             onClick={add}
         > + </button>

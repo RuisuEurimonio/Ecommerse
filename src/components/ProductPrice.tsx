@@ -19,14 +19,16 @@ const ProductPrice: React.FC<ProductPriceProp> = ({ data }) => {
                 {moneyFormatter(data.precio)}
             </h4>
             {data.descuento && (
-                <h4
-                    className="no-underline text-2xl my-1 text-principal-color font-bold 
-                                    sm:inline-block sm:mx-2
-                                    xl:text-3xl
-                            "
-                >
-                    {moneyFormatter(data.precio * 0.85)} {/* TODO: set the correct discount */}
-                </h4>
+                <>
+                    <h4
+                        className="no-underline text-2xl my-1 text-fifth-color font-bold 
+                                        sm:inline-block sm:mx-2
+                                        xl:text-3xl
+                                "
+                    >
+                        {moneyFormatter(data.precio * ((100 - data.descuento.porcentaje) / 100))} <span className="text-sm font-bold underline"> {data.descuento.porcentaje}% OFF </span>
+                    </h4>
+                </>
             )}
         </>
     );
