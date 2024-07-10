@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
@@ -11,73 +11,111 @@ import ProductPrice from "@/components/ProductPrice";
 
 import { ArticleProps } from "@/types/Props";
 
-import productsFake from "@/utils/json/productsFake.json";
-
-import image from "@/assets/img/imageNotFound.jpg";
 import { askForSaveProduct, getCantOfUrlParams } from "@/components/utils";
-
-const dataProducts = productsFake.slice(0, 10); //TODO Temporal data, implement fetch
+import { getElementByIdApi, getElementsApi } from "@/data/api";
 
 const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
-    const data = productsFake.find((item) => item.id === parseInt(params.id)); //TODO Temporal data, delete this when implement real data.
-
     const router = useRouter();
     const searchParam = useSearchParams();
+    const [data, setData] = useState<ArticleProps | null>(null);
+    const [articles, setArticles] = useState<ArticleProps[] | null>(null);
 
     useEffect(() => {
         router.replace(`?name=${data?.nombre}`);
-    }, []);
+    }, [data]);
+
+    useEffect(()=>{
+        const getElement = async () =>{
+            const data = await getElementByIdApi("http://localhost:8080/api/producto", params.id)
+            if(data){
+                setData(data);
+            }
+        }
+
+        const getElements = async () =>{
+            const data = await getElementsApi("http://localhost:8080/api/producto/all")
+            if(data){
+                setArticles(data);
+            }
+        }
+
+        getElement();
+        getElements();
+    },[])
 
     return (
         <div>
             <h2 className="text-center font-bold text-red-mafer mt-2 text-xl">
                 Descripción de producto.
             </h2>
-            <div
+            {data ?
+                <div
                 className="flex w-full my-4 flex-col-reverse gap-2
                 sm:flex-row sm:justify-between"
             >
                 <div
-                    className="basis-1/2 border-2
+                    className="basis-1/2 border-2 flex justify-center items-center
                     lg:basis-1/3"
                 >
                     <div>
-                        <Image
+                    <Image
                             className="w-3/4 m-auto mt-2 rounded-sm"
-                            src={image}
-                            alt={
-                                data?.descripcion ??
-                                "Description product not found"
-                            }
+                            src={data.imagen}
+                            alt={data.descripcion}
+                            width={0}
+                            height={0}
+                            sizes="200"
+                            style={{ width: 300, height: "auto"}}
+                            priority={false}
                         />
                         <ul className="grid grid-cols-4 m-1 gap-1">
-                            <li>
+                            <li className="m-auto">
                                 <Image
                                     className="rounded-sm"
-                                    src={image}
-                                    alt={data?.descripcion ?? ""}
+                                    src={data.imagen}
+                                    alt={data.descripcion}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: "auto"}}
+                                    priority={false}
                                 />
                             </li>
-                            <li>
+                            <li className="m-auto">
                                 <Image
                                     className="rounded-sm"
-                                    src={image}
-                                    alt={data?.descripcion ?? ""}
+                                    src={data.imagen}
+                                    alt={data.descripcion}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: "auto"}}
+                                    priority={false}
                                 />
                             </li>
-                            <li>
+                            <li className="m-auto">
                                 <Image
                                     className="rounded-sm"
-                                    src={image}
-                                    alt={data?.descripcion ?? ""}
+                                    src={data.imagen}
+                                    alt={data.descripcion}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: "auto"}}
+                                    priority={false}
                                 />
                             </li>
-                            <li>
+                            <li className="m-auto">
                                 <Image
                                     className="rounded-sm"
-                                    src={image}
-                                    alt={data?.descripcion ?? ""}
+                                    src={data.imagen}
+                                    alt={data.descripcion}
+                                    width={0}
+                                    height={0}
+                                    sizes="100"
+                                    style={{ width: 75, height: 50}}
+                                    priority={false}
                                 />
                             </li>
                         </ul>
@@ -92,15 +130,15 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                         className="flex text-sm justify-between
                         xl:text-base"
                     >
-                        <p>{data?.categoria ?? "Not found"}</p>
-                        <p> SKU: {data?.SKU ?? "Not found"}</p>
+                        <p>{data.categoria.nombre}</p>
+                        <p> SKU: {data?.sku}</p>
                     </div>
                     <div>
                         <h3
                             className="text-red-mafer uppercase font-bold text-lg
                             xl:text-xl"
                         >
-                            {data?.nombre ?? "Not found"}
+                            {data.nombre}
                         </h3>
                         <ul
                             className="flex flex-row text-sm
@@ -114,7 +152,7 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                             sm:line-clamp-2
                             lg:text-base lg:line-clamp-3"
                         >
-                            {data?.descripcion}
+                            {data.descripcion}
                         </p>
                     </div>
                     <div
@@ -159,6 +197,9 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
                     </ul>
                 </div>
             </div>
+            :
+            <h3> Algo salio mal, vuelvelo a intentar.</h3>
+            }
 
             <div
                 className="hidden
@@ -166,13 +207,13 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
             >
                 <h3 className="text-lg font-bold"> Descripción. </h3>
                 <p className="my-2 text-base text-justify">
-                    {data?.descripcion}
+                    {data && data.descripcion}
                 </p>
             </div>
 
             <Comments />
 
-            <ProductsRecomended data={dataProducts} />
+            {articles && <ProductsRecomended data={articles} />}
         </div>
     );
 };

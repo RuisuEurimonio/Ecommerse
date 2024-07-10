@@ -10,10 +10,10 @@ type ProductLayoutProps = {
   children: any;
 };
 
-const rootPaths : {products: string, discounts: string, JOSC: string}  = {
+const rootPaths : {products: string, discounts: string, ruisus: string}  = {
   "products" : "Productos",
   "discounts" : "Descuentos",
-  "JOSC" : "JOSC"
+  "ruisus" : "Ruisus"
 }
 
 

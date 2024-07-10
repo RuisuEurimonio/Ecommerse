@@ -35,7 +35,8 @@ const Products: React.FC<ProductsProps> = () => {
             const data = await getElementsApi("http://localhost:8080/api/producto/all");
             if(data){
                 setData(data);
-            }
+            } 
+            console.log(data);
         }
 
         get();
@@ -89,7 +90,7 @@ const Products: React.FC<ProductsProps> = () => {
                                         key={item.id}
                                         item={item}
                                         link={"products"}
-                                        discount={true}
+                                        discount={item.descuento?.activo}
                                     />
                                 )})
                             }

@@ -24,3 +24,16 @@ export async function getElementByIdApi(url : string, id: number){
         console.log("Error get element by id: "+error);
     }
 }
+
+export async function getElementsByFilterName(url : string, id: number){
+    try{
+        const response = await fetch(url+"/"+id);
+        if(!response.ok){
+            throw new Error("Network response was not ok");
+        }
+        const data = response.json();
+        return data;
+    } catch (error){
+        console.log("Error get element by brand: "+error);
+    }
+}

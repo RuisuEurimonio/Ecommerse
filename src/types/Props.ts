@@ -37,7 +37,7 @@ export type DiscountProps = {
     nombre: string, 
     descripcion: string, 
     porcentaje: number,
-    active: boolean,
+    activo: boolean,
     fechaCreacion: string, 
     fechaModificacion: string
 }
