@@ -28,7 +28,7 @@ const ProductsLayout: React.FC<ProductLayoutProps> = ({ children }) => {
       className="w-11/12 m-auto
         md:w-4/5"
     >
-      {path != "/JOSC" && (
+      {path != "/ruisus" && (
         <>
         {Object.entries(rootPaths).map(([pathEntity, namePath])=>{
           return(
@@ -41,7 +41,7 @@ const ProductsLayout: React.FC<ProductLayoutProps> = ({ children }) => {
         </>
       )}
       
-      {path === "/JOSC" &&
+      {path === "/ruisu" &&
         <AboutJosc fullContent={false}/>
       }
 

@@ -1,19 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { useSearchParams } from "next/navigation";
 
+import DataNotFoundMessage from "@/components/DataNotFoundMessage";
+import { SelectCantItems } from "@/components/SelectCantItems";
 import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
 import Filters from "@/components/Filters";
-import { SelectCantItems } from "@/components/SelectCantItems";
 
+import { perPageOptions, alphabetOptions } from "@/utils/ts/configuration";
 import { verifyPerPageExist } from "@/utils/ts/validations";
 
-import { perPageOptions } from "@/utils/ts/configuration";
-import { alphabetOptions } from "@/utils/ts/configuration";
-import { useEffect, useState } from "react";
-import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 import { ArticleProps } from "@/types/Props";
+
 import { getElementsApi } from "@/data/api";
 
 type ProductsProps = {};

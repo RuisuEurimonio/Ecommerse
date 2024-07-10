@@ -61,7 +61,7 @@ export const deleteAlert = (name:string, type:string) =>  {Swal.fire({
     }
 })}
 
-export const askForSaveProduct = (item:ArticleProps, cantidad?: number) =>{
+export const askForSaveProduct = (item:ArticleProps, cantidad: number = 1) =>{
     Swal.fire({
         title: "Guardar producto",
         text: "Deseas guardar el producto: " + item.nombre+" ?",

@@ -1,20 +1,21 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { useSearchParams } from "next/navigation";
 
+import DataNotFoundMessage from "@/components/DataNotFoundMessage";
+import { SelectCantItems } from "@/components/SelectCantItems";
 import Numeration from "@/components/Numeration";
 import CardItem from "@/components/CardItem";
 import Filters from "@/components/Filters";
-import { SelectCantItems } from "@/components/SelectCantItems";
 
 import { verifyPerPageExist } from "@/utils/ts/validations";
+import { perPageOptions, alphabetOptions } from "@/utils/ts/configuration";
 
-import { perPageOptions } from "@/utils/ts/configuration";
-import { alphabetOptions } from "@/utils/ts/configuration";
-import { useEffect, useState } from "react";
-import { ArticleProps } from "@/types/Props";
 import { getElementsApi } from "@/data/api";
-import DataNotFoundMessage from "@/components/DataNotFoundMessage";
+
+import { ArticleProps } from "@/types/Props";
 
 type DisctountsProps = {};
 
@@ -55,7 +56,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                 <div>
                     <div className="bg-fourth-color p-1 rounded-sm flex flex-col items-center">
                         <div className="mt-2">
-                            <label className="text-white-mafer">
+                            <label className="text-principal-color">
                                 Ordenar por:
                             </label>
                             <select

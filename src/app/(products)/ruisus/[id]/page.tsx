@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-import Comments from "@/components/Comments";
+import { askForSaveProduct, getCantOfUrlParams } from "@/components/utils";
 import ProductsRecomended from "@/components/ProductsRecomended";
 import AddProductCant from "@/components/AddProductCant";
 import ProductPrice from "@/components/ProductPrice";
+import Comments from "@/components/Comments";
 
 import { ArticleProps } from "@/types/Props";
 
-import { askForSaveProduct, getCantOfUrlParams } from "@/components/utils";
 import { getElementByIdApi, getElementsApi } from "@/data/api";
 
 const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {

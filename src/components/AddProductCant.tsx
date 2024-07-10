@@ -11,7 +11,7 @@ const AddProductCant : React.FC<AddProductCantProps> = () => {
     const name = searchParams.get("name");
     const router = useRouter();
 
-    const [cant, setCant] = useState<number>(0);
+    const [cant, setCant] = useState<number>(1);
 
     function add() {
         if(cant<100) {
@@ -22,7 +22,7 @@ const AddProductCant : React.FC<AddProductCantProps> = () => {
     }
 
     function subtract() {
-        if(cant>0){
+        if(cant>1){
             const sub = cant-1;
             setCant(sub);
             updateCantUrl(sub);
@@ -31,11 +31,11 @@ const AddProductCant : React.FC<AddProductCantProps> = () => {
 
     function handleChange(event:any){
         let value = event.target.value;
-        if(parseInt(value) <= 100 && parseInt(value) >= 0) {
+        if(parseInt(value) <= 100 && parseInt(value) > 0) {
             setCant(parseInt(value));
             updateCantUrl(value);
         } else if (value === ""){
-            setCant(0);
+            setCant(1);
         }
         else {
             setCant(cant);
