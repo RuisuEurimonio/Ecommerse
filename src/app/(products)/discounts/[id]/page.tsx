@@ -23,7 +23,7 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
     useEffect(() => {
         router.replace(`?name=${data?.nombre}`);
-    }, []);
+    }, [data]);
 
     useEffect(()=>{
         const getElement =  async () => {
@@ -42,7 +42,7 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
         getElement();
         getElements();
-    })
+    },[])
 
     return (
         <div className="">

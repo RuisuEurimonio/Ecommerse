@@ -18,7 +18,7 @@ const Comments : React.FC<CommentsProps> = () => {
                     <div className="basis-1/4 flex justify-center
                         sm:items-center
                     ">
-                        <div className="size-16 flex justify-center items-center bg-gray rounded-full
+                        <div className="size-16 flex justify-center items-center bg-secondary-color/20 rounded-full
                             sm:size-24
                         ">
                             <span className="text-2xl font-bold
@@ -27,7 +27,7 @@ const Comments : React.FC<CommentsProps> = () => {
                         </div>
                     </div>
                     <div className="basis-3/4">
-                        <h4 className="text-sm font-bold"> {user.nombres} {user.apellidos} </h4>
+                        <h4 className="text-sm font-bold text-fifth-color"> {user.nombres} {user.apellidos} </h4>
                         <ul className="flex flex-row text-xs"> 
                             <li> ⭐⭐⭐⭐⭐ </li>
                         </ul>
@@ -36,7 +36,7 @@ const Comments : React.FC<CommentsProps> = () => {
                 </div>
             ))}
             <div className="flex flex-row-reverse justify-center">
-                <button className="py-1 px-3 mb-2 bg-fourth-color/80 text-third-color hover:bg-fourth-color"> Escribir una opinión. </button>
+                <button className="py-1 px-3 mb-2 bg-fourth-color/80 text-principal-color hover:bg-fourth-color rounded-lg"> Escribir una opinión. </button>
             </div>
         </>
     )
