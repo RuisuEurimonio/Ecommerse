@@ -130,7 +130,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                             redirectName="Iniciar sesión"
                         />
                     }
-                    {dataUser && <Link href="/my-account" className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center
+                    {dataUser && <Link href="/my-account" className="bg-secondary-color text-third-color px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center
                     lg:w-2/4"><button> Configurar </button></Link>}
                 </div>
                 <div className="mx-auto
@@ -147,12 +147,12 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                         </label>
                         <textarea id="observations" className="border rounded-sm block w-full resize-none px-1" rows={4} value={observations} onChange={(e)=>(onChangeText(e))}/>
                     </ul>
-                    <button className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
+                    <button className="bg-secondary-color text-third-color px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
                         lg:w-2/4"
                             onClick={()=>{confirmOrder(totalBill, listOfItems.length)}}
                     > Confirmar. </button>
                     <PDFDownloadLink document={<PricePdf items={listOfItems} subtotal={totalBill} discounts={totalDiscounts} sendPrice={0} total={totalBill-totalDiscounts+sendPrice} observations={observations}/>} fileName="Cotización">
-                    <button className="bg-blue-mafer text-white px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
+                    <button className="bg-secondary-color text-third-color px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
                         lg:w-2/4"> Generar cotización </button>
                     </PDFDownloadLink>
                 </div>
