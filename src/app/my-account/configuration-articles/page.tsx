@@ -97,7 +97,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             <div className="bg-secondary-color text-third-color flex flex-col-reverse items-center rounded-sm min-h-5">
                 {data && <Numeration className="text-third-color" dataLength={data.length} itemsByPage={perPage} />}
             </div>
-            <button className="float-right my-4 py-1 px-4 bg-secondary-color text-third-color text-white-mafer rounded-sm hover:scale-105 transition"
+            <button className="float-right my-4 py-1 px-4 bg-secondary-color text-third-color  rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}
             > Agregar. </button>
         </div>
