@@ -31,7 +31,6 @@ h2.custom_title{
   line-height: 1.75rem/* 28px */;
   text-align: center;
   --tw-text-opacity: 1;
-  color: rgb(12 30 94 / var(--tw-text-opacity));
   font-weight: 700;
 }
 

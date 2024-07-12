@@ -1,5 +1,5 @@
 import AboutUs from "@/components/AboutUs";
-import Branch from "@/components/Branch";
+import Brand from "@/components/Brand";
 import Clasificaciones from "@/components/Clasficaciones";
 import LatestDiscounts from "@/components/LatestDiscounts";
 import MainCarousel from "@/components/MainCarousel";
@@ -13,7 +13,7 @@ export default function Home() {
       <AboutUs/>
       <LatestDiscounts/>
       <OurService/>
-      <Branch/>
+      <Brand/>
     </>
   );
 }

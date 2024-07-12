@@ -24,7 +24,7 @@ const CardSimple: React.FC<CardSimpleProps> = ({
 
     return (
         <li
-            className={`bg-fourth-color/5 min-w-[10rem] flex flex-col justify-between
+            className={`bg-fourth-color/5 min-w-[10rem] flex flex-col justify-between max-w-40
             ${newsletter ? "" : "flex-1"}`}
         >
             <Link href={ product ? ("/products/"+product.id+"?name="+product.nombre) : ("/events/"+newsletter?.id)}> 

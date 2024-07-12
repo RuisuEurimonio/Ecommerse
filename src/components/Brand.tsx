@@ -12,7 +12,7 @@ const Branch : React.FC<BranchProps> = () => {
 
     return(
         <div className="custom_content">
-            <h2 className="custom_title"> Aliados comerciales. </h2>
+            <h2 className="custom_title text-fifth-color"> Aliados comerciales. </h2>
             <CarouselSimple data={data} intervalMove={intervalMove}/>
         </div>
     )

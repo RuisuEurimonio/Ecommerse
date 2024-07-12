@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 
-import AboutJosc from "@/components/AboutJOSC";
+import AboutUs from "@/components/AboutUs";
 import Clasificaciones from "@/components/Clasficaciones";
 import HistoryNavigation from "@/components/HistoryNavigation";
 
@@ -42,7 +42,7 @@ const ProductsLayout: React.FC<ProductLayoutProps> = ({ children }) => {
       )}
       
       {path === "/ruisu" &&
-        <AboutJosc fullContent={false}/>
+        <AboutUs fullContent={false}/>
       }
 
       {children}

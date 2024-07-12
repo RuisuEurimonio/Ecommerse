@@ -37,7 +37,7 @@ const CardItemWrapper: React.FC<CardItemWrapper> = ({
                     {children}
                 </ul>
             </div>
-            <div
+            {dataLength > 3 && <div
                 className="absolute left-2
                         md:left-5"
             >
@@ -47,8 +47,8 @@ const CardItemWrapper: React.FC<CardItemWrapper> = ({
                             md:text-4xl"
                     />
                 </button>
-            </div>
-            <div
+            </div>}
+            {dataLength > 3 && <div
                 className="absolute right-2
                     md:right-5"
             >
@@ -58,7 +58,7 @@ const CardItemWrapper: React.FC<CardItemWrapper> = ({
                         md:text-4xl"
                     />
                 </button>
-            </div>
+            </div>}
         </div>
     );
 };
