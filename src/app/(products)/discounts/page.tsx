@@ -36,7 +36,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
             if(response){
                 let array : ArticleProps[] = [];
                 response.forEach((item : ArticleProps)=>{
-                    if(item.descuento != null){
+                    if(item.descuento?.activo){
                         array.push(item);
                     }
                 })

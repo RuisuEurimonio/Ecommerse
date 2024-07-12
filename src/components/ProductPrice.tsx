@@ -11,14 +11,14 @@ const ProductPrice: React.FC<ProductPriceProp> = ({ data }) => {
         <>
             <h4
                 className={`mt-2 text-principal-color inline-block font-bold 
-                            ${data.descuento ? "xl:text-xl" : "text-2xl"}
-                            ${data.descuento ? "xl:text-2xl" : "xl:text-3xl"}
-                            ${data.descuento && "line-through"}
+                            ${data.descuento?.activo ? "xl:text-xl" : "text-2xl"}
+                            ${data.descuento?.activo ? "xl:text-2xl" : "xl:text-3xl"}
+                            ${data.descuento?.activo && "line-through"}
                         `}
             >
                 {moneyFormatter(data.precio)}
             </h4>
-            {data.descuento && (
+            {data.descuento?.activo && (
                 <>
                     <h4
                         className="no-underline text-2xl my-1 text-fifth-color font-bold 

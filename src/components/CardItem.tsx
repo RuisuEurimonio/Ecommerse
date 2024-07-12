@@ -32,7 +32,7 @@ const CardItem: React.FC<CardItemProps> = ({
             <div className="relative">
                 {discount && (
                     <React.Fragment>
-                        <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-principal-color border-l-transparent border-b-transparent"/>
+                        <span className="absolute top-0 right-0 border-[1.5rem] w-0 h-0 border-fifth-color border-l-transparent border-b-transparent"/>
                         <span className="absolute top-0.8 right-1 font-bold text-lg"> % </span>
                     </React.Fragment>
                 )}
