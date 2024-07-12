@@ -8,8 +8,8 @@ type LayoutProps = {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div className="mb-4">
-            <div className="bg-blue-mafer h-8 mb-5 flex items-center pb-3">
-                <div className="w-4/5 m-auto text-white-mafer">
+            <div className="bg-fifth-color h-8 mb-5 flex items-center pb-3">
+                <div className="w-4/5 m-auto text-principal-color">
                     <Link className="flex items-center gap-3" href="/">
                         <span className="icon icon-arrowl"></span>
                         <p className=""> Inicio. </p>

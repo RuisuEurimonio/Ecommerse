@@ -31,17 +31,17 @@ const MyAccount: React.FC<MyAccountProps> = () => {
                                 {data.nombres.slice(0, 1)}
                             </span>
                             <div>
-                                <h3 className="font-bold text-blue-mafer text-lg tracking-tighter">
+                                <h3 className="font-bold text-fifth-color text-lg tracking-tighter">
                                     {data.nombres} {data?.apellidos}
                                 </h3>
                                 <h4> {data.correo} </h4>
                             </div>
                         </div>
                         <div className="flex gap-2 mb-2 justify-around h-4/6">
-                            <button className="py-1 px-2 bg-blue-mafer rounded-sm text-white-mafer inline">
+                            <button className="py-1 px-2 bg-colortext-fifth-color rounded-sm text-third-color inline">
                                 Mi carrito
                             </button>
-                            <button className="py-1 px-2 bg-blue-mafer rounded-sm text-white-mafer inline">
+                            <button className="py-1 px-2 bg-colortext-fifth-color rounded-sm text-third-color inline">
                                 Cerrar sesión.
                             </button>
                         </div>

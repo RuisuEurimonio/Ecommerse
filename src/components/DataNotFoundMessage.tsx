@@ -12,7 +12,7 @@ const DataNotFoundMessage : React.FC<DataNotFoundMessageProps> = ({title, text, 
         <div className="w-full h-full flex items-center justify-center flex-col">
             <h1 className="font-bold text-center text-lg"> {title} </h1>
             <p className="text-center"> {text} </p>
-            <Link href={redirectLink} className="font-bold underline text-blue-700 text-center"> {redirectName} </Link>
+            <Link href={redirectLink} className="font-bold underline text-fifth-color text-center"> {redirectName} </Link>
         </div>
     )
 }
