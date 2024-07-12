@@ -94,10 +94,10 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                     <NoDataTable message="No se encontraron artículos ingresados." secondaryMessage="Ingrese nuevos articulos por medio del botón infeior"/ >
                     }
             </div>
-            <div className="bg-blue-mafer flex flex-col-reverse items-center rounded-sm min-h-5">
-                {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
+            <div className="bg-secondary-color text-third-color flex flex-col-reverse items-center rounded-sm min-h-5">
+                {data && <Numeration className="text-third-color" dataLength={data.length} itemsByPage={perPage} />}
             </div>
-            <button className="float-right my-4 py-1 px-4 bg-blue-mafer text-white-mafer rounded-sm hover:scale-105 transition"
+            <button className="float-right my-4 py-1 px-4 bg-secondary-color text-third-color text-white-mafer rounded-sm hover:scale-105 transition"
                 onClick={openCloseModal}
             > Agregar. </button>
         </div>
@@ -105,7 +105,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             <div className="w-full relative">
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
-            <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataProductSelect == null ? "Agregar" : "Actualizar"} articulo. </h2>
+            <h2 className="font-bold text-fifth-color text-xl m-2"> {dataProductSelect == null ? "Agregar" : "Actualizar"} articulo. </h2>
             <Form className="w-11/12 h-full" modal data={dataProductSelect} schequema={articleSchequema} dataName="Articulo" inputsList={inputsForm} />
         </Modal>
     </div>

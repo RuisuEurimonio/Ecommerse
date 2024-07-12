@@ -26,7 +26,7 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
         case "combined":
             return <p className={`text-center ${className}`}> {secondObject ? String(secondObject) : String(mergeData)} {String(value)} </p>
         case "object":
-            return <p className={`text-center ${className}`}> {String(secondObject)} </p>
+            return <p className={`text-center ${className}`}> {secondObject === "undefined" ? "No especificado" :   secondObject} </p>
         default:
             return <p className={`text-center ${className}`}> {String(value)} </p>
     }
