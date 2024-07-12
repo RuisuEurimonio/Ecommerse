@@ -58,7 +58,7 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
                     md:left-5
                 ">
                     <button onClick={before}>
-                        <span className="icon icon-arrowl text-xl 
+                        <span className="icon icon-arrowl text-xl text-third-color 
                             md:text-4xl"
                         />
                     </button>
@@ -67,7 +67,7 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
                     md:right-5
                 ">
                     <button onClick={next}>
-                        <span className="icon icon-arrowr text-xl
+                        <span className="icon icon-arrowr text-xl text-third-color
                             md:text-4xl
                         "/>
                     </button>

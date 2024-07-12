@@ -1,4 +1,4 @@
-import AboutJosc from "@/components/AboutJOSC";
+import AboutUs from "@/components/AboutUs";
 import Branch from "@/components/Branch";
 import Clasificaciones from "@/components/Clasficaciones";
 import LatestDiscounts from "@/components/LatestDiscounts";
@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <MainCarousel/>
       <Clasificaciones main/>
-      <AboutJosc/>
+      <AboutUs/>
       <LatestDiscounts/>
       <OurService/>
       <Branch/>

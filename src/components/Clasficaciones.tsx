@@ -21,7 +21,7 @@ import Link from "next/link";
              `}> 
                  <Link href="/" className="relative flex justify-center items-center h-full">
                      <Image src={setup} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
-                     <p className="absolute z-20 font-bold text-third-color bg-fourth-color/50 p-2 rounded-lg"> Setups. </p>
+                     <p className="absolute z-20 font-bold text-fifth-color bg-principal-color p-2 rounded-lg"> Setups. </p>
                  </Link> 
              </li>
              <li className={`flex-[100%] flex-grow-0 h-14
@@ -31,7 +31,7 @@ import Link from "next/link";
              `}> 
                  <Link href="/" className="relative flex justify-center items-center h-full ">
                      <Image src={components} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
-                     <p className="absolute z-20 font-bold text-third-color bg-fourth-color/50 p-2 rounded-lg"> Componentes. </p>
+                     <p className="absolute z-20 font-bold text-fifth-color bg-principal-color p-2 rounded-lg"> Componentes. </p>
                  </Link> 
              </li>
              <li className={`flex-[100%] flex-grow-0 h-14
@@ -41,7 +41,7 @@ import Link from "next/link";
              `}> 
                  <Link href="/" className="relative flex justify-center items-center h-full ">
                      <Image src={peripherals} alt="" width={640} className="brightness-100 hover:brightness-75 transition object-cover h-full"/>
-                     <p className="absolute z-20 font-bold text-third-color bg-fourth-color/50 p-2 rounded-lg"> Perífericos </p>
+                     <p className="absolute z-20 font-bold text-fifth-color bg-principal-color p-2 rounded-lg"> Perífericos </p>
                  </Link> 
              </li>
          </ul>
