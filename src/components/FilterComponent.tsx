@@ -1,12 +1,12 @@
 "use client"
 
 import React, { useState } from 'react';
-import {CategoryProps} from "@/types/Props"
+import {BrandProps, CategoryProps, ClasificationProps} from "@/types/Props"
 import Link from 'next/link';
 
 type FilterProps ={
     title: string,
-    data: CategoryProps[],
+    data: CategoryProps[] | ClasificationProps[] | BrandProps[],
     sliceFrom?: number,
     sliceTo?: number
 }
@@ -34,7 +34,7 @@ const FilterComponent : React.FC<FilterProps> = ({title, data, sliceFrom, sliceT
             `}>
                 {data.slice(sliceFrom,sliceTo).map((item : CategoryProps)=>(
                     <li key={item.id} className="pl-2">
-                        <Link href=""> <p> 🛠 {item.nombre} </p> </Link>
+                        <Link href=""> <p> {item.nombre} </p> </Link>
                     </li>
                 ))}
             </ul>

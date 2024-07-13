@@ -1,22 +1,51 @@
 "use client"
 
-import React, { useState } from "react";
-import branchFake from "@/utils/json/branchFake.json";
+import React, { useEffect, useState } from "react";
 import FilterComponent from "./FilterComponent";
+import { BrandProps, CategoryProps, ClasificationProps } from "@/types/Props";
+import { getElementsApi } from "@/data/api";
 
 type FiltersProps = {
 
 }
 
-const data = branchFake;
-
 const Filters : React.FC<FiltersProps> = () => {
 
     const [active, setActive] = useState(false);
+    const [categories, setCategories] = useState<CategoryProps [] | null>(null);
+    const [classifications, setClassifications] = useState<ClasificationProps [] | null>(null);
+    const [brands, setBrands] = useState<BrandProps [] | null>(null);
 
     function openFilters(){
         setActive(!active);
     }
+
+    useEffect(()=>{
+        const getCategories = async () => {
+            const data = await getElementsApi("http://localhost:8080/api/producto/categoria/all");
+            if(data){
+                setCategories(data);
+            }
+        }
+
+        const getClassifications = async () => {
+            const data = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
+            if(data){
+                setClassifications(data);
+            }
+        }
+
+        const getBrands = async () => {
+            const data = await getElementsApi("http://localhost:8080/api/producto/marca/all");
+            if(data){
+                setBrands(data);
+            }
+        }
+
+        getCategories();
+        getClassifications();
+        getBrands();
+    },[])
 
     return (
         <>
@@ -42,24 +71,24 @@ const Filters : React.FC<FiltersProps> = () => {
                 ">
                     <h2 className="text-xl font-bold text-center"> Buscar por filtros. </h2>
                     <div className="text-sm">
-                        <FilterComponent
+                        {categories && <FilterComponent
                             title="Categoria."
-                            data={data}
+                            data={categories}
                             sliceFrom={0}
                             sliceTo={6}
-                        />
-                        <FilterComponent
+                        />}
+                        {classifications && <FilterComponent
                             title="Clasficicación."
-                            data={data}
+                            data={classifications}
                             sliceFrom={0}
                             sliceTo={2}
-                        />
-                        <FilterComponent
+                        />}
+                        { brands && <FilterComponent
                             title="Marca."
-                            data={data}
+                            data={brands}
                             sliceFrom={0}
                             sliceTo={12}
-                        />
+                        />}
                     </div>
                 </div>
             </div>
