@@ -1,6 +1,6 @@
-export const alphabetOptions : {id: number, tipo: string}[] = [
-    { id: 1, tipo: "alfabeticamente a > z" },
-    { id: 2, tipo: "alfabeticamente z > a" },
+export const alphabetOptions : {id: number, tipo: string, keyWord: string}[] = [
+    { id: 1, tipo: "alfabeticamente a > z", keyWord: "asc"},
+    { id: 2, tipo: "alfabeticamente z > a", keyWord: "desc" },
   ];
   
 export const perPageOptions : {id: number, cantidad: number}[] = [

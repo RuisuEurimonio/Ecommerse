@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { SelectHTMLAttributes, useEffect, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
@@ -15,7 +15,7 @@ import { verifyPerPageExist } from "@/utils/ts/validations";
 
 import { ArticleProps } from "@/types/Props";
 
-import { getElementsApi } from "@/data/api";
+import { getElementsApi, getElementsByOrder } from "@/data/api";
 
 type ProductsProps = {};
 
@@ -37,15 +37,24 @@ const Products: React.FC<ProductsProps> = () => {
         }
     }
 
-    useEffect(()=>{
-        const get = async () => {
-            const data = await getElementsApi("http://localhost:8080/api/producto/all");
-            if(data){
-                setData(data);
-            } 
-            console.log(data);
-        }
+    const get = async () => {
+        const data = await getElementsApi("http://localhost:8080/api/producto/all");
+        if(data){
+            setData(data);
+        } 
+    }
 
+    
+    async function getDataByOrder(event : React.ChangeEvent<HTMLSelectElement>){
+        let { value } = event.target
+        if(value === "none") { return get() }
+        const data = await getElementsByOrder(value as "desc" | "asc");
+        if(data){
+            setData(data);
+        }
+    }
+
+    useEffect(()=>{
         get();
     },[])
 
@@ -66,9 +75,11 @@ const Products: React.FC<ProductsProps> = () => {
                             <select
                                 name="order"
                                 className="outline-none cursor-pointer mx-1 rounded-sm"
+                                onChange={(event)=>{getDataByOrder(event)}}
                             >
+                                <option value="none"> Seleccionar. </option>
                                 {alphabetOptions.map((option) => (
-                                    <option key={option.id}>
+                                    <option key={option.id} value={option.keyWord} >
                                         {option.tipo}
                                     </option>
                                 ))}

@@ -37,3 +37,16 @@ export async function getElementsByFilterName(url : string, id: number){
         console.log("Error get element by brand: "+error);
     }
 }
+
+export async function getElementsByOrder(order : "desc" | "asc"){
+    try{
+        const response = await fetch("http://localhost:8080/api/producto/order/"+order);
+        if(!response.ok){
+            throw new Error("Network response was not ok")
+        }
+        const data = response.json();
+        return data;
+    } catch(error){
+        console.log("Error get elements by order: "+error);
+    }
+}
