@@ -31,6 +31,12 @@ const Products: React.FC<ProductsProps> = () => {
 
     const ID_BRAND = 6;
 
+    function updateDataByFilter(data : ArticleProps[]){
+        if(data){
+            setData(data);
+        }
+    }
+
     useEffect(()=>{
         const get = async () =>{
             const data = await getElementsByFilterName("http://localhost:8080/api/producto/filter/marca", ID_BRAND);
@@ -47,7 +53,7 @@ const Products: React.FC<ProductsProps> = () => {
             className="flex my-4 flex-col justify-between
                     md:flex-row"
         >
-            <Filters />
+            <Filters updateDataFunction={updateDataByFilter}/>
             <div className="md:basis-3/4">
                 <div>
                     <div className="bg-fourth-color p-1 rounded-sm flex flex-col items-center">

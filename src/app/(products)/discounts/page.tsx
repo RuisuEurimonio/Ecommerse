@@ -30,6 +30,12 @@ const Discounts: React.FC<DisctountsProps> = () => {
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
     const [data, setData] = useState<ArticleProps[] | null> (null);
 
+    function updateDataByFilter(data : ArticleProps[]){
+        if(data){
+            setData(data);
+        }
+    }
+
     useEffect(()=>{
         const get = async () =>{
             const response = await getElementsApi("http://localhost:8080/api/producto/all")
@@ -46,12 +52,13 @@ const Discounts: React.FC<DisctountsProps> = () => {
         get();
     },[])
 
+    
     return (
         <div
             className="flex my-4 flex-col justify-between
                     md:flex-row"
         >
-            <Filters />
+            <Filters updateDataFunction={updateDataByFilter} />
             <div className="md:basis-3/4">
                 <div>
                     <div className="bg-fourth-color p-1 rounded-sm flex flex-col items-center">
@@ -81,7 +88,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             lg:grid-cols-4
                             xl:grid-cols-5"
                         >
-                            {data &&
+                            {data ?
                             data
                                 .slice(
                                     perPage * pageNum - perPage,
@@ -94,7 +101,9 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                         discount
                                         link={"discounts"}
                                     />
-                                ))}
+                                ))
+                                :
+                                <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encuentraron productos." />}
                         </ul>
                         {!data && 
                         <div className="w-full flex justify-center items-center">

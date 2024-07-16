@@ -8,10 +8,12 @@ type FilterProps ={
     title: string,
     data: CategoryProps[] | ClasificationProps[] | BrandProps[],
     sliceFrom?: number,
-    sliceTo?: number
+    sliceTo?: number,
+    dataId: string,
+    updateData: (event:any , type: string) => void
 }
 
-const FilterComponent : React.FC<FilterProps> = ({title, data, sliceFrom, sliceTo}) => {
+const FilterComponent : React.FC<FilterProps> = ({title, data, sliceFrom, sliceTo, dataId, updateData}) => {
 
     const [active, setActive] = useState(false);
 
@@ -32,9 +34,9 @@ const FilterComponent : React.FC<FilterProps> = ({title, data, sliceFrom, sliceT
             <ul className={`flex-col overflow-hidden transition max-h-40 overflow-y-scroll
                 ${active ? "flex" : "hidden"}
             `}>
-                {data.slice(sliceFrom,sliceTo).map((item : CategoryProps)=>(
+                {data.slice(sliceFrom,sliceTo).map((item : ClasificationProps | CategoryProps | BrandProps) =>(
                     <li key={item.id} className="pl-2">
-                        <Link href=""> <p> {item.nombre} </p> </Link>
+                        <p onClick={()=>{updateData(item.id, dataId)}}> {item.nombre} </p>
                     </li>
                 ))}
             </ul>

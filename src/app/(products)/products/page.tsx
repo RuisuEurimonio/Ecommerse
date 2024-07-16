@@ -31,6 +31,12 @@ const Products: React.FC<ProductsProps> = () => {
     
     const[data, setData] = useState<ArticleProps[] | null>(null);
 
+    function updateDataByFilter(data : ArticleProps[]){
+        if(data){
+            setData(data);
+        }
+    }
+
     useEffect(()=>{
         const get = async () => {
             const data = await getElementsApi("http://localhost:8080/api/producto/all");
@@ -48,7 +54,7 @@ const Products: React.FC<ProductsProps> = () => {
             className="flex my-4 flex-col justify-between
                     md:flex-row"
         >
-            <Filters />
+            <Filters updateDataFunction={updateDataByFilter} />
 
             <div className="md:basis-3/4">
                 <div>

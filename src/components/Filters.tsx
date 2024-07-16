@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import FilterComponent from "./FilterComponent";
-import { BrandProps, CategoryProps, ClasificationProps } from "@/types/Props";
+import { ArticleProps, BrandProps, CategoryProps, ClasificationProps } from "@/types/Props";
 import { getElementsApi } from "@/data/api";
 
 type FiltersProps = {
-
+    updateDataFunction : (data : ArticleProps[]) => void;
 }
 
-const Filters : React.FC<FiltersProps> = () => {
+const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
 
     const [active, setActive] = useState(false);
     const [categories, setCategories] = useState<CategoryProps [] | null>(null);
@@ -47,6 +47,15 @@ const Filters : React.FC<FiltersProps> = () => {
         getBrands();
     },[])
 
+    async function selectData(id : number, typeData: string){
+        if(id && typeData){
+            const newData = await getElementsApi("http://localhost:8080/api/producto/filter/"+typeData+"/"+id);
+            if(newData){
+                updateDataFunction(newData);
+            }
+        }
+    }
+
     return (
         <>
             <div className="w-full md:hidden">
@@ -74,20 +83,20 @@ const Filters : React.FC<FiltersProps> = () => {
                         {categories && <FilterComponent
                             title="Categoria."
                             data={categories}
-                            sliceFrom={0}
-                            sliceTo={6}
+                            dataId="categoria"
+                            updateData={selectData}
                         />}
                         {classifications && <FilterComponent
                             title="Clasficicación."
                             data={classifications}
-                            sliceFrom={0}
-                            sliceTo={2}
+                            dataId="clasificacion"
+                            updateData={selectData}
                         />}
                         { brands && <FilterComponent
                             title="Marca."
                             data={brands}
-                            sliceFrom={0}
-                            sliceTo={12}
+                            dataId="marca"
+                            updateData={selectData}
                         />}
                     </div>
                 </div>
