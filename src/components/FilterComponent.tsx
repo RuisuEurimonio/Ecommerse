@@ -10,19 +10,26 @@ type FilterProps ={
     sliceFrom?: number,
     sliceTo?: number,
     dataId: string,
-    updateData: (event:any , type: string) => void
+    updateData: (event:any , type: string) => void,
+    isClicked: boolean,
+    onClick?: (name : string) => void;
 }
 
-const FilterComponent : React.FC<FilterProps> = ({title, data, sliceFrom, sliceTo, dataId, updateData}) => {
+const FilterComponent : React.FC<FilterProps> = ({title, data, sliceFrom, sliceTo, dataId, updateData, isClicked = false, onClick}) => {
 
     const [active, setActive] = useState(false);
+    const [filterSelected, setFilterSelected] = useState("");
 
     function openFilters(){
         setActive(!active);
     }
 
+    function updateFilterSelected(name : string){
+        setFilterSelected(name);
+    }
+
     return (
-        <div className="transition px-2 border-2 rounded-sm my-0.5 cursor-pointer">
+        <div className="transition px-2 border-2 rounded-sm my-0.5 cursor-pointer" >
             <h3 className="font-bold text-lg my-1 relative flex items-center border-b-2
                 md:text-base
             " onClick={openFilters}>
@@ -35,8 +42,8 @@ const FilterComponent : React.FC<FilterProps> = ({title, data, sliceFrom, sliceT
                 ${active ? "flex" : "hidden"}
             `}>
                 {data.slice(sliceFrom,sliceTo).map((item : ClasificationProps | CategoryProps | BrandProps) =>(
-                    <li key={item.id} className="pl-2">
-                        <p onClick={()=>{updateData(item.id, dataId)}}> {item.nombre} </p>
+                    <li key={item.id} className="pl-2" onClick={()=>{onClick && onClick(dataId)}}>
+                        <p className={`${filterSelected == item.nombre && isClicked ? "underline" : ""}`} onClick={()=>{updateData(item.id, dataId) ; updateFilterSelected(item.nombre)}}> {item.nombre} </p>
                     </li>
                 ))}
             </ul>

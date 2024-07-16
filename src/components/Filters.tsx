@@ -15,6 +15,7 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
     const [categories, setCategories] = useState<CategoryProps [] | null>(null);
     const [classifications, setClassifications] = useState<ClasificationProps [] | null>(null);
     const [brands, setBrands] = useState<BrandProps [] | null>(null);
+    const [currentClicked, setCurrentClicked] = useState("");
 
     function openFilters(){
         setActive(!active);
@@ -56,6 +57,10 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
         }
     }
 
+    function updateCurrentClicked(name : string){
+        setCurrentClicked(name);
+    }
+
     return (
         <>
             <div className="w-full md:hidden">
@@ -85,18 +90,24 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
                             data={categories}
                             dataId="categoria"
                             updateData={selectData}
+                            isClicked={currentClicked == "categoria"}
+                            onClick={updateCurrentClicked}
                         />}
                         {classifications && <FilterComponent
                             title="Clasficicación."
                             data={classifications}
                             dataId="clasificacion"
                             updateData={selectData}
+                            isClicked={currentClicked == "clasificacion"}
+                            onClick={updateCurrentClicked}
                         />}
                         { brands && <FilterComponent
                             title="Marca."
                             data={brands}
                             dataId="marca"
                             updateData={selectData}
+                            isClicked={currentClicked == "marca"}
+                            onClick={updateCurrentClicked}
                         />}
                     </div>
                 </div>
