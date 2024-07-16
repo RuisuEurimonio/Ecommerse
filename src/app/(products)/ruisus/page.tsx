@@ -15,7 +15,7 @@ import { perPageOptions, alphabetOptions } from "@/utils/ts/configuration";
 
 import { ArticleProps } from "@/types/Props";
 
-import { getElementsByFilterName } from "@/data/api";
+import { getElementsByFilterName, getElementsByOrder } from "@/data/api";
 
 type ProductsProps = {};
 
@@ -33,25 +33,42 @@ const Products: React.FC<ProductsProps> = () => {
 
     function updateDataByFilter(data : ArticleProps[]){
         if(data){
-            let array : ArticleProps[] = [];
-            data.forEach((item)=>{
-                console.log(item)
-                if(item.marca.id == 6){
-                    array.push(item);
-                }
-            })
-            setData(array);
+            const newData = selectDataRuisus(data);
+            setData(newData);
         }
     }
 
-    useEffect(()=>{
-        const get = async () =>{
-            const data = await getElementsByFilterName("http://localhost:8080/api/producto/filter/marca", ID_BRAND);
-            if(data){
-                setData(data);
+    function selectDataRuisus(data : ArticleProps[]) : ArticleProps[]{
+        let array : ArticleProps[] = [];
+        data.forEach((item)=>{
+            if(item.marca.id == 6){
+                array.push(item);
+            }
+        })
+        return array;
+    }
+
+    const get = async () =>{
+        const data = await getElementsByFilterName("http://localhost:8080/api/producto/filter/marca", ID_BRAND);
+        if(data){
+            setData(data);
+        }
+    }
+
+    async function getDataByOrder(event : React.ChangeEvent<HTMLSelectElement>){
+        let { value } = event.target
+        if(value === "none") {return get()};
+        const data = await getElementsByOrder(value as "desc" | "asc");
+        if(data){
+            const dataDiscount = selectDataRuisus(data);
+            if(dataDiscount){
+                setData(dataDiscount);
             }
         }
+    }
 
+
+    useEffect(()=>{
         get();
     },[])
 
@@ -69,13 +86,15 @@ const Products: React.FC<ProductsProps> = () => {
                             <select
                                 name="order"
                                 className="outline-none cursor-pointer mx-1 rounded-sm"
-                            >
-                                {alphabetOptions.map((option) => (
-                                    <option key={option.id}>
-                                        {option.tipo}
-                                    </option>
-                                ))}
-                            </select>
+                                onChange={(event)=>{getDataByOrder(event)}}
+                                >
+                                    <option value="none"> Seleccionar. </option>
+                                    {alphabetOptions.map((option) => (
+                                        <option key={option.id} value={option.keyWord} >
+                                            {option.tipo}
+                                        </option>
+                                    ))}
+                                </select>
                         </div>
                         <div>
                             {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
