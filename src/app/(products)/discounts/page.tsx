@@ -32,21 +32,27 @@ const Discounts: React.FC<DisctountsProps> = () => {
 
     function updateDataByFilter(data : ArticleProps[]){
         if(data){
-            setData(data);
+            const discountsData = selectDataWithDiscounts(data);
+            setData(discountsData);
         }
+    }
+
+    function selectDataWithDiscounts(response : ArticleProps[]) : ArticleProps[]{
+        let array : ArticleProps[] = [];
+        response.forEach((item : ArticleProps)=>{
+            if(item.descuento?.activo){
+                array.push(item);
+            }
+        })
+        return array;
     }
 
     useEffect(()=>{
         const get = async () =>{
             const response = await getElementsApi("http://localhost:8080/api/producto/all")
             if(response){
-                let array : ArticleProps[] = [];
-                response.forEach((item : ArticleProps)=>{
-                    if(item.descuento?.activo){
-                        array.push(item);
-                    }
-                })
-                setData(array);
+                const data = selectDataWithDiscounts(response);
+                setData(data);
             }
         }
         get();
@@ -88,7 +94,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             lg:grid-cols-4
                             xl:grid-cols-5"
                         >
-                            {data ?
+                            {data &&
                             data
                                 .slice(
                                     perPage * pageNum - perPage,
@@ -101,10 +107,11 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                         discount
                                         link={"discounts"}
                                     />
-                                ))
-                                :
-                                <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encuentraron productos." />}
+                                ))}
                         </ul>
+                        {data && data?.length == 0 && 
+                            <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
+                        }
                         {!data && 
                         <div className="w-full flex justify-center items-center">
                             <DataNotFoundMessage

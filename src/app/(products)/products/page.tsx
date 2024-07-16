@@ -102,6 +102,9 @@ const Products: React.FC<ProductsProps> = () => {
                                 )})
                             }
                         </ul>
+                        {data && data?.length == 0 && 
+                            <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
+                        }
                         {!data && 
                         <div className="w-full flex justify-center items-center">
                             <DataNotFoundMessage
