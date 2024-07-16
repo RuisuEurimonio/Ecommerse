@@ -59,8 +59,10 @@ const Discounts: React.FC<DisctountsProps> = () => {
         get();
     },[])
 
-    async function getDataByOrder(order : "desc" | "asc"){
-        const data = await getElementsByOrder(order);
+    async function getDataByOrder(event : React.ChangeEvent<HTMLSelectElement>){
+        let { value } = event.target
+        if(value === "none") {return get()};
+        const data = await getElementsByOrder(value as "desc" | "asc");
         if(data){
             const dataDiscount = selectDataWithDiscounts(data);
             if(dataDiscount){
@@ -85,14 +87,15 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             <select
                                 name="order"
                                 className="outline-none cursor-pointer mx-1 rounded-sm"
-                            >
-                                <option onClick={get}> Seleccionar. </option>
-                                {alphabetOptions.map((option) => (
-                                    <option key={option.id} onClick={()=>{getDataByOrder(option.keyWord as "desc" | "asc")}}>
-                                        {option.tipo}
-                                    </option>
-                                ))}
-                            </select>
+                                onChange={(event)=>{getDataByOrder(event)}}
+                                >
+                                    <option value="none"> Seleccionar. </option>
+                                    {alphabetOptions.map((option) => (
+                                        <option key={option.id} value={option.keyWord} >
+                                            {option.tipo}
+                                        </option>
+                                    ))}
+                                </select>
                         </div>
                         <div>
                             {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
