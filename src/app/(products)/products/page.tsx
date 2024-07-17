@@ -1,6 +1,6 @@
 "use client";
 
-import { SelectHTMLAttributes, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
@@ -15,7 +15,8 @@ import { verifyPerPageExist } from "@/utils/ts/validations";
 
 import { ArticleProps } from "@/types/Props";
 
-import { getElementsApi, getElementsByOrder } from "@/data/api";
+import { getElementsApi, getElementsByOrder, getElementsSearched } from "@/data/api";
+import { useDebouncedCallback } from "use-debounce";
 
 type ProductsProps = {};
 
@@ -28,6 +29,7 @@ const Products: React.FC<ProductsProps> = () => {
         searchParams.get("perPage") || perPageOptions[1].cantidad
     ) as number;
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
+    const searchValue = searchParams.get("search") || "";
     
     const[data, setData] = useState<ArticleProps[] | null>(null);
 
@@ -44,6 +46,12 @@ const Products: React.FC<ProductsProps> = () => {
         } 
     }
 
+    const getSearch = async () => {
+        const data = await getElementsSearched(searchValue.toString());
+        if(data){
+            setData(data);
+        }
+    }
     
     async function getDataByOrder(event : React.ChangeEvent<HTMLSelectElement>){
         let { value } = event.target
@@ -54,9 +62,17 @@ const Products: React.FC<ProductsProps> = () => {
         }
     }
 
+    const debouncedGetSearch = useDebouncedCallback(() => {
+        if (searchValue) {
+            getSearch();
+        } else {
+            get();
+        }
+    }, 500);
+
     useEffect(()=>{
-        get();
-    },[])
+        debouncedGetSearch();
+    },[searchValue])
 
     return (
         <div

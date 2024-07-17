@@ -50,3 +50,16 @@ export async function getElementsByOrder(order : "desc" | "asc"){
         console.log("Error get elements by order: "+error);
     }
 }
+
+export async function getElementsSearched(value : string) {
+    try{
+        const response = await fetch(`http://localhost:8080/api/producto/search?sku=${value}&nombre=${value}`)
+        if(!response.ok){
+            throw new Error("Network responses was not ok")
+        }
+        const data = response.json();
+        return data;
+    } catch(error){
+        console.log("Error get elements searched ")
+    }
+}

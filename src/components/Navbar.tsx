@@ -3,6 +3,7 @@ import React from "react";
 import logo from "@/assets/img/logo sin fondo.png";
 import Link from "next/link";
 import NavLinks from "./NavLinks";
+import SearchInput from "./SearchInput";
 
 type navProps = {};
 
@@ -31,24 +32,9 @@ const NavBar: React.FC<navProps> = () => {
                     w-[50%]
                     md:w-[30%]"
                 >
-                    <form
-                        className="w-[90%] m-auto flex 
-                        md:h-7
-                        xl:h-10 xl:w-full"
-                    >
-                        <input
-                            className="w-4/5 rounded-l-3xl pl-5 outline-none text-base
-                            md:h-full"
-                            placeholder="Buscar"
-                        />
-                        <button
-                            className="w-1/5 bg-fifth-color rounded-r-3xl h-full border-l-2 text-base
-                            md:h-full"
-                            name="Buscar"
-                        >
-                            <span className="icon icon-search"></span>
-                        </button>
-                    </form>
+                    
+                        <SearchInput />
+                    
                 </div>
                 <NavLinks />
                 <div
