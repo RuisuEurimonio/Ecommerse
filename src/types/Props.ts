@@ -105,6 +105,7 @@ export type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
     children?: React.ReactElement<any>
     isLoginRegister?: boolean
     updateInfo?: boolean
+    urlFetch: string,
     customFunction?: () => void;
 };
 

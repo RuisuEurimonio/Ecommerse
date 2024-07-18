@@ -23,6 +23,7 @@ const Form = <T extends {id?: number},
         children, 
         isLoginRegister, 
         updateInfo = false,
+        urlFetch,
         customFunction
     }: FormProps<T, U>) => {
 
@@ -224,7 +225,7 @@ const Form = <T extends {id?: number},
                 try{
                     let id = data?.id ?? null;
                     let newData = {id, ...dataInputs}
-                    customFunction && await updateAlert("clasificación", newData, customFunction);
+                    customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
                 } catch (error){
                     console.log("Error updating in form: "+error)
                 }

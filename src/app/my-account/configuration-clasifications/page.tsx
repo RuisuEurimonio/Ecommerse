@@ -110,6 +110,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                   schequema={ClasificationSchequema} 
                   inputsList={inputsForm} 
                   updateInfo={updateData} 
+                  urlFetch="producto/clasificacion"
                   customFunction={createOrUpdateElement}/>
         </Modal>
     </div>
