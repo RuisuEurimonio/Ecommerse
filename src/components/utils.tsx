@@ -1,3 +1,4 @@
+import { updateElement } from '@/data/api';
 import { ArticleProps } from '@/types/Props';
 import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
@@ -39,6 +40,39 @@ export const saveAlert = (name:string):Promise<boolean> => {
             Toast.fire();
             return true;
         } else { return false}
+    })
+}
+
+export const updateAlert = (name:string, data: any, customFunction : ()=> void):void => {
+    Swal.fire({
+        title: `Actualizar ${name}.`,
+        text: `Desea actualizar con los datos ingresados?`,
+        icon: "question",
+        showCancelButton: true
+    }).then((response)=>{
+        if(response.isConfirmed){
+
+            updateElement("producto/clasificacion", {
+                method: "PUT",
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then((response)=>{
+                if(response){
+                    let Toast = Swal.mixin({
+                        toast: true,
+                        position: "bottom-end",
+                        showConfirmButton: false,
+                        icon: "success",
+                        timer: 4000,
+                        title: `${name} actualizado.`
+                    })
+                    Toast.fire();
+                    customFunction();
+                }  
+            })  
+        } 
     })
 }
 

@@ -43,11 +43,13 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
     const [dataClasificationSelect, setDataClasificationSelect] = useState<ClasificationProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
     const [data, setData] = useState<ClasificationProps[] | null>(null);
+    const [updateData, setUpdateData] = useState(false);
 
     function openCloseModal(){
         setKeyModal("main")
         setModalVisible(!modalVisible);
         setDataClasificationSelect(null);
+        setUpdateData(false);
     }
 
     function openCloseSubModal(data: ClasificationProps){
@@ -58,16 +60,22 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
         }
         setKeyModal(data.nombre)
         setModalVisible(!modalVisible);
+        setUpdateData(true)
+    }
+
+    const get = async () => {
+        const data = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
+        if(data){
+            setData(data);
+        }
+    }
+
+    function createOrUpdateElement(){
+        openCloseModal();
+        get();
     }
 
     useEffect(()=>{
-        const get = async () => {
-            const data = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
-            if(data){
-                setData(data);
-            }
-        }
-
         get();
     },[])
 
@@ -95,7 +103,14 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataClasificationSelect == null ? "Agregar" : "Actualizar"} clasificación. </h2>
-            <Form className="w-11/12 h-full" modal data={dataClasificationSelect} dataName="Clasificación" schequema={ClasificationSchequema} inputsList={inputsForm} />
+            <Form className="w-11/12 h-full"
+                  modal 
+                  data={dataClasificationSelect} 
+                  dataName="Clasificación" 
+                  schequema={ClasificationSchequema} 
+                  inputsList={inputsForm} 
+                  updateInfo={updateData} 
+                  customFunction={createOrUpdateElement}/>
         </Modal>
     </div>
     );

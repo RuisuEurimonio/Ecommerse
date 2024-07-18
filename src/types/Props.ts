@@ -104,6 +104,8 @@ export type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
     inputsList: InputsListProps<U>[]
     children?: React.ReactElement<any>
     isLoginRegister?: boolean
+    updateInfo?: boolean
+    customFunction?: () => void;
 };
 
 export type InputsListProps<U extends {id? : number | string, nombre?: string}> = {

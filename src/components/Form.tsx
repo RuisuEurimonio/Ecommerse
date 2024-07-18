@@ -9,9 +9,22 @@ import { z } from "zod";
 
 import { InputsListProps,  FormProps} from "@/types/Props"
 
-import { InputErrorText, saveAlert } from "./utils";
+import { InputErrorText, saveAlert, updateAlert } from "./utils";
+import { updateElement } from "@/data/api";
 
-const Form = <T, U extends {id? : number | string, nombre?: string}>({ className, modal = false, data, dataName, schequema, inputsList, children, isLoginRegister}: FormProps<T, U>) => {
+const Form = <T extends {id?: number}, 
+              U extends {id? : number | string, nombre?: string}>({
+        className,
+        modal = false, 
+        data , 
+        dataName, 
+        schequema, 
+        inputsList, 
+        children, 
+        isLoginRegister, 
+        updateInfo = false,
+        customFunction
+    }: FormProps<T, U>) => {
 
     const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number | string, nombre?: string}>[]>([]);
 
@@ -199,12 +212,22 @@ const Form = <T, U extends {id? : number | string, nombre?: string}>({ className
         )
     }
 
-    const onSubmit: SubmitHandler<formProps> = async (data) => {
+    const onSubmit: SubmitHandler<formProps> = async (dataInputs) => {
         if(!isLoginRegister){
-            const response = await saveAlert(dataName);
-            if (response) {
-                reset();
-                alert(`${dataName} guardado`);
+            if(!updateInfo){
+                const response = await saveAlert(dataName);
+                if (response) {
+                    reset();
+                    alert(`${dataName} guardado`);
+                }
+            } else {
+                try{
+                    let id = data?.id ?? null;
+                    let newData = {id, ...dataInputs}
+                    customFunction && await updateAlert("clasificación", newData, customFunction);
+                } catch (error){
+                    console.log("Error updating in form: "+error)
+                }
             }
         } else {
             reset();

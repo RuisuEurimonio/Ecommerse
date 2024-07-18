@@ -60,6 +60,15 @@ export async function getElementsSearched(value : string) {
         const data = response.json();
         return data;
     } catch(error){
-        console.log("Error get elements searched ")
+        console.log("Error get elements searched: "+ error)
+    }
+}
+
+export async function updateElement(type: string, data: any){
+    try{
+        const response = await fetch(`http://localhost:8080/api/${type}/update`, data);
+        return response.ok;
+    } catch(error){
+        console.log("Error update element: "+error)
     }
 }
