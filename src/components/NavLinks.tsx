@@ -34,9 +34,9 @@ const NavLinks:React.FC<NavLinksProps> = () => {
                     md:hidden
                 "
                 onClick={()=>{setActive(!active)}}>
-                    <span className="icon icon-bars" />
+                    <span className="icon icon-bars text-third-color" />
             </button>
-            <div className={`fixed right-0 top-0 w-[320px] h-screen bg-light-third-color border-2 transition duration-500 z-40
+            <div className={`fixed right-0 top-0 w-[320px] h-screen bg-principal-color border-2 transition duration-500 z-40 text-fifth-color
                 md:static md:translate-x-0 md:px-0 md:py-0 md:h-auto md:border-0 md:w-auto
                 ${active ? "translate-x-0" : "translate-x-full"}
             `}

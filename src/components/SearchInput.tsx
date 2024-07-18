@@ -37,7 +37,7 @@ const SearchInput: React.FC<SearchInputProps> = () => {
                 value={searchParams.get("search") ? searchParams.get("search")!.toString() : ""} 
             />
             <Link
-                className="w-1/5 bg-fifth-color rounded-r-3xl h-full border-l-2 text-base flex items-center justify-center
+                className="w-1/5 bg-fifth-color rounded-r-3xl  border-l-2 text-base flex items-center justify-center
                             md:h-full"
                 href={`/products?search=${searchParams.get("search")?.toString() ?? ""}`}
                 
