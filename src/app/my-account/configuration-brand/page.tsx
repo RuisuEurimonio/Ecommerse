@@ -43,11 +43,13 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
     const [dataBrandSelect, setDataBrandSelect] = useState<BrandProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
     const [data, setData] = useState<BrandProps[] | null>(null);
+    const [updateData, setUpdateData] = useState(false);
 
     function openCloseModal() {
         setKeyModal("main")
         setModalVisible(!modalVisible);
         setDataBrandSelect(null);
+        setUpdateData(false);
     }
 
     function openCloseSubModal(data: BrandProps) {
@@ -58,16 +60,22 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
         }
         setKeyModal(data.nombre)
         setModalVisible(!modalVisible);
+        setUpdateData(true);
+    }
+
+    const get = async () =>{
+        const data = await getElementsApi("http://localhost:8080/api/producto/marca/all");
+        if(data){
+            setData(data);
+        }
+    }   
+
+    function createOrUpdateElement(){
+        openCloseModal();
+        get()
     }
 
     useEffect(()=>{
-        const get = async () =>{
-            const data = await getElementsApi("http://localhost:8080/api/producto/marca/all");
-            if(data){
-                setData(data);
-            }
-        }
-
         get();
     },[])
 
@@ -95,7 +103,15 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                     <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
                 </div>
                 <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataBrandSelect == null ? "Agregar" : "Actualizar"} marca. </h2>
-                <Form className="w-11/12 h-full" modal data={dataBrandSelect} dataName="marca" schequema={brandSchequema} inputsList={inputsForm} />
+                <Form className="w-11/12 h-full"
+                      modal 
+                      data={dataBrandSelect} 
+                      dataName="marca" 
+                      schequema={brandSchequema} 
+                      inputsList={inputsForm} 
+                      updateInfo={updateData}
+                      urlFetch="producto/marca"
+                      customFunction={createOrUpdateElement}/>
             </Modal>
         </div>
     );
