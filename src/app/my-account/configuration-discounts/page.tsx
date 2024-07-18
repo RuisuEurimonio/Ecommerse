@@ -32,7 +32,7 @@ const subDataTable : subDataTableProps<any>[] = [
     {columnName: "nombre"},
     {className:"line-clamp-3", columnName: "descripcion"},
     {columnName: "porcentaje"},
-    {type: "boolean", columnName: "active"},
+    {type: "boolean", columnName: "activo"},
     {hiddenMobile: true, columnName: "fechaCreacion"},
     {hiddenMobile: true, columnName: "fechaModificacion"}
 ]
@@ -41,7 +41,7 @@ const inputsForm = [
     {type: "text", id: "nombre", name: "Nombre"},
     {type: "textarea", id: "descripcion", name: "Descripción"},
     {type: "text", id: "porcentaje", name: "Porcentaje"},
-    {type: "checkbox", id: "active", name: "Estado"}
+    {type: "checkbox", id: "activo", name: "Estado"}
 ]
 
 const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
@@ -50,11 +50,13 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
     const [dataDiscountSelect, setDataDiscountSelect] = useState<DiscountProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
     const [data, setData] = useState<DiscountProps[] | null>(null);
+    const [updateData, setUpdateData] = useState(false);
 
     function openCloseModal(){
         setKeyModal("main")
         setModalVisible(!modalVisible);
         setDataDiscountSelect(null);
+        setUpdateData(false);
     }
 
     function openCloseSubModal(data: DiscountProps){
@@ -65,16 +67,21 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
         }
         setKeyModal(data.nombre)
         setModalVisible(!modalVisible);
+        setUpdateData(true);
+    }
+    
+    const get = async () => {
+        const data = await getElementsApi("http://localhost:8080/api/producto/descuento/all");
+        if(data){
+            setData(data);
+        }
     }
 
+    function createOrUpdateElement(){
+        openCloseModal();
+        get();
+    }
     useEffect(()=>{
-        const get = async () => {
-            const data = await getElementsApi("http://localhost:8080/api/producto/descuento/all");
-            if(data){
-                setData(data);
-            }
-        }
-
         get();
     },[])
 
@@ -103,7 +110,16 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataDiscountSelect == null ? "Agregar" : "Actualizar"} descuento. </h2>
-            <Form className="w-11/12 h-full" modal data={dataDiscountSelect} dataName="Descuento" schequema={discountSchequema} inputsList={inputsForm}/> 
+            <Form className="w-11/12 h-full"
+                  modal
+                  data={dataDiscountSelect}
+                  dataName="Descuento"
+                  schequema={discountSchequema}
+                  inputsList={inputsForm}
+                  urlFetch="producto/descuento"
+                  updateInfo={updateData}
+                  customFunction={createOrUpdateElement}
+                  />
         </Modal>
     </div>
     );

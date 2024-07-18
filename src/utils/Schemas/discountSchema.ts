@@ -9,11 +9,13 @@ export const discountSchequema = z
         descripcion: z
             .string()
             .min(5, "Ingrese una descripción válida")
-            .max(500, "Ingrese una descripción válida")
-            ,
+            .max(500, "Ingrese una descripción válida"),
         porcentaje: z
-            .number({message:"Ingresa un numero"})
-            .positive("Debe ser un número positivo"),
-        active: z
+            .coerce
+            .number({message: "Ingrese un número"})
+            .min(1, "Ingrese un número")
+            .max(99, "Ingrese un número menor a 100")
+            ,
+        activo: z
             .boolean(),
     });

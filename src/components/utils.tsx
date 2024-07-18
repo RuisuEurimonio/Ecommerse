@@ -44,6 +44,7 @@ export const saveAlert = (name:string):Promise<boolean> => {
 }
 
 export const updateAlert = (name:string, data: any, file: string, customFunction : ()=> void):void => {
+    console.log(data);
     Swal.fire({
         title: `Actualizar ${name}.`,
         text: `Desea actualizar con los datos ingresados?`,
