@@ -8,8 +8,6 @@ type NavBarAccountProps = {};
 const NavBarAccount: React.FC<NavBarAccountProps> = () => {
     const pathName = usePathname().split("/")[2];
 
-    console.log(pathName);
-
     return (
         <ul>
             <li>

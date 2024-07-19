@@ -41,6 +41,8 @@ const Form = <T extends {id?: number},
         defaultValues: data ?? {} as T,
     });
 
+    const formValues = watch();
+
     const selectComponent = <U extends { id?: number | string, nombre?: string }>(
         id: string, 
         name: string, 
@@ -78,13 +80,13 @@ const Form = <T extends {id?: number},
             )
         }
 
-    const inputWithSelect = <U extends {nombre?: string, id?: number | string, otherData?: string} >(
+    const inputWithSelect = <U extends {nombre?: string, id?: number | string, abreviacion?: string} >(
         id: string,
         name: string,
         type: string,
         extraData: U[],
         secondId: string
-    ) => {
+    ) => { 
         return(
             <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
@@ -93,14 +95,14 @@ const Form = <T extends {id?: number},
                         <p className="inline-block w-5/12">{name}*:</p>
                         <select
                             className="border rounded-sm w-2/12"
-                            {...register(secondId)}
+                            {...register(secondId+".id")}
                         >
-                            {extraData.map((item) => (
+                            {extraData.map((item : U) => (
                                 <option
                                     key={item.nombre?? "" + item.id}
-                                    value={item.nombre}
+                                    value={item.id}
                                 >
-                                    {item.otherData?? item.nombre}
+                                    {item.abreviacion?? item.abreviacion}
                                 </option>
                             ))}
                         </select>
@@ -115,7 +117,6 @@ const Form = <T extends {id?: number},
                         <InputErrorText
                             modal={modal}
                         >
-                            {" "}
                             {errors[secondId]?.message as string}
                         </InputErrorText>
                     )}
@@ -237,7 +238,6 @@ const Form = <T extends {id?: number},
     useEffect(() => {
         const groupedItems = inputsList.filter(item => typeof item.id !== 'undefined' && item.groupData);
         setListOfItemWithGroup(groupedItems as InputsListProps<{ id?: number | string; nombre: string; }>[]);
-        console.log(data)
     }, [inputsList]);
 
     return (
@@ -262,6 +262,8 @@ const Form = <T extends {id?: number},
 
             </div>
             
+            <pre>{JSON.stringify(formValues, null, 2)}</pre>
+
             {children}
 
             {isLoginRegister ? 

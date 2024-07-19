@@ -37,7 +37,6 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         const user = localStorage.getItem("user");
         setListOfItems(products ? JSON.parse(products) : [])
         setDataUser(user ? JSON.parse(user) : "");
-        console.log(products ? JSON.parse(products) : [])
         setUpdateData(false);
         
     },[updateData])

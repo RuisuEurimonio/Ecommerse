@@ -7,7 +7,7 @@ import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 
-import { subDataTableProps, UserProps } from "@/types/Props";
+import { RolProps, subDataTableProps, TypeDocumentProps, UserProps } from "@/types/Props";
 
 import { userSchequema } from "@/utils/Schemas/userSchema";
 import NoDataTable from "@/components/NoDataTable";
@@ -36,32 +36,32 @@ const subDataTable : subDataTableProps<any>[] = [
     {type:"object", columnName: "permisos", secondObject: "nombre"},
 ]
 
-const document = [
-    { nombre: "Tarjeta de identidad", otherData: "TI", id: "tarjetaIdentidad" },
-    { nombre: "Cedula de Ciudadania", otherData: "CC", id: "cedulaCiudadania"},
-    { nombre: "Cedula de extranjeria", otherData: "CED", id: "cedulaExtranjeria" },
-];
-
-const inputsForm = [
-    {type: "combined", id: "numeroDocumento", name: "Documento", extraData: document, secondId: "tipoDocumento"},
-    {type: "text", id: "nombres", name: "Nombre"},
-    {type: "text", id: "apellidos", name: "Apellidos"},
-    {type: "text", id: "telefono", name: "Teléfono"},
-    {type: "text", id: "direccion", name: "Dirección"},
-    {type: "text", id: "correo", name: "Correo"}
-]
-
 const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [dataUserSelect, setDataUserSelect] = useState<UserProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
     const [data, setData] = useState<UserProps[] | null>();
+    const [updateData, setUpdateData] = useState(false);
+    const [dataDocument, setDataDocument] = useState<TypeDocumentProps[] | null>(null);
+    const [permissions, setPermissions] = useState<RolProps[] | null>(null);
+
+    const inputsForm = [
+        {type: "combined", id: "numeroDocumento", name: "Documento", extraData: dataDocument, secondId: "tipoDocumento"},
+        {type: "text", id: "nombres", name: "Nombre"},
+        {type: "text", id: "apellidos", name: "Apellidos"},
+        {type: "text", id: "telefono", name: "Teléfono"},
+        {type: "text", id: "celular", name: "Celular"},
+        {type: "text", id: "direccion", name: "Dirección"},
+        {type: "text", id: "correo", name: "Correo"},
+        {type: "select", id: "permisos", name: "Permisos", extraData: permissions}
+    ]
 
     function openCloseModal(){
         setKeyModal("main")
         setModalVisible(!modalVisible);
         setDataUserSelect(null);
+        setUpdateData(false);
     }
 
     function openCloseSubModal(data: UserProps){
@@ -72,16 +72,36 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
         }
         setKeyModal(data.correo)
         setModalVisible(!modalVisible);
+        setUpdateData(true);
+    }
+
+    const get = async () =>{
+        const response = await getElementsApi("http://localhost:8080/api/usuario/all");
+        if(response){
+            setData(response);
+        }
+    }
+
+    function createOrUpdateElements(){
+        openCloseModal();
+        get();
     }
 
     useEffect(()=>{
-        const get = async () =>{
-            const response = await getElementsApi("http://localhost:8080/api/usuario/all");
-            if(response){
-                setData(response);
+        const getDataDocument = async () =>{
+            const data = await getElementsApi("http://localhost:8080/api/usuario/documento/all");
+            if(data){
+                setDataDocument(data);
             }
         }
-
+        const getDataPermissions = async () =>{
+            const data = await getElementsApi("http://localhost:8080/api/usuario/permiso/all");
+            if(data){
+                setPermissions(data);
+            }
+        }
+        getDataPermissions();
+        getDataDocument();
         get();
     },[])
 
@@ -109,7 +129,16 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataUserSelect == null ? "Agregar" : "Actualizar"} usuario. </h2>
-            <Form className="w-11/12 h-full" modal data={dataUserSelect} schequema={userSchequema} dataName="Usuario" inputsList={inputsForm} />
+            <Form className="w-11/12 h-full"
+                  modal
+                  data={dataUserSelect}
+                  schequema={userSchequema}
+                  dataName="Usuario"
+                  inputsList={inputsForm} 
+                  customFunction={createOrUpdateElements}
+                  urlFetch="usuario"
+                  updateInfo={updateData}
+                  />
         </Modal>
     </div>
     );
