@@ -7,7 +7,7 @@ import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 import Form from "@/components/Form";
 
-import { ArticleProps, subDataTableProps} from "@/types/Props";
+import { ArticleProps, BrandProps, CategoryProps, ClasificationProps, subDataTableProps} from "@/types/Props";
 
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import subData from "@/utils/json/branchFake.json"
@@ -35,16 +35,7 @@ const subDataTable : subDataTableProps<any>[] = [
     {hiddenMobile: true, columnName: "imagen"},   
 ]
 
-const inputsForm = [
-    {type: "text", id: "nombre", name: "Nombre"},
-    {type: "textarea", id: "descripcion", name: "Descripción"},
-    {type: "text", id: "SKU", name: "SKU"},
-    {type: "text", id: "precio", name: "Precio"},
-    {type: "text", id: "image", name: "Imagen"},
-    {type: "select", id: "brand", name: "Marca", extraData: subData, groupData: true},
-    {type: "select", id: "clasification", name: "Clasificación", extraData: subData, groupData: true},
-    {type: "select", id: "category", name: "Categoria", extraData: subData, groupData: true},
-]
+
 
 const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
 
@@ -52,11 +43,27 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
     const [dataProductSelect, setDataProductSelect] = useState<ArticleProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
     const [data, setData] = useState<ArticleProps[] | null>(null)
+    const [updateData, setUpdateData] = useState(false);
+    const [dataClassification, setDataClassification] = useState<ClasificationProps[] | null>(null);
+    const [dataBrand, setDataBrand] = useState<BrandProps[] | null>(null);
+    const [dataCategory, setDataCategory] = useState<CategoryProps[] | null>(null);
 
+    const inputsForm = [
+        {type: "text", id: "nombre", name: "Nombre"},
+        {type: "textarea", id: "descripcion", name: "Descripción"},
+        {type: "text", id: "sku", name: "sku"},
+        {type: "text", id: "precio", name: "Precio"},
+        {type: "text", id: "imagen", name: "Imagen"},
+        {type: "select", id: "marca", name: "Marca", extraData: dataBrand, groupData: true},
+        {type: "select", id: "clasificacion", name: "Clasificación", extraData: dataClassification, groupData: true},
+        {type: "select", id: "categoria", name: "Categoria", extraData: dataCategory, groupData: true},
+    ]
+    
     function openCloseModal(){
         setKeyModal("main")
         setModalVisible(!modalVisible);
         setDataProductSelect(null);
+        setUpdateData(false);
     }
 
     function openCloseSubModal(data: ArticleProps){
@@ -67,18 +74,40 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
         }
         setKeyModal(String(data.sku))
         setModalVisible(!modalVisible);
+        setUpdateData(true);
     }
 
+    const get = async () =>{
+        const data = await getElementsApi("http://localhost:8080/api/producto/all");
+        if(data){
+            setData(data)
+        }
+    }
+
+    function createOrUpdateElement(){
+        openCloseModal();
+        get();
+    }
+
+
+
     useEffect(()=>{
-        const get = async () =>{
-            const data = await getElementsApi("http://localhost:8080/api/producto/all");
-            if(data){
-                setData(data)
+        const getSubData = async () => {
+            const category = await getElementsApi("http://localhost:8080/api/producto/categoria/all");
+            const brand = await getElementsApi("http://localhost:8080/api/producto/marca/all");
+            const classification = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
+
+            if(category && brand && classification){
+                setDataCategory(category)
+                setDataBrand(brand)
+                setDataClassification(classification)
             }
         }
-
         get();
+        getSubData()
     },[])
+
+    
 
     return (
         <div
@@ -106,10 +135,20 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
             <h2 className="font-bold text-fifth-color text-xl m-2"> {dataProductSelect == null ? "Agregar" : "Actualizar"} articulo. </h2>
-            <Form className="w-11/12 h-full" modal data={dataProductSelect} schequema={articleSchequema} dataName="Articulo" inputsList={inputsForm} />
+            <Form className="w-11/12 h-full"
+                  modal
+                  data={dataProductSelect}
+                  schequema={articleSchequema}
+                  dataName="Articulo"
+                  inputsList={inputsForm} 
+                  customFunction={createOrUpdateElement}
+                  urlFetch="producto"
+                  updateInfo={updateData}
+                  />
         </Modal>
     </div>
     );
 };
 
 export default ConfigurationProducts;
+

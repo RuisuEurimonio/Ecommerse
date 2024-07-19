@@ -10,7 +10,6 @@ import { z } from "zod";
 import { InputsListProps,  FormProps} from "@/types/Props"
 
 import { InputErrorText, saveAlert, updateAlert } from "./utils";
-import { updateElement } from "@/data/api";
 
 const Form = <T extends {id?: number}, 
               U extends {id? : number | string, nombre?: string}>({
@@ -191,12 +190,12 @@ const Form = <T extends {id?: number},
                 <p> {name} </p>
                 <select
                     className="border rounded-sm w-full"
-                    {...register(id)}
+                    {...register(id+".id")}
                 >
                     {subList.map((item) => (
                         <option
                             key={item.id}
-                            value={item.nombre}
+                            value={item.id}
                         >
                             {item.nombre}
                         </option>
@@ -224,7 +223,7 @@ const Form = <T extends {id?: number},
             } else {
                 try{
                     let id = data?.id ?? null;
-                    let newData = {id, ...dataInputs}
+                    let newData = {id, ...dataInputs};
                     customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
                 } catch (error){
                     console.log("Error updating in form: "+error)
@@ -238,6 +237,7 @@ const Form = <T extends {id?: number},
     useEffect(() => {
         const groupedItems = inputsList.filter(item => typeof item.id !== 'undefined' && item.groupData);
         setListOfItemWithGroup(groupedItems as InputsListProps<{ id?: number | string; nombre: string; }>[]);
+        console.log(data)
     }, [inputsList]);
 
     return (

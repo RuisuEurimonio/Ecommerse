@@ -11,25 +11,23 @@ export const articleSchequema = z
             .min(5, "Ingrese una descripción válida")
             .max(1000, "Ingrese una descripción válida")
         ,
-        SKU: z
-            .string()
-            .refine((number) => !isNaN(parseInt(number)), {
-                message: "Debe ser un número"
-            })
+        sku: z
+            .coerce
+            .number()
+            .min(1, "Ingresa un valor valido" )
         ,
         precio: z
-            .string()
-            .refine((number) => !isNaN(parseInt(number)), {
-                message: "Debe ser un número sin puntos"
-            }),
-        image: z
+            .coerce
+            .number({message: "Ingresa un número sin puntos ni comas"})
+            .min(1, "Ingresa un valor valido" ),
+        imagen: z
             .string()
             .regex(new RegExp("^(https?:\\/\\/)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w .-]*)*\\/?\\.(jpg|jpeg|png|gif|bmp)$"), "Debe ser una URL valida.")
         ,
-        brand: z
-            .string(),
-        clasification: z
-            .string(),
-        category: z
-            .string()
+        marca: z
+            .any(),
+        clasificacion: z
+            .any(),
+        categoria: z
+            .any()
     });
