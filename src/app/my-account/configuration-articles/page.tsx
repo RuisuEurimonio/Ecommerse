@@ -56,7 +56,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
         {type: "text", id: "imagen", name: "Imagen"},
         {type: "select", id: "marca", name: "Marca", extraData: dataBrand, groupData: true},
         {type: "select", id: "clasificacion", name: "Clasificación", extraData: dataClassification, groupData: true},
-        {type: "select", id: "categoria", name: "Categoria", extraData: dataCategory, groupData: true},
+        {type: "checkbox", id: "categoria", name: "Categoria", extraData: dataCategory},
     ]
     
     function openCloseModal(){

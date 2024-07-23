@@ -1,17 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { z } from "zod";
 
-import { InputsListProps,  FormProps} from "@/types/Props"
+import { InputsListProps,  FormProps, CategoryProps} from "@/types/Props"
 
 import { InputErrorText, saveAlert, updateAlert } from "./utils";
+  
+  
+type FormPropsSec = {categories : CategoryProps[]} | {};
 
-const Form = <T extends {id?: number}, 
+const Form = <T extends {id?: number} & FormPropsSec , 
               U extends {id? : number | string, nombre?: string}>({
         className,
         modal = false, 
@@ -28,18 +31,29 @@ const Form = <T extends {id?: number},
 
     const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number | string, nombre?: string}>[]>([]);
 
-    type formProps = z.infer<typeof schequema>;
+    type FormPropsType = z.infer<typeof schequema>;
+
+  const defaultValues: FormPropsType = ('categories' in (data ?? {}) 
+    ? { ...(data ?? {}), categories: (data as {categories : CategoryProps[]}).categories ?? [] } 
+    : (data ?? {})) as FormPropsType;
 
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
-        reset
-    } = useForm<formProps>({
+        reset,
+        control
+    } = useForm<FormPropsType>({
         resolver: zodResolver(schequema),
-        defaultValues: data ?? {} as T,
+        defaultValues:defaultValues,
     });
+
+    useEffect(() => {
+        if (data) {
+          reset(defaultValues);
+        }
+      }, [data, reset, defaultValues]);
 
     const formValues = watch();
 
@@ -57,6 +71,8 @@ const Form = <T extends {id?: number},
                 return textAreaInput(id, name);
             case ("combined"):
                 return inputWithSelect(id, name, type, extraData ?? [], secondId ?? "");
+            case ("checkbox"):
+                return checkboxInput(id, name, type, extraData ?? []);
             default:
                 return defaultInput(id, name, type);
         }
@@ -213,7 +229,49 @@ const Form = <T extends {id?: number},
         )
     }
 
-    const onSubmit: SubmitHandler<formProps> = async (dataInputs) => {
+    const checkboxInput = <U extends { id?: number | string, nombre?: string }>(id: string, name: string, type: string, subList: U[]) => {
+        return (
+            <div className={`inline ml-5
+                ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
+                `}>
+                <p> {name} </p>
+                    {subList.map((item) => {return item.id && item.nombre && (
+                        <React.Fragment key={item.id+item.nombre}>
+                        <Controller
+                            control={control}
+                            name={"categoria"}
+                            render={({field})=>{
+                                return(
+                                <input
+                                    type="checkbox"
+                                    value={item.id}
+                                    checked={Array.isArray(field.value) && field.value.some((value) => value.id === item.id)}
+                                    onChange={e=>{
+                                        console.log(e.target.checked);
+                                        const checked = e.target.checked;
+                                        const newValue = checked
+                                        ? [...(Array.isArray(field.value) ? field.value : []), { id: item.id}]
+                                        : (Array.isArray(field.value) ? field.value : []).filter((value) => value.id !== item.id);
+                                        field.onChange(newValue);
+                                    }}
+                                />
+                            )}}
+                        />
+                        <label htmlFor={String(item.id)}> {item.nombre} </label>
+                        </ React.Fragment>
+                    )})}
+                {errors[id] && (
+                    <InputErrorText
+                        modal={modal}
+                    >
+                        {errors[id]?.message as string}
+                    </InputErrorText>
+                )}
+            </div>
+        )
+    }
+
+    const onSubmit: SubmitHandler<FormPropsType> = async (dataInputs) => {
         if(!isLoginRegister){
             if(!updateInfo){
                 const response = await saveAlert(dataName);

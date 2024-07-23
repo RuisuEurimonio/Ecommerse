@@ -1,3 +1,4 @@
+import { CategoryProps } from "@/types/Props";
 import { z } from "zod";
 
 export const articleSchequema = z
@@ -29,5 +30,5 @@ export const articleSchequema = z
         clasificacion: z
             .any(),
         categoria: z
-            .any()
+            .array(z.any()).min(1, "Debes seleccionar una categoria")
     });
