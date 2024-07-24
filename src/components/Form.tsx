@@ -247,7 +247,6 @@ const Form = <T extends {id?: number} & FormPropsSec ,
                                     value={item.id}
                                     checked={Array.isArray(field.value) && field.value.some((value) => value.id === item.id)}
                                     onChange={e=>{
-                                        console.log(e.target.checked);
                                         const checked = e.target.checked;
                                         const newValue = checked
                                         ? [...(Array.isArray(field.value) ? field.value : []), { id: item.id}]
@@ -274,19 +273,11 @@ const Form = <T extends {id?: number} & FormPropsSec ,
     const onSubmit: SubmitHandler<FormPropsType> = async (dataInputs) => {
         if(!isLoginRegister){
             if(!updateInfo){
-                const response = await saveAlert(dataName);
-                if (response) {
-                    reset();
-                    alert(`${dataName} guardado`);
-                }
+                customFunction && await saveAlert(dataName, dataInputs, urlFetch, customFunction);
             } else {
-                try{
-                    let id = data?.id ?? null;
-                    let newData = {id, ...dataInputs};
-                    customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
-                } catch (error){
-                    console.log("Error updating in form: "+error)
-                }
+                let id = data?.id ?? null;
+                let newData = {id, ...dataInputs};
+                customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
             }
         } else {
             reset();

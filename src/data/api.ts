@@ -72,3 +72,12 @@ export async function updateElement(type: string, data: any){
         console.log("Error update element: "+error)
     }
 }
+
+export async function createElement(name: string, data: object){
+    try{
+        const response = await fetch(`http://localhost:8080/api/${name}/new`, data);
+        return response.ok;
+    } catch (error){
+        console.log("Error create element: "+error)
+    }
+}

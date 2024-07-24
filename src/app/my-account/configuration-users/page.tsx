@@ -12,6 +12,7 @@ import { RolProps, subDataTableProps, TypeDocumentProps, UserProps } from "@/typ
 import { userSchequema } from "@/utils/Schemas/userSchema";
 import NoDataTable from "@/components/NoDataTable";
 import { getElementsApi } from "@/data/api";
+import { userSchequemaFull } from "@/utils/Schemas/userSchemaFull";
 
 type ConfigurationUsersProps = {
     
@@ -132,9 +133,9 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
             <Form className="w-11/12 h-full"
                   modal
                   data={dataUserSelect}
-                  schequema={userSchequema}
+                  schequema={updateData ? userSchequema : userSchequemaFull}
                   dataName="Usuario"
-                  inputsList={inputsForm} 
+                  inputsList={updateData ? inputsForm : [...inputsForm, {type:"password", id: "contrasena", name: "Contraseña"}]} 
                   customFunction={createOrUpdateElements}
                   urlFetch="usuario"
                   updateInfo={updateData}

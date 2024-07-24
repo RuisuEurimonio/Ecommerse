@@ -1,6 +1,6 @@
-import { updateElement } from '@/data/api';
+import { createElement, updateElement } from '@/data/api';
 import { ArticleProps } from '@/types/Props';
-import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
+import { ReadonlyURLSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
 import Swal from 'sweetalert2';
 
@@ -21,30 +21,49 @@ export const InputErrorText : React.FC<inputErrorTextProps>  = ({ children, moda
     );
 };
 
-export const saveAlert = (name:string):Promise<boolean> => {
-    return Swal.fire({
+export const saveAlert = (name:string, data : any, file: string, customFunction : ()=> void):void => {
+    Swal.fire({
         title: `Guardar ${name}.`,
         text: `Desea guardar este ${name} con los datos ingresados?`,
         icon: "question",
         showCancelButton: true
     }).then((response)=>{
         if(response.isConfirmed){
-            let Toast = Swal.mixin({
-                toast: true,
-                position: "bottom-end",
-                showConfirmButton: false,
-                icon: "success",
-                timer: 4000,
-                title: `${name} guardado.`
+            createElement(file,{
+                method: "POST",
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then((response)=>{
+                let Toast = Swal;
+                if(response){
+                    Toast = Swal.mixin({
+                        toast: true,
+                        position: "bottom-end",
+                        showConfirmButton: false,
+                        icon: "success",
+                        timer: 4000,
+                        title: `${name} guardado.`
+                    })
+                } else {
+                    Toast = Swal.mixin({
+                        toast: true,
+                        position: "bottom-end",
+                        showConfirmButton: false,
+                        icon: "error",
+                        timer: 4000,
+                        title: `Algo salio mal`
+                    })
+                }
+                Toast.fire();
+                customFunction();
             })
-            Toast.fire();
-            return true;
-        } else { return false}
+        }
     })
 }
 
 export const updateAlert = (name:string, data: any, file: string, customFunction : ()=> void):void => {
-    console.log(data);
     Swal.fire({
         title: `Actualizar ${name}.`,
         text: `Desea actualizar con los datos ingresados?`,
@@ -52,7 +71,6 @@ export const updateAlert = (name:string, data: any, file: string, customFunction
         showCancelButton: true
     }).then((response)=>{
         if(response.isConfirmed){
-
             updateElement(file, {
                 method: "PUT",
                 headers: {
@@ -60,8 +78,9 @@ export const updateAlert = (name:string, data: any, file: string, customFunction
                 },
                 body: JSON.stringify(data)
             }).then((response)=>{
+                let Toast = Swal;
                 if(response){
-                    let Toast = Swal.mixin({
+                    Toast = Swal.mixin({
                         toast: true,
                         position: "bottom-end",
                         showConfirmButton: false,
@@ -69,9 +88,18 @@ export const updateAlert = (name:string, data: any, file: string, customFunction
                         timer: 4000,
                         title: `${name} actualizado.`
                     })
-                    Toast.fire();
-                    customFunction();
-                }  
+                }  else {
+                    Toast = Swal.mixin({
+                        toast: true,
+                        position: "bottom-end",
+                        showConfirmButton: false,
+                        icon: "error",
+                        timer: 4000,
+                        title: `Algo salio mal!`
+                    })
+                }
+                Toast.fire();
+                customFunction();
             })  
         } 
     })

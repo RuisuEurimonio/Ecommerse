@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const userSchequema = z
+export const userSchequemaFull = z
     .object({
         tipoDocumento: z.any(),
         numeroDocumento: z
