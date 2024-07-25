@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { deleteAlert } from "./utils";
 import { subDataTableProps } from "@/types/Props";
 
-type TableGeneralProps<T extends { id: number, nombre: string}> = {
+type TableGeneralProps<T extends { id: number, nombre?: string, nombres?: string}> = {
     data: T[],
     perPage: number,
     openCloseSubModal: (data: T) => void,
@@ -18,7 +18,7 @@ type TableGeneralProps<T extends { id: number, nombre: string}> = {
 };
 
 
-const TableGeneral = <T extends { id: number, nombre : string},>({ data, perPage, openCloseSubModal, updateData, titles, subData, urlFetch }: TableGeneralProps<T>) => {
+const TableGeneral = <T extends { id: number, nombre?: string, nombres?: string}>({ data, perPage, openCloseSubModal, updateData, titles, subData, urlFetch }: TableGeneralProps<T>) => {
 
     
 const renderCell = (value: T[keyof T], type: string = "text", className: string = "", mergeData: T[keyof T] | string = "", secondObject?: string) =>{

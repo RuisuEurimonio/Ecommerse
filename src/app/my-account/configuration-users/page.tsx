@@ -19,6 +19,7 @@ type ConfigurationUsersProps = {
 };
 
 const perPage : number = 20;
+const URL_FETCH = "usuario";
 
 const titlesTable = [
     {titleName: "Documento"},
@@ -77,7 +78,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
     }
 
     const get = async () =>{
-        const response = await getElementsApi("http://localhost:8080/api/usuario/all");
+        const response = await getElementsApi("usuario");
         if(response){
             setData(response);
         }
@@ -90,13 +91,13 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
 
     useEffect(()=>{
         const getDataDocument = async () =>{
-            const data = await getElementsApi("http://localhost:8080/api/usuario/documento/all");
+            const data = await getElementsApi("usuario/documento");
             if(data){
                 setDataDocument(data);
             }
         }
         const getDataPermissions = async () =>{
-            const data = await getElementsApi("http://localhost:8080/api/usuario/permiso/all");
+            const data = await getElementsApi("usuario/permiso");
             if(data){
                 setPermissions(data);
             }
@@ -113,7 +114,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 <h2 className="font-bold text-xl mt-4 mb-2">Usuarios.</h2>
                 <div className="w-full relative overflow-x-auto">
                     {data?
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH} />
                     :
                     <NoDataTable message="No se encontro información de usuarios registrados." secondaryMessage="Ingresa algún usuario por medio del botón inferior." />
                 }
@@ -137,7 +138,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                   dataName="Usuario"
                   inputsList={updateData ? inputsForm : [...inputsForm, {type:"password", id: "contrasena", name: "Contraseña"}]} 
                   customFunction={createOrUpdateElements}
-                  urlFetch="usuario"
+                  urlFetch={URL_FETCH}
                   updateInfo={updateData}
                   />
         </Modal>
