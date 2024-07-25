@@ -14,6 +14,8 @@ import { ArticleProps } from "@/types/Props";
 
 import { getElementByIdApi, getElementsApi } from "@/data/api";
 
+const URL_FETCH = "producto"
+
 const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
     const router = useRouter();
@@ -30,14 +32,14 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
     useEffect(()=>{
 
         const getById = async () =>{
-            const data = await getElementByIdApi("http://localhost:8080/api/producto", params.id);
+            const data = await getElementByIdApi(URL_FETCH, params.id);
             if(data){
                 setData(data);
             }
         }
 
         const get = async () => {
-            const articles = await getElementsApi("http://localhost:8080/api/producto/all");
+            const articles = await getElementsApi(URL_FETCH);
             if(articles){
                 setArticles(articles);
             }

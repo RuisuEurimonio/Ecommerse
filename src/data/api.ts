@@ -27,9 +27,9 @@ export async function getElementByIdApi(url : string, id: number){
     }
 }
 
-export async function getElementsByFilterName(url : string, id: number){
+export async function getElementsByFilterName(url : string, type: string, id: number){
     try{
-        const response = await fetch(HOST+url+"/"+id);
+        const response = await fetch(HOST+url+"/filter/"+type+"/"+id);
         if(!response.ok){
             throw new Error("Network response was not ok");
         }

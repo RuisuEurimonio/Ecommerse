@@ -14,6 +14,8 @@ import { ArticleProps } from "@/types/Props";
 import { askForSaveProduct, getCantOfUrlParams } from "@/components/utils";
 import { getElementByIdApi, getElementsApi } from "@/data/api";
 
+const URL_FETCH = "producto"
+
 const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
     const router = useRouter();
@@ -27,14 +29,14 @@ const ProductPage: React.FC<ArticleProps> = ({ params }: any) => {
 
     useEffect(()=>{
         const getElement =  async () => {
-            const data = await getElementByIdApi("http://localhost:8080/api/producto",params.id);
+            const data = await getElementByIdApi(URL_FETCH,params.id);
             if(data){
                 setData(data);
             }
         }
 
         const getElements = async () => {
-            const data = await getElementsApi("http://localhost:8080/api/producto/all");
+            const data = await getElementsApi(URL_FETCH);
             if(data){
                 setArticle(data);
             }

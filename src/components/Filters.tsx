@@ -23,21 +23,21 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
 
     useEffect(()=>{
         const getCategories = async () => {
-            const data = await getElementsApi("http://localhost:8080/api/producto/categoria/all");
+            const data = await getElementsApi("producto/categoria");
             if(data){
                 setCategories(data);
             }
         }
 
         const getClassifications = async () => {
-            const data = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
+            const data = await getElementsApi("producto/clasificacion");
             if(data){
                 setClassifications(data);
             }
         }
 
         const getBrands = async () => {
-            const data = await getElementsApi("http://localhost:8080/api/producto/marca/all");
+            const data = await getElementsApi("producto/marca");
             if(data){
                 setBrands(data);
             }
@@ -50,7 +50,7 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
 
     async function selectData(id : number, typeData: string){
         if(id && typeData){
-            const newData = await getElementsApi("http://localhost:8080/api/producto/filter/"+typeData+"/"+id);
+            const newData = await getElementsApi("producto/filter/"+typeData+"/"+id);
             if(newData){
                 updateDataFunction(newData);
             }

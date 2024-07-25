@@ -19,6 +19,8 @@ import { ArticleProps } from "@/types/Props";
 
 type DisctountsProps = {};
 
+const URL_FETCH = "producto"
+
 const Discounts: React.FC<DisctountsProps> = () => {
 
     const searchParams = useSearchParams();
@@ -48,7 +50,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
     }
 
     const get = async () =>{
-        const response = await getElementsApi("http://localhost:8080/api/producto/all")
+        const response = await getElementsApi(URL_FETCH)
         if(response){
             const data = selectDataWithDiscounts(response);
             setData(data);

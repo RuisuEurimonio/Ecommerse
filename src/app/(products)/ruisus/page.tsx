@@ -19,6 +19,9 @@ import { getElementsByFilterName, getElementsByOrder } from "@/data/api";
 
 type ProductsProps = {};
 
+const ID_BRAND = 6;
+const URL_FETCH = "producto"
+
 const Products: React.FC<ProductsProps> = () => {
     const searchParams = useSearchParams();
 
@@ -29,7 +32,7 @@ const Products: React.FC<ProductsProps> = () => {
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
     const [data, setData] = useState<ArticleProps[] | null>(null);
 
-    const ID_BRAND = 6;
+    
 
     function updateDataByFilter(data : ArticleProps[]){
         if(data){
@@ -49,7 +52,7 @@ const Products: React.FC<ProductsProps> = () => {
     }
 
     const get = async () =>{
-        const data = await getElementsByFilterName("http://localhost:8080/api/producto/filter/marca", ID_BRAND);
+        const data = await getElementsByFilterName(URL_FETCH,"marca", ID_BRAND);
         if(data){
             setData(data);
         }

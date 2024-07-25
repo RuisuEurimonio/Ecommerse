@@ -20,6 +20,8 @@ import { useDebouncedCallback } from "use-debounce";
 
 type ProductsProps = {};
 
+const URL_FETCH = "producto"
+
 const Products: React.FC<ProductsProps> = () => {
 
     const searchParams = useSearchParams();
@@ -40,7 +42,7 @@ const Products: React.FC<ProductsProps> = () => {
     }
 
     const get = async () => {
-        const data = await getElementsApi("http://localhost:8080/api/producto/all");
+        const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data);
         } 
