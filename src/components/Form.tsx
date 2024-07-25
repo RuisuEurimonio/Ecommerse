@@ -274,6 +274,7 @@ const Form = <T extends {id?: number} & FormPropsSec ,
         if(!isLoginRegister){
             if(!updateInfo){
                 customFunction && await saveAlert(dataName, dataInputs, urlFetch, customFunction);
+                reset()
             } else {
                 let id = data?.id ?? null;
                 let newData = {id, ...dataInputs};

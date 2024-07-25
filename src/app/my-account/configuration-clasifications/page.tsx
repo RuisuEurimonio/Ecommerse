@@ -16,6 +16,7 @@ import { getElementsApi } from "@/data/api";
 type ConfigurationClasificationsProps = {};
 
 const perPage : number = 20;
+const URL_FETCH = "producto/marca"
 
 const titlesTable = [
     {titleName: "nombre"},
@@ -64,7 +65,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
     }
 
     const get = async () => {
-        const data = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
+        const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data);
         }
@@ -86,7 +87,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                 <h2 className="font-bold text-xl mt-4 mb-2">Clasificaciones.</h2>
                 <div className="w-full relative overflow-x-auto">
                     {data ?
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH}/>
                     :
                     <NoDataTable message="No se encontraron datos de clasificaciones" secondaryMessage="Ingresa una nueva clasificación por medio del botón inferior." />
                 }
@@ -110,7 +111,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                   schequema={ClasificationSchequema} 
                   inputsList={inputsForm} 
                   updateInfo={updateData} 
-                  urlFetch="producto/clasificacion"
+                  urlFetch={URL_FETCH}
                   customFunction={createOrUpdateElement}/>
         </Modal>
     </div>

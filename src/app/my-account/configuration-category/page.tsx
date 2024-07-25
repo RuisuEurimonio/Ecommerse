@@ -65,7 +65,7 @@ const ConfigurationCategory: React.FC<ConfigurationCategoryProps> = () => {
     }
 
     const get = async () => {
-        const data = await getElementsApi("http://localhost:8080/api/producto/categoria/all");
+        const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data);
         }
