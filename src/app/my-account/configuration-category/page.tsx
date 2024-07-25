@@ -7,7 +7,7 @@ import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 import Form from "@/components/Form";
 
-import { ClasificationProps, subDataTableProps } from "@/types/Props";
+import { CategoryProps, subDataTableProps } from "@/types/Props";
 
 import { ClasificationSchequema } from "@/utils/Schemas/clasificationSchema";
 import NoDataTable from "@/components/NoDataTable";
@@ -40,23 +40,23 @@ const inputsForm = [
 const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [dataClasificationSelect, setDataClasificationSelect] = useState<ClasificationProps | null>(null);
+    const [dataCategorySelect, setDataCategorySelect] = useState<CategoryProps | null>(null);
     const [keyModal, setKeyModal] = useState("");
-    const [data, setData] = useState<ClasificationProps[] | null>(null);
+    const [data, setData] = useState<CategoryProps[] | null>(null);
     const [updateData, setUpdateData] = useState(false);
 
     function openCloseModal(){
         setKeyModal("main")
         setModalVisible(!modalVisible);
-        setDataClasificationSelect(null);
+        setDataCategorySelect(null);
         setUpdateData(false);
     }
 
-    function openCloseSubModal(data: ClasificationProps){
+    function openCloseSubModal(data: CategoryProps){
         if(modalVisible){
-            setDataClasificationSelect(null);
+            setDataCategorySelect(null);
         }else{
-            setDataClasificationSelect(data);
+            setDataCategorySelect(data);
         }
         setKeyModal(data.nombre)
         setModalVisible(!modalVisible);
@@ -64,7 +64,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
     }
 
     const get = async () => {
-        const data = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
+        const data = await getElementsApi("http://localhost:8080/api/producto/categoria/all");
         if(data){
             setData(data);
         }
@@ -83,12 +83,12 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
         <div
             className="md:flex-1">
             <div className="w-4/5 mx-auto">
-                <h2 className="font-bold text-xl mt-4 mb-2">Clasificaciones.</h2>
+                <h2 className="font-bold text-xl mt-4 mb-2">Categorias.</h2>
                 <div className="w-full relative overflow-x-auto">
                     {data ?
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
                     :
-                    <NoDataTable message="No se encontraron datos de clasificaciones" secondaryMessage="Ingresa una nueva clasificación por medio del botón inferior." />
+                    <NoDataTable message="No se encontraron datos de categorias" secondaryMessage="Ingresa una nueva categoria por medio del botón inferior." />
                 }
             </div>
             <div className="bg-secondary-color text-third-color  min-h-5 flex flex-col-reverse items-center rounded-sm">
@@ -102,15 +102,15 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
             <div className="w-full relative">
                 <span className="icon icon-xmark text-2xl float-right mr-4 cursor-pointer" onClick={openCloseModal}></span>
             </div>
-            <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataClasificationSelect == null ? "Agregar" : "Actualizar"} clasificación. </h2>
+            <h2 className="font-bold text-blue-mafer text-xl m-2"> {dataCategorySelect == null ? "Agregar" : "Actualizar"} Categoria. </h2>
             <Form className="w-11/12 h-full"
                   modal 
-                  data={dataClasificationSelect} 
-                  dataName="Clasificación" 
+                  data={dataCategorySelect} 
+                  dataName="Categoria" 
                   schequema={ClasificationSchequema} 
                   inputsList={inputsForm} 
                   updateInfo={updateData} 
-                  urlFetch="producto/clasificacion"
+                  urlFetch="producto/categoria"
                   customFunction={createOrUpdateElement}/>
         </Modal>
     </div>
