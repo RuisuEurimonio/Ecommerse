@@ -10,13 +10,13 @@ import Form from "@/components/Form";
 import { ArticleProps, BrandProps, CategoryProps, ClasificationProps, subDataTableProps} from "@/types/Props";
 
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
-import subData from "@/utils/json/branchFake.json"
 import NoDataTable from "@/components/NoDataTable";
 import { getElementsApi } from "@/data/api";
 
 type ConfigurationProductsProps = {};
 
 const perPage : number = 20;
+const URL_FETCH = "producto";
 
 const titlesTable = [
     {titleName: "Nombre"},
@@ -78,7 +78,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
     }
 
     const get = async () =>{
-        const data = await getElementsApi("http://localhost:8080/api/producto/all");
+        const data = await getElementsApi("producto");
         if(data){
             setData(data)
         }
@@ -93,9 +93,9 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
 
     useEffect(()=>{
         const getSubData = async () => {
-            const category = await getElementsApi("http://localhost:8080/api/producto/categoria/all");
-            const brand = await getElementsApi("http://localhost:8080/api/producto/marca/all");
-            const classification = await getElementsApi("http://localhost:8080/api/producto/clasificacion/all");
+            const category = await getElementsApi("producto/categoria");
+            const brand = await getElementsApi("producto/marca");
+            const classification = await getElementsApi("producto/clasificacion");
 
             if(category && brand && classification){
                 setDataCategory(category)
@@ -118,7 +118,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                 <h2 className="font-bold text-xl mt-4 mb-2">Artículos.</h2>
                 <div className="w-full relative overflow-x-auto">
                     {data ?
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH}/>
                     :
                     <NoDataTable message="No se encontraron artículos ingresados." secondaryMessage="Ingrese nuevos articulos por medio del botón infeior"/ >
                     }
@@ -142,7 +142,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                   dataName="Articulo"
                   inputsList={inputsForm} 
                   customFunction={createOrUpdateElement}
-                  urlFetch="producto"
+                  urlFetch={URL_FETCH}
                   updateInfo={updateData}
                   />
         </Modal>

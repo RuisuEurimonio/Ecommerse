@@ -1,6 +1,8 @@
+const HOST = "http://localhost:8080/api/"
+
 export async function getElementsApi(url : string){
     try{
-        const response = await fetch(url);
+        const response = await fetch(HOST+url+"/all");
         if(!response.ok){
             throw new Error("Network response was not ok");
         }
@@ -14,7 +16,7 @@ export async function getElementsApi(url : string){
 
 export async function getElementByIdApi(url : string, id: number){
     try{
-        const response = await fetch(url+"/"+id);
+        const response = await fetch(HOST+url+"/"+id);
         if(!response.ok){
             throw new Error("Network response was not ok");
         }
@@ -27,7 +29,7 @@ export async function getElementByIdApi(url : string, id: number){
 
 export async function getElementsByFilterName(url : string, id: number){
     try{
-        const response = await fetch(url+"/"+id);
+        const response = await fetch(HOST+url+"/"+id);
         if(!response.ok){
             throw new Error("Network response was not ok");
         }
@@ -40,7 +42,7 @@ export async function getElementsByFilterName(url : string, id: number){
 
 export async function getElementsByOrder(order : "desc" | "asc"){
     try{
-        const response = await fetch("http://localhost:8080/api/producto/order/"+order);
+        const response = await fetch(HOST+"producto/order/"+order);
         if(!response.ok){
             throw new Error("Network response was not ok")
         }
@@ -53,7 +55,7 @@ export async function getElementsByOrder(order : "desc" | "asc"){
 
 export async function getElementsSearched(value : string) {
     try{
-        const response = await fetch(`http://localhost:8080/api/producto/search?sku=${value}&nombre=${value}`)
+        const response = await fetch(HOST+`producto/search?sku=${value}&nombre=${value}`)
         if(!response.ok){
             throw new Error("Network responses was not ok")
         }
@@ -66,7 +68,7 @@ export async function getElementsSearched(value : string) {
 
 export async function updateElement(type: string, data: any){
     try{
-        const response = await fetch(`http://localhost:8080/api/${type}/update`, data);
+        const response = await fetch(`${HOST}${type}/update`, data);
         return response.ok;
     } catch(error){
         console.log("Error update element: "+error)
@@ -75,7 +77,7 @@ export async function updateElement(type: string, data: any){
 
 export async function createElement(name: string, data: object){
     try{
-        const response = await fetch(`http://localhost:8080/api/${name}/new`, data);
+        const response = await fetch(`${HOST}${name}/new`, data);
         return response.ok;
     } catch (error){
         console.log("Error create element: "+error)
@@ -84,7 +86,7 @@ export async function createElement(name: string, data: object){
 
 export async function deleteElement(name: string, id: number){
     try {
-        await fetch(`http://localhost:8080/api/${name}/delete/${id}`, {method: 'DELETE'});
+        await fetch(`${HOST}${name}/delete/${id}`, {method: 'DELETE'});
     } catch(error){
         console.log("Error deleting element: "+error);
     }

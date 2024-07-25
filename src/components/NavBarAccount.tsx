@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 type NavBarAccountProps = {};
 
 const urlLinks : {url: string, name: string}[] = [
-    {url: "configuration-user", name: "Usuarios."},
+    {url: "configuration-users", name: "Usuarios."},
     {url: "configuration-articles", name: "Articulos."},
     {url: "configuration-brand", name: "Marcas."},
     {url: "configuration-category", name: "Categorias."},
