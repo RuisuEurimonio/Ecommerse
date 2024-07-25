@@ -14,9 +14,8 @@ export const InputErrorText : React.FC<inputErrorTextProps>  = ({ children, moda
         <p className={`text-sm text-red-500
             ${(!modal)?"lg:absolute lg:-right-4 lg:top-0 lg:-translate-x-[-100%] lg:max-w-[25vw]":"text-right"}
         `}>
-            {" "}
             <span className="icon icon-alert"></span>{" "}
-            {children}{" "}
+            {children}
         </p>
     );
 };
@@ -244,5 +243,35 @@ export function confirmOrder(total: number, cantOfItem: number){
                 icon: "success"
             })
         }
+    })
+}
+
+export function confirmAction(text: string, title?: string) : Promise<Boolean>{
+    return Swal.fire({
+        title: title ?? "¿Desea realizar esta acción?",
+        text: text,
+        icon: "question",
+        showCancelButton: true
+    }).then((response)=>{
+        return response.isConfirmed;
+    })
+    
+}
+
+export function errorAction(text: string, title?: string){
+    Swal.fire({
+        title: title ?? "Ups!, ha ocurrido un problema",
+        text: text,
+        icon: "error"
+    })
+}
+
+export function successAction(text: string, title?: string){
+    Swal.fire({
+        title: title ?? "Se ha completado la acción con exito",
+        text: text,
+        icon: "success",
+        showConfirmButton: true,
+        timer: 2000
     })
 }

@@ -1,3 +1,4 @@
+import { errorAction } from "@/components/utils";
 import Swal from "sweetalert2";
 
 const HOST = "http://localhost:8080/api/"
@@ -103,10 +104,6 @@ export async function login(data: Object){
         }
         return dataRes
     } catch (error){
-        Swal.fire({
-            title: "¡Ups!, ocurrio un problema.",
-            text: "Por favor verifica las credenciales y vuelve a intentarlo \n"+error,
-            icon: "error"
-        })
+        errorAction("Por favor verifica las credenciales y vuelve a intentarlo \n"+error);
     }
 }

@@ -13,8 +13,13 @@ const MyAccount: React.FC<MyAccountProps> = () => {
     
     useEffect(()=>{
         const localData = localStorage.getItem("user");
-        const userData = localData ? JSON.parse(localData) : null;
-        setData(userData);
+        let userData = localData !== null ? JSON.parse(localData) : null;
+        console.log(userData);
+        if(!userData){
+            const sessionData = sessionStorage.getItem("user");
+            userData = sessionData !== null ? JSON.parse(sessionData) : null;
+        }
+        setData(userData["Usuario: "]);
     }, [])
 
     return (

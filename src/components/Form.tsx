@@ -9,8 +9,9 @@ import { z } from "zod";
 
 import { InputsListProps,  FormProps, CategoryProps} from "@/types/Props"
 
-import { InputErrorText, saveAlert, updateAlert } from "./utils";
+import { confirmAction, InputErrorText, saveAlert, successAction, updateAlert } from "./utils";
 import { login } from "@/data/api";
+import { useRouter } from "next/navigation";
   
   
 type FormPropsSec = {categories : CategoryProps[]} | {};
@@ -50,6 +51,8 @@ const Form = <T extends {id?: number} & FormPropsSec ,
         resolver: zodResolver(schequema),
         defaultValues:defaultValues,
     });
+
+    const router = useRouter();
 
     useEffect(() => {
         if (data) {
@@ -283,15 +286,28 @@ const Form = <T extends {id?: number} & FormPropsSec ,
                 customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
             }
         } else {
-            const response = await login({
-                method: 'POST', 
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(dataInputs)
+            confirmAction("¿Desea ingresar sesión?").then((response)=>{
+                if(response){
+                    login({
+                        method: 'POST', 
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(dataInputs)
+                    }).then((responseData)=>{
+                        if(responseData){
+                            if(isSaveSession){
+                                localStorage.setItem("user", JSON.stringify(responseData));
+                            } else {
+                                sessionStorage.setItem("user", JSON.stringify(responseData));
+                            }
+                            successAction("Sesión iniciada!");
+                            router.push("/")
+                        }
+                    })
+                }
             })
-            console.log(response);
-            /* reset(); */
+             
         }
     };
 
