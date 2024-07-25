@@ -78,7 +78,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
     }
 
     const get = async () =>{
-        const response = await getElementsApi("usuario");
+        const response = await getElementsApi(URL_FETCH);
         if(response){
             setData(response);
         }

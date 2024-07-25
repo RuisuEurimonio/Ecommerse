@@ -78,7 +78,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
     }
 
     const get = async () =>{
-        const data = await getElementsApi("producto");
+        const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data)
         }

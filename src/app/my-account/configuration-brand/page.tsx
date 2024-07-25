@@ -16,6 +16,7 @@ import { getElementsApi } from "@/data/api";
 type ConfigurationUsersProps = {};
 
 const perPage: number = 20;
+const URL_FETCH = "producto/marca"
 
 const inputsForm = [
     {type: "text", id: "nombre", name: "Nombre"},
@@ -64,7 +65,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
     }
 
     const get = async () =>{
-        const data = await getElementsApi("http://localhost:8080/api/producto/marca/all");
+        const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data);
         }
@@ -86,7 +87,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                 <h2 className="font-bold text-xl mt-4 mb-2"> Marcas.</h2>
                 <div className="w-full relative overflow-x-auto">
                     {data ? 
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable}/>
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH} />
                     :
                     <NoDataTable message="No se encontro datos de marcas" secondaryMessage="Agrega nuevas marcas por medio del botón inferior" />
                 }
@@ -110,7 +111,7 @@ const ConfigurationUsers: React.FC<ConfigurationUsersProps> = () => {
                       schequema={brandSchequema} 
                       inputsList={inputsForm} 
                       updateInfo={updateData}
-                      urlFetch="producto/marca"
+                      urlFetch={URL_FETCH}
                       customFunction={createOrUpdateElement}/>
             </Modal>
         </div>
