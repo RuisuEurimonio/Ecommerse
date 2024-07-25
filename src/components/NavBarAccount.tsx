@@ -5,6 +5,15 @@ import { usePathname } from "next/navigation";
 
 type NavBarAccountProps = {};
 
+const urlLinks : {url: string, name: string}[] = [
+    {url: "configuration-user", name: "Usuarios."},
+    {url: "configuration-articles", name: "Articulos."},
+    {url: "configuration-brand", name: "Marcas."},
+    {url: "configuration-category", name: "Categorias."},
+    {url: "configuration-clasifications", name: "Clasificaciones."},
+    {url: "configuration-discounts", name: "Descuentos."},
+]
+
 const NavBarAccount: React.FC<NavBarAccountProps> = () => {
     const pathName = usePathname().split("/")[2];
 
@@ -31,76 +40,24 @@ const NavBarAccount: React.FC<NavBarAccountProps> = () => {
                     Configuración empresarial.{" "}
                 </p>
                 <ul className="list-disc">
-                    <li
-                        className="ml-5 my-2"
-                        style={{
-                            textDecoration:
-                                pathName === "configuration-users"
-                                    ? "underline"
-                                    : "none",
-                        }}
-                    >
-                        {" "}
-                        <Link href="/my-account/configuration-users">
-                            Usuarios.
-                        </Link>{" "}
-                    </li>
-                    <li className="ml-5 my-2"
-                        style={{
-                            textDecoration:
-                                pathName === "configuration-articles"
-                                    ? "underline"
-                                    : "none",
-                        }}
-                    >
-                        {" "}
-                        <Link href="/my-account/configuration-articles">
+                    {urlLinks.map((item)=>(
+                        <li
+                            key={item.url}
+                            className="ml-5 my-2"
+                            style={{
+                                textDecoration:
+                                    pathName === item.url
+                                        ? "underline"
+                                        : "none",
+                            }}
+                        >
                             {" "}
-                            Articulos.{" "}
-                        </Link>{" "}
-                    </li>
-                    <li className="ml-5 my-2"
-                        style={{
-                            textDecoration:
-                                pathName === "configuration-brand"
-                                    ? "underline"
-                                    : "none",
-                        }}
-                    >
-                        {" "}
-                        <Link href="/my-account/configuration-brand">
-                            {" "}
-                            Marcas.{" "}
-                        </Link>{" "}
-                    </li>
-                    <li className="ml-5 my-2"
-                        style={{
-                            textDecoration:
-                                pathName === "configuration-clasifications"
-                                    ? "underline"
-                                    : "none",
-                        }}
-                    >
-                        {" "}
-                        <Link href="/my-account/configuration-clasifications">
-                            {" "}
-                            Clasificaciones.{" "}
-                        </Link>{" "}
-                    </li>
-                    <li className="ml-5 my-2"
-                        style={{
-                            textDecoration:
-                                pathName === "configuration-discounts"
-                                    ? "underline"
-                                    : "none",
-                        }}
-                    >
-                        {" "}
-                        <Link href="/my-account/configuration-discounts">
-                            {" "}
-                            Descuentos.{" "}
-                        </Link>{" "}
-                    </li>
+                            <Link href={`/my-account/${item.url}`}>
+                                {item.name}
+                            </Link>
+                        </li>
+
+                    ))}
                     <li className="ml-5 my-2"> Imagenes. </li>
                 </ul>
             </li>
