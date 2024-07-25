@@ -60,7 +60,7 @@ const Form = <T extends {id?: number} & FormPropsSec ,
     const selectComponent = <U extends { id?: number | string, nombre?: string }>(
         id: string, 
         name: string, 
-        type: string, 
+        type: "select" | "textarea" | "combined" | "group-checkbox" | string, 
         extraData?: U[] | null | undefined,
         secondId?: string
     ) => {
@@ -71,7 +71,7 @@ const Form = <T extends {id?: number} & FormPropsSec ,
                 return textAreaInput(id, name);
             case ("combined"):
                 return inputWithSelect(id, name, type, extraData ?? [], secondId ?? "");
-            case ("checkbox"):
+            case ("group-checkbox"):
                 return checkboxInput(id, name, type, extraData ?? []);
             default:
                 return defaultInput(id, name, type);

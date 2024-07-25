@@ -17,6 +17,7 @@ type ConfigurationDiscountsProps = {};
 
 
 const perPage : number = 20;
+const URL_FETCH = "producto/descuento"
 
 const titlesTable = [
     {titleName: "nombre"},
@@ -71,7 +72,7 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
     }
     
     const get = async () => {
-        const data = await getElementsApi("http://localhost:8080/api/producto/descuento/all");
+        const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data);
         }
@@ -92,7 +93,7 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
                 <h2 className="font-bold text-xl mt-4 mb-2"> Descuentos.</h2>
                 <div className="w-full relative overflow-x-auto">
                     {data ?
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable}/>
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH} />
                     :
                     <NoDataTable message="No se encontró información de descuentos" secondaryMessage="Agrege un descuento por medio del botón inferior" />
                 }
@@ -116,7 +117,7 @@ const ConfigurationDiscounts: React.FC<ConfigurationDiscountsProps> = () => {
                   dataName="Descuento"
                   schequema={discountSchequema}
                   inputsList={inputsForm}
-                  urlFetch="producto/descuento"
+                  urlFetch={URL_FETCH}
                   updateInfo={updateData}
                   customFunction={createOrUpdateElement}
                   />
