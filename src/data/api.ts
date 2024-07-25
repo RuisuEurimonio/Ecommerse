@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const HOST = "http://localhost:8080/api/"
 
 export async function getElementsApi(url : string){
@@ -89,5 +91,22 @@ export async function deleteElement(name: string, id: number){
         await fetch(`${HOST}${name}/delete/${id}`, {method: 'DELETE'});
     } catch(error){
         console.log("Error deleting element: "+error);
+    }
+}
+
+export async function login(data: Object){
+    try {
+        const response = await fetch(HOST+"usuario/login", data);
+        const dataRes = await response.json();
+        if(dataRes.status === 403){
+            throw new Error("Invalid credentials: "+ dataRes.message)
+        }
+        return dataRes
+    } catch (error){
+        Swal.fire({
+            title: "¡Ups!, ocurrio un problema.",
+            text: "Por favor verifica las credenciales y vuelve a intentarlo \n"+error,
+            icon: "error"
+        })
     }
 }

@@ -5,25 +5,24 @@ import { authFormLogin } from "@/utils/Schemas/authFormLogin";
 import Link from "next/link";
 import image from "@/assets/img/login.jpg"
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { TypeDocumentProps } from "@/types/Props";
+import { getElementsApi } from "@/data/api";
 
 type AuthFormProps = {
 
 }
 
-const document = [
-    { nombre: "Tarjeta de identidad", otherData: "TI", id: "tarjetaIdentidad" },
-    { nombre: "Cedula de Ciudadania", otherData: "CC", id: "cedulaCiudadania"},
-    { nombre: "Cedula de extranjeria", otherData: "CED", id: "cedulaExtranjeria" },
-];
+const URL_FETCH = "usuario"
 
 const AuthForm : React.FC<AuthFormProps> = () => {
 
     const [stateViewPasswordInput, setStateViewPasswordInput] = useState("password");
+    const [isChecked, setIsChecket] = useState<boolean>(false);
 
     const inputsList = [
-        {type: "combined", id: "numeroDocumento", name: "Documento", extraData: document, secondId: "tipoDocumento"},
-        {type: stateViewPasswordInput, id: "password", name: "Contraseña"}
+        {type: "text", id: "correo", name:"Correo"},
+        {type: stateViewPasswordInput, id: "contrasena", name: "Contraseña"}
     ]
 
     function onChange(){
@@ -32,6 +31,10 @@ const AuthForm : React.FC<AuthFormProps> = () => {
         } else {
             setStateViewPasswordInput("password")
         }
+    }
+
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>){
+        setIsChecket(event.target.checked);
     }
 
     return (
@@ -45,15 +48,18 @@ const AuthForm : React.FC<AuthFormProps> = () => {
                         dataName="Iniciar sesión"
                         schequema={authFormLogin}
                         inputsList={inputsList}
+                        urlFetch={URL_FETCH}
                         modal
-                        isLoginRegister>
+                        isLoginRegister
+                        isSaveSession={isChecked}
+                        >
                     <div className="flex items-center flex-col my-4">
                         <label htmlFor="showPassword">
                             <input type="checkbox" id="showPassword" onClick={onChange}/>
                             Mostrar contraseña.
                         </label>
                         <label htmlFor="saveSession">
-                            <input type="checkbox" id="saveSession"/>
+                            <input type="checkbox" id="saveSession" checked={isChecked} onChange={(e)=> handleChange(e)}/>
                             Mantener sesión.
                         </label>
                         <p className="text-center text-sm mt-2"> ¿No tienes una cuenta? <Link href="/register" className="font-bold underline text-fifth-color text-center"> Registrate aquí. </Link> </p>

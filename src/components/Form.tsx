@@ -10,6 +10,7 @@ import { z } from "zod";
 import { InputsListProps,  FormProps, CategoryProps} from "@/types/Props"
 
 import { InputErrorText, saveAlert, updateAlert } from "./utils";
+import { login } from "@/data/api";
   
   
 type FormPropsSec = {categories : CategoryProps[]} | {};
@@ -24,6 +25,7 @@ const Form = <T extends {id?: number} & FormPropsSec ,
         inputsList, 
         children, 
         isLoginRegister, 
+        isSaveSession = false,
         updateInfo = false,
         urlFetch,
         customFunction
@@ -281,7 +283,15 @@ const Form = <T extends {id?: number} & FormPropsSec ,
                 customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
             }
         } else {
-            reset();
+            const response = await login({
+                method: 'POST', 
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(dataInputs)
+            })
+            console.log(response);
+            /* reset(); */
         }
     };
 
