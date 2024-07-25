@@ -13,9 +13,10 @@ import { ClasificationSchequema } from "@/utils/Schemas/clasificationSchema";
 import NoDataTable from "@/components/NoDataTable";
 import { getElementsApi } from "@/data/api";
 
-type ConfigurationClasificationsProps = {};
+type ConfigurationCategoryProps = {};
 
 const perPage : number = 20;
+const URL_FETCH = "producto/categoria";
 
 const titlesTable = [
     {titleName: "nombre"},
@@ -37,7 +38,7 @@ const inputsForm = [
     {type: "textarea", id: "descripcion", name: "Descripción"},
 ]
 
-const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = () => {
+const ConfigurationCategory: React.FC<ConfigurationCategoryProps> = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [dataCategorySelect, setDataCategorySelect] = useState<CategoryProps | null>(null);
@@ -86,7 +87,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                 <h2 className="font-bold text-xl mt-4 mb-2">Categorias.</h2>
                 <div className="w-full relative overflow-x-auto">
                     {data ?
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} titles={titlesTable} subData={subDataTable} />
+                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH} />
                     :
                     <NoDataTable message="No se encontraron datos de categorias" secondaryMessage="Ingresa una nueva categoria por medio del botón inferior." />
                 }
@@ -110,11 +111,11 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
                   schequema={ClasificationSchequema} 
                   inputsList={inputsForm} 
                   updateInfo={updateData} 
-                  urlFetch="producto/categoria"
+                  urlFetch={URL_FETCH}
                   customFunction={createOrUpdateElement}/>
         </Modal>
     </div>
     );
 };
 
-export default ConfigurationClasifications;
+export default ConfigurationCategory;

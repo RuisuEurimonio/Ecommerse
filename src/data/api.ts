@@ -81,3 +81,11 @@ export async function createElement(name: string, data: object){
         console.log("Error create element: "+error)
     }
 }
+
+export async function deleteElement(name: string, id: number){
+    try {
+        await fetch(`http://localhost:8080/api/${name}/delete/${id}`, {method: 'DELETE'});
+    } catch(error){
+        console.log("Error deleting element: "+error);
+    }
+}

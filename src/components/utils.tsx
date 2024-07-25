@@ -1,4 +1,4 @@
-import { createElement, updateElement } from '@/data/api';
+import { createElement, deleteElement, updateElement } from '@/data/api';
 import { ArticleProps } from '@/types/Props';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
@@ -105,24 +105,29 @@ export const updateAlert = (name:string, data: any, file: string, customFunction
     })
 }
 
-export const deleteAlert = (name:string, type:string) =>  {Swal.fire({
-    title: `Eliminar ${type}`,
-    text: `¿Estás seguro de eliminar al ${type}: ${name}?`,
-    icon: "question",
-    showCancelButton: true
-}).then((response)=>{
-    if(response.isConfirmed){
-        let Toast = Swal.mixin({
-            toast: true,
-            position: "bottom-end",
-            showConfirmButton: false,
-            icon: "success",
-            timer: 1500,
-            title: `${type} ${name} eliminado`
-        })
-        Toast.fire();
-    }
-})}
+export const deleteAlert = <T extends {id: number, nombre: string}>(name:string, data: T, updateData: ()=>void) =>  {
+    Swal.fire({
+        title: `Eliminar ${data.nombre}`,
+        text: `¿Estás seguro de eliminar a ${data.nombre}?`,
+        icon: "question",
+        showCancelButton: true
+    }).then((response)=>{
+        if(response.isConfirmed){
+            deleteElement(name, data.id).then(()=>{
+                let Toast = Swal.mixin({
+                    toast: true,
+                    position: "bottom-end",
+                    showConfirmButton: false,
+                    icon: "success",
+                    timer: 1500,
+                    title: `${data.nombre} eliminado`
+                })
+                Toast.fire();
+                updateData();
+            })
+        }
+    })
+}
 
 export const askForSaveProduct = (item:ArticleProps, cantidad: number = 1) =>{
     Swal.fire({

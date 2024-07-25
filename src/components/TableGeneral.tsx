@@ -4,19 +4,21 @@ import { useSearchParams } from "next/navigation";
 import { deleteAlert } from "./utils";
 import { subDataTableProps } from "@/types/Props";
 
-type TableGeneralProps<T extends { id: number, }> = {
+type TableGeneralProps<T extends { id: number, nombre: string}> = {
     data: T[],
     perPage: number,
     openCloseSubModal: (data: T) => void,
+    updateData : () => void,
     titles: {
         className?: string,
         titleName: string,
     }[],
     subData: subDataTableProps<T>[];
+    urlFetch : string
 };
 
 
-const TableGeneral = <T extends { id: number },>({ data, perPage, openCloseSubModal, titles, subData }: TableGeneralProps<T>) => {
+const TableGeneral = <T extends { id: number, nombre : string},>({ data, perPage, openCloseSubModal, updateData, titles, subData, urlFetch }: TableGeneralProps<T>) => {
 
     
 const renderCell = (value: T[keyof T], type: string = "text", className: string = "", mergeData: T[keyof T] | string = "", secondObject?: string) =>{
@@ -84,7 +86,7 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                             </td>
                         )})}
                         <td scope="row" className="py-2 px-2">
-                            <button className="mx-1 hover:scale-105 transition" onClick={() => { deleteAlert(String(item.id), "Marca") }}>
+                            <button className="mx-1 hover:scale-105 transition" onClick={() => { deleteAlert(urlFetch, item, updateData) }}>
                                 <span className="icon icon-delete text-base"></span>
                             </button>
                             <button className="mx-1 hover:scale-105 transition" onClick={() => { openCloseSubModal(item) }}>
