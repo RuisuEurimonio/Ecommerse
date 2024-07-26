@@ -14,12 +14,11 @@ const MyAccount: React.FC<MyAccountProps> = () => {
     useEffect(()=>{
         const localData = localStorage.getItem("user");
         let userData = localData !== null ? JSON.parse(localData) : null;
-        console.log(userData);
         if(!userData){
             const sessionData = sessionStorage.getItem("user");
             userData = sessionData !== null ? JSON.parse(sessionData) : null;
         }
-        setData(userData["Usuario: "]);
+        setData(userData ? userData["Usuario: "] : null);
     }, [])
 
     return (
@@ -43,10 +42,10 @@ const MyAccount: React.FC<MyAccountProps> = () => {
                             </div>
                         </div>
                         <div className="flex gap-2 mb-2 justify-around h-4/6">
-                            <button className="py-1 px-2 bg-colortext-fifth-color rounded-sm text-third-color inline">
+                            <button className="py-1 px-2 bg-secondary-color  rounded-sm text-third-color inline">
                                 Mi carrito
                             </button>
-                            <button className="py-1 px-2 bg-colortext-fifth-color rounded-sm text-third-color inline">
+                            <button className="py-1 px-2 bg-secondary-color  rounded-sm text-third-color inline">
                                 Cerrar sesión.
                             </button>
                         </div>
@@ -63,6 +62,7 @@ const MyAccount: React.FC<MyAccountProps> = () => {
                     <FormUser
                         className="w-11/12 mx-auto my-4
                                 sm:w-3/4"
+                                data={data}
                     />
                 </>
                 :

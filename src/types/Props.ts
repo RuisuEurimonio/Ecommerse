@@ -145,3 +145,17 @@ export type subDataTableProps<T> = {
     mergeData?: keyof T,
     columnName: keyof T;
 }
+
+export type typePayMethodProps = {
+    id: number,
+    tipo: string,
+    porcentajeAumento: number
+}
+
+export type payMethodProps = {
+    id: number,
+    numero: string,
+    expira: string,
+    proveedor: string,
+    tipo_id: TypeDocumentProps
+}

@@ -71,7 +71,7 @@ const Form = <T extends {id?: number} & FormPropsSec ,
     ) => {
         switch (type) {
             case ("select"):
-                return selectInput(id, name, type, extraData ?? []);
+                return selectInput(id, name, extraData ?? []);
             case ("textarea"):
                 return textAreaInput(id, name);
             case ("combined"):
@@ -204,7 +204,7 @@ const Form = <T extends {id?: number} & FormPropsSec ,
         )
     }
 
-    const selectInput = <U extends { id?: number | string, nombre?: string }>(id: string, name: string, type: string, subList: U[]) => {
+    const selectInput = <U extends { id?: number | string, nombre?: string, tipo?: string}>(id: string, name: string, subList: U[]) => {
         return (
             <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
@@ -219,7 +219,7 @@ const Form = <T extends {id?: number} & FormPropsSec ,
                             key={item.id}
                             value={item.id}
                         >
-                            {item.nombre}
+                            {item.nombre ?? item.tipo}
                         </option>
                     ))}
                 </select>

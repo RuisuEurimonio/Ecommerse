@@ -4,9 +4,9 @@ export const userSchequemaFull = z
     .object({
         tipoDocumento: z.any(),
         numeroDocumento: z
-            .coerce
-            .number({message: "Ingrese un numero válido"})
-            .min(10000000, {message: "Ingrese un número válido"}),
+            .string()
+            .min(8, "ingrese un número válido")
+            .max(11, "ingrese un número válido"),
         nombres: z
             .string()
             .min(3, "Ingrese un apellido válido")
@@ -16,10 +16,9 @@ export const userSchequemaFull = z
             .min(3, "Ingrese un apellido válido")
             .max(30, "Ingrese un apellido válido"),
         telefono: z
-            .coerce
-            .number({message: "Ingrese un número válido"})
-            .min(1000000, "Ingrese un número válido")
-            .max(9999999, "Ingrese un número válido"),
+            .string()
+            .min(6, "Ingrese un número válido")
+            .max(7, "Ingrese un número válido"),
         celular: z
             .coerce
             .number({message: "Ingrese un número válido"})
