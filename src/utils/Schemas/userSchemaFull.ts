@@ -31,28 +31,31 @@ export const userSchequemaFull = z
         correo: z.string().email({ message: "ingrese un correo valido" }),
         permisos: z.any(),
         contrasena: z.string()
-            .min(8, { message: "La contraseña debe tener al menos 8 caracteres." })
-            .regex(/[a-z]/, { message: "La contraseña debe contener al menos una letra minúscula." })
-            .regex(/[A-Z]/, { message: "La contraseña debe contener al menos una letra mayúscula." })
-            .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número." })
-            .regex(/[^a-zA-Z0-9]/, { message: "La contraseña debe contener al menos un carácter especial." })
-            .optional(),
+            .optional().refine((val) => !val || validatePasswords.safeParse(val).success,{
+                message: "La coontraseña no cumple con los requisitos de seguridad"
+            }),
         newPassword: z.string()
-            .min(8, { message: "La contraseña debe tener al menos 8 caracteres." })
-            .regex(/[a-z]/, { message: "La contraseña debe contener al menos una letra minúscula." })
-            .regex(/[A-Z]/, { message: "La contraseña debe contener al menos una letra mayúscula." })
-            .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número." })
-            .regex(/[^a-zA-Z0-9]/, { message: "La contraseña debe contener al menos un carácter especial." })
-            .optional(),
+            .optional().refine((val) => !val || validatePasswords.safeParse(val).success,{
+                message: "La coontraseña no cumple con los requisitos de seguridad"
+        }),
         repeatPassword: z.string()
-            .min(8, { message: "La contraseña debe tener al menos 8 caracteres." })
-            .regex(/[a-z]/, { message: "La contraseña debe contener al menos una letra minúscula." })
-            .regex(/[A-Z]/, { message: "La contraseña debe contener al menos una letra mayúscula." })
-            .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número." })
-            .regex(/[^a-zA-Z0-9]/, { message: "La contraseña debe contener al menos un carácter especial." })
-            .optional(),
+            .optional().refine((val) => !val || validatePasswords.safeParse(val).success,{
+                message: "La coontraseña no cumple con los requisitos de seguridad"
+        }),
     })
-    .refine((data) => data.newPassword === data.repeatPassword, {
+    .refine((data) => {
+        if(data.newPassword || data.repeatPassword){
+        return data.newPassword === data.repeatPassword
+    }
+        return true
+} , {
         message: "Las contraseñas deben ser iguales.",
         path: ["repeatPassword"],
     });
+
+    const validatePasswords = z.string()
+    .min(8 )
+    .regex(/[a-z]/ )
+    .regex(/[A-Z]/ )
+    .regex(/[0-9]/ )
+    .regex(/[^a-zA-Z0-9]/ )

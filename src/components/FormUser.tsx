@@ -3,8 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { InputErrorText, saveAlert } from "./utils";
-import { payMethodProps, TypeDocumentProps, typePayMethodProps, UserProps } from "@/types/Props";
+import { errorAction, InputErrorText, updateAlert } from "./utils";
+import { TypeDocumentProps, typePayMethodProps, UserProps } from "@/types/Props";
 import { userSchequemaFull } from "@/utils/Schemas/userSchemaFull";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -62,9 +62,9 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     }
 
     function customFunction(){
-        localStorage.clear()
+        /* localStorage.clear()
         sessionStorage.clear()
-        route.push("/login")
+        route.push("/login") */
     }
 
     const getDocuments = async () => {
@@ -86,18 +86,24 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         getTypePayMethods();
     },[])
 
-    const onSubmit: SubmitHandler<formProps> = async (data) => {
-        if(data.correo && data.contrasena){
-            verifyPassword(data.correo, data.contrasena).then((response)=>{
+    const onSubmit: SubmitHandler<formProps> = async (dataInputs) => {
+        let id = data.id
+        let permisos = data.permisos;
+        let dataWithId = {id, permisos, ...dataInputs};
+        const {contrasena, newPassword, repeatPassword, ...dataSend} = dataWithId;
+        if(dataInputs.correo && dataInputs.contrasena){
+            verifyPassword(dataInputs.correo, dataInputs.contrasena).then((response)=>{
                 if(response){
-                    data.contrasena = data.newPassword;
-                    saveAlert("Usuario", data, "usuario", customFunction);
+                    let contrasena = dataInputs.newPassword;
+                    let arraySend = {contrasena, ...dataSend};
+                    updateAlert("Usuario", arraySend, "usuario", customFunction);
+                }else{
+                    errorAction("Por favor verifique la contraseña actual ingresada.")
                 }
             })
+        } else {
+            updateAlert("Usuario", dataSend, "usuario", customFunction);
         }
-
-
-        
     };
 
     return (
@@ -114,12 +120,12 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             <p className="inline-block w-5/12">Documento*:</p>
                             <select
                                 className="border rounded-sm w-2/12"
-                                {...register("tipoDocumento")}
+                                {...register("tipoDocumento.id")}
                             >
                                 {dataDocument && dataDocument.map((item) => (
                                     <option
                                         key={item.abreviacion}
-                                        value={item.nombre}
+                                        value={item.id}
                                     >
                                         {item.abreviacion}
                                     </option>
@@ -274,10 +280,10 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                         sm:inline sm:text-left sm:ml-5
                         lg:max-w-[35vw] lg:relative
                     ">
-                                <label htmlFor="password" className="m-auto">
+                                <label htmlFor="contrasena" className="m-auto">
                                     <p className="sm:inline-block sm:w-1/3">Contraseña actual*:</p>
                                     <input
-                                        id="password"
+                                        id="contrasena"
                                         type="password"
                                         className="border rounded-sm
                                     sm:w-2/3"
@@ -333,8 +339,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                                         <InputErrorText
                                             modal={modal}
                                         >
-                                            {" "}
-                                            {errors.repeatPassword.message}{" "}
+                                            {errors.repeatPassword.message}
                                         </InputErrorText>
                                     )}
                                 </label>
