@@ -42,7 +42,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     } = useForm<formProps>({
         resolver: zodResolver(userSchequemaFull),
         defaultValues: {
-            tipoDocumento: data.tipoDocumento.nombre,
+            tipoDocumento: {id: data.tipoDocumento.id},
             numeroDocumento: data.numeroDocumento,
             nombres: data.nombres,
             apellidos: data.apellidos,
@@ -62,9 +62,9 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     }
 
     function customFunction(){
-        /* localStorage.clear()
+        localStorage.clear()
         sessionStorage.clear()
-        route.push("/login") */
+        route.push("/login")
     }
 
     const getDocuments = async () => {
@@ -92,17 +92,17 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         let dataWithId = {id, permisos, ...dataInputs};
         const {contrasena, newPassword, repeatPassword, ...dataSend} = dataWithId;
         if(dataInputs.correo && dataInputs.contrasena){
-            verifyPassword(dataInputs.correo, dataInputs.contrasena).then((response)=>{
+            verifyPassword(data.correo, dataInputs.contrasena).then((response)=>{
                 if(response){
                     let contrasena = dataInputs.newPassword;
                     let arraySend = {contrasena, ...dataSend};
-                    updateAlert("Usuario", arraySend, "usuario", customFunction);
+                    updateAlert("Usuario", arraySend, "usuario", customFunction, true);
                 }else{
                     errorAction("Por favor verifique la contraseña actual ingresada.")
                 }
             })
         } else {
-            updateAlert("Usuario", dataSend, "usuario", customFunction);
+            updateAlert("Usuario", dataSend, "usuario", customFunction, true);
         }
     };
 

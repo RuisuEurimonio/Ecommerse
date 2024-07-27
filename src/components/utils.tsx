@@ -62,7 +62,7 @@ export const saveAlert = (name:string, data : any, file: string, customFunction 
     })
 }
 
-export const updateAlert = (name:string, data: any, file: string, customFunction : ()=> void):void => {
+export const updateAlert = (name:string, data: any, file: string, customFunction : ()=> void, ownInfo?: boolean):void => {
     Swal.fire({
         title: `Actualizar ${name}.`,
         text: `Desea actualizar con los datos ingresados?`,
@@ -84,8 +84,8 @@ export const updateAlert = (name:string, data: any, file: string, customFunction
                         position: "bottom-end",
                         showConfirmButton: false,
                         icon: "success",
-                        timer: 4000,
-                        title: `${name} actualizado.`
+                        timer: ownInfo ? 7000 : 4000,
+                        title: `${name} actualizado. ${ownInfo ? "\n Ingresa sesión de nuevo para ver los cambios." : ""}`
                     })
                 }  else {
                     Toast = Swal.mixin({
