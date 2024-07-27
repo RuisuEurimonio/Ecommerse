@@ -107,3 +107,21 @@ export async function login(data: Object){
         errorAction("Por favor verifica las credenciales y vuelve a intentarlo \n"+error);
     }
 }
+
+export async function verifyPassword(correo : string,  contrasena: string): Promise<boolean> {
+    try{
+        const body = {correo: correo,contrasena: contrasena};
+        const response = await fetch("http://localhost:8080/api/usuario/verify-password", 
+            {method: 'POST', 
+             headers: {'content-type': 'application/json'}, 
+             body: JSON.stringify(body)}
+        )
+        if(!response.ok){
+            throw new Error("Invalid credential: ");
+        }
+       return response.json();
+    } catch(error){
+        console.log("Error with password: "+error)
+        return false
+    }
+}

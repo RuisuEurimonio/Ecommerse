@@ -8,7 +8,7 @@ import { payMethodProps, TypeDocumentProps, typePayMethodProps, UserProps } from
 import { userSchequemaFull } from "@/utils/Schemas/userSchemaFull";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getElementsApi } from "@/data/api";
+import { getElementsApi, verifyPassword } from "@/data/api";
 import Modal from "./Modal";
 import Form from "./Form";
 import { payMethodSchema } from "@/utils/Schemas/payMethodSchema";
@@ -87,8 +87,17 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     },[])
 
     const onSubmit: SubmitHandler<formProps> = async (data) => {
+        if(data.correo && data.contrasena){
+            verifyPassword(data.correo, data.contrasena).then((response)=>{
+                if(response){
+                    data.contrasena = data.newPassword;
+                    saveAlert("Usuario", data, "usuario", customFunction);
+                }
+            })
+        }
+
+
         
-        /* await saveAlert("Usuario", data, "usuario", customFunction); */
     };
 
     return (
@@ -347,7 +356,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                     <p className="mr-5"> {data.metodoPago ? data.metodoPago : "No registra"} </p>
                     <div className="flex gap-5">
                         <button className="bg-secondary-color text-third-color py-1 px-2" onClick={openCloseModal}> Actualizar </button>
-                        <button className="bg-secondary-color text-third-color py-1 px-2"> Eliminar </button>
+                        <button className="bg-secondary-color text-third-color py-1 px-2" disabled={data.metodoPago === null} style={{cursor: data.metodoPago ? "pointer" : "not-allowed"}}> Eliminar </button>
                     </div>
                 </div>
             </div>
@@ -363,6 +372,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                     schequema={payMethodSchema}
                     urlFetch="pago/metodo"
                     inputsList={inputsForm}
+                    data={data.metodoPago ? data.metodoPago : null}
                     />
             </Modal>
         </div>

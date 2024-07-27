@@ -14,9 +14,9 @@ import { login } from "@/data/api";
 import { useRouter } from "next/navigation";
   
   
-type FormPropsSec = {categories : CategoryProps[]} | {};
+type FormPropsSec = {categories?: CategoryProps[]} | {};
 
-const Form = <T extends {id?: number} & FormPropsSec , 
+const Form = <T extends {id?: number} | FormPropsSec , 
               U extends {id? : number | string, nombre?: string}>({
         className,
         modal = false, 
@@ -281,9 +281,11 @@ const Form = <T extends {id?: number} & FormPropsSec ,
                 customFunction && await saveAlert(dataName, dataInputs, urlFetch, customFunction);
                 reset()
             } else {
-                let id = data?.id ?? null;
-                let newData = {id, ...dataInputs};
-                customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
+                if ( data && 'id' in data){
+                    let id = data?.id ?? null;
+                    let newData = {id, ...dataInputs};
+                    customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
+                }
             }
         } else {
             confirmAction("¿Desea ingresar sesión?").then((response)=>{
