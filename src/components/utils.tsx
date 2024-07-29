@@ -1,5 +1,6 @@
 import { createElement, deleteElement, updateElement } from '@/data/api';
 import { ArticleProps } from '@/types/Props';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
 import Swal from 'sweetalert2';
@@ -274,4 +275,10 @@ export function successAction(text: string, title?: string){
         showConfirmButton: true,
         timer: 2000
     })
+}
+
+export function closeSession(router : AppRouterInstance){
+    localStorage.clear();
+    sessionStorage.clear();
+    router.push("/")
 }

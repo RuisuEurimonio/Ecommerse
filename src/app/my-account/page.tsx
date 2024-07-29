@@ -4,12 +4,27 @@ import FormUser from "@/components/FormUser";
 import { UserProps } from "@/types/Props";
 import { useEffect, useState } from "react";
 import DataNotFoundMessage from "@/components/DataNotFoundMessage";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { closeSession, confirmAction, successAction } from "@/components/utils";
 
 type MyAccountProps = {};
 
 const MyAccount: React.FC<MyAccountProps> = () => {
 
     const [data, setData] = useState<UserProps | null>(null);
+
+    const router = useRouter();
+
+    function askForTheCloseTheSession(){
+        confirmAction("¿Desea cerrar la sesión?", "Salir de la cuenta.")
+        .then((response)=>{
+            if(response){
+                successAction("Cerrando sesión...");
+                closeSession(router);
+            }
+        })
+    }
     
     useEffect(()=>{
         const localData = localStorage.getItem("user");
@@ -42,10 +57,14 @@ const MyAccount: React.FC<MyAccountProps> = () => {
                             </div>
                         </div>
                         <div className="flex gap-2 mb-2 justify-around h-4/6">
-                            <button className="py-1 px-2 bg-secondary-color  rounded-sm text-third-color inline">
-                                Mi carrito
-                            </button>
-                            <button className="py-1 px-2 bg-secondary-color  rounded-sm text-third-color inline">
+                            <Link href="/shopping-cart">
+                                <button className="py-1 px-2 bg-secondary-color  rounded-sm text-third-color inline">
+                                    Mi carrito
+                                </button>
+                            </Link>
+                            <button className="py-1 px-2 bg-secondary-color  rounded-sm text-third-color inline"
+                                onClick={askForTheCloseTheSession}
+                            >
                                 Cerrar sesión.
                             </button>
                         </div>
