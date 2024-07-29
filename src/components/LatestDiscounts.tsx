@@ -9,8 +9,10 @@ type LatestDiscountsProps = {
 
 }
 
+const URL_FETCH = "producto"
+
 async function get(){
-    const data = await getElementsApi("http://localhost:8080/api/producto/all");
+    const data = await getElementsApi(URL_FETCH);
     if(data){
         let res : ArticleProps[] = [];
         data.forEach((item:ArticleProps)=>{

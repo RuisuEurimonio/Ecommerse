@@ -13,9 +13,10 @@ type AboutUsProps = {
 } 
 
 const RUISU_ID = 6;
+const URL_FETCH = "producto"
 
 async function getData(){
-    const data = await getElementsByFilterName("http://localhost:8080/api/producto/filter/marca", RUISU_ID);
+    const data = await getElementsByFilterName(URL_FETCH,"marca", RUISU_ID);
     if(data){
         return data as ArticleProps[];
     }
