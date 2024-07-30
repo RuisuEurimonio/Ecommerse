@@ -1,5 +1,5 @@
 import { createElement, deleteElement, updateElement } from '@/data/api';
-import { ArticleProps } from '@/types/Props';
+import { ArticleProps, PayMethodProps } from '@/types/Props';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
@@ -21,7 +21,7 @@ export const InputErrorText : React.FC<inputErrorTextProps>  = ({ children, moda
     );
 };
 
-export const saveAlert = (name:string, data : any, file: string, customFunction : ()=> void):void => {
+export const saveAlert = (name:string, data : any, file: string, customFunction?: ()=> void, customFunctionWithData?: (data:any)=> void):void => {
     Swal.fire({
         title: `Guardar ${name}.`,
         text: `Desea guardar este ${name} con los datos ingresados?`,
@@ -57,13 +57,14 @@ export const saveAlert = (name:string, data : any, file: string, customFunction 
                     })
                 }
                 Toast.fire();
-                customFunction();
+                customFunction && customFunction();
+                customFunctionWithData && customFunctionWithData(response);
             })
         }
     })
 }
 
-export const updateAlert = (name:string, data: any, file: string, customFunction : ()=> void, ownInfo?: boolean):void => {
+export const updateAlert = (name:string, data: any, file: string, ownInfo?: boolean, customFunction?: ()=> void, customFunctionWithData?: (data: any)=>void ):void => {
     Swal.fire({
         title: `Actualizar ${name}.`,
         text: `Desea actualizar con los datos ingresados?`,
@@ -99,7 +100,8 @@ export const updateAlert = (name:string, data: any, file: string, customFunction
                     })
                 }
                 Toast.fire();
-                customFunction();
+                customFunction && customFunction();
+                customFunctionWithData && customFunctionWithData(data);
             })  
         } 
     })

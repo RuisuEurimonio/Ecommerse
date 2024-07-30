@@ -81,7 +81,11 @@ export async function updateElement(type: string, data: any){
 export async function createElement(name: string, data: object){
     try{
         const response = await fetch(`${HOST}${name}/new`, data);
-        return response.ok;
+        if(!response.ok){
+            throw new Error(await response.json())
+        }
+        const dataRes = await response.json();
+        return dataRes;
     } catch (error){
         console.log("Error create element: "+error)
     }

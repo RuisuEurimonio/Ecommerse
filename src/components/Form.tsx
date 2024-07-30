@@ -29,7 +29,8 @@ const Form = <T extends {id?: number} | FormPropsSec ,
         isSaveSession = false,
         updateInfo = false,
         urlFetch,
-        customFunction
+        customFunction,
+        customFunctionWithData
     }: FormProps<T, U>) => {
 
     const [listOfItemWithGroup, setListOfItemWithGroup] = useState<InputsListProps<{id? : number | string, nombre?: string}>[]>([]);
@@ -279,12 +280,14 @@ const Form = <T extends {id?: number} | FormPropsSec ,
         if(!isLoginRegister){
             if(!updateInfo){
                 customFunction && await saveAlert(dataName, dataInputs, urlFetch, customFunction);
+                customFunctionWithData && await saveAlert(dataName, dataInputs, urlFetch, undefined, customFunctionWithData)
                 reset()
             } else {
                 if ( data && 'id' in data){
                     let id = data?.id ?? null;
                     let newData = {id, ...dataInputs};
-                    customFunction && await updateAlert(dataName, newData, urlFetch, customFunction);
+                    customFunction && await updateAlert(dataName, newData, urlFetch, false, customFunction);
+                    customFunctionWithData && await updateAlert(dataName, newData, urlFetch, false, undefined, customFunctionWithData)
                 }
             }
         } else {

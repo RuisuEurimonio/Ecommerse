@@ -5,7 +5,7 @@ export const payMethodSchema = z.object({
         .string()
         .min(14, "Ingrese un número válido")    
         .max(14, "Ingrese un número válido"),
-    expira: z.date(),
+    expira: z.coerce.date(),
     proveedor: z.string(),
-    tipo_id: z.any()
+    tipo: z.any()
 })

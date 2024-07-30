@@ -62,7 +62,7 @@ export type UserProps = {
         apellidos: string;
         direccion: string;
         permisos: RolProps;
-        metodoPago: string;
+        metodoPago: PayMethodProps;
         fechaCreacion: string;
         fechaModificacion: string;
         contraseña: string;
@@ -75,12 +75,6 @@ export type NewsLetterProps ={
     Subtitle: string,
     text: string,
     date: string,
-    img: string
-}
-
-export type PayMethodProps = {
-    id: number,
-    metodo: string,
     img: string
 }
 
@@ -108,6 +102,7 @@ export type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
     updateInfo?: boolean
     urlFetch: string,
     customFunction?: () => void;
+    customFunctionWithData?: (data: any) => void;
 };
 
 export type InputsListProps<U extends {id? : number | string, nombre?: string}> = {
@@ -152,7 +147,7 @@ export type typePayMethodProps = {
     porcentajeAumento: number
 }
 
-export type payMethodProps = {
+export type PayMethodProps = {
     id: number,
     numero: string,
     expira: string,

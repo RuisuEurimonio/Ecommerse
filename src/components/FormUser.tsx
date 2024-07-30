@@ -3,12 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { errorAction, InputErrorText, updateAlert } from "./utils";
-import { TypeDocumentProps, typePayMethodProps, UserProps } from "@/types/Props";
+import { errorAction, InputErrorText, successAction, updateAlert } from "./utils";
+import { PayMethodProps, TypeDocumentProps, typePayMethodProps, UserProps } from "@/types/Props";
 import { userSchequemaFull } from "@/utils/Schemas/userSchemaFull";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getElementsApi, verifyPassword } from "@/data/api";
+import { getElementsApi, updateElement, verifyPassword } from "@/data/api";
 import Modal from "./Modal";
 import Form from "./Form";
 import { payMethodSchema } from "@/utils/Schemas/payMethodSchema";
@@ -32,7 +32,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         {type: "text", id: "numero", name: "Número" },
         {type: "date", id: "expira", name: "Fecha de expiración" },
         {type: "text", id: "proveedor", name: "Proveedor" },
-        {type: "select", id: "tipo_id", name: "Tipo", extraData: dataTypePayMethods },
+        {type: "select", id: "tipo", name: "Tipo", extraData: dataTypePayMethods },
     ]
 
     const {
@@ -67,6 +67,24 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         route.push("/login")
     }
 
+    function assignThePayMethodToUser(dataPayMethod : PayMethodProps){
+        const id = data.id;
+        const permisos = data.permisos;
+        const idMetodo = dataPayMethod.id
+        const metodoPago = {id: idMetodo};
+        const newData = {id, permisos, metodoPago};
+        updateElement("usuario", {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(newData)
+        }).then((response)=>{
+            if(response){
+                successAction("Ingresa nuevamente para ver los cambios reflejados.")
+                customFunction();
+            }
+        })
+    }
+
     const getDocuments = async () => {
         const response = await getElementsApi("usuario/documento");
         if(response){
@@ -81,11 +99,6 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         }
     }
 
-    useEffect(()=>{
-        getDocuments();
-        getTypePayMethods();
-    },[])
-
     const onSubmit: SubmitHandler<formProps> = async (dataInputs) => {
         let id = data.id
         let permisos = data.permisos;
@@ -96,15 +109,20 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                 if(response){
                     let contrasena = dataInputs.newPassword;
                     let arraySend = {contrasena, ...dataSend};
-                    updateAlert("Usuario", arraySend, "usuario", customFunction, true);
+                    updateAlert("Usuario", arraySend, "usuario", true , customFunction);
                 }else{
                     errorAction("Por favor verifique la contraseña actual ingresada.")
                 }
             })
         } else {
-            updateAlert("Usuario", dataSend, "usuario", customFunction, true);
+            updateAlert("Usuario", dataSend, "usuario", true, customFunction );
         }
     };
+    
+    useEffect(()=>{
+        getDocuments();
+        getTypePayMethods();
+    },[])
 
     return (
         <div className={className}>
@@ -358,7 +376,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
             <div className="my-4">
                 <h3 className="font-bold text-lg"> Pagos. </h3>
                 <div className="flex justify-between ml-5 mb-3">
-                    <p className="mr-5"> {data.metodoPago ? data.metodoPago : "No registra"} </p>
+                    {<p className="mr-5"> {data.metodoPago ? data.metodoPago.numero +" "+ data.metodoPago.proveedor : "No registra"} </p>}
                     <div className="flex gap-5">
                         <button className="bg-secondary-color text-third-color py-1 px-2" onClick={openCloseModal}> Actualizar </button>
                         <button className="bg-secondary-color text-third-color py-1 px-2" disabled={data.metodoPago === null} style={{cursor: data.metodoPago ? "pointer" : "not-allowed"}}> Eliminar </button>
@@ -378,6 +396,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                     urlFetch="pago/metodo"
                     inputsList={inputsForm}
                     data={data.metodoPago ? data.metodoPago : null}
+                    customFunctionWithData={assignThePayMethodToUser}
                     />
             </Modal>
         </div>
