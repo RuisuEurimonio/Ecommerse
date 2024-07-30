@@ -122,6 +122,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     useEffect(()=>{
         getDocuments();
         getTypePayMethods();
+        console.log(data)
     },[])
 
     return (

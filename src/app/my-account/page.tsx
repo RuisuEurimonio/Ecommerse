@@ -25,6 +25,14 @@ const MyAccount: React.FC<MyAccountProps> = () => {
             }
         })
     }
+
+    function parsePayMethodDate(){
+        if(data && data.metodoPago){
+            let fullDate = new Date(data.metodoPago.expira);
+            let newDate = fullDate.toISOString().split("T")[0];
+            data.metodoPago.expira = newDate;
+        }
+    }
     
     useEffect(()=>{
         const localData = localStorage.getItem("user");
@@ -35,6 +43,10 @@ const MyAccount: React.FC<MyAccountProps> = () => {
         }
         setData(userData ? userData["Usuario: "] : null);
     }, [])
+
+    useEffect(()=>{
+        parsePayMethodDate();
+    },[data])
 
     return (
         <div className={`md:basis-[85%] ${(data != null) ? "" : "flex justify-center items-center"}`} >
