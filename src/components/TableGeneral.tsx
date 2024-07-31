@@ -1,8 +1,8 @@
 "use client"
 
 import { useSearchParams } from "next/navigation";
-import { deleteAlert } from "./utils";
-import { subDataTableProps } from "@/types/Props";
+import { deleteAlert, errorAction, isOwnUserDataDelete } from "./utils";
+import { subDataTableProps, UserProps } from "@/types/Props";
 
 type TableGeneralProps<T extends { id: number, nombre?: string, nombres?: string}> = {
     data: T[],
@@ -86,7 +86,13 @@ const renderCell = (value: T[keyof T], type: string = "text", className: string 
                             </td>
                         )})}
                         <td scope="row" className="py-2 px-2">
-                            <button className="mx-1 hover:scale-105 transition" onClick={() => { deleteAlert(urlFetch, item, updateData) }}>
+                            <button className="mx-1 hover:scale-105 transition" onClick={() => { 
+                                    if("correo" in item && isOwnUserDataDelete(item)){
+                                        errorAction("No te puedes eliminar a ti mismo.")
+                                        return;
+                                    }
+                                    deleteAlert(urlFetch, item, updateData) 
+                                }}>
                                 <span className="icon icon-delete text-base"></span>
                             </button>
                             <button className="mx-1 hover:scale-105 transition" onClick={() => { openCloseSubModal(item) }}>

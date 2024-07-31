@@ -1,5 +1,5 @@
 import { createElement, deleteElement, updateElement } from '@/data/api';
-import { ArticleProps, PayMethodProps } from '@/types/Props';
+import { ArticleProps, PayMethodProps, UserProps } from '@/types/Props';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 import React, {ReactNode} from 'react'
@@ -283,4 +283,18 @@ export function closeSession(router : AppRouterInstance){
     localStorage.clear();
     sessionStorage.clear();
     router.push("/")
+}
+
+export function isOwnUserDataDelete(item : any) : boolean{
+    let data = null;
+    data = localStorage.getItem("user");
+    if(!data){
+        data = sessionStorage.getItem("user")
+    }
+    if(data === null){
+        return false;
+    }
+    let parseData = JSON.parse(data);
+    let userSessionData : UserProps = parseData["Usuario: "];
+    return userSessionData.correo === item.correo;
 }
