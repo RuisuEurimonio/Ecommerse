@@ -109,8 +109,8 @@ export const updateAlert = (name:string, data: any, file: string, ownInfo?: bool
 
 export const deleteAlert = <T extends {id: number, nombre?: string, nombres?: string}>(name:string, data: T, updateData: ()=>void) =>  {
     Swal.fire({
-        title: `Eliminar ${data.nombre ?? data.nombres}`,
-        text: `¿Estás seguro de eliminar a ${data.nombre ?? data.nombres}?`,
+        title: `Eliminar ${data.nombre ?? data.nombres ?? "item"}`,
+        text: `¿Estás seguro de eliminar a ${data.nombre ?? data.nombres ?? "item"}?`,
         icon: "question",
         showCancelButton: true
     }).then((response)=>{
@@ -122,7 +122,7 @@ export const deleteAlert = <T extends {id: number, nombre?: string, nombres?: st
                     showConfirmButton: false,
                     icon: "success",
                     timer: 1500,
-                    title: `${data.nombre ?? data.nombres} eliminado`
+                    title: `${data.nombre ?? data.nombres ?? "item"} eliminado`
                 })
                 Toast.fire();
                 updateData();

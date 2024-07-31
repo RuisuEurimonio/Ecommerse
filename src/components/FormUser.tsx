@@ -3,12 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { errorAction, InputErrorText, successAction, updateAlert } from "./utils";
+import { confirmAction, deleteAlert, errorAction, InputErrorText, successAction, updateAlert } from "./utils";
 import { PayMethodProps, TypeDocumentProps, typePayMethodProps, UserProps } from "@/types/Props";
 import { userSchequemaFull } from "@/utils/Schemas/userSchemaFull";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getElementsApi, updateElement, verifyPassword } from "@/data/api";
+import { deleteElement, getElementsApi, updateElement, verifyPassword } from "@/data/api";
 import Modal from "./Modal";
 import Form from "./Form";
 import { payMethodSchema } from "@/utils/Schemas/payMethodSchema";
@@ -122,7 +122,6 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     useEffect(()=>{
         getDocuments();
         getTypePayMethods();
-        console.log(data)
     },[])
 
     return (
@@ -380,7 +379,12 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                     {<p className="mr-5"> {data.metodoPago ? data.metodoPago.numero +" "+ data.metodoPago.proveedor : "No registra"} </p>}
                     <div className="flex gap-5">
                         <button className="bg-secondary-color text-third-color py-1 px-2" onClick={openCloseModal}> Actualizar </button>
-                        <button className="bg-secondary-color text-third-color py-1 px-2" disabled={data.metodoPago === null} style={{cursor: data.metodoPago ? "pointer" : "not-allowed"}}> Eliminar </button>
+                        <button 
+                            className="bg-secondary-color text-third-color py-1 px-2" 
+                            disabled={data.metodoPago === null} 
+                            style={{cursor: data.metodoPago ? "pointer" : "not-allowed"}}
+                            onClick={()=>{deleteAlert("pago/metodo",data.metodoPago, ()=>{successAction("Vuelva a iniciar sesión para ver los cambios."); customFunction() })}}
+                    > Eliminar </button>
                     </div>
                 </div>
             </div>
@@ -398,6 +402,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                     inputsList={inputsForm}
                     data={data.metodoPago ? data.metodoPago : null}
                     customFunctionWithData={assignThePayMethodToUser}
+                    updateInfo={data.metodoPago != null}
                     />
             </Modal>
         </div>
