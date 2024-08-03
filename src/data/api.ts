@@ -17,6 +17,20 @@ export async function getElementsApi(url : string){
     }
 }
 
+
+export async function getElementsByFilter(url : String){
+    try{
+        const response = await fetch(HOST+url);
+        if(!response.ok){
+            throw new Error("Network responses was not ok");
+        }
+        const data = await response.json();
+        return data;
+    } catch (error){
+        console.log("Error get elements filter" + error);
+    }
+}
+
 export async function getElementByIdApi(url : string, id: number){
     try{
         const response = await fetch(HOST+url+"/"+id);

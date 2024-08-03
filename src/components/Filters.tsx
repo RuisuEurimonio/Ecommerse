@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import FilterComponent from "./FilterComponent";
 import { ArticleProps, BrandProps, CategoryProps, ClasificationProps } from "@/types/Props";
-import { getElementsApi } from "@/data/api";
+import { getElementsApi, getElementsByFilter } from "@/data/api";
 
 type FiltersProps = {
     updateDataFunction : (data : ArticleProps[]) => void;
@@ -50,7 +50,7 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
 
     async function selectData(id : number, typeData: string){
         if(id && typeData){
-            const newData = await getElementsApi("producto/filter/"+typeData+"/"+id);
+            const newData = await getElementsByFilter("producto/filter/"+typeData+"/"+id);
             if(newData){
                 updateDataFunction(newData);
             }
