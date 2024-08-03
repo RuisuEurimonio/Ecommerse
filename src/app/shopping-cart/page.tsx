@@ -157,10 +157,10 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                         lg:w-2/4"
                             onClick={()=>{confirmOrder(totalBill, listOfItems.length)}}
                     > Confirmar. </button>
-                    <PDFDownloadLink document={<PricePdf items={listOfItems} subtotal={totalBill} discounts={totalDiscounts} sendPrice={0} total={totalBill-totalDiscounts+sendPrice} observations={observations}/>} fileName="Cotización">
+                    {dataUser && <PDFDownloadLink document={<PricePdf user={dataUser} items={listOfItems} subtotal={totalBill} discounts={totalDiscounts} sendPrice={0} total={totalBill-totalDiscounts+sendPrice} observations={observations}/>} fileName="Cotización">
                     <button className="bg-secondary-color text-third-color px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center my-3
                         lg:w-2/4"> Generar cotización </button>
-                    </PDFDownloadLink>
+                    </PDFDownloadLink>}
                 </div>
             </div>
         </div>

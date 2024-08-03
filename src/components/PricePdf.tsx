@@ -1,6 +1,6 @@
 "use client"
 
-import { ArticleProps } from "@/types/Props";
+import { ArticleProps, UserProps } from "@/types/Props";
 import { Page, Text, View, Document, StyleSheet, Font, Image } from "@react-pdf/renderer";
 import { moneyFormatter } from "./utils";
 import image from "@/assets/img/logo.png"
@@ -15,13 +15,14 @@ type PricePdfProps = {
     sendPrice: number,
     total: number,
     observations: string
+    user: UserProps
 }
 
 const TITLE_SIZE = 15;
 const SUBTITLE_SIZE = 12;
 const TEXT_SIZE = 9;
 
-const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPrice, total, observations}) => {
+const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPrice, total, observations, user = {nombres: "No especifica", apellidos: "", direccion: "No especifica"}}) => {
 
     const date = new Date();
     const options : Intl.DateTimeFormatOptions= { year: 'numeric', month: '2-digit', day: '2-digit'};
@@ -34,7 +35,9 @@ const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPri
                 <View>
                     <Text style={styles.headerTitle}>COTIZACIÓN</Text>
                     <Text style={styles.headerSubitems}>{formattedDate}</Text>
-                    <Text style={styles.headerSubitems}>Cliente: Lauro Tauro</Text> {/* TODO: update the client info */}
+                    <Text style={styles.headerSubitems}>Cliente: {user.nombres} {user.apellidos}</Text>
+                    <Text style={styles.headerSubitems}>Dirección: {user.direccion}</Text>
+
                     <Text style={styles.headerSubitems}>Vendedor: Generado por página web.</Text>
                 </View>
                 <View>
