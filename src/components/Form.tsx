@@ -12,6 +12,7 @@ import { InputsListProps,  FormProps, CategoryProps} from "@/types/Props"
 import { confirmAction, InputErrorText, saveAlert, successAction, updateAlert } from "./utils";
 import { login } from "@/data/api";
 import { useRouter } from "next/navigation";
+import { sendImageToAzureContainer } from "@/data/azure";
   
   
 type FormPropsSec = {categories?: CategoryProps[]} | {};
@@ -79,6 +80,8 @@ const Form = <T extends {id?: number} | FormPropsSec ,
                 return inputWithSelect(id, name, type, extraData ?? [], secondId ?? "");
             case ("group-checkbox"):
                 return checkboxInput(id, name, type, extraData ?? []);
+            case ("file"):
+                return defaultInput(id,name,type);
             default:
                 return defaultInput(id, name, type);
         }
@@ -153,19 +156,29 @@ const Form = <T extends {id?: number} | FormPropsSec ,
         )
     }
 
-    const defaultInput = (id: string, name: string, type: string) => {
+    const defaultInput = (id: string, name: string, type: string, isFileInput: boolean = false) => {
         return (
             <div key={id + name} className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                 `}>
                 <label htmlFor={id}>
                     <p className="inline-block w-1/3"> {name}*:</p>
-                    <input
+                    {isFileInput ? <input
                         id={id}
                         type={type}
                         className="border rounded-sm w-2/3"
+
                         {...register(id)}
                     />
+                :
+                <input
+                    id={id}
+                    type={type}
+                    className="border rounded-sm w-2/3"
+                    accept="image/png, image/jpeg, image/webp"
+                    {...register(id)}
+            />
+                }
                 </label>
                 {errors[id] && (
                     <InputErrorText
@@ -277,6 +290,11 @@ const Form = <T extends {id?: number} | FormPropsSec ,
     }
 
     const onSubmit: SubmitHandler<FormPropsType> = async (dataInputs) => {
+
+        if("imagen" in dataInputs){
+            dataInputs.imagen = await sendImageToAzureContainer(dataInputs.imagen[0]);
+        }
+
         if(!isLoginRegister){
             if(!updateInfo){
                 customFunction && await saveAlert(dataName, dataInputs, urlFetch, customFunction);

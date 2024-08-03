@@ -1,4 +1,3 @@
-import { CategoryProps } from "@/types/Props";
 import { z } from "zod";
 
 export const articleSchequema = z
@@ -22,8 +21,7 @@ export const articleSchequema = z
             .number({message: "Ingresa un número sin puntos ni comas"})
             .min(1, "Ingresa un valor valido" ),
         imagen: z
-            .string()
-            .regex(new RegExp("^(https?:\\/\\/)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w .-]*)*\\/?\\.(jpg|jpeg|png|gif|bmp)$"), "Debe ser una URL valida.")
+            .any()
         ,
         marca: z
             .any(),

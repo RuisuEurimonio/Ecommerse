@@ -9,6 +9,10 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: "c4.wallpaperflare.com"
+            },
+            {
+                protocol: "https",
+                hostname: "storagerux1111.blob.core.windows.net"
             }
         ]
     }

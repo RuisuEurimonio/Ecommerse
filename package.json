@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.24.0",
     "@hookform/resolvers": "^3.4.2",
     "@react-pdf/renderer": "^3.4.4",
     "next": "14.1.4",

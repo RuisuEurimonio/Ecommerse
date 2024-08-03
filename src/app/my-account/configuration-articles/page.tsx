@@ -53,7 +53,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
         {type: "textarea", id: "descripcion", name: "Descripción"},
         {type: "text", id: "sku", name: "sku"},
         {type: "text", id: "precio", name: "Precio"},
-        {type: "text", id: "imagen", name: "Imagen"},
+        {type: "file", id: "imagen", name: "Imagen"},
         {type: "select", id: "marca", name: "Marca", extraData: dataBrand, groupData: true},
         {type: "select", id: "clasificacion", name: "Clasificación", extraData: dataClassification, groupData: true},
         {type: "group-checkbox", id: "categoria", name: "Categoria", extraData: dataCategory},

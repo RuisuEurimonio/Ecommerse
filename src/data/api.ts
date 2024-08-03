@@ -1,7 +1,7 @@
 import { errorAction } from "@/components/utils";
-import Swal from "sweetalert2";
+import credential from "./credentials";
 
-const HOST = "http://localhost:8080/api/"
+const HOST = credential.getHostDB();
 
 export async function getElementsApi(url : string){
     try{
