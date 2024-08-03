@@ -43,8 +43,8 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
     function getDiscounts(){
         let total = 0;
         listOfItems.forEach((item)=>{
-            if (item[0].descuento){
-                total += (item[0].precio * item[0].descuento.porcentaje) * item[1];
+            if (item[0].descuento && item[0].descuento.activo){
+                total += (item[0].precio * (item[0].descuento.porcentaje / 100)) * item[1];
             }
         })
         setTotalDiscounts(total);
@@ -108,7 +108,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                     {listOfItems.map((item, index)=> {
                         return(
                             <Link href={`/products/${item[0].id}?name=${item[0].nombre}`} key={index}>
-                                <CardItem item={item[0]} link="products" itemCart cantidad={item[1]} index={index} functionFather={updateLocalStorageData}/>
+                                <CardItem item={item[0]} link="products" itemCart discount={item[0].descuento?.activo} cantidad={item[1]} index={index} functionFather={updateLocalStorageData}/>
                             </Link>
                     )})}
                 </div>
