@@ -32,21 +32,6 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
     const [updateData, setUpdateData] = useState(false);
     const [observations, setObservations] = useState("");
 
-    useEffect(()=>{
-        const products = localStorage.getItem("products");
-        const user = localStorage.getItem("user");
-        setListOfItems(products ? JSON.parse(products) : [])
-        setDataUser(user ? JSON.parse(user) : "");
-        setUpdateData(false);
-        
-    },[updateData])
-
-    useEffect(()=>{
-        getBillDeatils();
-        getDiscounts();
-        getSendPrice();
-    },[listOfItems])
-
     function getBillDeatils(){
         let total = 0;
         listOfItems.forEach((item)=>{
@@ -59,14 +44,14 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
         let total = 0;
         listOfItems.forEach((item)=>{
             if (item[0].descuento){
-                total += (item[0].precio * 0.14) * item[1]; //TODO: Implement with the real database data.
+                total += (item[0].precio * item[0].descuento.porcentaje) * item[1];
             }
         })
         setTotalDiscounts(total);
     }
 
     function getSendPrice(){
-        setsendPrice(0); //TODO: Implement this function with the user data.
+        setsendPrice(10000);
     }
 
     function updateLocalStorageData(){
@@ -79,6 +64,28 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
             setObservations(event.target.value);
         }
     }
+
+    useEffect(()=>{
+        const dataLocal = localStorage.getItem("user");
+        let dataRes = dataLocal !== null ? JSON.parse(dataLocal) : null;
+        if(!dataLocal){
+            const dataSession = sessionStorage.getItem("user");
+            dataRes = dataSession !== null ? JSON.parse(dataSession) : null;
+        }
+        setDataUser(dataRes ? dataRes["Usuario: "] : null);
+    },[])
+
+    useEffect(()=>{
+        const products = localStorage.getItem("products");
+        setListOfItems(products ? JSON.parse(products) : [])
+        setUpdateData(false);
+    },[updateData])
+
+    useEffect(()=>{
+        getBillDeatils();
+        getDiscounts();
+        getSendPrice();
+    },[listOfItems])
 
     return(
         <div className="w-11/12 my-4 mx-auto flex gap-5 flex-col
@@ -113,19 +120,19 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
                     <h2 className="font-bold text-lg"> Cliente. </h2>
                     <hr className="mt-4"/>
                     {dataUser ? 
-                        <ul className="my-3">
-                            <li> {dataUser?.tipoDocumento + " " + dataUser?.numeroDocumento}   </li>
-                            <li> {dataUser?.nombres}   </li>
-                            <li> {dataUser?.apellidos}   </li>
-                            <li> {dataUser?.correo}   </li>
-                            <li> {dataUser?.telefono}   </li>
-                            <li> {dataUser?.direccion}   </li>
+                        <ul className="my-3" key={dataUser?.id}>
+                            <li> <span className="font-bold"> Documento: </span> {dataUser?.tipoDocumento.abreviacion + " " + dataUser?.numeroDocumento}   </li>
+                            <li> <span className="font-bold"> Nombres: </span> {dataUser?.nombres}   </li>
+                            <li> <span className="font-bold"> Apellidos: </span> {dataUser?.apellidos}   </li>
+                            <li> <span className="font-bold"> Correo: </span> {dataUser?.correo}   </li>
+                            <li> <span className="font-bold"> Teléfono: </span> {dataUser?.telefono}   </li>
+                            <li> <span className="font-bold"> Dirección: </span> {dataUser?.direccion}   </li>
                         </ul>
                         :
                         <DataNotFoundMessage 
                             title="No has ingresado sesión"
                             text="Inicia sesión o crea una cuenta por medio del siguiente link para validar la información"
-                            redirectLink="/authForm"
+                            redirectLink="/login"
                             redirectName="Iniciar sesión"
                         />
                     }
