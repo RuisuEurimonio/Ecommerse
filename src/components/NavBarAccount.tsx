@@ -29,15 +29,14 @@ const NavBarAccount: React.FC<NavBarAccountProps> = () => {
                                 pathName === undefined ? "underline" : "none",
                         }}
                     >
-                        {" "}
-                        <Link href="/my-account">Información.</Link>{" "}
+                        
+                        <Link href="/my-account">Información.</Link>
                     </li>
                 </ul>
             </li>
             <li>
                 <p className="font-bold text-lg">
-                    {" "}
-                    Configuración empresarial.{" "}
+                    Configuración empresarial.
                 </p>
                 <ul className="list-disc">
                     {urlLinks.map((item)=>(
@@ -51,7 +50,6 @@ const NavBarAccount: React.FC<NavBarAccountProps> = () => {
                                         : "none",
                             }}
                         >
-                            {" "}
                             <Link href={`/my-account/${item.url}`}>
                                 {item.name}
                             </Link>

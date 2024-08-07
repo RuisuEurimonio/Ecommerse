@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import Modal from "@/components/Modal";
 import Numeration from "@/components/Numeration";
@@ -12,6 +12,7 @@ import { ArticleProps, BrandProps, CategoryProps, ClasificationProps, subDataTab
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import NoDataTable from "@/components/NoDataTable";
 import { getElementsApi } from "@/data/api";
+import LoadingItem from "@/components/LoadingItem/LoadingItem";
 
 type ConfigurationProductsProps = {};
 
@@ -117,11 +118,13 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Artículos.</h2>
                 <div className="w-full relative overflow-x-auto">
-                    {data ?
-                    <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH}/>
-                    :
-                    <NoDataTable message="No se encontraron artículos ingresados." secondaryMessage="Ingrese nuevos articulos por medio del botón infeior"/ >
-                    }
+                    <Suspense fallback={<LoadingItem/>}>
+                        {data ?
+                        <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH}/>
+                        :
+                        <NoDataTable message="No se encontraron artículos ingresados." secondaryMessage="Ingrese nuevos articulos por medio del botón infeior"/ >
+                        }
+                    </Suspense>
             </div>
             <div className="bg-secondary-color text-third-color flex flex-col-reverse items-center rounded-sm min-h-5">
                 {data && <Numeration className="text-third-color" dataLength={data.length} itemsByPage={perPage} />}

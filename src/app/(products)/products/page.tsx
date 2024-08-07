@@ -17,6 +17,7 @@ import { ArticleProps } from "@/types/Props";
 
 import { getElementsApi, getElementsByOrder, getElementsSearched } from "@/data/api";
 import { useDebouncedCallback } from "use-debounce";
+import LoadingItem from "@/components/LoadingItem/LoadingItem";
 
 type ProductsProps = {};
 
@@ -34,6 +35,7 @@ const Products: React.FC<ProductsProps> = () => {
     const searchValue = searchParams.get("search") || "";
     
     const[data, setData] = useState<ArticleProps[] | null>(null);
+    const [loading, setLoading] = useState(true);
 
     function updateDataByFilter(data : ArticleProps[]){
         if(data){
@@ -45,14 +47,14 @@ const Products: React.FC<ProductsProps> = () => {
         const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data);
+            setLoading(false);
         } 
     }
 
     const getSearch = async () => {
         const data = await getElementsSearched(searchValue.toString());
-        if(data){
-            setData(data);
-        }
+        setData(data);
+        setLoading(false);
     }
     
     async function getDataByOrder(event : React.ChangeEvent<HTMLSelectElement>){
@@ -61,6 +63,7 @@ const Products: React.FC<ProductsProps> = () => {
         const data = await getElementsByOrder(value as "desc" | "asc");
         if(data){
             setData(data);
+            setLoading(false);
         }
     }
 
@@ -73,7 +76,10 @@ const Products: React.FC<ProductsProps> = () => {
     }, 500);
 
     useEffect(()=>{
+        setData(null);
+        setLoading(true);
         debouncedGetSearch();
+
     },[searchValue])
 
     return (
@@ -114,7 +120,7 @@ const Products: React.FC<ProductsProps> = () => {
                             lg:grid-cols-4
                             xl:grid-cols-5"
                         >
-                            {data &&
+                            {data && !loading &&
                             data
                                 .slice(
                                     perPage * pageNum - perPage,
@@ -131,10 +137,13 @@ const Products: React.FC<ProductsProps> = () => {
                                 )})
                             }
                         </ul>
-                        {data && data?.length == 0 && 
+                        {loading && !data &&
+                            <LoadingItem/>
+                        }
+                        {data && data?.length === 0 && !loading &&
                             <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
                         }
-                        {!data && 
+                        {!data && !loading && 
                         <div className="w-full flex justify-center items-center">
                             <DataNotFoundMessage
                                 title="Error"
