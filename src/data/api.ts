@@ -74,9 +74,9 @@ export async function getElementsSearched(value : string) {
     try{
         const response = await fetch(HOST+`producto/search?sku=${value}&nombre=${value}`)
         if(!response.ok){
-            throw new Error("Network responses was not ok")
+            throw new Error("Network response was not ok")
         }
-        const data = response.json();
+        const data = await response.json();
         return data;
     } catch(error){
         console.log("Error get elements searched: "+ error)

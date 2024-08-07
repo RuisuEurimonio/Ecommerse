@@ -34,7 +34,7 @@ const Products: React.FC<ProductsProps> = () => {
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
     const searchValue = searchParams.get("search") || "";
     
-    const[data, setData] = useState<ArticleProps[] | null>(null);
+    const [data, setData] = useState<ArticleProps[] | null>(null);
     const [loading, setLoading] = useState(true);
 
     function updateDataByFilter(data : ArticleProps[]){
@@ -47,12 +47,12 @@ const Products: React.FC<ProductsProps> = () => {
         const data = await getElementsApi(URL_FETCH);
         if(data){
             setData(data);
-            setLoading(false);
         } 
+        setLoading(false);
     }
 
-    const getSearch = async () => {
-        const data = await getElementsSearched(searchValue.toString());
+    const getSearch = async (value : string) => {
+        const data = await getElementsSearched(value);
         setData(data);
         setLoading(false);
     }
@@ -63,13 +63,13 @@ const Products: React.FC<ProductsProps> = () => {
         const data = await getElementsByOrder(value as "desc" | "asc");
         if(data){
             setData(data);
-            setLoading(false);
         }
+        setLoading(false);
     }
 
     const debouncedGetSearch = useDebouncedCallback(() => {
-        if (searchValue) {
-            getSearch();
+        if (searchValue !== "") {
+            getSearch(searchValue);
         } else {
             get();
         }
@@ -79,7 +79,6 @@ const Products: React.FC<ProductsProps> = () => {
         setData(null);
         setLoading(true);
         debouncedGetSearch();
-
     },[searchValue])
 
     return (
@@ -110,7 +109,7 @@ const Products: React.FC<ProductsProps> = () => {
                             </select>
                         </div>
                         <div>
-                            { data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
+                            {data && data.length > 0 && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                         </div>
                     </div>
                     <div className="m-2">
@@ -156,7 +155,7 @@ const Products: React.FC<ProductsProps> = () => {
                     </div>
                     <div className="bg-fourth-color p-1 flex flex-col-reverse items-center rounded-sm">
                         <SelectCantItems perPage={perPage} />
-                        {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
+                        {data && data.length > 0 && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                     </div>
                 </div>
             </div>
