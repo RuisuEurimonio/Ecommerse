@@ -16,6 +16,7 @@ import { perPageOptions, alphabetOptions } from "@/utils/ts/configuration";
 import { ArticleProps } from "@/types/Props";
 
 import { getElementsByFilterName, getElementsByOrder } from "@/data/api";
+import LoadingItem from "@/components/LoadingItem/LoadingItem";
 
 type ProductsProps = {};
 
@@ -31,7 +32,7 @@ const Products: React.FC<ProductsProps> = () => {
     ) as number;
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
     const [data, setData] = useState<ArticleProps[] | null>(null);
-
+    const [loading, setLoading] = useState(true);
     
 
     function updateDataByFilter(data : ArticleProps[]){
@@ -55,6 +56,7 @@ const Products: React.FC<ProductsProps> = () => {
         const data = await getElementsByFilterName(URL_FETCH,"marca", ID_BRAND);
         if(data){
             setData(data);
+            setLoading(false);
         }
     }
 
@@ -66,6 +68,7 @@ const Products: React.FC<ProductsProps> = () => {
             const dataDiscount = selectDataRuisus(data);
             if(dataDiscount){
                 setData(dataDiscount);
+                setLoading(false);
             }
         }
     }
@@ -110,7 +113,7 @@ const Products: React.FC<ProductsProps> = () => {
                             lg:grid-cols-4
                             xl:grid-cols-5"
                         >
-                            {data &&
+                            {data && !loading &&
                             data
                                 .slice(
                                     perPage * pageNum - perPage,
@@ -125,10 +128,13 @@ const Products: React.FC<ProductsProps> = () => {
                                     />
                                 ))}
                         </ul>
-                        {data && data?.length == 0 && 
+                        {loading && 
+                            <LoadingItem/>
+                        }
+                        {!loading && data && data?.length == 0 && 
                             <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
                         }
-                        {!data && 
+                        {!loading && !data && 
                         <div className="w-full flex justify-center items-center">
                             <DataNotFoundMessage
                                 title="Error"
