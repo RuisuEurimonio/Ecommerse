@@ -1,16 +1,18 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
-import CardItem from "@/components/CardItem";
-import PricePdf from "@/components/PricePdf";
+const CardItem = React.lazy(()=>  import("@/components/CardItem"));
+const PricePdf = React.lazy(()=> import("@/components/PricePdf"));
 import { confirmOrder, moneyFormatter } from "@/components/utils";
 
 import { ArticleProps, UserProps } from "@/types/Props";
 import DataNotFoundMessage from "@/components/DataNotFoundMessage";
+import LoadingItem from "@/components/LoadingItem/LoadingItem";
+import SpinnerItem from "@/components/LoadingItem/SpinnerItem";
 
 const PDFDownloadLink = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod. PDFDownloadLink),
@@ -31,6 +33,8 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
     const [sendPrice, setsendPrice] = useState(0);
     const [updateData, setUpdateData] = useState(false);
     const [observations, setObservations] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [loadingDataUser, setLoadingDataUser] = useState(true);
 
     function getBillDeatils(){
         let total = 0;
@@ -73,12 +77,14 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
             dataRes = dataSession !== null ? JSON.parse(dataSession) : null;
         }
         setDataUser(dataRes ? dataRes["Usuario: "] : null);
+        setLoadingDataUser(false);
     },[])
 
     useEffect(()=>{
         const products = localStorage.getItem("products");
         setListOfItems(products ? JSON.parse(products) : [])
         setUpdateData(false);
+        setLoading(false);
     },[updateData])
 
     useEffect(()=>{
@@ -93,51 +99,62 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
             <div className="sm:basis-3/4">
                 <h2 className="font-bold text-lg"> Artículos </h2>
                 <hr className="mt-4"/>
-                {listOfItems.length == 0 ?
-                <DataNotFoundMessage 
-                    title="No tienes artículos en el carrito." 
-                    text="Agrega algún artículo de nuestro catalogo." 
-                    redirectLink="/products" 
-                    redirectName="Articulos."/>
+                {!loading ?
+                    <Suspense fallback={<LoadingItem/>}>
+                        {listOfItems.length == 0 ?
+                        <DataNotFoundMessage 
+                            title="No tienes artículos en el carrito." 
+                            text="Agrega algún artículo de nuestro catalogo." 
+                            redirectLink="/products" 
+                            redirectName="Articulos."/>
+                        :
+                        <div className="grid grid-cols-2 gap-5 my-4
+                            sm:grid-cols-3
+                            lg:grid-cols-4
+                            xl:grid-cols-5
+                            2xl:grid-cols-6">
+                            {listOfItems.map((item, index)=> {
+                                return(
+                                    <Link href={`/products/${item[0].id}?name=${item[0].nombre}`} key={index}>
+                                        <CardItem item={item[0]} link="products" itemCart discount={item[0].descuento?.activo} cantidad={item[1]} index={index} functionFather={updateLocalStorageData}/>
+                                    </Link>
+                            )})}
+                        </div>
+                }   </Suspense>
                 :
-                <div className="grid grid-cols-2 gap-5 my-4
-                    sm:grid-cols-3
-                    lg:grid-cols-4
-                    xl:grid-cols-5
-                    2xl:grid-cols-6">
-                    {listOfItems.map((item, index)=> {
-                        return(
-                            <Link href={`/products/${item[0].id}?name=${item[0].nombre}`} key={index}>
-                                <CardItem item={item[0]} link="products" itemCart discount={item[0].descuento?.activo} cantidad={item[1]} index={index} functionFather={updateLocalStorageData}/>
-                            </Link>
-                    )})}
-                </div>
-            }   
+                    <LoadingItem/>
+                }
             </div>
             <div className="sm:basis-1/4">
                 <div className="mx-auto my-2
                     sm:w-4/5 ">
                     <h2 className="font-bold text-lg"> Cliente. </h2>
                     <hr className="mt-4"/>
-                    {dataUser ? 
-                        <ul className="my-3" key={dataUser?.id}>
-                            <li> <span className="font-bold"> Documento: </span> {dataUser?.tipoDocumento.abreviacion + " " + dataUser?.numeroDocumento}   </li>
-                            <li> <span className="font-bold"> Nombres: </span> {dataUser?.nombres}   </li>
-                            <li> <span className="font-bold"> Apellidos: </span> {dataUser?.apellidos}   </li>
-                            <li> <span className="font-bold"> Correo: </span> {dataUser?.correo}   </li>
-                            <li> <span className="font-bold"> Teléfono: </span> {dataUser?.telefono}   </li>
-                            <li> <span className="font-bold"> Dirección: </span> {dataUser?.direccion}   </li>
-                        </ul>
-                        :
-                        <DataNotFoundMessage 
-                            title="No has ingresado sesión"
-                            text="Inicia sesión o crea una cuenta por medio del siguiente link para validar la información"
-                            redirectLink="/login"
-                            redirectName="Iniciar sesión"
-                        />
+                    {!loadingDataUser ?
+                        <>
+                            {dataUser ? 
+                                <ul className="my-3" key={dataUser?.id}>
+                                    <li> <span className="font-bold"> Documento: </span> {dataUser?.tipoDocumento.abreviacion + " " + dataUser?.numeroDocumento}   </li>
+                                    <li> <span className="font-bold"> Nombres: </span> {dataUser?.nombres}   </li>
+                                    <li> <span className="font-bold"> Apellidos: </span> {dataUser?.apellidos}   </li>
+                                    <li> <span className="font-bold"> Correo: </span> {dataUser?.correo}   </li>
+                                    <li> <span className="font-bold"> Teléfono: </span> {dataUser?.telefono}   </li>
+                                    <li> <span className="font-bold"> Dirección: </span> {dataUser?.direccion}   </li>
+                                </ul>
+                                :
+                                <DataNotFoundMessage 
+                                    title="No has ingresado sesión"
+                                    text="Inicia sesión o crea una cuenta por medio del siguiente link para validar la información"
+                                    redirectLink="/login"
+                                    redirectName="Iniciar sesión"
+                                />
+                            }
+                            {dataUser && <Link href="/my-account" className="bg-secondary-color text-third-color px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center
+                            lg:w-2/4"><button> Configurar </button></Link>}
+                        </>
+                    :
+                    <SpinnerItem/>
                     }
-                    {dataUser && <Link href="/my-account" className="bg-secondary-color text-third-color px-2 py-1 rounded-sm cursor-pointer block mx-auto w-3/4 text-center
-                    lg:w-2/4"><button> Configurar </button></Link>}
                 </div>
                 <div className="mx-auto
                     sm:w-4/5">
