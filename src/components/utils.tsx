@@ -1,4 +1,5 @@
 import { createElement, deleteElement, updateElement } from '@/data/api';
+import { deleteImageFromStorage } from '@/data/azure';
 import { ArticleProps, PayMethodProps, UserProps } from '@/types/Props';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { ReadonlyURLSearchParams } from 'next/navigation';
@@ -115,6 +116,20 @@ export const deleteAlert = <T extends {id: number, nombre?: string, nombres?: st
         showCancelButton: true
     }).then((response)=>{
         if(response.isConfirmed){
+            let next = true;
+
+            if("imagen" in data && data.imagen){
+                let name : string = data.imagen as string;
+                let fileName = name.split("images/")[1];
+                deleteImageFromStorage(fileName).then((res)=>{
+                    next = res as boolean;
+                })
+            }
+
+            if(!next){
+                errorAction("Algo salio mal, vuelve a intentarlo");
+            }
+
             deleteElement(name, data.id).then(()=>{
                 let Toast = Swal.mixin({
                     toast: true,

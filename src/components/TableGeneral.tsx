@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { deleteAlert, errorAction, isOwnUserDataDelete } from "./utils";
 import { subDataTableProps, UserProps } from "@/types/Props";
+import { deleteImageFromStorage } from "@/data/azure";
 
 type TableGeneralProps<T extends { id: number, nombre?: string, nombres?: string}> = {
     data: T[],

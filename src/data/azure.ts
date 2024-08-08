@@ -37,3 +37,21 @@ export async function sendImageToAzureContainer(file: File):Promise<string>{
 
         }
 }
+
+export async function deleteImageFromStorage(fileName : string) : Promise<Boolean>{
+    if(fileName){
+        try{
+            const response = await fetch(credentials.getUrlDeleteItem(fileName), {
+                method: 'DELETE',
+                headers: {
+                    'x-ms-version': '2020-10-02'
+                }
+            })
+            return response.ok;
+        }catch(error){
+            console.log("Error delet item from Azure Blob storage "+error)
+            return false;
+        }
+    }
+    return false;
+}

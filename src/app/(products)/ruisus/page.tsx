@@ -79,6 +79,7 @@ const Products: React.FC<ProductsProps> = () => {
     },[])
 
     return (
+        
         <div
             className="flex my-4 flex-col justify-between
                     md:flex-row"
