@@ -304,8 +304,14 @@ const Form = <T extends {id?: number} | FormPropsSec ,
             } else {
                 if ( data && 'id' in data){
                     let id = data?.id ?? null;
-                    let fileName = "imagen" in data ? data.imagen : "";
-                    let newData = "imagen" in data ? {id, fileName, ...dataInputs} : {id, ...dataInputs};
+                    let newData;
+                    if("imagen" in dataInputs && "imagen" in data && dataInputs.imagen === 'h' ){
+                        dataInputs.imagen = data.imagen;
+                        newData = {id, ...dataInputs}
+                    }else{
+                        let fileName = "imagen" in data ? data.imagen : "";
+                        newData = {id, fileName, ...dataInputs}
+                    }
                     customFunction && await updateAlert(dataName, newData, urlFetch, false, customFunction);
                     customFunctionWithData && await updateAlert(dataName, newData, urlFetch, false, undefined, customFunctionWithData)
                 }
