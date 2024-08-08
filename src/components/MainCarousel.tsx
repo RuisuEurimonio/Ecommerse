@@ -45,12 +45,15 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
                 <ul className="flex w-full">
                     {images.map((img, index)=>(
                         <li className={`min-w-full transition`} key={index} style={{transform: `translateX(${position}%)`}}> 
-                        <Image 
-                            src={img.src}
-                            alt={img.altText}
-                            width={1920}
-                            priority={true}
-                        />
+                        <div style={{ position: 'relative', width: '100%', height: '65vh' }}>
+                            <Image 
+                                src={img.src}
+                                alt={img.altText}
+                                fill
+                                style={{objectFit: "cover"}}
+                                priority={index === 0}
+                            />
+                        </div>
                     </li>    
                     ))}
                 </ul>

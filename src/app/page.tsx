@@ -1,19 +1,29 @@
-import AboutUs from "@/components/AboutUs";
-import Brand from "@/components/Brand";
+const AboutUs = React.lazy(()=> import("@/components/AboutUs"));
+const Brand = React.lazy(()=> import("@/components/Brand"));
 import Clasificaciones from "@/components/Clasficaciones";
-import LatestDiscounts from "@/components/LatestDiscounts";
+import LoadingItem from "@/components/LoadingItem/LoadingItem";
+const LatestDiscounts = React.lazy(()=> import("@/components/LatestDiscounts"));
 import MainCarousel from "@/components/MainCarousel";
-import OurService from "@/components/OurService";
+const OurService =  React.lazy(()=>import("@/components/OurService"));
+import React, { Suspense } from "react";
 
 export default function Home() {
   return (
     <>
       <MainCarousel/>
       <Clasificaciones main/>
-      <AboutUs/>
-      <LatestDiscounts/>
-      <OurService/>
-      <Brand/>
+      <Suspense fallback={<LoadingItem/>}>
+        <AboutUs/>
+      </Suspense>
+      <Suspense fallback={<LoadingItem/>}>
+        <LatestDiscounts/>
+      </Suspense>
+      <Suspense fallback={<LoadingItem/>}>
+        <OurService/>
+      </Suspense>
+      <Suspense fallback={<LoadingItem/>}>
+        <Brand/>
+      </Suspense>
     </>
   );
 }
