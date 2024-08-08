@@ -1,5 +1,5 @@
 import { createElement, deleteElement, updateElement } from '@/data/api';
-import { deleteImageFromStorage } from '@/data/azure';
+import { deleteImageFromStorage, sendImageToAzureContainer } from '@/data/azure';
 import { ArticleProps, PayMethodProps, UserProps } from '@/types/Props';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { ReadonlyURLSearchParams } from 'next/navigation';
@@ -22,90 +22,109 @@ export const InputErrorText : React.FC<inputErrorTextProps>  = ({ children, moda
     );
 };
 
-export const saveAlert = (name:string, data : any, file: string, customFunction?: ()=> void, customFunctionWithData?: (data:any)=> void):void => {
-    Swal.fire({
+export const saveAlert = async (name:string, data : any, file: string, customFunction?: ()=> void, customFunctionWithData?: (data:any)=> void): Promise<void> => {
+    const response = await Swal.fire({
         title: `Guardar ${name}.`,
         text: `Desea guardar este ${name} con los datos ingresados?`,
         icon: "question",
         showCancelButton: true
-    }).then((response)=>{
-        if(response.isConfirmed){
-            createElement(file,{
-                method: "POST",
-                headers:{
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then((response)=>{
-                let Toast = Swal;
-                if(response){
-                    Toast = Swal.mixin({
-                        toast: true,
-                        position: "bottom-end",
-                        showConfirmButton: false,
-                        icon: "success",
-                        timer: 4000,
-                        title: `${name} guardado.`
-                    })
-                } else {
-                    Toast = Swal.mixin({
-                        toast: true,
-                        position: "bottom-end",
-                        showConfirmButton: false,
-                        icon: "error",
-                        timer: 4000,
-                        title: `Algo salio mal`
-                    })
-                }
-                Toast.fire();
-                customFunction && customFunction();
-                customFunctionWithData && customFunctionWithData(response);
+    })
+    
+    if(response.isConfirmed){
+        if("imagen" in data){
+            data.imagen = await sendImageToAzureContainer(data.imagen);
+        }
+
+        const createResponse = await createElement(file,{
+            method: "POST",
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        let Toast = Swal;
+
+        if(createResponse){
+            Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                icon: "success",
+                timer: 4000,
+                title: `${name} guardado.`
+            })
+        } else {
+            Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                icon: "error",
+                timer: 4000,
+                title: `Algo salio mal`
             })
         }
-    })
+
+        Toast.fire();
+        customFunction && customFunction();
+        customFunctionWithData && customFunctionWithData(response);
+    }
+    
 }
 
-export const updateAlert = (name:string, data: any, file: string, ownInfo?: boolean, customFunction?: ()=> void, customFunctionWithData?: (data: any)=>void ):void => {
-    Swal.fire({
+export const updateAlert = async (name:string, data: any, file: string, ownInfo?: boolean, customFunction?: ()=> void, customFunctionWithData?: (data: any)=>void ):Promise<void> => {
+    
+    const response = await Swal.fire({
         title: `Actualizar ${name}.`,
         text: `Desea actualizar con los datos ingresados?`,
         icon: "question",
         showCancelButton: true
-    }).then((response)=>{
-        if(response.isConfirmed){
-            updateElement(file, {
-                method: "PUT",
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then((response)=>{
-                let Toast = Swal;
-                if(response){
-                    Toast = Swal.mixin({
-                        toast: true,
-                        position: "bottom-end",
-                        showConfirmButton: false,
-                        icon: "success",
-                        timer: ownInfo ? 7000 : 4000,
-                        title: `${name} actualizado. ${ownInfo ? "\n Ingresa sesión de nuevo para ver los cambios." : ""}`
-                    })
-                }  else {
-                    Toast = Swal.mixin({
-                        toast: true,
-                        position: "bottom-end",
-                        showConfirmButton: false,
-                        icon: "error",
-                        timer: 4000,
-                        title: `Algo salio mal!`
-                    })
-                }
-                Toast.fire();
-                customFunction && customFunction();
-                customFunctionWithData && customFunctionWithData(data);
-            })  
-        } 
     })
+        
+    if(response.isConfirmed){
+
+        if("imagen" in data && "fileName" in data){
+            const fullName = data.fileName as string;
+            const fileName = fullName.split("images/")[1];
+            const next = await deleteImageFromStorage(fileName);
+            if(!next){
+                errorAction("Algo salio mal, vuelve a intentarlo");
+            }
+            data.imagen = await sendImageToAzureContainer(data.imagen);
+        }
+
+        const updateResponse = await updateElement(file, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        let Toast = Swal;
+        if(updateResponse){
+            Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                icon: "success",
+                timer: ownInfo ? 7000 : 4000,
+                title: `${name} actualizado. ${ownInfo ? "\n Ingresa sesión de nuevo para ver los cambios." : ""}`
+            })
+        }  else {
+            Toast = Swal.mixin({
+                toast: true,
+                position: "bottom-end",
+                showConfirmButton: false,
+                icon: "error",
+                timer: 4000,
+                title: `Algo salio mal!`
+            })
+        }
+        Toast.fire();
+        customFunction && customFunction();
+        customFunctionWithData && customFunctionWithData(data);
+    } 
 }
 
 export const deleteAlert = <T extends {id: number, nombre?: string, nombres?: string}>(name:string, data: T, updateData: ()=>void) =>  {

@@ -292,7 +292,8 @@ const Form = <T extends {id?: number} | FormPropsSec ,
     const onSubmit: SubmitHandler<FormPropsType> = async (dataInputs) => {
 
         if("imagen" in dataInputs){
-            dataInputs.imagen = await sendImageToAzureContainer(dataInputs.imagen[0]);
+           let nameData = dataInputs.imagen[0];
+           dataInputs.imagen = nameData;
         }
 
         if(!isLoginRegister){
@@ -303,7 +304,8 @@ const Form = <T extends {id?: number} | FormPropsSec ,
             } else {
                 if ( data && 'id' in data){
                     let id = data?.id ?? null;
-                    let newData = {id, ...dataInputs};
+                    let fileName = "imagen" in data ? data.imagen : "";
+                    let newData = "imagen" in data ? {id, fileName, ...dataInputs} : {id, ...dataInputs};
                     customFunction && await updateAlert(dataName, newData, urlFetch, false, customFunction);
                     customFunctionWithData && await updateAlert(dataName, newData, urlFetch, false, undefined, customFunctionWithData)
                 }
