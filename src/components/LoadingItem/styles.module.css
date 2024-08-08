@@ -1,0 +1,50 @@
+/* fROM https://css-loaders.com/hypnotic/ */
+
+.loader {
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    overflow: hidden;
+  }
+  .loader::before {
+    content: "Loading...";
+    color: #0000;
+    text-shadow: 0 0 0 #9C5EF2,10ch 0 0 #fff,20ch 0 0 #9C5EF2;
+    background: linear-gradient(90deg,#0000 calc(100%/3),#9C5EF2 0 calc(2*100%/3),#0000 0) left/300% 100%;
+    animation: l23 2s infinite;
+  }
+  
+  @keyframes l23{
+    50% {background-position: center;text-shadow: -10ch 0 0 #9C5EF2,    0 0 0 #fff,10ch 0 0 #9C5EF2}
+    100%{background-position: right ;text-shadow: -20ch 0 0 #9C5EF2,-10ch 0 0 #fff,   0 0 0 #9C5EF2}
+  }
+
+.loaderSpinner {
+  width: 25px;
+  height: 50px;
+  display: grid;
+  color: #000;
+  background:
+    linear-gradient(currentColor 0 0) top/100% 2px,
+    radial-gradient(farthest-side at  top, #f802f800 calc(100% - 2px),currentColor calc(100% - 1px) ,#0000) top,
+    linear-gradient(currentColor 0 0) bottom/100% 2px,
+    radial-gradient(farthest-side at  bottom, #0000 calc(100% - 2px),currentColor calc(100% - 1px) ,#0000) bottom;
+  background-size: 100% 1px,100% 50%; 
+  background-repeat: no-repeat;
+  animation: l18 4s infinite linear;
+}
+.loaderSpinner::before,
+.loaderSpinner::after {
+  content: "";
+  grid-area: 1/1;
+  background: inherit;
+  border: inherit;
+  animation: inherit;
+}
+.loaderSpinner::after {
+  animation-duration: 2s;
+}
+@keyframes l18 {
+  100% {transform: rotate(1turn)}
+}

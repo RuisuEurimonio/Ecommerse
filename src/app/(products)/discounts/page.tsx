@@ -16,6 +16,8 @@ import { perPageOptions, alphabetOptions } from "@/utils/ts/configuration";
 import { getElementsApi, getElementsByOrder } from "@/data/api";
 
 import { ArticleProps } from "@/types/Props";
+import SpinnerItem from "@/components/LoadingItem/SpinnerItem";
+import LoadingItem from "@/components/LoadingItem/LoadingItem";
 
 type DisctountsProps = {};
 
@@ -31,6 +33,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
     ) as number;
     const perPage = verifyPerPageExist(perPageOptions, perPageParam);
     const [data, setData] = useState<ArticleProps[] | null> (null);
+    const [loading, setLoading] = useState(true);
 
     function updateDataByFilter(data : ArticleProps[]){
         if(data){
@@ -50,10 +53,12 @@ const Discounts: React.FC<DisctountsProps> = () => {
     }
 
     const get = async () =>{
+        setLoading(true);
         const response = await getElementsApi(URL_FETCH)
         if(response){
             const data = selectDataWithDiscounts(response);
             setData(data);
+            setLoading(false);
         }
     }
 
@@ -62,6 +67,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
     },[])
 
     async function getDataByOrder(event : React.ChangeEvent<HTMLSelectElement>){
+        setLoading(true);
         let { value } = event.target
         if(value === "none") {return get()};
         const data = await getElementsByOrder(value as "desc" | "asc");
@@ -69,6 +75,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
             const dataDiscount = selectDataWithDiscounts(data);
             if(dataDiscount){
                 setData(dataDiscount);
+                setLoading(false);
             }
         }
     }
@@ -100,7 +107,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                 </select>
                         </div>
                         <div>
-                            {data && <Numeration dataLength={data.length} itemsByPage={perPage} />}
+                            {data && !loading && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                         </div>
                     </div>
                     <div className="m-2">
@@ -110,7 +117,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             lg:grid-cols-4
                             xl:grid-cols-5"
                         >
-                            {data &&
+                            {data && !loading &&
                             data
                                 .slice(
                                     perPage * pageNum - perPage,
@@ -125,10 +132,13 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                     />
                                 ))}
                         </ul>
-                        {data && data?.length == 0 && 
+                        {data && data?.length == 0 && !loading &&
                             <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
                         }
-                        {!data && 
+                        {loading &&
+                            <LoadingItem/>
+                        }
+                        {!data && !loading &&
                         <div className="w-full flex justify-center items-center">
                             <DataNotFoundMessage
                                 title="Error"
@@ -140,7 +150,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                         }
                     </div>
                     <div className="bg-fourth-color p-2 flex flex-col-reverse items-center rounded-sm">
-                        {data &&
+                        {data && !loading &&
                         <>
                             <SelectCantItems perPage={perPage} />
                             <Numeration dataLength={data.length} itemsByPage={perPage} />

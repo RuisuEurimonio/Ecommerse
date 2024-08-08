@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import FilterComponent from "./FilterComponent";
 import { ArticleProps, BrandProps, CategoryProps, ClasificationProps } from "@/types/Props";
 import { getElementsApi, getElementsByFilter } from "@/data/api";
+import SpinnerItem from "./LoadingItem/SpinnerItem";
 
 type FiltersProps = {
     updateDataFunction : (data : ArticleProps[]) => void;
@@ -16,6 +17,7 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
     const [classifications, setClassifications] = useState<ClasificationProps [] | null>(null);
     const [brands, setBrands] = useState<BrandProps [] | null>(null);
     const [currentClicked, setCurrentClicked] = useState("");
+    const [loading, setLoading] = useState(true);
 
     function openFilters(){
         setActive(!active);
@@ -46,6 +48,7 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
         getCategories();
         getClassifications();
         getBrands();
+        setLoading(false);
     },[])
 
     async function selectData(id : number, typeData: string){
@@ -84,7 +87,12 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
                     md:py-0 md:px-2 md:pb-2 md:h-auto
                 ">
                     <h2 className="text-xl font-bold text-center"> Buscar por filtros. </h2>
-                    <div className="text-sm">
+                    {loading && 
+                        <div className="md:basis-1/4">
+                            <SpinnerItem/>
+                        </div>
+                    }
+                    {!loading && <div className="text-sm">
                         {categories && <FilterComponent
                             title="Categoria."
                             data={categories}
@@ -109,7 +117,7 @@ const Filters : React.FC<FiltersProps> = ({updateDataFunction}) => {
                             isClicked={currentClicked == "marca"}
                             onClick={updateCurrentClicked}
                         />}
-                    </div>
+                    </div>}
                 </div>
             </div>
         </>

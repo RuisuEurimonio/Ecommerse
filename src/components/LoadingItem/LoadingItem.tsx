@@ -1,4 +1,4 @@
-import style from "./LoadingItem.module.css";
+import style from "./styles.module.css";
 
 const LoadingItem : React.FC<{}> = () =>{
     return (
