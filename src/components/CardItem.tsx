@@ -28,7 +28,7 @@ const CardItem: React.FC<CardItemProps> = ({
     link,
 }) => {
     return (
-        <div className="flex-[20%] flex flex-col justify-between max-w-40 ">
+        <li className="flex-[20%] flex flex-col justify-between max-w-40 ">
             <div className="relative">
                 {discount && (
                     <React.Fragment>
@@ -108,7 +108,7 @@ const CardItem: React.FC<CardItemProps> = ({
                 </>
                 }
             </div>
-        </div>
+        </li>
     );
 };
 

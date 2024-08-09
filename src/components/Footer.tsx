@@ -124,10 +124,10 @@ const Footer: React.FC<FooterProps> = () => {
                     <ul className="justify-center flex gap-5  mt-3 text-fifth-color
                         xl:absolute xl:right-0 xl:top-1/2 xl:-translate-y-1/2 xl:text-xl xl:justify-normal xl:mt-0
                     ">
-                        <li> <Link target="_blank" href="https://www.instagram.com"> <span className="icon icon-instagram"/> </Link> </li>
-                        <li> <Link target="_blank" href="https://www.facebook.com"> <span className="icon icon-facebook"/> </Link> </li>
-                        <li> <Link target="_blank" href="https://www.tiktok.com"> <span className="icon icon-tiktok"/> </Link> </li>
-                        <li> <Link target="_blank" href="https://github.com/RuisuEurimonio"> <span className="icon icon-globe"/> </Link> </li>
+                        <li> <Link target="_blank" href="https://www.instagram.com" aria-label="Ir a red social de instagram"> <span className="icon icon-instagram" /> </Link> </li>
+                        <li> <Link target="_blank" href="https://www.facebook.com" aria-label="Ir a red social de facebook"> <span className="icon icon-facebook" /> </Link> </li>
+                        <li> <Link target="_blank" href="https://www.tiktok.com" aria-label="Ir a red social de tiktok"> <span className="icon icon-tiktok" /> </Link> </li>
+                        <li> <Link target="_blank" href="https://github.com/RuisuEurimonio" aria-label="Ir a red social de Github"> <span className="icon icon-globe" /> </Link> </li>
                     </ul>
                 </div>
             </div>

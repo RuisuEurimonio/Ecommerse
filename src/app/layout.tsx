@@ -4,9 +4,10 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
-import UnderLineNav from "@/components/UnderLineNav";
+const UnderLineNav = dynamic(()=> import("@/components/UnderLineNav") , {ssr : false});
 import Footer from "@/components/Footer";
 import logo from "@/assets/img/logotipo-sin-fondo.ico"
+import dynamic from "next/dynamic";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 

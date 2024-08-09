@@ -30,7 +30,7 @@ const LatestDiscounts : React.FC<LatestDiscountsProps> = async () => {
 
     return(
         <div className="custom_content">
-            <h2 className="custom_title text-fifth-color"> Últimos descuentos. </h2>
+            <h2 className="custom_title text-secondary-color"> Últimos descuentos. </h2>
             {data?.length ?
                 <CardItemWrapper dataLength={data.length}>
                         {data.map((product : ArticleProps)=>(

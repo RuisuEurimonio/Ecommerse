@@ -42,14 +42,14 @@ const NavBar: React.FC<navProps> = () => {
                     xl:text-xl xl:h-full
                     md:block"
                 >
-                    <Link href="/shopping-cart">
-                        <button className="h-full border-r-[0.5px] border-fifth-color">
-                            <span className=" h-full px-3 icon icon-cart before:content-['\e906'] before:text-fourth-color"></span>
+                    <Link href="/shopping-cart" aria-label="Ir a carrito de compra">
+                        <button className="h-full border-r-[0.5px] border-fifth-color" aria-label="Carrito de compra">
+                            <span className=" h-full px-3 icon icon-cart before:content-['\e906'] before:text-fourth-color"/>
                         </button>
                     </Link>
-                    <Link href="/my-account">
-                        <button className="h-full border-l-[0.5px] border-fifth-color">
-                            <span className="h-full px-3 icon icon-user before:content-['\e907'] before:text-fourth-color"></span>
+                    <Link href="/my-account" aria-label="Ir a información de mi cuenta">
+                        <button className="h-full border-l-[0.5px] border-fifth-color" arial-label="Mi cuenta">
+                            <span className="h-full px-3 icon icon-user before:content-['\e907'] before:text-fourth-color"/>
                         </button>
                     </Link>
                 </div>

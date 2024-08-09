@@ -40,7 +40,7 @@ const SearchInput: React.FC<SearchInputProps> = () => {
                 className="w-1/5 bg-fifth-color rounded-r-3xl  border-l-2 text-base flex items-center justify-center
                             md:h-full"
                 href={`/products?search=${searchParams.get("search")?.toString() ?? ""}`}
-                
+                aria-label="Buscar producto por texto ingresado"
             >
                 <span className="icon icon-search"></span>
             </Link>

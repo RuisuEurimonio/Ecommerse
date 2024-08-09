@@ -48,11 +48,11 @@ const CarouselSimple: React.FC<CarouselSimpleProps> = ({
                         <Image
                             src={imageNotFound}
                             alt={`Imagen de representativo de ${
-                                "nombre" in data ? data.nombre : data.metodo
+                                "nombre" in data ? data.nombre : data.proveedor
                             }`}
                         />
                         <p className="text-center text-xs mt-2 line-clamp-2">
-                            {"nombre" in data ? data.nombre : data.metodo}
+                            {"nombre" in data ? data.nombre : data.proveedor}
                         </p>
                     </li>
                 ))}
@@ -62,7 +62,7 @@ const CarouselSimple: React.FC<CarouselSimpleProps> = ({
                         md:left-5
                     "
             >
-                <button onClick={before}>
+                <button onClick={before} aria-label="Devolver elemento de carrusel">
                     <span
                         className="icon icon-arrowl text-xl
                             md:text-2xl"
@@ -74,7 +74,7 @@ const CarouselSimple: React.FC<CarouselSimpleProps> = ({
                     md:right-5
                 "
             >
-                <button onClick={next}>
+                <button onClick={next} aria-label="Siguiente elemento de carrusel">
                     <span
                         className="icon icon-arrowr text-xl
                         md:text-2xl

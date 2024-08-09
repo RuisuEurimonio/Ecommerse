@@ -45,12 +45,17 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
                 <ul className="flex w-full">
                     {images.map((img, index)=>(
                         <li className={`min-w-full transition`} key={index} style={{transform: `translateX(${position}%)`}}> 
-                        <div style={{ position: 'relative', width: '100%', height: '65vh' }}>
+                        <div className="relative w-full h-[25vh]
+                            sm:h-[55vh]
+                            mg:h-[65vh]
+                            lg:h-[70vh]
+                            xl:h-[80vh]
+                        ">
                             <Image 
                                 src={img.src}
                                 alt={img.altText}
                                 fill
-                                style={{objectFit: "cover"}}
+                                sizes="100vh"
                                 priority={index === 0}
                             />
                         </div>
@@ -60,7 +65,7 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
                 <div className="absolute left-2
                     md:left-5
                 ">
-                    <button onClick={before}>
+                    <button onClick={before} aria-label="Imagen anterior">
                         <span className="icon icon-arrowl text-xl text-third-color 
                             md:text-4xl"
                         />
@@ -69,7 +74,7 @@ const MainCarousel : React.FC<MainCarouselProps> = () => {
                 <div className="absolute right-2
                     md:right-5
                 ">
-                    <button onClick={next}>
+                    <button onClick={next} aria-label="Imagen siguiente">
                         <span className="icon icon-arrowr text-xl text-third-color
                             md:text-4xl
                         "/>

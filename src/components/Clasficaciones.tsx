@@ -15,7 +15,7 @@ import Link from "next/link";
             lg:text-base 2xl:text-lg
          `}>
              <li className={`flex-[100%] flex-grow-0 h-14
-                 md:flex-[33.3333%] md:h-auto
+                 md:flex-[33.3333%] md:35vh
                  ${(main) ? "md:h-48" : "md:h-28"} 
                  ${(main) ? "lg:h-60" : "lg:h-44"}
              `}> 
@@ -34,7 +34,7 @@ import Link from "next/link";
                  </Link> 
              </li>
              <li className={`flex-[100%] flex-grow-0 h-14
-                 md:flex-[33.3333%] md:h-auto
+                 md:flex-[33.3333%] md:35vh
                  ${(main) ? "md:h-48" : "md:h-28"} 
                  ${(main) ? "lg:h-60" : "lg:h-44"}
              `}> 
@@ -52,7 +52,7 @@ import Link from "next/link";
                  </Link> 
              </li>
              <li className={`flex-[100%] flex-grow-0 h-14
-                 md:flex-[33.3333%] md:h-auto
+                 md:flex-[33.3333%] md:35vh
                  ${(main) ? "md:h-48" : "md:h-28"} 
                  ${(main) ? "lg:h-60" : "lg:h-44"}
              `}> 
