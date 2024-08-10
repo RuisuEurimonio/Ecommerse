@@ -9,8 +9,8 @@ import { z } from "zod";
 
 import { InputsListProps,  FormProps, CategoryProps} from "@/types/Props"
 
-import { confirmAction, InputErrorText, saveAlert, successAction, updateAlert } from "./utils";
-import { login } from "@/data/api";
+import { confirmAction, errorAction, InputErrorText, saveAlert, successAction, updateAlert } from "./utils";
+import { createElement, login, validateEmail } from "@/data/api";
 import { useRouter } from "next/navigation";
 import { sendImageToAzureContainer } from "@/data/azure";
   
@@ -291,12 +291,13 @@ const Form = <T extends {id?: number} | FormPropsSec ,
 
     const onSubmit: SubmitHandler<FormPropsType> = async (dataInputs) => {
 
-        if("imagen" in dataInputs){
-           let nameData = dataInputs.imagen[0];
-           dataInputs.imagen = nameData;
-        }
-
         if(!isLoginRegister){
+
+            if("imagen" in dataInputs){
+                let nameData = dataInputs.imagen[0];
+                dataInputs.imagen = nameData;
+            }
+
             if(!updateInfo){
                 customFunction && await saveAlert(dataName, dataInputs, urlFetch, customFunction);
                 customFunctionWithData && await saveAlert(dataName, dataInputs, urlFetch, undefined, customFunctionWithData)
@@ -317,27 +318,51 @@ const Form = <T extends {id?: number} | FormPropsSec ,
                 }
             }
         } else {
-            confirmAction("¿Desea ingresar sesión?").then((response)=>{
+            if("correo" in dataInputs && "nombres" in dataInputs){
+                const existPassword = await validateEmail(dataInputs.correo);
+                if(existPassword){
+                    return errorAction("Este correo ya esta registado");
+                }
+                const response = await confirmAction("¿Desea registrar este usuario?");
                 if(response){
-                    login({
-                        method: 'POST', 
-                        headers: {
-                            'content-type': 'application/json'
+                    const {repeatPassword, ...restInputs} = dataInputs;
+                    const createResponse = await createElement("usuario",{
+                        method: 'POST',
+                        headers:{
+                            "content-type": "application/json"
                         },
-                        body: JSON.stringify(dataInputs)
-                    }).then((responseData)=>{
-                        if(responseData){
+                        body: JSON.stringify({...restInputs, permisos : {id: 1}})
+                    })
+
+                    if(createResponse){
+                        successAction("¡Usuario registrado!");
+                        router.push("/login")
+                    }
+                }
+
+            }else{
+                const response = await confirmAction("¿Desea ingresar sesión?");
+
+                    if(response){
+                        const responseFetch = await login({
+                            method: 'POST', 
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(dataInputs)
+                        })
+
+                        if(responseFetch){
                             if(isSaveSession){
-                                localStorage.setItem("user", JSON.stringify(responseData));
+                                localStorage.setItem("user", JSON.stringify(responseFetch));
                             } else {
-                                sessionStorage.setItem("user", JSON.stringify(responseData));
+                                sessionStorage.setItem("user", JSON.stringify(responseFetch));
                             }
                             successAction("Sesión iniciada!");
                             router.push("/")
                         }
-                    })
-                }
-            })
+                    }
+            }
              
         }
     };

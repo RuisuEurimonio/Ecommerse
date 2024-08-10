@@ -4,31 +4,29 @@ import Form from "@/components/Form";
 import Link from "next/link";
 import image from "@/assets/img/register.jpg"
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthFormRegister } from "@/utils/Schemas/authFormRegister";
+import { TypeDocumentProps } from "@/types/Props";
+import { getElementsApi } from "@/data/api";
 
 type AuthFormProps = {
 
 }
 
-const document = [
-    { nombre: "Tarjeta de identidad", otherData: "TI", id: "tarjetaIdentidad" },
-    { nombre: "Cedula de Ciudadania", otherData: "CC", id: "cedulaCiudadania"},
-    { nombre: "Cedula de extranjeria", otherData: "CED", id: "cedulaExtranjeria" },
-];
-
 const AuthForm : React.FC<AuthFormProps> = () => {
 
     const [stateViewPasswordInput, setStateViewPasswordInput] = useState("password");
+    const [dataDocuments, setDataDocuments] = useState<TypeDocumentProps[] | null>(null);
 
     const inputsList = [
-        {type: "text", id: "name", name: "Nombre"},
-        {type: "text", id: "lastName", name: "Apellido"},
-        {type: "combined", id: "numeroDocumento", name: "Documento", extraData: document, secondId: "tipoDocumento"},
-        {type: "text", id: "phone", name: "Telefono"},
-        {type: "email", id: "email", name: "Correo"},
-        {type: "text", id: "address", name: "Dirección"},
-        {type: stateViewPasswordInput, id: "password", name: "Contraseña"},
+        {type: "text", id: "nombres", name: "Nombre"},
+        {type: "text", id: "apellidos", name: "Apellido"},
+        {type: "combined", id: "numeroDocumento", name: "Documento", extraData: dataDocuments, secondId: "tipoDocumento"},
+        {type: "text", id: "telefono", name: "Telefono"},
+        {type: "text", id: "celular", name: "Celular"},
+        {type: "email", id: "correo", name: "Correo"},
+        {type: "text", id: "direccion", name: "Dirección"},
+        {type: stateViewPasswordInput, id: "contrasena", name: "Contraseña"},
         {type: stateViewPasswordInput, id: "repeatPassword", name: "Repetir contraseña"}
 
     ]
@@ -40,6 +38,16 @@ const AuthForm : React.FC<AuthFormProps> = () => {
             setStateViewPasswordInput("password")
         }
     }
+
+    function get(){
+        getElementsApi("usuario/documento").then((res)=>{
+            setDataDocuments(res);
+        })
+    }
+
+    useEffect(()=>{
+        get();
+    }, [])
 
     return (
         <div className="w-11/12 min-h-[70vh] mx-auto flex items-center justify-center"> 
@@ -54,7 +62,9 @@ const AuthForm : React.FC<AuthFormProps> = () => {
                         schequema={AuthFormRegister}
                         inputsList={inputsList}
                         modal
-                        isLoginRegister>
+                        isLoginRegister
+                        urlFetch="usuario"  
+                        >
                     <div className="flex items-center flex-col my-4">
                         <label htmlFor="showPassword">
                             <input type="checkbox" id="showPassword" onClick={onChange}/>

@@ -143,3 +143,12 @@ export async function verifyPassword(correo : string,  contrasena: string): Prom
         return false
     }
 }
+
+export async function validateEmail(correo: string) : Promise<Boolean>{
+    try{
+        const response = await fetch(HOST+"usuario/search/correo/"+correo);
+        return await response.json() !== null;
+    }catch(error){
+        throw new Error("Error validating the email: "+error);
+    }
+}
