@@ -1,5 +1,6 @@
 import { errorAction } from "@/components/utils";
 import credential from "./credentials";
+import { throws } from "assert";
 
 const HOST = credential.getHostDB();
 
@@ -167,5 +168,24 @@ export async function sendMessageRecoveryPassword(email: {}){
         }
     } catch (error){
         console.log("Error with send message for recovery account by email: "+error);
+    }
+}
+
+export async function sendNewPassword(contrasena : string, token: string) : Promise<Boolean>{
+    try{
+        const response = await fetch(HOST+"usuario/reset-password?token="+token,{
+            method: "POST",
+            headers:{
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({password:contrasena, newPassword:contrasena})
+        })
+        if(!response.ok){
+            throw new Error("Network response was not ok");
+        }
+        return true;
+    }catch(error){
+        console.log("Error with send new password: "+error)
+        throw new Error("Network response was not ok");
     }
 }
