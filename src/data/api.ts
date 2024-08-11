@@ -152,3 +152,20 @@ export async function validateEmail(correo: string) : Promise<Boolean>{
         throw new Error("Error validating the email: "+error);
     }
 }
+
+export async function sendMessageRecoveryPassword(email: {}){
+    try{
+        const response = await fetch(HOST+"usuario/forgot-password",{
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(email)
+        });
+        if(!response.ok){
+            throw new Error("Network response was not ok");
+        }
+    } catch (error){
+        console.log("Error with send message for recovery account by email: "+error);
+    }
+}

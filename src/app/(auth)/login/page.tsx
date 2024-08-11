@@ -63,7 +63,7 @@ const AuthForm : React.FC<AuthFormProps> = () => {
                             Mantener sesión.
                         </label>
                         <p className="text-center text-sm mt-2"> ¿No tienes una cuenta? <Link href="/register" className="font-bold underline text-fifth-color text-center"> Registrate aquí. </Link> </p>
-                        <p className="text-center text-sm"> ¿Olvidaste la contraseña? <Link href="/" className="font-bold underline text-fifth-color text-center"> Recuperar contraseña. </Link> </p>
+                        <p className="text-center text-sm"> ¿Olvidaste la contraseña? <Link href="/recovery-password" className="font-bold underline text-fifth-color text-center"> Recuperar contraseña. </Link> </p>
                     </div>
                     </Form>
                 </div>
