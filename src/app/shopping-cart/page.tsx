@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 const CardItem = React.lazy(()=>  import("@/components/CardItem"));
-const PricePdf = React.lazy(()=> import("@/components/PricePdf"));
+import PricePdf from "@/components/PricePdf";
 import { confirmOrder, moneyFormatter } from "@/components/utils";
 
 import { ArticleProps, UserProps } from "@/types/Props";
