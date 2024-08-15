@@ -13,6 +13,7 @@ import { confirmAction, errorAction, InputErrorText, saveAlert, successAction, u
 import { createElement, login, validateEmail } from "@/data/api";
 import { useRouter } from "next/navigation";
 import { sendImageToAzureContainer } from "@/data/azure";
+import { saveCredentials } from "@/auth/security";
   
   
 type FormPropsSec = {categories?: CategoryProps[]} | {};
@@ -353,13 +354,9 @@ const Form = <T extends {id?: number} | FormPropsSec ,
                         })
 
                         if(responseFetch){
-                            if(isSaveSession){
-                                localStorage.setItem("user", JSON.stringify(responseFetch));
-                            } else {
-                                sessionStorage.setItem("user", JSON.stringify(responseFetch));
-                            }
-                            successAction("Sesión iniciada!");
-                            router.push("/")
+                            saveCredentials(responseFetch[1], responseFetch[0], isSaveSession);
+                            //successAction("Sesión iniciada!");
+                            //router.push("/")
                         }
                     }
             }

@@ -41,7 +41,7 @@ const MyAccount: React.FC<MyAccountProps> = () => {
             const sessionData = sessionStorage.getItem("user");
             userData = sessionData !== null ? JSON.parse(sessionData) : null;
         }
-        setData(userData ? userData["Usuario: "] : null);
+        setData(userData ? userData : null);
     }, [])
 
     useEffect(()=>{

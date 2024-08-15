@@ -76,7 +76,7 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
             const dataSession = sessionStorage.getItem("user");
             dataRes = dataSession !== null ? JSON.parse(dataSession) : null;
         }
-        setDataUser(dataRes ? dataRes["Usuario: "] : null);
+        setDataUser(dataRes ? dataRes : null);
         setLoadingDataUser(false);
     },[])
 

@@ -329,6 +329,6 @@ export function isOwnUserDataDelete(item : any) : boolean{
         return false;
     }
     let parseData = JSON.parse(data);
-    let userSessionData : UserProps = parseData["Usuario: "];
+    let userSessionData : UserProps = parseData[0];
     return userSessionData.correo === item.correo;
 }
