@@ -12,6 +12,7 @@ import { deleteElement, getElementsApi, updateElement, verifyPassword } from "@/
 import Modal from "./Modal";
 import Form from "./Form";
 import { payMethodSchema } from "@/utils/Schemas/payMethodSchema";
+import { deleteCookies } from "@/auth/security";
 
 type FormUserProps = {
     className?: string,
@@ -62,8 +63,8 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     }
 
     function customFunction(){
-        localStorage.clear()
-        sessionStorage.clear()
+        deleteCookies("u");
+        deleteCookies("t");
         route.push("/login")
     }
 

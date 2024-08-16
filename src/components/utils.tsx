@@ -1,3 +1,4 @@
+import { deleteCookies, getDataCookie } from '@/auth/security';
 import { createElement, deleteElement, updateElement } from '@/data/api';
 import { deleteImageFromStorage, sendImageToAzureContainer } from '@/data/azure';
 import { ArticleProps, PayMethodProps, UserProps } from '@/types/Props';
@@ -314,21 +315,18 @@ export function successAction(text: string, title?: string){
 }
 
 export function closeSession(router : AppRouterInstance){
-    localStorage.clear();
-    sessionStorage.clear();
+    deleteCookies("u")
+    deleteCookies("t")
     router.push("/")
 }
 
 export function isOwnUserDataDelete(item : any) : boolean{
     let data = null;
-    data = localStorage.getItem("user");
-    if(!data){
-        data = sessionStorage.getItem("user")
-    }
+    data = getDataCookie("u");
+    console.log(data);
     if(data === null){
         return false;
     }
-    let parseData = JSON.parse(data);
-    let userSessionData : UserProps = parseData[0];
+    let userSessionData : UserProps = data;
     return userSessionData.correo === item.correo;
 }

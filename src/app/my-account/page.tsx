@@ -7,6 +7,7 @@ import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { closeSession, confirmAction, successAction } from "@/components/utils";
+import { getDataCookie } from "@/auth/security";
 
 type MyAccountProps = {};
 
@@ -35,13 +36,8 @@ const MyAccount: React.FC<MyAccountProps> = () => {
     }
     
     useEffect(()=>{
-        const localData = localStorage.getItem("user");
-        let userData = localData !== null ? JSON.parse(localData) : null;
-        if(!userData){
-            const sessionData = sessionStorage.getItem("user");
-            userData = sessionData !== null ? JSON.parse(sessionData) : null;
-        }
-        setData(userData ? userData : null);
+        const data = getDataCookie("u");
+        setData(data);
     }, [])
 
     useEffect(()=>{

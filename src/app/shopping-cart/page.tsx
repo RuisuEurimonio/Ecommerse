@@ -13,6 +13,7 @@ import { ArticleProps, UserProps } from "@/types/Props";
 import DataNotFoundMessage from "@/components/DataNotFoundMessage";
 import LoadingItem from "@/components/LoadingItem/LoadingItem";
 import SpinnerItem from "@/components/LoadingItem/SpinnerItem";
+import { getDataCookie } from "@/auth/security";
 
 const PDFDownloadLink = dynamic(
   () => import("@react-pdf/renderer").then((mod) => mod. PDFDownloadLink),
@@ -70,13 +71,8 @@ const ShoppingCart : React.FC<ShoppingCartProps> = () => {
     }
 
     useEffect(()=>{
-        const dataLocal = localStorage.getItem("user");
-        let dataRes = dataLocal !== null ? JSON.parse(dataLocal) : null;
-        if(!dataLocal){
-            const dataSession = sessionStorage.getItem("user");
-            dataRes = dataSession !== null ? JSON.parse(dataSession) : null;
-        }
-        setDataUser(dataRes ? dataRes : null);
+        const data = getDataCookie("u");
+        setDataUser(data);
         setLoadingDataUser(false);
     },[])
 
