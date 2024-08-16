@@ -323,7 +323,6 @@ export function closeSession(router : AppRouterInstance){
 export function isOwnUserDataDelete(item : any) : boolean{
     let data = null;
     data = getDataCookie("u");
-    console.log(data);
     if(data === null){
         return false;
     }

@@ -1,5 +1,6 @@
 "use client";
 
+import { havePermission } from "@/auth/security";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -35,29 +36,32 @@ const NavBarAccount: React.FC<NavBarAccountProps> = () => {
                 </ul>
             </li>
             <li>
-                <p className="font-bold text-lg">
-                    Configuración empresarial.
-                </p>
-                <ul className="list-disc">
-                    {urlLinks.map((item)=>(
-                        <li
-                            key={item.url}
-                            className="ml-5 my-2"
-                            style={{
-                                textDecoration:
-                                    pathName === item.url
-                                        ? "underline"
-                                        : "none",
-                            }}
-                        >
-                            <Link href={`/my-account/${item.url}`}>
-                                {item.name}
-                            </Link>
-                        </li>
+                {havePermission() && <>
+                    <p className="font-bold text-lg">
+                        Configuración empresarial.
+                    </p>
+                    <ul className="list-disc">
+                        {urlLinks.map((item)=>(
+                            <li
+                                key={item.url}
+                                className="ml-5 my-2"
+                                style={{
+                                    textDecoration:
+                                        pathName === item.url
+                                            ? "underline"
+                                            : "none",
+                                }}
+                            >
+                                <Link href={`/my-account/${item.url}`}>
+                                    {item.name}
+                                </Link>
+                            </li>
 
-                    ))}
-                    <li className="ml-5 my-2"> Imagenes. </li>
-                </ul>
+                        ))}
+                        <li className="ml-5 my-2"> Imagenes. </li>
+                    </ul>
+                </>
+                }
             </li>
         </ul>
     );
