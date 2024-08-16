@@ -355,8 +355,8 @@ const Form = <T extends {id?: number} | FormPropsSec ,
 
                         if(responseFetch){
                             saveCredentials(responseFetch[1], responseFetch[0], isSaveSession);
-                            //successAction("Sesión iniciada!");
-                            //router.push("/")
+                            successAction("Sesión iniciada!");
+                            router.push("/")
                         }
                     }
             }

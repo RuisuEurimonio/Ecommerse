@@ -13,7 +13,7 @@ export async function getElementsApi(url : string){
         const data = await response.json();
         return data;
     } catch(error){
-        console.log("error get elements: "+error);
+        errorAction("Se ha presentado un error oobteniendo "+url+", vuelvelo a intentar: \n" + error)
         return null;
     }
 }
@@ -28,7 +28,8 @@ export async function getElementsByFilter(url : String){
         const data = await response.json();
         return data;
     } catch (error){
-        console.log("Error get elements filter" + error);
+        errorAction("Se ha presentado un error oobteniendo "+url+", vuelvelo a intentar: \n" + error);
+        return null;
     }
 }
 
@@ -41,7 +42,8 @@ export async function getElementByIdApi(url : string, id: number){
         const data = response.json();
         return data;
     }catch(error){
-        console.log("Error get element by id: "+error);
+        errorAction("Se ha presentado un error oobteniendo "+url+", vuelvelo a intentar: \n" + error);
+        return null
     }
 }
 
@@ -54,7 +56,8 @@ export async function getElementsByFilterName(url : string, type: string, id: nu
         const data = response.json();
         return data;
     } catch (error){
-        console.log("Error get element by brand: "+error);
+        errorAction("Se ha presentado un error oobteniendo "+url+", vuelvelo a intentar: \n" + error)
+        return null;
     }
 }
 
@@ -67,7 +70,8 @@ export async function getElementsByOrder(order : "desc" | "asc"){
         const data = response.json();
         return data;
     } catch(error){
-        console.log("Error get elements by order: "+error);
+        errorAction("Se ha presentado un error oobteniendo datos con orden "+order+", vuelvelo a intentar: \n" + error);
+        return null;
     }
 }
 
@@ -80,7 +84,8 @@ export async function getElementsSearched(value : string) {
         const data = await response.json();
         return data;
     } catch(error){
-        console.log("Error get elements searched: "+ error)
+        errorAction("Se ha presentado un error oobteniendo dato buscando con "+value+", vuelvelo a intentar: \n" + error);
+        return null;
     }
 }
 
@@ -89,7 +94,8 @@ export async function updateElement(type: string, data: any){
         const response = await fetch(`${HOST}${type}/update`, data);
         return response.ok;
     } catch(error){
-        console.log("Error update element: "+error)
+        errorAction("Se ha presentado un error actualizando "+type+", vuelvelo a intentar: \n" + error)
+        return false;
     }
 }
 
@@ -102,7 +108,8 @@ export async function createElement(name: string, data: object){
         const dataRes = await response.json();
         return dataRes;
     } catch (error){
-        console.log("Error create element: "+error)
+        errorAction("Se ha presentado un error creando "+name+", vuelvelo a intentar: \n" + error)
+        return null;
     }
 }
 
@@ -110,7 +117,7 @@ export async function deleteElement(name: string, id: number){
     try {
         await fetch(`${HOST}${name}/delete/${id}`, {method: 'DELETE'});
     } catch(error){
-        console.log("Error deleting element: "+error);
+        errorAction("Se ha presentado un error eliminando "+name+", vuelvelo a intentar: \n" + error);
     }
 }
 
@@ -124,6 +131,7 @@ export async function login(data: Object){
         return dataRes
     } catch (error){
         errorAction("Por favor verifica las credenciales y vuelve a intentarlo \n"+error);
+        return null;
     }
 }
 
@@ -136,11 +144,11 @@ export async function verifyPassword(correo : string,  contrasena: string): Prom
              body: JSON.stringify(body)}
         )
         if(!response.ok){
-            throw new Error("Invalid credential: ");
+            throw new Error("Credenciales invalidas.");
         }
        return response.json();
     } catch(error){
-        console.log("Error with password: "+error)
+        errorAction("Por favor verifica los datos y vuelvelo a intentar: \n" + error)
         return false
     }
 }
@@ -150,7 +158,7 @@ export async function validateEmail(correo: string) : Promise<Boolean>{
         const response = await fetch(HOST+"usuario/search/correo/"+correo);
         return await response.json() !== null;
     }catch(error){
-        throw new Error("Error validating the email: "+error);
+        throw new Error("Se ha presentado un error validando el correo "+correo+"\n" +error);
     }
 }
 
@@ -167,7 +175,8 @@ export async function sendMessageRecoveryPassword(email: {}){
             throw new Error("Network response was not ok");
         }
     } catch (error){
-        console.log("Error with send message for recovery account by email: "+error);
+        errorAction("Se ha presentado un error enviando mensaje de restablecimiento, vuelvelo a intentar" + error);
+        return null;
     }
 }
 
@@ -185,7 +194,7 @@ export async function sendNewPassword(contrasena : string, token: string) : Prom
         }
         return true;
     }catch(error){
-        console.log("Error with send new password: "+error)
-        throw new Error("Network response was not ok");
+        errorAction("Se ha presentado un error actualizando la contraseña, vuelvelo a intentar: \n" + error)
+        return false;
     }
 }
