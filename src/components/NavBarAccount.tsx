@@ -3,6 +3,7 @@
 import { havePermission } from "@/auth/security";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type NavBarAccountProps = {};
 
@@ -17,6 +18,12 @@ const urlLinks : {url: string, name: string}[] = [
 
 const NavBarAccount: React.FC<NavBarAccountProps> = () => {
     const pathName = usePathname().split("/")[2];
+
+    const [verify, setVerify] = useState(false);
+
+    useEffect(()=>{
+        setVerify(havePermission());
+    },[])
 
     return (
         <ul>
@@ -36,7 +43,7 @@ const NavBarAccount: React.FC<NavBarAccountProps> = () => {
                 </ul>
             </li>
             <li>
-                {havePermission() && <>
+                {verify && <>
                     <p className="font-bold text-lg">
                         Configuración empresarial.
                     </p>

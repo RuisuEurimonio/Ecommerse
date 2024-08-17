@@ -18,6 +18,7 @@ import { ArticleProps } from "@/types/Props";
 import { getElementsApi, getElementsByOrder, getElementsSearched } from "@/data/api";
 import { useDebouncedCallback } from "use-debounce";
 import LoadingItem from "@/components/LoadingItem/LoadingItem";
+import { havePermission } from "@/auth/security";
 
 type ProductsProps = {};
 
@@ -139,10 +140,7 @@ const Products: React.FC<ProductsProps> = () => {
                         {loading && !data &&
                             <LoadingItem/>
                         }
-                        {data && data?.length === 0 && !loading &&
-                            <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
-                        }
-                        {!data && !loading && 
+                        {!data && !loading && havePermission() &&
                         <div className="w-full flex justify-center items-center">
                             <DataNotFoundMessage
                                 title="Error"
@@ -151,6 +149,9 @@ const Products: React.FC<ProductsProps> = () => {
                                 redirectLink="/my-account/configuration-articles"
                             />
                         </div>
+                        }
+                        {!loading &&
+                            <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
                         }
                     </div>
                     <div className="bg-fourth-color p-1 flex flex-col-reverse items-center rounded-sm">

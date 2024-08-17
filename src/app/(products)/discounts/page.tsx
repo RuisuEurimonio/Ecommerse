@@ -18,6 +18,7 @@ import { getElementsApi, getElementsByOrder } from "@/data/api";
 import { ArticleProps } from "@/types/Props";
 import SpinnerItem from "@/components/LoadingItem/SpinnerItem";
 import LoadingItem from "@/components/LoadingItem/LoadingItem";
+import { havePermission } from "@/auth/security";
 
 type DisctountsProps = {};
 
@@ -107,7 +108,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                 </select>
                         </div>
                         <div>
-                            {data && !loading && <Numeration dataLength={data.length} itemsByPage={perPage} />}
+                            {data && !LoadingItem && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                         </div>
                     </div>
                     <div className="m-2">
@@ -132,13 +133,7 @@ const Discounts: React.FC<DisctountsProps> = () => {
                                     />
                                 ))}
                         </ul>
-                        {data && data?.length == 0 && !loading &&
-                            <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
-                        }
-                        {loading &&
-                            <LoadingItem/>
-                        }
-                        {!data && !loading &&
+                        {!data && !loading && havePermission() &&
                         <div className="w-full flex justify-center items-center">
                             <DataNotFoundMessage
                                 title="Error"
@@ -148,14 +143,16 @@ const Discounts: React.FC<DisctountsProps> = () => {
                             />
                         </div>
                         }
+                        {!loading &&
+                            <DataNotFoundMessage title={"No hay coincidencias"} text="Lo sentimos, no se encontraron productos." />
+                        }
+                        {loading &&
+                            <LoadingItem/>
+                        }
                     </div>
                     <div className="bg-fourth-color p-2 flex flex-col-reverse items-center rounded-sm">
-                        {data && !loading &&
-                        <>
                             <SelectCantItems perPage={perPage} />
-                            <Numeration dataLength={data.length} itemsByPage={perPage} />
-                        </>
-                        }
+                            {data && !LoadingItem && <Numeration dataLength={data.length} itemsByPage={perPage} />}
                     </div>
                 </div>
             </div>
