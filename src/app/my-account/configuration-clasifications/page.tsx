@@ -86,7 +86,7 @@ const ConfigurationClasifications: React.FC<ConfigurationClasificationsProps> = 
             <div className="w-4/5 mx-auto">
                 <h2 className="font-bold text-xl mt-4 mb-2">Clasificaciones.</h2>
                 <div className="w-full relative overflow-x-auto">
-                    {data ?
+                    {data && data.length > 0  ?
                     <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH}/>
                     :
                     <NoDataTable message="No se encontraron datos de clasificaciones" secondaryMessage="Ingresa una nueva clasificación por medio del botón inferior." />

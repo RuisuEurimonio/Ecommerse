@@ -119,7 +119,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                 <h2 className="font-bold text-xl mt-4 mb-2">Artículos.</h2>
                 <div className="w-full relative overflow-x-auto">
                     <Suspense fallback={<LoadingItem/>}>
-                        {data ?
+                        {data && data.length > 0  ? 
                         <Table data={data} perPage={perPage} openCloseSubModal={openCloseSubModal} updateData={get} titles={titlesTable} subData={subDataTable} urlFetch={URL_FETCH}/>
                         :
                         <NoDataTable message="No se encontraron artículos ingresados." secondaryMessage="Ingrese nuevos articulos por medio del botón infeior"/ >
