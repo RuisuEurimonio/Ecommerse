@@ -154,3 +154,9 @@ export type PayMethodProps = {
     proveedor: string,
     tipo_id: TypeDocumentProps
 }
+
+export type PayMethodAccepted = {
+    id: number, 
+    metodo: string,
+    img: string
+}

@@ -1,12 +1,12 @@
 "use client";
 
-import { BrandProps, PayMethodProps } from "@/types/Props";
+import { BrandProps, PayMethodAccepted, PayMethodProps } from "@/types/Props";
 import imageNotFound from "@/assets/img/imageNotFound.jpg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type CarouselSimpleProps = {
-    data: BrandProps[] | PayMethodProps[];
+    data: BrandProps[] | PayMethodProps[] | PayMethodAccepted[];
     intervalMove: number;
 };
 
@@ -48,11 +48,11 @@ const CarouselSimple: React.FC<CarouselSimpleProps> = ({
                         <Image
                             src={imageNotFound}
                             alt={`Imagen de representativo de ${
-                                "nombre" in data ? data.nombre : data.proveedor
+                                "nombre" in data ? data.nombre : "proveedor" in data ? data.proveedor : "un item indeterminado."
                             }`}
                         />
                         <p className="text-center text-xs mt-2 line-clamp-2">
-                            {"nombre" in data ? data.nombre : data.proveedor}
+                            {"nombre" in data ? data.nombre : "proveedor" in data ? data.proveedor : "un item indetermindao."}
                         </p>
                     </li>
                 ))}
