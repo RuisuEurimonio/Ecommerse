@@ -58,7 +58,6 @@ const RecoveryPassword : React.FC<RecoveryPasswordProps> = () => {
             return;
         }
         const response = await sendNewPassword(contrasena,token);
-        console.log(response)
         if(response){
             successAction("¡Contraseña cambiada!");
             router.push("/login");

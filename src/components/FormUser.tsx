@@ -81,6 +81,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
         }).then((response)=>{
             if(response){
                 successAction("Ingresa nuevamente para ver los cambios reflejados.")
+                deleteCookies("u");
                 customFunction();
             }
         })
@@ -181,8 +182,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             <InputErrorText
                                 modal={modal}
                             >
-                                {" "}
-                                {errors.nombres.message}{" "}
+                                {errors.nombres.message}
                             </InputErrorText>
                         )}
                     </div>
@@ -202,8 +202,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             <InputErrorText
                                 modal={modal}
                             >
-                                {" "}
-                                {errors.apellidos.message}{" "}
+                                {errors.apellidos.message}
                             </InputErrorText>
                         )}
                     </div>
@@ -223,8 +222,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             <InputErrorText
                                 modal={modal}
                             >
-                                {" "}
-                                {errors.telefono.message}{" "}
+                                {errors.telefono.message}
                             </InputErrorText>
                         )}
                     </div>
@@ -244,8 +242,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             <InputErrorText
                                 modal={modal}
                             >
-                                {" "}
-                                {errors.celular.message}{" "}
+                                {errors.celular.message}
                             </InputErrorText>
                         )}
                     </div>
@@ -265,8 +262,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             <InputErrorText
                                 modal={modal}
                             >
-                                {" "}
-                                {errors.direccion.message}{" "}
+                                {errors.direccion.message}
                             </InputErrorText>
                         )}
                     </div>
@@ -287,8 +283,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                             <InputErrorText
                                 modal={modal}
                             >
-                                {" "}
-                                {errors.correo.message}{" "}
+                                {errors.correo.message}
                             </InputErrorText>
                         )}
                     </div>
@@ -312,8 +307,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                                         <InputErrorText
                                             modal={modal}
                                         >
-                                            {" "}
-                                            {errors.contrasena.message}{" "}
+                                            {errors.contrasena.message}
                                         </InputErrorText>
                                     )}
                                 </label>
@@ -335,8 +329,7 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                                         <InputErrorText
                                             modal={modal}
                                         >
-                                            {" "}
-                                            {errors.newPassword.message}{" "}
+                                            {errors.newPassword.message}
                                         </InputErrorText>
                                     )}
                                 </label>

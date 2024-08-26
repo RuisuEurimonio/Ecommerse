@@ -68,7 +68,7 @@ export const saveAlert = async (name:string, data : any, file: string, customFun
 
         Toast.fire();
         customFunction && customFunction();
-        customFunctionWithData && customFunctionWithData(response);
+        customFunctionWithData && customFunctionWithData(createResponse);
     }
     
 }
