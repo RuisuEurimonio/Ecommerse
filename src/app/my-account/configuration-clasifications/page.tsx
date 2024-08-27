@@ -16,7 +16,7 @@ import { getElementsApi } from "@/data/api";
 type ConfigurationClasificationsProps = {};
 
 const perPage : number = 20;
-const URL_FETCH = "producto/marca"
+const URL_FETCH = "producto/clasificacion"
 
 const titlesTable = [
     {titleName: "nombre"},

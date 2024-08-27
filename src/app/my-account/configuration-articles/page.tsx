@@ -7,7 +7,7 @@ import Numeration from "@/components/Numeration";
 import Table from "@/components/TableGeneral";
 import Form from "@/components/Form";
 
-import { ArticleProps, BrandProps, CategoryProps, ClasificationProps, subDataTableProps} from "@/types/Props";
+import { ArticleProps, BrandProps, CategoryProps, ClasificationProps, DiscountProps, subDataTableProps} from "@/types/Props";
 
 import { articleSchequema } from "@/utils/Schemas/articleSchema";
 import NoDataTable from "@/components/NoDataTable";
@@ -46,6 +46,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
     const [data, setData] = useState<ArticleProps[] | null>(null)
     const [updateData, setUpdateData] = useState(false);
     const [dataClassification, setDataClassification] = useState<ClasificationProps[] | null>(null);
+    const [dataDiscount, setDataDiscount] = useState<DiscountProps[] | null>(null);
     const [dataBrand, setDataBrand] = useState<BrandProps[] | null>(null);
     const [dataCategory, setDataCategory] = useState<CategoryProps[] | null>(null);
 
@@ -57,6 +58,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
         {type: "file", id: "imagen", name: "Imagen"},
         {type: "select", id: "marca", name: "Marca", extraData: dataBrand, groupData: true},
         {type: "select", id: "clasificacion", name: "Clasificación", extraData: dataClassification, groupData: true},
+        {type: "select", id: "descuento", name: "Descuento", extraData: dataDiscount, groupData: true},
         {type: "group-checkbox", id: "categoria", name: "Categoria", extraData: dataCategory},
     ]
     
@@ -97,11 +99,13 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             const category = await getElementsApi("producto/categoria");
             const brand = await getElementsApi("producto/marca");
             const classification = await getElementsApi("producto/clasificacion");
+            const discounts = await getElementsApi("producto/descuento")
 
             if(category && brand && classification){
-                setDataCategory(category)
-                setDataBrand(brand)
-                setDataClassification(classification)
+                setDataCategory(category);
+                setDataBrand(brand);
+                setDataClassification(classification);
+                setDataDiscount(discounts);
             }
         }
         get();

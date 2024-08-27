@@ -39,11 +39,12 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
     } = useForm<formProps>({
         resolver: zodResolver(userSchequemaFull),
         defaultValues: {
-            tipoDocumento: {id: data.tipoDocumento.id},
+            tipoDocumento: {"id" : data.tipoDocumento.id},
             numeroDocumento: data.numeroDocumento,
             nombres: data.nombres,
             apellidos: data.apellidos,
@@ -55,6 +56,8 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
     });
 
     const route = useRouter();
+
+    const watchs = watch();
 
     function openCloseModal(){
         setKeyModal(!modalVisible ? "main" : data.nombres)
@@ -136,13 +139,16 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                     <div className={`inline ml-5
                     ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
                     `}>
-                        <label htmlFor="tipoDocumento">
+                        <label>
                             <p className="inline-block w-5/12">Documento*:</p>
                             <select
                                 className="border rounded-sm w-2/12"
-                                {...register("tipoDocumento.id")}
+                                {...register("tipoDocumento.id", 
+                                    {setValueAs: (value : string) => parseInt(value, 10)}
+                                 )}
                             >
-                                {dataDocument && dataDocument.map((item) => (
+                                {dataDocument && dataDocument.map((item) => 
+                                (
                                     <option
                                         key={item.abreviacion}
                                         value={item.id}
@@ -152,7 +158,6 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                                 ))}
                             </select>
                             <input
-                                id="numeroDocumento"
                                 type="text"
                                 className="border rounded-sm w-5/12"
                                 {...register("numeroDocumento")}
@@ -399,6 +404,8 @@ const FormUser: React.FC<FormUserProps> = ({ className, modal = false, data}) =>
                     updateInfo={data.metodoPago != null}
                     />
             </Modal>
+
+            <pre>{JSON.stringify(watchs, null, 2)}</pre>
         </div>
     );
 };

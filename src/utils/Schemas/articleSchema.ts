@@ -28,5 +28,7 @@ export const articleSchequema = z
         clasificacion: z
             .any(),
         categoria: z
-            .array(z.any()).min(1, "Debes seleccionar una categoria")
+            .array(z.any()).min(1, "Debes seleccionar una categoria"),
+            descuento: z
+            .any().optional()
     });
