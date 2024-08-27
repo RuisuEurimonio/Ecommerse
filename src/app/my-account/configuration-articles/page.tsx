@@ -151,6 +151,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
                   customFunction={createOrUpdateElement}
                   urlFetch={URL_FETCH}
                   updateInfo={updateData}
+                  nullInput
                   />
         </Modal>
     </div>

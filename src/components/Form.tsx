@@ -30,6 +30,7 @@ const Form = <T extends {id?: number} | FormPropsSec ,
         isLoginRegister, 
         isSaveSession = false,
         updateInfo = false,
+        nullInput = false,
         urlFetch,
         customFunction,
         customFunctionWithData
@@ -74,7 +75,7 @@ const Form = <T extends {id?: number} | FormPropsSec ,
     ) => {
         switch (type) {
             case ("select"):
-                return selectInput(id, name, extraData ?? []);
+                return selectInput(id, name, extraData ?? [], nullInput);
             case ("textarea"):
                 return textAreaInput(id, name);
             case ("combined"):
@@ -219,7 +220,7 @@ const Form = <T extends {id?: number} | FormPropsSec ,
         )
     }
 
-    const selectInput = <U extends { id?: number | string, nombre?: string, tipo?: string}>(id: string, name: string, subList: U[]) => {
+    const selectInput = <U extends { id?: number | string, nombre?: string, tipo?: string}>(id: string, name: string, subList: U[], nullInput : boolean) => {
         return (
             <div className={`inline ml-5
                 ${(!modal) ? "lg:max-w-[35vw] lg:relative" : ""}
@@ -229,6 +230,9 @@ const Form = <T extends {id?: number} | FormPropsSec ,
                     className="border rounded-sm w-full"
                     {...register(id+".id")}
                 >
+                    {nullInput && <option value={-1}>
+                        sin descuento
+                    </option>}
                     {subList.map((item) => (
                         <option
                             key={item.id}
@@ -291,6 +295,12 @@ const Form = <T extends {id?: number} | FormPropsSec ,
     }
 
     const onSubmit: SubmitHandler<FormPropsType> = async (dataInputs) => {
+
+        if("descuento" in dataInputs){
+            if(dataInputs.descuento.id === "-1") {
+                dataInputs.descuento = null;
+            }
+        }
 
         if(!isLoginRegister){
 

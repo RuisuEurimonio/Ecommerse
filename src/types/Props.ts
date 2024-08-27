@@ -100,6 +100,7 @@ export type FormProps<T, U extends {id? : number | string, nombre?: string}> = {
     isLoginRegister?: boolean
     isSaveSession?: boolean
     updateInfo?: boolean
+    nullInput?: boolean
     urlFetch: string,
     customFunction?: () => void;
     customFunctionWithData?: (data: any) => void;
