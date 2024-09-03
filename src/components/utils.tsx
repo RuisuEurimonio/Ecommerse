@@ -36,9 +36,13 @@ export const saveAlert = async (name:string, data : any, file: string, customFun
             data.imagen = await sendImageToAzureContainer(data.imagen);
         }
 
+        const token = getToken();
+        console.log(token);
+
         const createResponse = await createElement(file,{
             method: "POST",
             headers:{
+                'Authorization':'Bearer '+token,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(data)
@@ -328,4 +332,12 @@ export function isOwnUserDataDelete(item : any) : boolean{
     }
     let userSessionData : UserProps = data;
     return userSessionData.correo === item.correo;
+}
+
+function getToken() : string{
+    const token = getDataCookie("t");
+    if(!token){
+        return "";
+    }
+    return token;
 }

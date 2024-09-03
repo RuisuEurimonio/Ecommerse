@@ -1,6 +1,7 @@
 import { errorAction } from "@/components/utils";
 import credential from "./credentials";
 import { throws } from "assert";
+import { getDataCookie } from "@/auth/security";
 
 const HOST = credential.getHostDB();
 

@@ -101,7 +101,7 @@ const ConfigurationProducts: React.FC<ConfigurationProductsProps> = () => {
             const classification = await getElementsApi("producto/clasificacion");
             const discounts = await getElementsApi("producto/descuento")
 
-            if(category && brand && classification){
+            if(category && brand && classification && discounts){
                 setDataCategory(category);
                 setDataBrand(brand);
                 setDataClassification(classification);
