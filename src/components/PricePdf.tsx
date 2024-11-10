@@ -25,7 +25,7 @@ const TEXT_SIZE = 9;
 const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPrice, total, observations, user = {nombres: "No especifica", apellidos: "", direccion: "No especifica"}}) => {
 
     const date = new Date();
-    const options : Intl.DateTimeFormatOptions= { year: 'numeric', month: '2-digit', day: '2-digit'};
+    const options : Intl.DateTimeFormatOptions= { year: "numeric", month: "2-digit", day: "2-digit"};
     const formattedDate = new Intl.DateTimeFormat("es-CO", options).format(date);
 
     return(
@@ -115,7 +115,7 @@ const PricePdf : React.FC<PricePdfProps> = ({items, subtotal, discounts, sendPri
                 <View style={styles.footer}>
                     <Text>Cotización valida por 15 días a partir de su generación.</Text>
                     <Text>Generado por:</Text>
-                    <Text>Ruisu's Software</Text>
+                    <Text>Ruisu&aposs Software</Text>
                 </View>    
             </View>
         </Page>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     logo:{
         width:150,
         height:150,
-        filter: 'grayscale(100%)'
+        filter: "grayscale(100%)"
     },
     page:{
         marginTop: 60

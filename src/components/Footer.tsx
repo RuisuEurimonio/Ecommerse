@@ -35,7 +35,7 @@ const Footer: React.FC<FooterProps> = () => {
                             sm:w-8/12
                             xl:py-0
                             2xl:text-base
-                        "> <span className="font-semibold">Ruisu's Software</span> es una tienda de cómputo dedicada a proporcionar soluciones tecnológicas innovadoras y de alta calidad. Nuestro propósito es equipar a individuos y empresas con el mejor software y hardware disponible, facilitando su acceso a herramientas esenciales para la productividad y el entretenimiento. Ofrecemos una amplia gama de productos, desde software especializado hasta componentes de hardware, respaldados por un servicio al cliente excepcional y soporte técnico experto para garantizar la satisfacción y el éxito de nuestros clientes. </p>
+                        "> <span className="font-semibold">Ruisu&aposs Software</span> es una tienda de cómputo dedicada a proporcionar soluciones tecnológicas innovadoras y de alta calidad. Nuestro propósito es equipar a individuos y empresas con el mejor software y hardware disponible, facilitando su acceso a herramientas esenciales para la productividad y el entretenimiento. Ofrecemos una amplia gama de productos, desde software especializado hasta componentes de hardware, respaldados por un servicio al cliente excepcional y soporte técnico experto para garantizar la satisfacción y el éxito de nuestros clientes. </p>
                     </div>
                     <div className="flex-1 flex-wrap flex items-center
                         sm:flex-nowrap sm:items-start
@@ -120,7 +120,7 @@ const Footer: React.FC<FooterProps> = () => {
                 </div>
                 <hr/>
                 <div className="relative py-3">
-                    <h4 className="text-xs text-center text-third-color"> © Ruisu's Software 2024. Todos los derechos reservados. </h4>
+                    <h4 className="text-xs text-center text-third-color"> © Ruisu&aposs Software 2024. Todos los derechos reservados. </h4>
                     <ul className="justify-center flex gap-5  mt-3 text-fifth-color
                         xl:absolute xl:right-0 xl:top-1/2 xl:-translate-y-1/2 xl:text-xl xl:justify-normal xl:mt-0
                     ">
